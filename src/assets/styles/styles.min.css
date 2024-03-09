@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Inter;
+    letter-spacing: 0%;
+}
+
+body {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+
+.text-base,
+h1,
+.small-text {
+    font-family: Inter;
+    color: black;
+}
+
+.small-text {
+    line-height: 1rem;
+    font-size: 1rem;
+}
+
+h1 {
+    line-height: 1rem;
+    font-size: 4rem;
+}
+
+.my-button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded;
+}
+.my-button:hover {
+    @apply bg-blue-700;
+}
+.my-button:active {
+    @apply bg-blue-200 text-black;
+}
+
+.section {
+    @apply p-4;
+}
+.section .mylist li {
+    @apply ml-8 text-red-600;
+}
+.section .mylist li:last-child {
+    @apply text-gray-300;
+}
+
+.card {
+    @apply bg-gray-200 rounded-md p-5;
+}
+.card__title {
+    @apply text-lg font-bold mb-2;
+}
+.card__title:hover {
+    @apply text-lg font-bold mb-2 text-green-500;
+}
+.card__description {
+    @apply text-sm text-gray-600 mb-5;
+}
+.card--featured {
+    @apply border-blue-500 border-2 p-6;
+}
+
+.pv-js-live-floating {
+    content: "";
+    position: relative;
+} /*# sourceMappingURL=styles.min.css.map */

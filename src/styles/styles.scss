@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Inter;
+    letter-spacing: 0%;
+}
+
+body {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+
+.text-base {
+    font-family: Inter;
+    color: black;
+}
+
+.small-text {
+    @extend .text-base;
+    line-height: 1rem;
+    font-size: 1rem;
+}
+
+h1 {
+    @extend .text-base;
+    line-height: 1rem;
+    font-size: 4rem;
+}
+
+// test tailwind usage in scss
+.my-button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded;
+
+    &:hover {
+        @apply bg-blue-700;
+    }
+    &:active {
+        @apply bg-blue-200 text-black;
+    }
+}
+.section {
+    @apply p-4;
+
+    .mylist li {
+        @apply ml-8 text-red-600;
+    }
+    .mylist li:last-child {
+        @apply text-gray-300;
+    }
+}
+
+// main Block
+.card {
+    @apply bg-gray-200 rounded-md p-5;
+
+    // Element of card
+    &__title {
+        @apply text-lg font-bold mb-2;
+
+        &:hover {
+            @apply text-lg font-bold mb-2 text-green-500;
+        }
+    }
+
+    // Element of card
+    &__description {
+        @apply text-sm text-gray-600 mb-5;
+    }
+
+    // Modifier - variation of .card
+    &--featured {
+        @apply border-blue-500 border-2 p-6;
+    }
+}
+
+// test ts live offsetting
+.pv-js-live-floating {
+    content: "";
+    position: relative;
+}
