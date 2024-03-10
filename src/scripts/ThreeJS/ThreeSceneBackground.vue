@@ -14,14 +14,13 @@ export default {
     name: "ThreeSceneBackground",
     setup() {
         const threeSceneBackground = VUE.ref<HTMLElement | null>(null);
-        let sceneInstance: TJ.ThreeScene;
+        let sceneInstance!: TJ.ThreeScene;
 
         VUE.onMounted(() => {
             const element = document.getElementById("three_scene_backgroung");
             if (element) {
                 element.id += `.${Guid.new()}`;
                 sceneInstance = new TJ.ThreeScene(element);
-                alert("three_scene_backgroung element was found");
             } else {
                 alert("three_scene_backgroung element wasn`t found");
             }
@@ -29,6 +28,7 @@ export default {
 
         return {
             threeSceneBackground,
+            sceneInstance,
         };
     },
 };

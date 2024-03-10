@@ -14,7 +14,7 @@ export class FloatingElements extends GE.DynamicObject {
         super();
     }
 
-    private updateManagedElements(styleID: string): void {
+    public registerManagedElements(styleID: string): void {
         const elements = document.getElementsByClassName(styleID);
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i] as HTMLElement;
@@ -27,9 +27,9 @@ export class FloatingElements extends GE.DynamicObject {
                 });
             }
         }
-        // console.log(
-        //     `FloatingElements registered "${this.elementPositions.size}" elements`
-        // );
+        console.log(
+            `FloatingElements registered "${this.elementPositions.size}" elements`
+        );
     }
 
     public override onFrameUpdate(): void {
@@ -60,16 +60,16 @@ export class FloatingElements extends GE.DynamicObject {
             this.motionAmplitude *
             megaCursorInfluence;
 
-        DU.Logger.write(
-            `element "${element.id}" - position before: top=${element.style.top}, left=${element.style.left}`
-        );
+        // DU.Logger.write(
+        //     `element "${element.id}" - position before: top=${element.style.top}, left=${element.style.left}`
+        // );
 
         element.style.position = "relative"; // absolute
         element.style.left = `${originalPosition.x + offsetX}px`;
         element.style.top = `${originalPosition.y + offsetY}px`;
 
-        DU.Logger.write(
-            `element "${element.id}" - position after: top=${element.style.top}, left=${element.style.left} and megaCursorInfluence = ${megaCursorInfluence}`
-        );
+        // DU.Logger.write(
+        //     `element "${element.id}" - position after: top=${element.style.top}, left=${element.style.left} and megaCursorInfluence = ${megaCursorInfluence}`
+        // );
     }
 }

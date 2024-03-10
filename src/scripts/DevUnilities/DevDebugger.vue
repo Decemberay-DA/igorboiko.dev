@@ -1,18 +1,16 @@
 <!-- Shows debug data about current page -->
 <template>
-    <div
-        class="l-glued-top-line flex flex-row top-line-color justify-around gap-4"
-    >
-        <p class="debug-text">debug:</p>
-        <p class="debug-text">fps: {{ fps }}</p>
-        <p class="debug-text">delta_time: {{ delta_time }}</p>
-        <p class="debug-text">
+    <div class="c-debuger">
+        <!-- <p class="c-debuger__debug-info">debug:</p> -->
+        <p class="c-debuger__debug-info">fps: {{ fps }}</p>
+        <p class="c-debuger__debug-info">delta_time: {{ delta_time }}</p>
+        <p class="c-debuger__debug-info">
             dynamick_objects_registered: {{ dynamick_objects_registered }}
         </p>
-        <p class="debug-text">
+        <p class="c-debuger__debug-info">
             dynamick_objects_enabled: {{ dynamick_objects_enabled }}
         </p>
-        <p class="debug-text">frame: {{ frame }}</p>
+        <p class="c-debuger__debug-info">frame: {{ frame }}</p>
     </div>
 </template>
 
@@ -49,7 +47,9 @@ export default {
                 onFrameUpdate: function () {
                     updateDebugData();
                     Logger.write(
-                        "AnonimousDynamicObject updated for debug desplay"
+                        "AnonimousDynamicObject updated for debug desplay." +
+                            "fps: " +
+                            fps.value
                     );
                 },
             });
@@ -66,14 +66,18 @@ export default {
 };
 </script>
 
-<style lang="css">
-.top-line-color {
-    background-color: rgb(244, 114, 182, 0.65);
-}
-.l-glued-top-line {
-    @apply fixed top-0 left-0 w-full;
-}
-.debug-text {
-    @apply text-base text-white;
+<style lang="scss">
+.c-debuger {
+    @apply fixed top-0 left-0 w-1/5 visible;
+    @apply p-4 m-6;
+    @apply flex flex-col;
+    background-color: rgb(244, 114, 182, 0.5);
+
+    &__debug-info {
+        @apply text-base text-white;
+    }
+    &:hover {
+        @apply invisible;
+    }
 }
 </style>

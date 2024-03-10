@@ -2,6 +2,7 @@ import * as DO from "../DinamicObjects/index";
 import * as MC from "../MegaCursor/index";
 import * as DU from "../DevUnilities/index";
 import * as TJ from "../ThreeJS/index";
+import { GE } from ".";
 
 /**
  * its goal is to ckick scene up.
@@ -15,8 +16,10 @@ export class SceneConfigurator {
      * like in unity lol.
      */
     public start() {
+        const timeUpdater = new GE.GameTime();
+
         const floating = new DO.FloatingElements();
-        floating.updateManagedElements("pv-js-live-floating"); // all elements woth this style is float
+        floating.registerManagedElements("pv-js-live-floating"); // all elements woth this style is float
 
         // const three = new TJ.ThreeScene(document.getElementById("") as HTMLElement);
 

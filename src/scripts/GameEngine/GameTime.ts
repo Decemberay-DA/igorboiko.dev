@@ -1,3 +1,4 @@
+import { DU } from "../DevUnilities";
 import { GE } from "./index";
 
 export class GameTime extends GE.DynamicObject {
@@ -25,5 +26,10 @@ export class GameTime extends GE.DynamicObject {
     }
     public override onFrameUpdate(): void {
         GameTime.updateTime();
+        DU.Logger.write(
+            "--------------- new frame '" +
+                GameTime.currentFrame +
+                "' GameTime ---------------"
+        );
     }
 }
