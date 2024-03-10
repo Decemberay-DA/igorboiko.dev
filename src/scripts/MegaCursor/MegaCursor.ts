@@ -2,7 +2,7 @@ import * as CT from "../CommonTypes/index";
 import * as DU from "../DevUnilities/index";
 import * as GE from "../GameEngine/index";
 
-export class MegaCursor extends GE.DynamicObject {
+export class MegaCursor extends GE.ADynamicObject {
     // position by default. // TODO create cursor stranding for phones and
     private static _position: CT.Vector2d = { x: 0, y: 0 };
 

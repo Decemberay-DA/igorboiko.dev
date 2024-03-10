@@ -7,7 +7,7 @@ export interface AnonimousDynamicObjectParams {
     readonly onFrameUpdatePriority?: number;
 }
 
-export class AnonimousDynamicObject extends GE.DynamicObject {
+export class AnonimousDynamicObject extends GE.ADynamicObject {
     public readonly params: AnonimousDynamicObjectParams;
 
     constructor(params: AnonimousDynamicObjectParams) {

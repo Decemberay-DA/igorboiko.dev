@@ -5,7 +5,7 @@ import * as THREE from "three";
 // import { createApp } from "vue";
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 
-export class ThreeScene extends GE.DynamicObject {
+export class ThreeScene extends GE.ADynamicObject {
     public readonly bacgroundContainer: HTMLElement;
     public readonly scene: THREE.Scene;
     public readonly camera: THREE.PerspectiveCamera;
@@ -13,6 +13,7 @@ export class ThreeScene extends GE.DynamicObject {
 
     public constructor(bacgroundContainer: HTMLElement) {
         super();
+        this.disable();
         this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.threeScene;
         this.bacgroundContainer = bacgroundContainer;
 

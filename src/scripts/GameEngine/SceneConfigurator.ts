@@ -18,8 +18,10 @@ export class SceneConfigurator {
     public start() {
         const timeUpdater = new GE.GameTime();
 
-        const floating = new DO.FloatingElements();
-        floating.registerManagedElements("pv-js-live-floating"); // all elements woth this style is float
+        // all elements woth this style is float
+        DO.FloatingElementsFactory.registerFloatingObjectsForClass(
+            "pv-js-live-floating"
+        );
 
         // const three = new TJ.ThreeScene(document.getElementById("") as HTMLElement);
 

@@ -48,18 +48,18 @@ export class Game implements IEnablable {
     }
 
     // DynamicObject registration ========-====-====-====-============
-    private _dynamicObjects: Array<GE.DynamicObject> = [];
-    public get dynamicObjects(): Readonly<Array<GE.DynamicObject>> {
+    private _dynamicObjects: Array<GE.ADynamicObject> = [];
+    public get dynamicObjects(): Readonly<Array<GE.ADynamicObject>> {
         return Object.freeze([...this._dynamicObjects]);
     }
-    public registerDinamicObject(dynamicObject: GE.DynamicObject): void {
+    public registerDinamicObject(dynamicObject: GE.ADynamicObject): void {
         this._dynamicObjects.push(dynamicObject);
         this._dynamicObjects.sort(
             (a, b) => a.onFrameUpdatePriority - b.onFrameUpdatePriority
         );
         DU.Logger.write(`DynamicObject registered`);
     }
-    public unRegisterDinamicObject(dynamicObject: GE.DynamicObject): void {
+    public unRegisterDinamicObject(dynamicObject: GE.ADynamicObject): void {
         const index = this._dynamicObjects.indexOf(dynamicObject);
         if (index > -1) {
             // if found
@@ -80,7 +80,7 @@ export class Game implements IEnablable {
         this.update();
     }
     private update(): void {
-        if (!this._isEnabled) return;
+        if (!this._isEnabled) requestAnimationFrame(() => this.update());
 
         this._dynamicObjects.forEach((dynamicObject) => {
             if (dynamicObject.isEnabled) {

@@ -3,7 +3,7 @@ import * as DU from "../DevUnilities/index";
 import * as GE from "../GameEngine/index";
 import * as MC from "../MegaCursor/index";
 
-export class CursorBetrayal extends GE.DynamicObject {
+export class CursorBetrayal extends GE.ADynamicObject {
     private element!: HTMLElement;
 
     public constructor() {

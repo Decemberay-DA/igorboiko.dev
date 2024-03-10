@@ -1,7 +1,7 @@
 import { DU } from "../DevUnilities";
 import { GE } from "./index";
 
-export class GameTime extends GE.DynamicObject {
+export class GameTime extends GE.ADynamicObject {
     public constructor() {
         super();
         this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.gameTime;

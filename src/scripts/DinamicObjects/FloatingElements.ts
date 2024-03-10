@@ -4,13 +4,14 @@ import * as MG from "../MegaCursor/index";
 // import * as GE from "../GameEngine/index";
 import { GE } from "../GameEngine/index";
 
-export class FloatingElements extends GE.DynamicObject {
+export class FloatingElementsBundle extends GE.ADynamicObject {
     private elementPositions: Map<HTMLElement, CT.Vector2d> = new Map();
     private motionSpeed = 5;
     private motionAmplitude = 6;
     private megaCursorInfluenceDistance = 1;
+    private xPositionTimeInfluence = 1;
 
-    constructor() {
+    public constructor() {
         super();
     }
 
@@ -38,17 +39,25 @@ export class FloatingElements extends GE.DynamicObject {
         });
     }
 
-    private updateElementPosition(
+    public updateElementPosition(
         element: HTMLElement,
         originalPosition: CT.Vector2d
     ): void {
-        const time = GE.GameTime.realTimeSinceStartup;
-        const megaCursorInfluence =
+        // offseted by horizontal axis
+        const time =
+            GE.GameTime.realTimeSinceStartup +
+            originalPosition.x * this.xPositionTimeInfluence;
+
+        // const megaCursorInfluence =
+        //     MG.MegaCursor.getDistance(originalPosition) *
+        //         this.megaCursorInfluenceDistance >
+        //     500
+        //         ? 1
+        //         : 0;
+        let megaCursorInfluence =
             MG.MegaCursor.getDistance(originalPosition) *
-                this.megaCursorInfluenceDistance >
-            500
-                ? 1
-                : 0;
+            this.megaCursorInfluenceDistance;
+        megaCursorInfluence = Math.max(0, Math.min(1, megaCursorInfluence));
 
         const offsetX =
             Math.sin(time * this.motionSpeed) *
@@ -67,9 +76,87 @@ export class FloatingElements extends GE.DynamicObject {
         element.style.position = "relative"; // absolute
         element.style.left = `${originalPosition.x + offsetX}px`;
         element.style.top = `${originalPosition.y + offsetY}px`;
+    }
+}
 
-        // DU.Logger.write(
-        //     `element "${element.id}" - position after: top=${element.style.top}, left=${element.style.left} and megaCursorInfluence = ${megaCursorInfluence}`
-        // );
+/**
+ * Manages one object only
+ */
+export class FloatingElement extends GE.ADynamicObject {
+    private readonly _element: HTMLElement;
+    private readonly _elementOriginalPositions: CT.Vector2d;
+
+    public constructor(element: HTMLElement) {
+        super();
+        this._element = element;
+
+        const rect = element.getBoundingClientRect();
+        this._elementOriginalPositions = {
+            x: rect.left,
+            y: rect.top,
+        };
+    }
+
+    private motionSpeed = 5;
+    private motionAmplitude = 6;
+    private megaCursorInfluenceDistance = 1;
+    private xPositionTimeInfluence = 1;
+
+    public override onFrameUpdate(): void {
+        this.updateElementPosition(
+            this._element,
+            this._elementOriginalPositions
+        );
+    }
+
+    private updateElementPosition(
+        element: HTMLElement,
+        originalPosition: CT.Vector2d
+    ): void {
+        // offseted by horizontal axis
+        const time =
+            GE.GameTime.realTimeSinceStartup +
+            originalPosition.x * this.xPositionTimeInfluence;
+
+        // const megaCursorInfluence =
+        //     MG.MegaCursor.getDistance(originalPosition) *
+        //         this.megaCursorInfluenceDistance >
+        //     500
+        //         ? 1
+        //         : 0;
+        let megaCursorInfluence =
+            MG.MegaCursor.getDistance(originalPosition) *
+            this.megaCursorInfluenceDistance;
+        megaCursorInfluence = Math.max(0, Math.min(1, megaCursorInfluence));
+
+        const offsetX =
+            Math.sin(time * this.motionSpeed) *
+            this.motionAmplitude *
+            megaCursorInfluence;
+
+        const offsetY =
+            Math.cos(time * this.motionSpeed) *
+            this.motionAmplitude *
+            megaCursorInfluence;
+
+        element.style.position = "relative"; // absolute
+        element.style.left = `${originalPosition.x + offsetX}px`;
+        element.style.top = `${originalPosition.y + offsetY}px`;
+    }
+}
+
+/**
+ * Creates a indivisual DO for each element that is marked
+ */
+export class FloatingElementsFactory extends GE.ADynamicObject {
+    private constructor() {
+        super();
+    }
+    public static registerFloatingObjectsForClass(classID: string): void {
+        const elements = document.getElementsByClassName(classID);
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i] as HTMLElement;
+            const floatingController = new FloatingElement(element);
+        }
     }
 }

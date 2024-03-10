@@ -1,21 +1,22 @@
 import * as GE from "./index";
 
-export abstract class DynamicObject implements IEnablable {
+export abstract class ADynamicObject implements IEnablable {
     protected _isEnabled: boolean = true; // is this object should be updated
     public get isEnabled(): boolean {
         return this._isEnabled;
     }
     public enable(): void {
         this._isEnabled = true;
-        console.log("Component enabled.");
+        console.log("DynamicObject '" + this.constructor.name + "' enabled.");
     }
     public disable(): void {
         this._isEnabled = false;
-        console.log("Component disabled.");
+        console.log("DynamicObject '" + this.constructor.name + "' disabled.");
     }
 
     protected constructor() {
         GE.Game.getInstance().registerDinamicObject(this);
+        console.log("DynamicObject '" + this.constructor.name + "' created.");
     }
 
     public onStart(): void {

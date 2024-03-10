@@ -3,7 +3,7 @@ import { GE } from "../GameEngine/index";
 /**
  * Execute action untill success
  */
-export class Seeker extends GE.DynamicObject {
+export class Seeker extends GE.ADynamicObject {
     private readonly _stopCondition: () => boolean;
     private readonly _executeAction: () => void;
 
@@ -20,4 +20,3 @@ export class Seeker extends GE.DynamicObject {
         }
     }
 }
-
