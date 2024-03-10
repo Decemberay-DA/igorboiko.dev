@@ -14,7 +14,7 @@ export class FloatingElements extends GE.DynamicObject {
         super();
     }
 
-    public updateManagedElements(styleID: string): void {
+    private updateManagedElements(styleID: string): void {
         const elements = document.getElementsByClassName(styleID);
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i] as HTMLElement;
@@ -27,9 +27,9 @@ export class FloatingElements extends GE.DynamicObject {
                 });
             }
         }
-        console.log(
-            `FloatingElements registered "${this.elementPositions.size}" elements`
-        );
+        // console.log(
+        //     `FloatingElements registered "${this.elementPositions.size}" elements`
+        // );
     }
 
     public override onFrameUpdate(): void {

@@ -18,13 +18,14 @@ export class ThreeScene extends GE.DynamicObject {
 
         // Scene ========-====-====-====-============
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x808080);
         this.camera = new THREE.PerspectiveCamera(
             75,
             window.innerWidth / window.innerHeight,
             0.1,
             1000
         );
-        this.renderer = this.gerRenderer();
+        this.renderer = this.getRenderer();
 
         // lights ========-====-====-====-============
         const light = new THREE.PointLight(0xffffff, 1);
@@ -38,9 +39,9 @@ export class ThreeScene extends GE.DynamicObject {
         this.scene.add(cube);
     }
 
-    private gerRenderer(): THREE.WebGLRenderer {
+    private getRenderer(): THREE.WebGLRenderer {
         const renderParameters: THREE.WebGLRendererParameters = {
-            // canvas: this.bacgroundContainer,
+            // canvas: this.bacgroundContainer, // here the error
             antialias: true,
             precision: "lowp",
         };

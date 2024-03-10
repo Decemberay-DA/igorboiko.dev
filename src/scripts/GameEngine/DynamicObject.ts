@@ -2,7 +2,7 @@ import * as GE from "./index";
 
 export abstract class DynamicObject implements IEnablable {
     protected _isEnabled: boolean = true; // is this object should be updated
-    public get isEenabled(): boolean {
+    public get isEnabled(): boolean {
         return this._isEnabled;
     }
     public enable(): void {

@@ -1,5 +1,5 @@
 interface IEnablable {
-    isEenabled: boolean;
+    isEnabled: boolean;
     enable(): void;
     disable(): void;
 }

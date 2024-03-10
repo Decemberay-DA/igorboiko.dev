@@ -1,4 +1,5 @@
 <template>
+    <DevDebugger />
     <div id="utils_container">
         <CursorBetrayalElement />
         <ThreeSceneBackground />
@@ -136,6 +137,7 @@
 
 <script setup lang="ts">
 // utilities
+import DevDebugger from "./scripts/DevUnilities/DevDebugger.vue";
 import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
 import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
 
