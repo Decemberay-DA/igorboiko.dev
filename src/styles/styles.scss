@@ -76,14 +76,10 @@ h1 {
         @apply text-sm text-gray-600 mb-5;
     }
 
+    // yes
     // Modifier - variation of .card
     &--featured {
         @apply border-blue-500 border-2 p-6;
     }
 }
 
-// test ts live offsetting
-.pv-js-live-floating {
-    content: "";
-    position: relative;
-}

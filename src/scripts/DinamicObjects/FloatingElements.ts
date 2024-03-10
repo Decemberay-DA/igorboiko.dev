@@ -84,13 +84,14 @@ export class FloatingElementsBundle extends GE.ADynamicObject {
  */
 export class FloatingElement extends GE.ADynamicObject {
     private readonly _element: HTMLElement;
-    private readonly _elementOriginalPositions: CT.Vector2d;
+    private _elementOriginalPositions!: CT.Vector2d;
 
     public constructor(element: HTMLElement) {
         super();
         this._element = element;
-
-        const rect = element.getBoundingClientRect();
+    }
+    public override onStart(): void {
+        const rect = this._element.getBoundingClientRect();
         this._elementOriginalPositions = {
             x: rect.left,
             y: rect.top,
@@ -99,7 +100,8 @@ export class FloatingElement extends GE.ADynamicObject {
 
     private motionSpeed = 5;
     private motionAmplitude = 6;
-    private megaCursorInfluenceDistance = 1;
+    private megaCursorInfluenceDistance = 0.001 * 2;
+    private xPositionTimeAmplitude = 5;
     private xPositionTimeInfluence = 1;
 
     public override onFrameUpdate(): void {
@@ -113,21 +115,23 @@ export class FloatingElement extends GE.ADynamicObject {
         element: HTMLElement,
         originalPosition: CT.Vector2d
     ): void {
+        const timeOffset =
+            originalPosition.x *
+            this.xPositionTimeAmplitude *
+            this.xPositionTimeInfluence;
         // offseted by horizontal axis
-        const time =
-            GE.GameTime.realTimeSinceStartup +
-            originalPosition.x * this.xPositionTimeInfluence;
+        const time = GE.GameTime.realTimeSinceStartup + timeOffset;
 
-        // const megaCursorInfluence =
-        //     MG.MegaCursor.getDistance(originalPosition) *
-        //         this.megaCursorInfluenceDistance >
-        //     500
-        //         ? 1
-        //         : 0;
         let megaCursorInfluence =
             MG.MegaCursor.getDistance(originalPosition) *
             this.megaCursorInfluenceDistance;
         megaCursorInfluence = Math.max(0, Math.min(1, megaCursorInfluence));
+        // megaCursorInfluence = megaCursorInfluence * 2; // add hard fallof
+
+        const offsetXY: CT.Vector2d = {
+            x: 1,
+            y: 2,
+        };
 
         const offsetX =
             Math.sin(time * this.motionSpeed) *

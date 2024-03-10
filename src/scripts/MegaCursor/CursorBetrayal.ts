@@ -29,7 +29,7 @@ export class CursorBetrayal extends GE.ADynamicObject {
     }
 
     public override onFrameUpdate(): void {
-        this.element.style.left = MC.MegaCursor.position.x + "px";
-        this.element.style.top = MC.MegaCursor.position.y + "px";
+        this.element.style.left = MC.MegaCursor.currentPosition.x + "px";
+        this.element.style.top = MC.MegaCursor.currentPosition.y + "px";
     }
 }

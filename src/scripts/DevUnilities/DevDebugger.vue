@@ -1,6 +1,6 @@
 <!-- Shows debug data about current page -->
 <template>
-    <div class="c-debuger">
+    <div class="c-debuger gap-1">
         <!-- <p class="c-debuger__debug-info">debug:</p> -->
         <p class="c-debuger__debug-info">fps: {{ fps }}</p>
         <p class="c-debuger__debug-info">delta_time: {{ delta_time }}</p>
@@ -85,15 +85,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .c-debuger {
     @apply fixed top-0 left-0 w-1/5;
     @apply p-4 m-6;
     @apply flex flex-col;
-    background-color: rgb(244, 114, 182, 0.5);
+    background-color: rgb(244, 114, 182, 0.75);
 
     &__debug-info {
-        @apply text-base text-white;
+        @apply text-base text-black;
     }
     &__button {
         @apply w-full h-fit bg-red-400 hover:bg-red-300 text-white;

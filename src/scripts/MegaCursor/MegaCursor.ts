@@ -4,7 +4,7 @@ import * as GE from "../GameEngine/index";
 
 export class MegaCursor extends GE.ADynamicObject {
     // position by default. // TODO create cursor stranding for phones and
-    private static _position: CT.Vector2d = { x: 0, y: 0 };
+    private static _currentPosition: CT.Vector2d = { x: 0, y: 0 };
 
     public constructor() {
         super();
@@ -17,20 +17,17 @@ export class MegaCursor extends GE.ADynamicObject {
     }
 
     private updatePosition(newPosition: CT.Vector2d): void {
-        MegaCursor._position = newPosition;
-        DU.Logger.write(
-            "MegaCursor position was updated to ${MegaCursor._position}"
-        );
-        const sadas = document.onmousemove;
+        MegaCursor._currentPosition = newPosition;
     }
 
-    public static get position(): CT.Vector2d {
-        return this._position;
+    public static get currentPosition(): CT.Vector2d {
+        return this._currentPosition;
     }
 
     public static getDistance(point: CT.Vector2d): number {
-        const dx = point.x - MegaCursor._position.x;
-        const dy = point.y - MegaCursor._position.y;
-        return Math.sqrt(dx * dx + dy * dy);
+        const dx = point.x - MegaCursor._currentPosition.x;
+        const dy = point.y - MegaCursor._currentPosition.y;
+        const diatance = Math.sqrt(dx * dx + dy * dy);
+        return diatance;
     }
 }

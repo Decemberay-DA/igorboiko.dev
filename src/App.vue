@@ -4,6 +4,11 @@
         <CursorBetrayalElement />
         <ThreeSceneBackground />
     </div>
+    <!-- <div
+        class="fixed w-screen h-screen flex flex-auto justify-center items-center pointer-events-none z-50"
+    >
+</div> -->
+    <FloatingElementsGrid :rows="20" :boxesPerRow="120" />
 
     <div id="test-rows-stuff" class="grid grid-rows-4 gap-6">
         <div>Row 1</div>
@@ -23,96 +28,96 @@
             <TestButton
                 v-bind:button-text="'Floating button a'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button b'"
                 id="Floating button b"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button c'"
                 id="Floating button c"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button d'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button'"
                 id="Floating button d"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button e'"
                 id="Floating button e"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
         </div>
         <div class="gap-3">
             <TestButton
                 v-bind:button-text="'Floating button a'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button b'"
                 id="Floating button b"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button c'"
                 id="Floating button c"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button d'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button'"
                 id="Floating button d"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button e'"
                 id="Floating button e"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
         </div>
         <div class="gap-3">
             <TestButton
                 v-bind:button-text="'Floating button a'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button b'"
                 id="Floating button b"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button c'"
                 id="Floating button c"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button d'"
                 id="Floating button a"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button'"
                 id="Floating button d"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <TestButton
                 v-bind:button-text="'Floating button e'"
                 id="Floating button e"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
         </div>
 
@@ -120,12 +125,12 @@
             <RectangleWithText
                 title="Test floating stuff A"
                 text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <RectangleWithText
                 title="Test floating stuff B"
                 text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
+                class="pv-js-live-floating-subject"
             />
             <RectangleWithText
                 title="Test floating stuff C"
@@ -140,11 +145,17 @@
 import DevDebugger from "./scripts/DevUnilities/DevDebugger.vue";
 import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
 import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
+import FloatingElementsGrid from "./scripts/Testes/FloatingElementsGrid.vue";
 
 import TestButton from "./components/TestButton.vue";
 import RectangleWithText from "./components/RectangleWithText.vue";
 </script>
 
-<style>
+<style lang="scss">
 @import "./assets/styles/styles.min.css";
+@import "src/scripts/DinamicObjects/FloatingElements.css";
+
+.pv-js-live-floating-subject {
+    content: "";
+}
 </style>

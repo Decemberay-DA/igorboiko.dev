@@ -1,6 +1,5 @@
 import * as GE from "./index";
 import * as DU from "../DevUnilities/index";
-import * as MC from "../MegaCursor/index";
 
 /**
  * Static definition of update orders.
@@ -24,16 +23,16 @@ export class UpdatePriorities {
  */
 export class Game implements IEnablable {
     // IEnablable ========-====-====-====-============
-    protected _isEnabled: boolean = false;
+    protected __isEnabled: boolean = false;
     public get isEnabled(): boolean {
-        return this._isEnabled;
+        return this.__isEnabled;
     }
     public enable(): void {
-        this._isEnabled = true;
+        this.__isEnabled = true;
         console.log("Component enabled.");
     }
     public disable(): void {
-        this._isEnabled = false;
+        this.__isEnabled = false;
         console.log("Component disabled.");
     }
 
@@ -80,7 +79,8 @@ export class Game implements IEnablable {
         this.update();
     }
     private update(): void {
-        if (!this._isEnabled) requestAnimationFrame(() => this.update());
+        // dont update anything if disable
+        if (!this.__isEnabled) requestAnimationFrame(() => this.update());
 
         this._dynamicObjects.forEach((dynamicObject) => {
             if (dynamicObject.isEnabled) {

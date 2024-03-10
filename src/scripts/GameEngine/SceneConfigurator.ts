@@ -20,7 +20,7 @@ export class SceneConfigurator {
 
         // all elements woth this style is float
         DO.FloatingElementsFactory.registerFloatingObjectsForClass(
-            "pv-js-live-floating"
+            "pv-js-live-floating-subject"
         );
 
         // const three = new TJ.ThreeScene(document.getElementById("") as HTMLElement);
