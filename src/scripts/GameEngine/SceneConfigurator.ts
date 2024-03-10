@@ -18,7 +18,7 @@ export class SceneConfigurator {
         const floating = new DO.FloatingElements();
         floating.updateManagedElements("pv-js-live-floating"); // all elements woth this style is float
 
-        const three = TJ.ThreeScene.instance;
+        // const three = new TJ.ThreeScene(document.getElementById("") as HTMLElement);
 
         const cursorStranding = null;
         const cursorDetector = null;

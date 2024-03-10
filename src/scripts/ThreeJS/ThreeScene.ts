@@ -6,34 +6,15 @@ import * as THREE from "three";
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 
 export class ThreeScene extends GE.DynamicObject {
-    private scene!: THREE.Scene;
-    private camera!: THREE.PerspectiveCamera;
-    private renderer!: THREE.WebGLRenderer;
-    private three_scene_bacground!: HTMLElement;
+    public readonly bacgroundContainer: HTMLElement;
+    public readonly scene: THREE.Scene;
+    public readonly camera: THREE.PerspectiveCamera;
+    public readonly renderer: THREE.WebGLRenderer;
 
-    // Singletotning ========-====-====-====-============
-    private static _instance: ThreeScene | null;
-    public static get instance() {
-        if (ThreeScene._instance == null) {
-            ThreeScene._instance = new ThreeScene();
-        }
-        return this._instance;
-    }
-    private constructor() {
+    public constructor(bacgroundContainer: HTMLElement) {
         super();
         this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.threeScene;
-        // alert("ThreeScene created");
-
-        const bg: HTMLElement | null = document.getElementById(
-            "three_scene_bacground.788320a9-5a74-4ab4-83c8-09ebb725c294"
-        );
-
-        if (bg == null) {
-            alert("three_scene_bacground was not found");
-        } else {
-            this.three_scene_bacground = bg;
-            Logger.write("three_scene_bacground was found");
-        }
+        this.bacgroundContainer = bacgroundContainer;
 
         // Scene ========-====-====-====-============
         this.scene = new THREE.Scene();
@@ -43,12 +24,7 @@ export class ThreeScene extends GE.DynamicObject {
             0.1,
             1000
         );
-        // const canvas: THREE.OffscreenCanvas;
-        const renderParameters: THREE.WebGLRendererParameters = {
-            canvas: this.three_scene_bacground,
-            precision: "lowp",
-        };
-        this.renderer = new THREE.WebGLRenderer(renderParameters);
+        this.renderer = this.gerRenderer();
 
         // lights ========-====-====-====-============
         const light = new THREE.PointLight(0xffffff, 1);
@@ -60,6 +36,42 @@ export class ThreeScene extends GE.DynamicObject {
         const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
         const cube = new THREE.Mesh(geometry, material);
         this.scene.add(cube);
+    }
+
+    private gerRenderer(): THREE.WebGLRenderer {
+        const renderParameters: THREE.WebGLRendererParameters = {
+            // canvas: this.bacgroundContainer,
+            antialias: true,
+            precision: "lowp",
+        };
+        const renderer = new THREE.WebGLRenderer(renderParameters);
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(
+            this.bacgroundContainer.clientWidth,
+            this.bacgroundContainer.clientHeight
+        );
+        this.bacgroundContainer.appendChild(renderer.domElement);
+        renderer.domElement.style.width = "100%";
+        renderer.domElement.style.height = "100%";
+
+        // resize render window
+        window.addEventListener(
+            "resize",
+            this.onWindowResize.bind(this),
+            false
+        );
+
+        return renderer;
+    }
+    private onWindowResize() {
+        const width = this.bacgroundContainer.clientWidth;
+        const height = this.bacgroundContainer.clientHeight;
+
+        this.renderer.setSize(width, height);
+        this.camera.aspect = width / height;
+
+        this.camera.updateProjectionMatrix();
     }
 
     public override onFrameUpdate() {
