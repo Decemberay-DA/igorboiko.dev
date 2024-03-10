@@ -2,6 +2,26 @@ import * as GE from "./index";
 import * as DU from "../DevUnilities/index";
 import * as MC from "../MegaCursor/index";
 
+/**
+ * Static definition of update orders.
+ * Legit for every type of update: onStart, onFrame, etc cz array is sorted
+ */
+export class UpdatePriorities {
+    // any shared base
+    public static readonly gameTime = -10000;
+    public static readonly earlyFrameUpdate = -9500;
+    // any logick
+    public static readonly usualDynamicObject = -9000;
+    // any visuals
+    public static readonly threeScene = -2000;
+    public static readonly gui = -100;
+    // post scene updators
+    public static readonly lateFrameUpdate = 10000;
+}
+
+/**
+ * game idk
+ */
 export class Game implements IEnablable {
     // IEnablable ========-====-====-====-============
     protected _isEnabled: boolean = false;
@@ -28,14 +48,21 @@ export class Game implements IEnablable {
     }
 
     // DynamicObject registration ========-====-====-====-============
-    private dynamicObjects: Set<GE.DynamicObject> = new Set();
+    private dynamicObjects: Array<GE.DynamicObject> = [];
     public registerDinamicObject(dynamicObject: GE.DynamicObject): void {
-        this.dynamicObjects.add(dynamicObject);
+        this.dynamicObjects.push(dynamicObject);
+        this.dynamicObjects.sort(
+            (a, b) => a.onFrameUpdatePriority - b.onFrameUpdatePriority
+        );
         DU.Logger.write(`DynamicObject registered`);
     }
     public unRegisterDinamicObject(dynamicObject: GE.DynamicObject): void {
-        this.dynamicObjects.delete(dynamicObject);
-        DU.Logger.write(`DynamicObject un registered`);
+        const index = this.dynamicObjects.indexOf(dynamicObject);
+        if (index > -1) {
+            // if found
+            this.dynamicObjects.splice(index, 1);
+            DU.Logger.write(`DynamicObject un registered`);
+        }
     }
 
     // Game loop ========-====-====-====-============
@@ -44,15 +71,12 @@ export class Game implements IEnablable {
         this.start();
     }
     private start(): void {
-        GE.GameTime.updateTime();
         this.dynamicObjects.forEach((dynamicObject) => {
             dynamicObject.onStart();
         });
         this.update();
     }
     private update(): void {
-        GE.GameTime.updateTime();
-
         if (!this._isEnabled) return;
 
         this.dynamicObjects.forEach((dynamicObject) => {

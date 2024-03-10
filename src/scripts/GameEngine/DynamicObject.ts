@@ -1,6 +1,5 @@
 import * as GE from "./index";
 
-
 export abstract class DynamicObject implements IEnablable {
     protected _isEnabled: boolean = true; // is this object should be updated
     public get isEenabled(): boolean {
@@ -22,6 +21,12 @@ export abstract class DynamicObject implements IEnablable {
     public onStart(): void {
         return;
     }
+    // define the order in which dynamick objects are sorted and updated
+    protected __onFrameUpdatePriority: number =
+        GE.OnFrameUpdatePriorities.usualDynamicObject;
+    public get onFrameUpdatePriority(): number {
+        return this.__onFrameUpdatePriority;
+    }
     public onFrameUpdate(): void {
         return;
     }
@@ -34,17 +39,3 @@ export abstract class DynamicObject implements IEnablable {
         this.onDelete();
     }
 }
-
-// export abstract class SingletonDinamicObject<TInstance> extends DynamicObject {
-//     private static _instance: TInstance;
-//     public static get instance():
-
-//     protected constructor() {
-//         super();
-//     }
-
-//     public override onStart(): void {
-//         // instance = new TInstance()
-//     }
-
-// }

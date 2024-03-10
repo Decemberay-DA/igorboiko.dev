@@ -24,11 +24,13 @@
         "markdown-it-sup": "^2.0.0",
         "markdown-it-task-lists": "^2.1.1",
         "markdown-it-toc-done-right": "^4.2.0",
+        "three": "^0.162.0",
         "vue": "^3.4.15"
     },
     "devDependencies": {
         "@tsconfig/node20": "^20.1.2",
         "@types/node": "^20.11.10",
+        "@types/three": "^0.162.0",
         "@vitejs/plugin-vue": "^5.0.3",
         "@vue/tsconfig": "^0.5.1",
         "autoprefixer": "^10.4.18",

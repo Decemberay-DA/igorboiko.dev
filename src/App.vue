@@ -1,6 +1,7 @@
 <template>
     <div id="utils_container">
         <CursorBetrayalElement />
+        <ThreeSceneBackground />
     </div>
 
     <div id="test-rows-stuff" class="grid grid-rows-4 gap-6">
@@ -66,13 +67,48 @@
                 text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
             />
         </div>
+        <div class="flex flex-row gap-8">
+            <RectangleWithText
+                title="Test floating stuff A"
+                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
+                class="pv-js-live-floating"
+            />
+            <RectangleWithText
+                title="Test floating stuff B"
+                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
+                class="pv-js-live-floating"
+            />
+            <RectangleWithText
+                title="Test floating stuff C"
+                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
+            />
+        </div>
+        <div class="flex flex-row gap-8">
+            <RectangleWithText
+                title="Test floating stuff A"
+                text="lorem 122"
+                class="pv-js-live-floating"
+            />
+            <RectangleWithText
+                title="Test floating stuff B"
+                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
+                class="pv-js-live-floating"
+            />
+            <RectangleWithText
+                title="Test floating stuff C"
+                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
+            />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+// utilities
+import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
+import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
+
 import TestButton from "./components/TestButton.vue";
 import RectangleWithText from "./components/RectangleWithText.vue";
-import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
 </script>
 
 <style>

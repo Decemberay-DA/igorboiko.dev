@@ -1,6 +1,7 @@
 export { DynamicObject } from "./DynamicObject";
-export { Game } from "./Game";
+export { Game, UpdatePriorities as OnFrameUpdatePriorities } from "./Game";
 export { GameManagering as GameManager } from "./GameManager";
 export { GameTime } from "./GameTime";
 export { SceneConfigurator } from "./SceneConfigurator";
+// export { SingletonDynamicObject } from "./SingletonDynamicObject";
 export * as GE from "./index";

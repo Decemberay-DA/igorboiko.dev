@@ -1,6 +1,7 @@
 import * as DO from "../DinamicObjects/index";
 import * as MC from "../MegaCursor/index";
 import * as DU from "../DevUnilities/index";
+import * as TJ from "../ThreeJS/index";
 
 /**
  * its goal is to ckick scene up.
@@ -16,6 +17,8 @@ export class SceneConfigurator {
     public start() {
         const floating = new DO.FloatingElements();
         floating.updateManagedElements("pv-js-live-floating"); // all elements woth this style is float
+
+        const three = TJ.ThreeScene.instance;
 
         const cursorStranding = null;
         const cursorDetector = null;
