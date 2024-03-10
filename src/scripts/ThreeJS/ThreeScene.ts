@@ -2,7 +2,7 @@ import { Logger } from "../DevUnilities";
 import { GE } from "../GameEngine/index";
 import * as THREE from "three";
 
-import { createApp } from "vue";
+// import { createApp } from "vue";
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 
 export class ThreeScene extends GE.DynamicObject {
@@ -12,29 +12,27 @@ export class ThreeScene extends GE.DynamicObject {
     private three_scene_bacground!: HTMLElement;
 
     // Singletotning ========-====-====-====-============
-    private static _instance: ThreeScene = new ThreeScene();
+    private static _instance: ThreeScene | null;
     public static get instance() {
+        if (ThreeScene._instance == null) {
+            ThreeScene._instance = new ThreeScene();
+        }
         return this._instance;
     }
     private constructor() {
         super();
         this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.threeScene;
-        alert("ThreeScene created");
+        // alert("ThreeScene created");
 
         const bg: HTMLElement | null = document.getElementById(
             "three_scene_bacground.788320a9-5a74-4ab4-83c8-09ebb725c294"
         );
 
         if (bg == null) {
-            // alert("three_scene_bacground was found");
-            // const app = createApp(ThreeSceneBackground);
-            // app.mount("#app");
-            // this.three_scene_bacground = app._component.
-            Logger.write("three_scene_bacground not found", 30);
+            alert("three_scene_bacground was not found");
         } else {
             this.three_scene_bacground = bg;
-            // alert("three_scene_bacground was not found");
-            Logger.write("three_scene_bacground ws found");
+            Logger.write("three_scene_bacground was found");
         }
 
         // Scene ========-====-====-====-============
@@ -45,6 +43,7 @@ export class ThreeScene extends GE.DynamicObject {
             0.1,
             1000
         );
+        // const canvas: THREE.OffscreenCanvas;
         const renderParameters: THREE.WebGLRendererParameters = {
             canvas: this.three_scene_bacground,
             precision: "lowp",

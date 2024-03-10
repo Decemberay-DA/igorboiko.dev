@@ -50,43 +50,75 @@
                 class="pv-js-live-floating"
             />
         </div>
+        <div class="gap-3">
+            <TestButton
+                v-bind:button-text="'Floating button a'"
+                id="Floating button a"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button b'"
+                id="Floating button b"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button c'"
+                id="Floating button c"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button d'"
+                id="Floating button a"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button'"
+                id="Floating button d"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button e'"
+                id="Floating button e"
+                class="pv-js-live-floating"
+            />
+        </div>
+        <div class="gap-3">
+            <TestButton
+                v-bind:button-text="'Floating button a'"
+                id="Floating button a"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button b'"
+                id="Floating button b"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button c'"
+                id="Floating button c"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button d'"
+                id="Floating button a"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button'"
+                id="Floating button d"
+                class="pv-js-live-floating"
+            />
+            <TestButton
+                v-bind:button-text="'Floating button e'"
+                id="Floating button e"
+                class="pv-js-live-floating"
+            />
+        </div>
 
         <div class="flex flex-row gap-8">
             <RectangleWithText
                 title="Test floating stuff A"
                 text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
-            />
-            <RectangleWithText
-                title="Test floating stuff B"
-                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
-            />
-            <RectangleWithText
-                title="Test floating stuff C"
-                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-            />
-        </div>
-        <div class="flex flex-row gap-8">
-            <RectangleWithText
-                title="Test floating stuff A"
-                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
-            />
-            <RectangleWithText
-                title="Test floating stuff B"
-                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-                class="pv-js-live-floating"
-            />
-            <RectangleWithText
-                title="Test floating stuff C"
-                text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
-            />
-        </div>
-        <div class="flex flex-row gap-8">
-            <RectangleWithText
-                title="Test floating stuff A"
-                text="lorem 122"
                 class="pv-js-live-floating"
             />
             <RectangleWithText
