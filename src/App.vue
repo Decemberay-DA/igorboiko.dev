@@ -4,6 +4,9 @@
         <CursorBetrayalElement />
         <ThreeSceneBackground />
     </div>
+
+    <Header />
+
     <!-- <div
         class="fixed w-screen h-screen flex flex-auto justify-center items-center pointer-events-none z-50"
     >
@@ -137,6 +140,8 @@
                 text="text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500 text-4xl font-bold text-center text-blue-500"
             />
         </div>
+
+        <Futer />
     </div>
 </template>
 
@@ -146,6 +151,10 @@ import DevDebugger from "./scripts/DevUnilities/DevDebugger.vue";
 import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
 import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
 import FloatingElementsGrid from "./scripts/Testes/FloatingElementsGrid.vue";
+
+// CommonPage
+import Header from "./components/CommonPage/Header.vue";
+import Futer from "./components/CommonPage/Futer.vue";
 
 import TestButton from "./components/TestButton.vue";
 import RectangleWithText from "./components/RectangleWithText.vue";
