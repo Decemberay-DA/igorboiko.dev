@@ -23,12 +23,13 @@ export class UpdatePriorities {
  */
 export class Game implements IEnablable {
     // IEnablable ========-====-====-====-============
-    protected __isEnabled: boolean = false;
+    protected __isEnabled: boolean = true;
     public get isEnabled(): boolean {
         return this.__isEnabled;
     }
     public enable(): void {
         this.__isEnabled = true;
+        requestAnimationFrame(() => this.update());
         console.log("Component enabled.");
     }
     public disable(): void {
@@ -69,7 +70,6 @@ export class Game implements IEnablable {
 
     // Game loop ========-====-====-====-============
     public triggerStart(): void {
-        this.enable();
         this.start();
     }
     private start(): void {
@@ -80,7 +80,7 @@ export class Game implements IEnablable {
     }
     private update(): void {
         // dont update anything if disable
-        if (!this.__isEnabled) requestAnimationFrame(() => this.update());
+        if (!this.__isEnabled) return;
 
         this._dynamicObjects.forEach((dynamicObject) => {
             if (dynamicObject.isEnabled) {

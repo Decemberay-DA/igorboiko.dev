@@ -28,5 +28,6 @@ export default {
 }
 .c-floating-box {
     @apply size-1 bg-blue-200;
+    @apply rounded-full;
 }
 </style>

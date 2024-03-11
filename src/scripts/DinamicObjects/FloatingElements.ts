@@ -100,7 +100,7 @@ export class FloatingElement extends GE.ADynamicObject {
 
     private motionSpeed = 5;
     private motionAmplitude = 6;
-    private megaCursorInfluenceDistance = 0.001 * 2;
+    private megaCursorInfluenceDistance = 0.001 * 4;
     private xPositionTimeAmplitude = 5;
     private xPositionTimeInfluence = 1;
 
@@ -122,16 +122,17 @@ export class FloatingElement extends GE.ADynamicObject {
         // offseted by horizontal axis
         const time = GE.GameTime.realTimeSinceStartup + timeOffset;
 
+        const currentPosition: CT.Vector2d = {
+            x: this._element.getBoundingClientRect().left,
+            y: this._element.getBoundingClientRect().top,
+        };
+
         let megaCursorInfluence =
-            MG.MegaCursor.getDistance(originalPosition) *
+            MG.MegaCursor.getDistance(currentPosition) *
+            // MG.MegaCursor.getDistance(originalPosition) *
             this.megaCursorInfluenceDistance;
         megaCursorInfluence = Math.max(0, Math.min(1, megaCursorInfluence));
-        // megaCursorInfluence = megaCursorInfluence * 2; // add hard fallof
-
-        const offsetXY: CT.Vector2d = {
-            x: 1,
-            y: 2,
-        };
+        megaCursorInfluence = megaCursorInfluence * 2; // add hard fallof
 
         const offsetX =
             Math.sin(time * this.motionSpeed) *

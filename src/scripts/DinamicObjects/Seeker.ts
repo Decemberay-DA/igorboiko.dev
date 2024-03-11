@@ -1,7 +1,8 @@
 import { GE } from "../GameEngine/index";
 
 /**
- * Execute action untill success
+ * Execute action untill success.
+ * Delete this.
  */
 export class Seeker extends GE.ADynamicObject {
     private readonly _stopCondition: () => boolean;
