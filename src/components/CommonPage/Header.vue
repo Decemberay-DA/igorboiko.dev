@@ -1,12 +1,12 @@
 <template>
     <div
-        class="flex flex-row justify-around h-8 grow-0 bg-neutral-500 h-fit w-screen"
+        class="flex flex-row justify-around grow-0 bg-neutral-500 h-fit w-screen"
     >
-        <div id="logo">
+        <div id="logo" class="flex flex-row">
             <p>LOGO</p>
         </div>
 
-        <div id="central_filters">
+        <div id="central_filters" class="flex flex-row">
             <p>Programmer</p>
             <p>Designer</p>
             <p>Musician</p>

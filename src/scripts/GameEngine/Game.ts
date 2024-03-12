@@ -48,7 +48,7 @@ export class Game implements IEnablable {
     }
 
     // DynamicObject registration ========-====-====-====-============
-    private _dynamicObjects: Array<GE.ADynamicObject> = [];
+    private _dynamicObjects: GE.ADynamicObject[] = [];
     public get dynamicObjects(): Readonly<Array<GE.ADynamicObject>> {
         return Object.freeze([...this._dynamicObjects]);
     }
@@ -78,7 +78,7 @@ export class Game implements IEnablable {
         });
         this.update();
     }
-    private update(): void {
+    private update(): void { // what about WASM???? dooooodeee noooooooooo
         // dont update anything if disable
         if (!this.__isEnabled) return;
 
