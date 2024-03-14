@@ -11,7 +11,7 @@
         class="fixed w-screen h-screen flex flex-auto justify-center items-center pointer-events-none z-50"
     >
 </div> -->
-    <FloatingElementsGrid :rows="20" :boxesPerRow="120" />
+    <FloatingElementsGrid :rows="1" :boxesPerRow="400" />
 
     <div id="test-rows-stuff" class="grid grid-rows-4 gap-6">
         <div>Row 1</div>
@@ -59,70 +59,7 @@
                 class="pv-js-live-floating-subject"
             />
         </div>
-        <div class="gap-3">
-            <TestButton
-                v-bind:button-text="'Floating button a'"
-                id="Floating button a"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button b'"
-                id="Floating button b"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button c'"
-                id="Floating button c"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button d'"
-                id="Floating button a"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button'"
-                id="Floating button d"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button e'"
-                id="Floating button e"
-                class="pv-js-live-floating-subject"
-            />
-        </div>
-        <div class="gap-3">
-            <TestButton
-                v-bind:button-text="'Floating button a'"
-                id="Floating button a"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button b'"
-                id="Floating button b"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button c'"
-                id="Floating button c"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button d'"
-                id="Floating button a"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button'"
-                id="Floating button d"
-                class="pv-js-live-floating-subject"
-            />
-            <TestButton
-                v-bind:button-text="'Floating button e'"
-                id="Floating button e"
-                class="pv-js-live-floating-subject"
-            />
-        </div>
+
 
         <div class="flex flex-row gap-8">
             <RectangleWithText
