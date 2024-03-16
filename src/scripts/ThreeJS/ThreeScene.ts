@@ -5,17 +5,17 @@ import * as THREE from "three";
 // import { createApp } from "vue";
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 
-export default class ThreeScene extends GE.ADynamicObject {
-    public readonly bacgroundContainer: HTMLElement;
+export class ThreeScene extends GE.ADynamicObject {
+    public readonly HTMLContainer: HTMLElement;
     public readonly scene: THREE.Scene;
     public readonly camera: THREE.PerspectiveCamera;
     public readonly renderer: THREE.WebGLRenderer;
 
-    public constructor(bacgroundContainer: HTMLElement) {
+    public constructor(HTMLContainer: HTMLElement) {
         super();
-        this.disable();
-        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.threeScene;
-        this.bacgroundContainer = bacgroundContainer;
+        this.disable(); // test
+        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
+        this.HTMLContainer = HTMLContainer;
 
         // Scene ========-====-====-====-============
         this.scene = new THREE.Scene();
@@ -42,7 +42,7 @@ export default class ThreeScene extends GE.ADynamicObject {
 
     private getRenderer(): THREE.WebGLRenderer {
         const renderParameters: THREE.WebGLRendererParameters = {
-            // canvas: this.bacgroundContainer, // here the error
+            // canvas: this.bacgroundContainer, // here is the error
             antialias: true,
             precision: "lowp",
         };
@@ -50,10 +50,10 @@ export default class ThreeScene extends GE.ADynamicObject {
 
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(
-            this.bacgroundContainer.clientWidth,
-            this.bacgroundContainer.clientHeight
+            this.HTMLContainer.clientWidth,
+            this.HTMLContainer.clientHeight
         );
-        this.bacgroundContainer.appendChild(renderer.domElement);
+        this.HTMLContainer.appendChild(renderer.domElement);
         renderer.domElement.style.width = "100%";
         renderer.domElement.style.height = "100%";
 
@@ -67,8 +67,8 @@ export default class ThreeScene extends GE.ADynamicObject {
         return renderer;
     }
     private onWindowResize() {
-        const width = this.bacgroundContainer.clientWidth;
-        const height = this.bacgroundContainer.clientHeight;
+        const width = this.HTMLContainer.clientWidth;
+        const height = this.HTMLContainer.clientHeight;
 
         this.renderer.setSize(width, height);
         this.camera.aspect = width / height;

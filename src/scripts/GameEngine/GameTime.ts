@@ -4,7 +4,7 @@ import { GE } from "./index";
 export class GameTime extends GE.ADynamicObject {
     public constructor() {
         super();
-        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.gameTime;
+        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.GAME_TIME;
     }
 
     private static previousFrameTimestamp: DOMHighResTimeStamp = 0;

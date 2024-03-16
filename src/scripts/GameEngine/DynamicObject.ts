@@ -24,7 +24,7 @@ export abstract class ADynamicObject implements IEnablable {
     }
     // define the order in which dynamick objects are sorted and updated
     protected __onFrameUpdatePriority: number =
-        GE.OnFrameUpdatePriorities.usualDynamicObject;
+        GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
     public get onFrameUpdatePriority(): number {
         return this.__onFrameUpdatePriority;
     }

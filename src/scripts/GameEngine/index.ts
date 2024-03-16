@@ -1,5 +1,5 @@
 export { ADynamicObject } from "./DynamicObject";
-export { Game, UpdatePriorities as OnFrameUpdatePriorities } from "./Game";
+export { Game, OnFrameOrders as OnFrameUpdatePriorities } from "./Game";
 export { GameManagering as GameManager } from "./GameManager";
 export { GameTime } from "./GameTime";
 export { SceneConfigurator } from "./SceneConfigurator";

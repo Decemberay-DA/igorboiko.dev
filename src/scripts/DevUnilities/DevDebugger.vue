@@ -62,7 +62,7 @@ export default {
         onMounted(() => {
             const debugUpdater = new DO.AnonimousDynamicObject({
                 onFrameUpdatePriority:
-                    GE.OnFrameUpdatePriorities.earlyFrameUpdate,
+                    GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE,
                 onFrameUpdate: function () {
                     updateDebugData();
                     Logger.write(

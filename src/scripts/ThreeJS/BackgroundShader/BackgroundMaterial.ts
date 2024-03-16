@@ -7,7 +7,7 @@ export default class BackgroundMaterial extends GE.ADynamicObject {
 
     public constructor() {
         super();
-        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.threeScene;
+        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
 
         this.shader = new THREE.ShaderMaterial({
             uniforms: {
