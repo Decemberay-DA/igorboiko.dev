@@ -1,17 +1,17 @@
 export class Guid {
-    private static readonly _guidBase = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"; // 4 cz random
+	private static readonly _guidBase = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"; // 4 cz random
 
-    private constructor() {}
+	private constructor() {}
 
-    public static new(): string {
-        let newGUID = Guid._guidBase;
+	public static new(): string {
+		let newGUID = Guid._guidBase;
 
-        newGUID.replace(/[xy]/g, function (c) {
-            var r = (Math.random() * 16) | 0,
-                v = c == "x" ? r : (r & 0x3) | 0x8;
-            return v.toString(16);
-        });
+		newGUID.replace(/[xy]/g, function (c) {
+			var r = (Math.random() * 16) | 0,
+				v = c == "x" ? r : (r & 0x3) | 0x8;
+			return v.toString(16);
+		});
 
-        return newGUID;
-    }
+		return newGUID;
+	}
 }

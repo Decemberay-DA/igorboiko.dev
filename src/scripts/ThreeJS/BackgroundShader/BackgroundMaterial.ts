@@ -1,23 +1,16 @@
-import { GE } from "@/scripts/GameEngine";
 import * as THREE from "three";
 import fragment from "./BGShader.glsl";
+import { TJ } from "..";
 
-export default class BackgroundMaterial extends GE.ADynamicObject {
-    public readonly shader: THREE.ShaderMaterial;
+export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
+	public constructor() {
+		super();
 
-    public constructor() {
-        super();
-        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
-
-        this.shader = new THREE.ShaderMaterial({
-            uniforms: {
-                time: { value: 1.0 },
-            },
-            fragmentShader: fragment,
-        });
-    }
-
-    public override onFrameUpdate(): void {
-        this.shader.uniforms.time.value = GE.GameTime.realTimeSinceStartup;
-    }
+		this.__shader = new THREE.ShaderMaterial({
+			uniforms: {
+				time: { value: 1.0 },
+			},
+			fragmentShader: fragment,
+		});
+	}
 }

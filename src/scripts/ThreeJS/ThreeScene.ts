@@ -1,82 +1,96 @@
-import { Logger } from "../DevUnilities";
 import { GE } from "../GameEngine/index";
 import * as THREE from "three";
+import { MegaCursor } from "../MegaCursor";
+
+type notmounted = null;
 
 // import { createApp } from "vue";
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
-
 export class ThreeScene extends GE.ADynamicObject {
-    public readonly HTMLContainer: HTMLElement;
-    public readonly scene: THREE.Scene;
-    public readonly camera: THREE.PerspectiveCamera;
-    public readonly renderer: THREE.WebGLRenderer;
+	public readonly scene: THREE.Scene;
+	public readonly camera: THREE.PerspectiveCamera;
+	public readonly renderer: THREE.WebGLRenderer;
 
-    public constructor(HTMLContainer: HTMLElement) {
-        super();
-        this.disable(); // test
-        this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
-        this.HTMLContainer = HTMLContainer;
+	private _HTMLContainer: HTMLElement | notmounted = null;
+	public get HTMLContainer(): HTMLElement | notmounted {
+		return this._HTMLContainer;
+	}
 
-        // Scene ========-====-====-====-============
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x808080);
-        this.camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
-        );
-        this.renderer = this.getRenderer();
+	public constructor() {
+		super();
+		this.disable(); // disabled untill being mounted to htmlelement
+		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
 
-        // lights ========-====-====-====-============
-        const light = new THREE.PointLight(0xffffff, 1);
-        light.position.set(0, 1, 1).normalize();
-        this.scene.add(light);
+		// Scene ========-====-====-====-============
+		this.scene = new THREE.Scene();
+		this.scene.background = new THREE.Color(0x808080);
+		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		const renderParameters: THREE.WebGLRendererParameters = {
+			antialias: true,
+			precision: "lowp",
+		};
+		this.renderer = new THREE.WebGLRenderer(renderParameters);
+		this.renderer.setPixelRatio(window.devicePixelRatio);
 
-        // Meshes ========-====-====-====-============
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        this.scene.add(cube);
-    }
+		// lights ========-====-====-====-============
+		const light = new THREE.PointLight(0xffffff, 1);
+		light.position.set(0, 1, 1).normalize();
+		this.scene.add(light);
 
-    private getRenderer(): THREE.WebGLRenderer {
-        const renderParameters: THREE.WebGLRendererParameters = {
-            // canvas: this.bacgroundContainer, // here is the error
-            antialias: true,
-            precision: "lowp",
-        };
-        const renderer = new THREE.WebGLRenderer(renderParameters);
+		// Meshes ========-====-====-====-============
+		const geometry = new THREE.BoxGeometry();
+		const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+		const cube = new THREE.Mesh(geometry, material);
+		this.scene.add(cube);
+	}
+	public MountTo(newMountedElement: HTMLElement): void {
+		if (this._HTMLContainer && this._HTMLContainer.contains(this.renderer.domElement)) return;
 
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(
-            this.HTMLContainer.clientWidth,
-            this.HTMLContainer.clientHeight
-        );
-        this.HTMLContainer.appendChild(renderer.domElement);
-        renderer.domElement.style.width = "100%";
-        renderer.domElement.style.height = "100%";
+		this.enable();
 
-        // resize render window
-        window.addEventListener(
-            "resize",
-            this.onWindowResize.bind(this),
-            false
-        );
+		this._HTMLContainer = newMountedElement;
+		this.renderer.setSize(newMountedElement.clientWidth, newMountedElement.clientHeight);
+		this.renderer.domElement.style.width = "100%";
+		this.renderer.domElement.style.height = "100%";
 
-        return renderer;
-    }
-    private onWindowResize() {
-        const width = this.HTMLContainer.clientWidth;
-        const height = this.HTMLContainer.clientHeight;
+		newMountedElement.appendChild(this.renderer.domElement);
+		window.addEventListener("resize", this.onWindowResize, false);
+	}
+	public UnMount() {
+		if (!this._HTMLContainer || !this._HTMLContainer.contains(this.renderer.domElement)) return;
 
-        this.renderer.setSize(width, height);
-        this.camera.aspect = width / height;
+		this.disable();
 
-        this.camera.updateProjectionMatrix();
-    }
+		this._HTMLContainer.removeChild(this.renderer.domElement);
 
-    public override onFrameUpdate() {
-        this.renderer.render(this.scene, this.camera);
-    }
+		window.removeEventListener("resize", this.onWindowResize, false);
+	}
+
+	private onWindowResize() {
+		if (!this._HTMLContainer) return;
+
+		const width = this._HTMLContainer.clientWidth;
+		const height = this._HTMLContainer.clientHeight;
+
+		this.renderer.setSize(width, height);
+		this.camera.aspect = width / height;
+		this.camera.updateProjectionMatrix();
+	}
+
+	public override onFrameUpdate() {
+		const b = Math.sin(GE.GameTime.realTimeSinceStartup);
+		this.scene.background = new THREE.Color(
+			// b * Math.PI * 1,
+			0,
+			MegaCursor.currentPosition.x / window.innerWidth,
+			MegaCursor.currentPosition.y / window.innerHeight
+			// b * Math.PI * 3
+		);
+		this.renderer.render(this.scene, this.camera);
+	}
+
+	public override onDelete(): void {
+		super.onDelete();
+		this.UnMount();
+	}
 }
