@@ -27,24 +27,14 @@ export class SceneConfigurator {
 		const bgScene = new TJ.ThreeScene();
 		TJ.ThreeScenesManager.BACKGROUND_SCENE.InitSetThreeScene(bgScene);
 
-		const bgGeometryPlane = new THREE.PlaneGeometry(2, 2);
+		const bgGeometryPlane = new THREE.PlaneGeometry(1, 1);
 		const bgMaterial = new TJ.BackgroundMaterial();
 		const bgMesh = new THREE.Mesh(bgGeometryPlane, bgMaterial.shader);
 		bgMesh.position.z = -1;
 		bgScene.scene.add(bgMesh);
 		bgScene.camera.position.z = 1;
 
-		// // lights ========-====-====-====-============
-		// const light = new THREE.PointLight(0xffffff, 1);
-		// light.position.set(0, 1, 1).normalize();
-		// this.scene.add(light);
-
-		// // Meshes ========-====-====-====-============
-		// const geometry = new THREE.BoxGeometry();
-		// const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-		// const cube = new THREE.Mesh(geometry, material);
-		// this.scene.add(cube);
-
+		// Three cursor ========-====-====-====-============
 		const cursorStranding = null;
 		const cursorDetector = null;
 		const cursorPositionProvider = null;

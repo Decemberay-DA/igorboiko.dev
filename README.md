@@ -18,7 +18,9 @@ the tudus:
         - [ ] 9/18 global grid
     - [ ] patterns illustration
     - [ ] make 3d and styles
-    - [ ] write glsl shader for bg
+    - [ ] glsl shader for bg
+        - [ ] prototipe in blender
+        - [ ] write in glsl
     - [ ] finish the complex code for cursor response system for buttons
 
 - [ ] create pages
