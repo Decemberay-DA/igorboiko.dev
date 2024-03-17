@@ -1,12 +1,12 @@
 # vue-portfolio-website
 
-the tudu:
+the tudus:
 
 - [ ] Base stuff
     - [x] game engine
-        - [ ] how to properly dispose stuff
-        - [ ] how to handle moving from page to page
-        - [ ] (maybe) virtualization of objects that are outside of screen
+        - [ ] how to properly dispose stuff?
+        - [ ] how to handle moving from page to page?
+        - [ ] (maybe) virtualization of objects that are outside of screen?
     - [x] Three
         - [ ] figure out how to use glsl shaders with three
         - [ ] connects variables of shader to some external ts data like cursor position
