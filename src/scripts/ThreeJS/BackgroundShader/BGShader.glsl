@@ -1,13 +1,22 @@
-#version 300 es
-precision highp float;
 
-uniform vec2 vUv;
-uniform float time;
-uniform float greenValue;
 
-out vec4 pc_fragColor;
 
-void main() {
-    float blueValue = sin(vUv.x * 2.0 * 3.14159) + time;
-    pc_fragColor = vec4(0.325, greenValue, blueValue, 1.0);
-}
+
+
+// varying vec2 vUv;
+// void main() {
+//     vUv = uv;
+//     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+// }
+
+
+// uniform float time;
+// uniform vec2 resolution;
+// varying vec2 vUv;
+// void main() {
+//     vec2 uv = gl_FragCoord.xy / resolution.xy;
+//     vec3 col = 0.5 + 0.5 * cos(time + uv.xyx + vec3(0, 2, 4));
+//     gl_FragColor = vec4(col,1.0);
+// }
+
+

@@ -8,7 +8,8 @@ the tudus:
         - [ ] how to handle moving from page to page?
         - [ ] (maybe) virtualization of objects that are outside of screen?
     - [x] Three
-        - [ ] figure out how to use glsl shaders with three
+        - [x] figure out how to use glsl shaders with three
+           - [ ] figure out how to store glsl shaders in separete normal file
         - [ ] connects variables of shader to some external ts data like cursor position
 
 - [ ] make lookable

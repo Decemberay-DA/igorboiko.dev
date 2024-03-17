@@ -27,7 +27,7 @@ class ThreeSceneDOMBridge {
 
 		this._threeScene = schene;
 		this._threeSceneSet = true;
-		if (this._sceneMountLocation) this._threeScene.MountTo(this._sceneMountLocation);
+		if (this._sceneMountLocation) this._threeScene.mountTo(this._sceneMountLocation);
 	}
 
 	private _sceneMountLocation: HTMLElement | uninitialized = null;
@@ -41,7 +41,7 @@ class ThreeSceneDOMBridge {
 
 		this._sceneMountLocation = element;
 		this._sceneMountLocationSet = true;
-		if (this._threeScene) this._threeScene.MountTo(this._sceneMountLocation);
+		if (this._threeScene) this._threeScene.mountTo(this._sceneMountLocation);
 		else console.warn("threeScene not initted to be mounted to " + element.id);
 	}
 }
@@ -61,8 +61,14 @@ export class ThreeScenesManager {
 		return [ThreeScenesManager.MAIN_SCENE, ThreeScenesManager.BACKGROUND_SCENE];
 	}
 
-	public static readonly MAIN_SCENE = new ThreeSceneDOMBridge("MAIN_SCENE", "e3d65d41-dcef-4e32-9299-STATIC00GUID");
-	public static readonly BACKGROUND_SCENE = new ThreeSceneDOMBridge("BACKGROUND_SCENE", "387237c6-89b7-4e48-be61-STATIC00GUID");
+	public static readonly MAIN_SCENE = new ThreeSceneDOMBridge(
+		"MAIN_SCENE",
+		"e3d65d41-dcef-4e32-9299-STATIC00GUID"
+	);
+	public static readonly BACKGROUND_SCENE = new ThreeSceneDOMBridge(
+		"BACKGROUND_SCENE",
+		"387237c6-89b7-4e48-be61-STATIC00GUID"
+	);
 }
 
 // public static readonly MAIN_SCENE = new ManagimentedThreeSceneBridge(

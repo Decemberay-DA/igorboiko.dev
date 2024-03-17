@@ -31,19 +31,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		};
 		this.renderer = new THREE.WebGLRenderer(renderParameters);
 		this.renderer.setPixelRatio(window.devicePixelRatio);
-
-		// lights ========-====-====-====-============
-		const light = new THREE.PointLight(0xffffff, 1);
-		light.position.set(0, 1, 1).normalize();
-		this.scene.add(light);
-
-		// Meshes ========-====-====-====-============
-		const geometry = new THREE.BoxGeometry();
-		const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-		const cube = new THREE.Mesh(geometry, material);
-		this.scene.add(cube);
 	}
-	public MountTo(newMountedElement: HTMLElement): void {
+	public mountTo(newMountedElement: HTMLElement): void {
 		if (this._HTMLContainer && this._HTMLContainer.contains(this.renderer.domElement)) return;
 
 		this.enable();
@@ -56,7 +45,7 @@ export class ThreeScene extends GE.ADynamicObject {
 		newMountedElement.appendChild(this.renderer.domElement);
 		window.addEventListener("resize", this.onWindowResize, false);
 	}
-	public UnMount() {
+	public unMount() {
 		if (!this._HTMLContainer || !this._HTMLContainer.contains(this.renderer.domElement)) return;
 
 		this.disable();
@@ -78,19 +67,19 @@ export class ThreeScene extends GE.ADynamicObject {
 	}
 
 	public override onFrameUpdate() {
-		const b = Math.sin(GE.GameTime.realTimeSinceStartup);
-		this.scene.background = new THREE.Color(
-			// b * Math.PI * 1,
-			0,
+		this.renderer.render(this.scene, this.camera);
+
+		// Simple animation to differe bg from everything else ========-====-====-====-============
+		const color = new THREE.Color(
+			Math.sin(GE.GameTime.realTimeSinceStartup),
 			MegaCursor.currentPosition.x / window.innerWidth,
 			MegaCursor.currentPosition.y / window.innerHeight
-			// b * Math.PI * 3
 		);
-		this.renderer.render(this.scene, this.camera);
+		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}
 
 	public override onDelete(): void {
 		super.onDelete();
-		this.UnMount();
+		this.unMount();
 	}
 }

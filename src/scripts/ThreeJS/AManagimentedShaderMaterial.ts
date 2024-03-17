@@ -12,7 +12,4 @@ export abstract class AManagimentedShaderMaterial extends GE.ADynamicObject {
 		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
 	}
 
-	public override onFrameUpdate(): void {
-		this.__shader.uniforms.time.value = GE.GameTime.realTimeSinceStartup;
-	}
 }
