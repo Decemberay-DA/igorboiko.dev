@@ -15,6 +15,7 @@ export class GLSLSahderReader {
 	public static readonly fragmentShaderEndDelimiter =
 		"// FRAGMENT SHADER END ========-====-====-====-============";
 
+	// dont works actually
 	public static extractVertexShader(glslDocument: string): string {
 		const match = glslDocument.match(
 			new RegExp(`${this.vertexShaderStartDelimiter}([\\s\\S]*?)${this.vertexShaderEndDelimiter}`, "m")

@@ -1,8 +1,5 @@
 
 
-
-
-
 // VERTEX SHADER START ========-====-====-====-============
 varying vec2 vUv;
 void main() { // waaaaaaaaaaaaa!!!!!
