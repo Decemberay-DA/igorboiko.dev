@@ -1,25 +1,27 @@
 <template>
-    <div
-        class="flex flex-row justify-around grow-0 bg-neutral-500 h-fit w-screen"
-    >
-        <div id="logo" class="flex flex-row">
-            <p>LOGO</p>
-        </div>
-
-        <div id="central_filters" class="flex flex-row">
-            <p>Programmer</p>
-            <p>Designer</p>
-            <p>Musician</p>
-        </div>
-
-        <div id="page_navigation" class="flex flex-row">
-            <p>About</p>
-            <p>Projects</p>
-            <p>Menu_idk</p>
-        </div>
-    </div>
+	<v-container>
+		<v-row class="flex flex-row gap-5">
+			<h1 class="header text-lg md:text-xl lg:text-2xl">LOGO</h1>
+			<h2 class="header text-xl">Content</h2>
+			<h2 class="header text-xl">Content</h2>
+			<h2 class="header text-xl">Content</h2>
+			<h2 class="header text-xl">Content</h2>
+			<v-btn prepend-icon="$vuetify" variant="tonal" class="text-xl bg-red-600 hover:bg-red-700">
+				Button
+			</v-btn>
+		</v-row>
+	</v-container>
 </template>
 
 <script lang="ts">
+import { createVuetify } from "vuetify";
+import * as components from "vuetify/components";
+
 export default {};
 </script>
+
+<style scoped>
+.header {
+	content: "";
+}
+</style>

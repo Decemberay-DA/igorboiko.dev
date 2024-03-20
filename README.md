@@ -1,4 +1,4 @@
-# vue-portfolio-website
+# vue-portfolio-website / diploma
 
 the tudus:
 

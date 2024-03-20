@@ -1,6 +1,10 @@
 import { DU } from "../DevUnilities";
 import { GE } from "./index";
 
+/**
+ * Handles time managiment in all scenes.
+ * Singleton.
+ */
 export class GameTime extends GE.ADynamicObject {
 	public constructor() {
 		super();

@@ -2,9 +2,12 @@ import "./assets/styles/styles.min.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import * as GE from "./scripts/GameEngine/index";
+import vuetify from "./plugins/vuetify";
 
-createApp(App).mount("#app");
+const app = createApp(App);
+app.use(vuetify);
+app.mount("#app");
 
-const sc = new GE.SceneConfigurator();
-sc.start();
+// start all game scripts
+new GE.SceneConfigurator().start();
 GE.GameManager.getInstance().start();

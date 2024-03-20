@@ -3,7 +3,6 @@ import * as MC from "../MegaCursor/index";
 import * as DU from "../DevUnilities/index";
 import * as TJ from "../ThreeJS/index";
 import { GE } from ".";
-import { BackgroundMaterial } from "../ThreeJS/BackgroundShader/BackgroundMaterial";
 import * as THREE from "three";
 
 /**
@@ -18,12 +17,14 @@ export class SceneConfigurator {
 	 * like in unity lol.
 	 */
 	public start() {
+		// Base Game setup ========-====-====-====-============
 		const timeUpdater = new GE.GameTime(); // just init and add to Game update cycle
+		// GE.Game.getInstance().disable(); // test disable game to just create a website and not be bored by all the code
 
 		// all elements woth this style is float
 		DO.FloatingElementsFactory.registerFloatingObjectsForClass("pv-js-live-floating-subject");
 
-		// Three scene background ========-====-====-====-============
+		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
 		TJ.ThreeScenesManager.BACKGROUND_SCENE.InitSetThreeScene(bgScene);
 
@@ -34,7 +35,9 @@ export class SceneConfigurator {
 		bgScene.scene.add(bgMesh);
 		bgScene.camera.position.z = 1;
 
-		// Three cursor ========-====-====-====-============
+		bgScene.disable();
+
+		// Three foreground scene cursor ========-====-====-====-============
 		const cursorStranding = null;
 		const cursorDetector = null;
 		const cursorPositionProvider = null;
