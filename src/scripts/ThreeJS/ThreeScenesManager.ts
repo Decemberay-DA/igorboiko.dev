@@ -70,12 +70,3 @@ export class ThreeScenesManager {
 		"387237c6-89b7-4e48-be61-STATIC00GUID"
 	);
 }
-
-// public static readonly MAIN_SCENE = new ManagimentedThreeSceneBridge(
-//     "MAIN_SCENE",
-//     "e3d65d41-dcef-4e32-9299-STATIC00GUID"
-// );
-// public static readonly BACKGROUND_SCENE = new ManagimentedThreeSceneBridge(
-//     "BACKGROUND_SCENE",
-//     "387237c6-89b7-4e48-be61-STATIC00GUID"
-// );

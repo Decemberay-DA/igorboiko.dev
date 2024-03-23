@@ -4,25 +4,6 @@
 		<CursorBetrayalElement />
 		<ThreeSceneBackground />
 	</div>
-
-	<v-row class="mt-10 gap-9">
-		<v-btn prepend-icon="$vuetify" variant="tonal" class="text-xl bg-red-600 hover:bg-red-400">
-			v Button
-		</v-btn>
-		<v-btn class="bg-blue-200 hover:text-white hover:bg-blue-700 hover:rounded-full">
-			tailwind Button
-		</v-btn>
-		<v-btn style="border-radius: 9999px" class="bg-blue-200 hover:text-white hover:bg-blue-700">
-			tailwind corrected Button
-		</v-btn>
-		<v-btn class="btn-corrected"> corrected in scss Button </v-btn>
-		<Button></Button>
-		<button class="pv-btn">My scss button</button>
-	</v-row>
-
-	<div class="mt-10 gap-9">
-		<Button></Button>
-	</div>
 </template>
 
 <script setup lang="ts">

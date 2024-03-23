@@ -23,6 +23,12 @@ export class MegaCursor extends GE.ADynamicObject {
 	public static get currentPosition(): CT.Vector2d {
 		return this._currentPosition;
 	}
+	public static get currentPosition0to1(): CT.Vector2d {
+		return {
+			x: this._currentPosition.x / window.innerWidth,
+			y: this._currentPosition.y / window.innerHeight,
+		};
+	}
 
 	public static getDistance(point: CT.Vector2d): number {
 		const dx = point.x - MegaCursor._currentPosition.x;
