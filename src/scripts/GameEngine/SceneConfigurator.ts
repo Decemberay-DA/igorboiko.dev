@@ -29,7 +29,7 @@ export class SceneConfigurator {
 		TJ.ThreeScenesManager.BACKGROUND_SCENE.InitSetThreeScene(bgScene);
 
 		// create a test bg plane
-		const bgGeometryPlane = new THREE.PlaneGeometry(16, 16);
+		const bgGeometryPlane = new THREE.PlaneGeometry(6, 6);
 		const bgMaterial = new TJ.BackgroundMaterial();
 		const bgMesh = new THREE.Mesh(bgGeometryPlane, bgMaterial.shader);
 		bgMesh.position.z = -3;

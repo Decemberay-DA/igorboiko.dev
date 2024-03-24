@@ -10,15 +10,21 @@ export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
 	public constructor() {
 		super();
 
+		const loader = new THREE.TextureLoader();
+		const texture = loader.load("src/scripts/ThreeJS/CommonAssets/CheckerDark_2D.jpg");
+
 		this.__shader = new THREE.ShaderMaterial({
+			vertexShader: a_vertex,
+			fragmentShader: a_fragment,
 			uniforms: {
 				time: { value: 0 },
 				pallete_mix_factor: { value: 0 },
 				sin_factor: { value: 0 },
 				resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+				background_texture: {
+					value: texture,
+				},
 			},
-			vertexShader: a_vertex,
-			fragmentShader: a_fragment,
 		});
 	}
 
