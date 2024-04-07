@@ -11,3 +11,11 @@ declare module "*.frag" {
 	const fragmentShader: string;
 	export default fragmentShader;
 }
+// declare module "*.gltf" {
+// 	const a: string;
+// 	export default a;
+// }
+// declare module "*.glb" {
+// 	const a: string;
+// 	export default a;
+// }

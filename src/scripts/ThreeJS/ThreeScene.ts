@@ -8,8 +8,16 @@ type notmounted = null;
 // import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 export class ThreeScene extends GE.ADynamicObject {
 	public readonly scene: THREE.Scene;
-	public readonly camera: THREE.PerspectiveCamera;
+	private _camera!: THREE.PerspectiveCamera;
 	public readonly renderer: THREE.WebGLRenderer;
+
+	// getters setters ========-====-====-====-============
+	public get camera(): THREE.PerspectiveCamera {
+		return this._camera;
+	}
+	public setCamera(newCamera: THREE.PerspectiveCamera): void {
+		this._camera = newCamera;
+	}
 
 	private _HTMLContainer: HTMLElement | notmounted = null;
 	public get HTMLContainer(): HTMLElement | notmounted {
@@ -24,7 +32,7 @@ export class ThreeScene extends GE.ADynamicObject {
 		// Scene ========-====-====-====-============
 		this.scene = new THREE.Scene();
 		this.scene.background = new THREE.Color(0x808080);
-		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		const renderParameters: THREE.WebGLRendererParameters = {
 			antialias: true,
 			precision: "lowp",

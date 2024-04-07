@@ -9,8 +9,8 @@ the tudus:
         - [ ] (maybe) virtualization of objects that are outside of screen?
     - [x] Three
         - [x] figure out how to use glsl shaders with three
-           - [ ] figure out how to store glsl shaders in separete normal file
-        - [ ] connects variables of shader to some external ts data like cursor position
+           - [x] figure out how to store glsl shaders in separete normal file
+        - [x] connects variables of shader to some external ts data like cursor position
 
 - [ ] make lookable
     - [ ] create styles

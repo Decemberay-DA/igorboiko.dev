@@ -7,5 +7,7 @@ const app = createApp(App);
 app.mount("#app");
 
 // start all game scripts
-new GE.SceneConfigurator().start();
-GE.GameManager.getInstance().start();
+const sc = new GE.SceneConfigurator();
+await sc.start();
+const gm = GE.GameManager.getInstance();
+await gm.start();

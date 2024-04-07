@@ -4,6 +4,9 @@ import { GE } from "../GameEngine/index";
  * Execute action untill success.
  * Delete this.
  * Delete this.
+ * Delete this.
+ * Delete this.
+ * Delete this.
  */
 export class Seeker extends GE.ADynamicObject {
 	private readonly _stopCondition: () => boolean;
