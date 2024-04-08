@@ -85,7 +85,9 @@ export class Game implements IEnablable {
 			}
 		});
 
-		DU.Logger.write(`Game updated "${GE.GameTime.currentFrame}", current time "${GE.GameTime.realTimeSinceStartup}", delta time "${GE.GameTime.deltaTime}"`);
+		DU.Logger.write(
+			`Game updated "${GE.GameTime.currentFrame}", current time "${GE.GameTime.realTimeSinceStartup}", delta time "${GE.GameTime.deltaTime}"`
+		);
 
 		requestAnimationFrame(() => this.update()); // Continue the loop
 	}

@@ -8,6 +8,6 @@ app.mount("#app");
 
 // start all game scripts
 const sc = new GE.SceneConfigurator();
-await sc.start();
+await sc.setupMainScenePage();
 const gm = GE.GameManager.getInstance();
 await gm.start();

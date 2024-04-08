@@ -5,6 +5,8 @@ import * as TJ from "../ThreeJS/index";
 import { GE } from ".";
 import * as THREE from "three";
 import { type GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { TWEENUpdater } from "../DinamicObjects/TWEENUpdater";
+import { CameraManager } from "../DinamicObjects/CameraManager";
 
 /**
  * its goal is to ckick scene up.
@@ -17,31 +19,40 @@ export class SceneConfigurator {
 	 * like adding main stuff in to it.
 	 * like in unity lol.
 	 */
-	public async start() {
+	public async setupMainScenePage() {
 		// Base Game setup ========-====-====-====-============
 		const timeUpdater = new GE.GameTime(); // just init and add to Game update cycle
-		// GE.Game.getInstance().disable(); // test disable game to just create a website and not be bored by all the code
-
-		// all elements woth this style is float
-		DO.FloatingElementsFactory.registerFloatingObjectsForClass("pv-js-live-floating-subject");
+		const tweenUpdater = new TWEENUpdater();
 
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
 		TJ.ThreeScenesManager.BACKGROUND_SCENE.InitSetThreeScene(bgScene);
-		// add gltf stuff
+
+		// add gltf stuff ========-====-====-====-============
 		const gltfBG: GLTF = await TJ.GLTFLoaderchik.aGelLoadedGLTF();
 		bgScene.scene.add(gltfBG.scene);
-		// set random camera every time scene loaded for test
+
+		// Camera managiment ========-====-====-====-============
+		const mainCameraRef = bgScene.scene.getObjectByName(
+			CameraManager.__MAIN_CAMERA__
+		) as THREE.PerspectiveCamera;
+		const cameraManager = new CameraManager(mainCameraRef, bgScene);
+
 		let currentCameraIndex = 0;
 		async function setNextCameraAsActive() {
 			currentCameraIndex++;
-			if (currentCameraIndex > gltfBG.cameras.length) {
+			if (currentCameraIndex > gltfBG.cameras.length - 1) {
 				currentCameraIndex = 0;
 			}
 			const randomCameraIndex = Math.floor(currentCameraIndex);
-			const activeCamera = gltfBG.cameras[randomCameraIndex] as THREE.PerspectiveCamera; // here may be a bug due to cast
-			activeCamera.updateProjectionMatrix();
-			bgScene.setCamera(activeCamera);
+			const nextCamera = gltfBG.cameras[randomCameraIndex] as THREE.PerspectiveCamera; // here may be a bug due to cast
+			console.warn("Next camera name is: " + nextCamera.name);
+			console.warn("Current active camera is: " + bgScene.camera.name);
+			// nextCamera.updateProjectionMatrix();
+			// bgScene.setCamera(nextCamera);
+			CameraManager.getInstance().tweenTo(nextCamera); // move active camera to position of next camera
+			// CameraManager.getInstance().transforms.position.x += 10;
+			// CameraManager.getInstance().camera.position.x += 10;
 		}
 		const keydownListener = (event: KeyboardEvent) => {
 			if (event.key === "f") setNextCameraAsActive();
@@ -51,7 +62,7 @@ export class SceneConfigurator {
 			onDelete: () => window.removeEventListener("keydown", keydownListener),
 		});
 
-		// add test rotation to planet
+		// add test rotation to planet ========-====-====-====-============
 		const planet = bgScene.scene.getObjectByName("Globa") as THREE.Object3D;
 		const innerplanet = bgScene.scene.getObjectByName("Sphere") as THREE.Object3D;
 		const planetRotator = new DO.AnonimousDynamicObject({
@@ -61,7 +72,7 @@ export class SceneConfigurator {
 			},
 		});
 
-		// create a test bg plane
+		// create a test bg plane ========-====-====-====-============
 		const bgGeometryPlane = new THREE.PlaneGeometry(6, 6);
 		const bgMaterial = new TJ.BackgroundMaterial();
 		const bgMesh = new THREE.Mesh(bgGeometryPlane, bgMaterial.shader);
@@ -82,4 +93,6 @@ export class SceneConfigurator {
 
 		DU.Logger.write("Scene was builded");
 	}
+
+	public async setun404Page() {}
 }
