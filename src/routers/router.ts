@@ -1,21 +1,26 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
+import MainPageView from "@/views/MainPageView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
-import ScrollBehavior from "./scrollBehaviour";
+import ScrollBehaviour from "./scrollBehaviour";
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/",
 		name: "home",
-		component: HomeView,
+		component: MainPageView,
 		meta: { preserveState: true },
+	},
+	{
+		path: "/:pathMatch(.*)*",
+		name: "NotFound",
+		component: NotFoundView,
 	},
 ];
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
 	routes,
-	scrollBehavior: ScrollBehavior.behaviour,
+	scrollBehavior: ScrollBehaviour.behaviour,
 });
 
 export default router;

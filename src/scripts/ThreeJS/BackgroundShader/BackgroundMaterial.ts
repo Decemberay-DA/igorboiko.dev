@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import { TJ } from "..";
 import { GE } from "@/scripts/GameEngine";
-import { MegaCursor } from "@/scripts/MegaCursor";
 
 import a_vertex from "./a_vertex.glsl";
 import a_fragment from "./a_fragment.glsl";
+import asi from "@/scripts/asi/asi";
 
 export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
 	public constructor() {
@@ -30,8 +30,8 @@ export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
 
 	public override onFrameUpdate(): void {
 		this.__shader.uniforms.time.value = GE.GameTime.realTimeSinceStartup;
-		this.__shader.uniforms.pallete_mix_factor.value = MegaCursor.currentPosition0to1.x;
-		this.__shader.uniforms.sin_factor.value = MegaCursor.currentPosition0to1.x * 50 + 1;
+		this.__shader.uniforms.pallete_mix_factor.value = asi.context.Cursor.currentPosition0to1.x;
+		this.__shader.uniforms.sin_factor.value = asi.context.Cursor.currentPosition0to1.x * 50 + 1;
 		this.__shader.uniforms.resolution.value.set(window.innerWidth, window.innerHeight);
 	}
 }

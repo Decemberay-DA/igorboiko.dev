@@ -1,9 +1,10 @@
 <template>
-	<div></div>
+	<div>This is my component.</div>
 </template>
 
 <script lang="ts">
+
 export default {};
 </script>
 
-<style lang="scss"></style>
+<style scoped lang="scss"></style>

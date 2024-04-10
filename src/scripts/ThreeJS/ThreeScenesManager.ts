@@ -3,7 +3,8 @@ import type { TJ } from ".";
 type uninitialized = null;
 
 /**
- * Handles connection beetween scene created in SceneConfigurator and vue component mounted to dom
+ * Handles connection beetween scene created in SceneConfigurator and vue component mounted to dom.
+ * hahah actually it used to manage only one scene cz i didn`t know what is getting initialized first html tree or ts
  */
 class ThreeSceneDOMBridge {
 	public readonly NAME: string;

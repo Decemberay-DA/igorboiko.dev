@@ -1,11 +1,9 @@
+import asi from "../asi/asi";
 import { GE } from "../GameEngine/index";
 import * as THREE from "three";
-import { MegaCursor } from "../MegaCursor";
 
 type notmounted = null;
 
-// import { createApp } from "vue";
-// import ThreeSceneBackground from "./ThreeSceneBackground.vue";
 export class ThreeScene extends GE.ADynamicObject {
 	public readonly scene: THREE.Scene;
 	private _camera!: THREE.PerspectiveCamera;
@@ -80,8 +78,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		// Simple animation to differe bg from everything else ========-====-====-====-============
 		const color = new THREE.Color(
 			Math.sin(GE.GameTime.realTimeSinceStartup),
-			MegaCursor.currentPosition.x / window.innerWidth,
-			MegaCursor.currentPosition.y / window.innerHeight
+			asi.context.Cursor.currentPosition.x / window.innerWidth,
+			asi.context.Cursor.currentPosition.y / window.innerHeight
 		);
 		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}

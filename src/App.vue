@@ -4,23 +4,23 @@
 		<CursorBetrayalElement />
 		<ThreeSceneBackground />
 	</div>
+	<ChangeCameraSceneButton class="w-full" />
 </template>
 
 <script setup lang="ts">
 // utilities
 import DevDebugger from "./scripts/DevUnilities/DevDebugger.vue";
-import CursorBetrayalElement from "./scripts/MegaCursor/CursorBetrayalElement.vue";
+import CursorBetrayalElement from "./scripts/MegaCursor/CursorFollower/CursorBetrayalElement.vue";
 import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
-import FloatingElementsGrid from "./scripts/Testes/FloatingElementsGrid.vue";
 
 import Button from "./components/Common/Button.vue";
 
 // CommonPage
-import Header from "./components/CommonPage/Header.vue";
-import Futer from "./components/CommonPage/Futer.vue";
 
 import TestButton from "./components/TestButton.vue";
 import RectangleWithText from "./components/RectangleWithText.vue";
+import type asi from "./scripts/asi/asi";
+import ChangeCameraSceneButton from "./scripts/CameraManagiment/Commands/ChangeCameraSceneButton.vue";
 </script>
 
 <style lang="scss">

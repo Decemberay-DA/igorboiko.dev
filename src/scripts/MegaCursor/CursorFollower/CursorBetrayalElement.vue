@@ -5,6 +5,10 @@
 	</div>
 </template>
 
+<script lang="ts">
+export default {};
+</script>
+
 <style scoped>
 .base {
 	@apply z-50 absolute flex-none origin-center pointer-events-none -translate-y-1/2;
