@@ -1,4 +1,4 @@
-interface IEnablable {
+export interface IEnablable {
 	isEnabled: boolean;
 	enable(): void;
 	disable(): void;

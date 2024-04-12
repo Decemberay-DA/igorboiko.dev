@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { GE } from "../GameEngine";
 import * as TWEEN from "@tweenjs/tween.js";
-import { Transforms, IITransforms } from "./ParamsControllers/Transforms";
+import { Transforms, IITransforms, type ITransforms } from "./ParamsControllers/Transforms";
 
 /**
  * Controlls camera crane omg
@@ -15,6 +15,7 @@ export class CameraCrain extends GE.ADynamicObject {
 
 	public constructor(crane: THREE.Object3D) {
 		super();
+		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 
 		this.crane = crane;
 		this.transforms = new Transforms(crane);
@@ -22,20 +23,23 @@ export class CameraCrain extends GE.ADynamicObject {
 		this.setToCrane();
 	}
 
-	public tweenTo(translateTo: THREE.Object3D) {
-		const startTransforms = IITransforms.fromObject3D(this.crane);
-		const endTransforms = IITransforms.fromObject3D(translateTo);
+	public tweenTo(
+		translateTo: ITransforms,
+		teweenTime: number = 3000,
+		interpolation: (v: number[], k: number) => number = TWEEN.Interpolation.Bezier
+	) {
+		const start = IITransforms.fromObject3D(this.crane);
+		const end = translateTo;
 
-		let factor = { x: 0 };
-		const endFactor = { x: 1 };
-		const interpolationTween = new TWEEN.Tween(factor) //
-			.to(endFactor, 2049) //
-			.interpolation(TWEEN.Interpolation.Bezier) //
+		let f1 = { x: 0 };
+		let f2 = { x: 1 };
+		const rotationTween = new TWEEN.Tween(f1) //
+			.to(f2, teweenTime) //
+			.interpolation(interpolation) //
 			.onUpdate(() => {
-				this.transforms = this.transforms.lerpBetween(startTransforms, endTransforms, factor.x);
-				this.setToCrane();
+				this.transforms = this.transforms.lerpBetween(start, end, f1.x);
 			});
-		interpolationTween.start();
+		rotationTween.start();
 
 		// why it works only here
 		function animate(time: number) {
@@ -45,11 +49,10 @@ export class CameraCrain extends GE.ADynamicObject {
 		animate(0);
 	}
 
-	private setToCrane() {
-		this.transforms.applyParamsTo(this.crane);
+	public setToCrane(transforms: Transforms = this.transforms) {
+		transforms.applyParamsTo(this.crane);
 		this.crane.updateMatrix();
 	}
-	// update camera every frame
 	public override onFrameUpdate(): void {
 		this.setToCrane();
 	}

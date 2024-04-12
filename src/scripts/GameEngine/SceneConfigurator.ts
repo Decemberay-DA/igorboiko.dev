@@ -3,12 +3,13 @@ import * as DU from "../DevUnilities/index";
 import * as TJ from "../ThreeJS/index";
 import { GE } from ".";
 import * as THREE from "three";
-import { type GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { TWEENUpdater } from "../DinamicObjects/TWEENUpdater";
 import { CameraManager } from "../CameraManagiment/CameraManager";
-import asi from "../asi/asi";
+import { asi } from "../asi/asi";
 import { CameraCrain } from "../CameraManagiment/CameraCrain";
 import { CameraScenes, CameraScenesExtractor } from "../CameraManagiment/CameraScenes";
+import { CursorStrandingBuilder } from "../MegaCursor/CursorStranding/CursorStrandingBuilder";
 
 /**
  * its goal is to ckick scene up.
@@ -29,9 +30,11 @@ export class SceneConfigurator {
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
 		TJ.ThreeScenesManager.BACKGROUND_SCENE.InitSetThreeScene(bgScene);
+		asi.data.THREE_MANAGIMENTED_SCENE = bgScene;
 
 		// add gltf stuff ========-====-====-====-============
 		const gltfBG: GLTF = await TJ.GLTFLoaderchik.aGelLoadedGLTF();
+		asi.data.GLTF_THREE_SCENE = gltfBG;
 		bgScene.scene.add(gltfBG.scene);
 
 		// Camera managiment ========-====-====-====-============
@@ -50,6 +53,7 @@ export class SceneConfigurator {
 		const cameraScenes = CameraScenesExtractor.extract();
 		asi.data.CAMERA_SCENES = cameraScenes;
 
+		// setRandomCameraAsActiveController ========-====-====-====-============
 		let currentCameraIndex = 0;
 		async function setNextCameraAsActive() {
 			currentCameraIndex++;
@@ -71,13 +75,20 @@ export class SceneConfigurator {
 			onDelete: () => window.removeEventListener("keydown", keydownListener),
 		});
 
+		// create cursor ========-====-====-====-============
+		// const cursorStranding = CursorStrandingBuilder.getPlatformDependend();
+		// asi.data.Cursor = cursorStranding;
+
 		// add test rotation to planet ========-====-====-====-============
 		const planet = bgScene.scene.getObjectByName("Globa") as THREE.Object3D;
 		const innerplanet = bgScene.scene.getObjectByName("Sphere") as THREE.Object3D;
 		const planetRotator = new DO.AnonimousDynamicObject({
 			onFrameUpdate: () => {
-				planet.rotation.y = planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0002;
-				innerplanet.rotation.y = innerplanet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0003;
+				planet.rotation.y =
+					planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0002 * GE.GameTime.deltaTime;
+				innerplanet.rotation.y =
+					innerplanet.rotation.y +
+					GE.GameTime.realTimeSinceStartup * 0.0003 * GE.GameTime.deltaTime;
 			},
 		});
 
@@ -89,14 +100,8 @@ export class SceneConfigurator {
 		bgScene.scene.add(bgMesh);
 		bgScene.camera.position.z = 1;
 
-		// bgScene.disable(); // temporal
 		// test assing fractals to planet
 		(planet as THREE.Mesh).material = bgMaterial.shader;
-
-		// Three foreground scene cursor ========-====-====-====-============
-		const cursorStranding = null;
-		const cursorDetector = null;
-		const cursorPositionProvider = null;
 
 		DU.Logger.write("Scene was builded");
 	}

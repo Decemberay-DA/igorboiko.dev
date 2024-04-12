@@ -1,11 +1,26 @@
+/**
+ *
+ */
 export default class DOMSearcher {
 	public static getDomElementsByIDSelector(className: string): Element[] {
 		const nodeList = document.querySelectorAll(`#${className}`);
 		const array = Array.from(nodeList);
 		return array;
 	}
-	public static getHTMLElementByClassName(className: string): HTMLElement {
+	public static getFirstHTMLElementByClassName(className: string): HTMLElement {
 		const elements = document.getElementsByClassName(className);
-		return elements.length > 0 ? (elements[0] as HTMLElement) : null!;
+		if (elements.length > 0) {
+			return elements[0] as HTMLElement;
+		} else {
+			throw new Error("First element with className '" + className + "' not found");
+		}
+	}
+	public static getElementById(id: string): HTMLElement {
+		const element = document.getElementById(id);
+		if (element) {
+			return element;
+		} else {
+			throw new Error("Element with id '" + name + "' not found");
+		}
 	}
 }

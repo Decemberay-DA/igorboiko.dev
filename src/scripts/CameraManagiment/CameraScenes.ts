@@ -1,13 +1,11 @@
 import * as THREE from "three";
-import { GE } from "../GameEngine";
-import * as TWEEN from "@tweenjs/tween.js";
-import type { TJ } from "../ThreeJS";
-import { CameraControlls } from "./ParamsControllers/CameraControlls";
-import { Transforms, IITransforms } from "./ParamsControllers/Transforms";
-import asi from "../asi/asi";
-import ObjectFinder from "../ThreeJS/Helpers/ObjectFinder";
+import { asi } from "../asi/asi";
+import { ObjectFinder } from "../ThreeJS/Helpers/ObjectFinder";
 import { EGLTF_PARAMS } from "../asi/asiSpesificks";
-import AEnumClass from "../utils/AEnumClass";
+import type { IEnumClass } from "../utils/AEnumClass";
+import * as TWEEN from "@tweenjs/tween.js";
+import { Transforms } from "./ParamsControllers/Transforms";
+import { CameraControlls } from "./ParamsControllers/CameraControlls";
 
 /**
  * Contains ordered scenes to easyly interpolate in them idk
@@ -19,34 +17,44 @@ export class CameraScenes {
 		return this._currentScene;
 	}
 
-	public get nextScene(): CameraScene {
-		const currentScene = this._currentScene;
-		let nextinedex = 0;
-		try {
-			nextinedex = this.scenes.findIndex((scene) => scene === currentScene) + 1;
-		} catch (error) {}
-		return this.scenes[nextinedex];
-	}
-
 	public constructor(scenes: Array<CameraScene>) {
 		this.scenes = scenes;
 		this._currentScene = this.scenes.find(
-			(obj) => obj.name === EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_CUTSCENE_POSITION
+			(obj) => obj.name === EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION
 		)!;
+		this.tweenToScene(EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION, 0);
 	}
 
-	public tweenToScene(sceneName: string) {
-		const startScene = this.currentScene;
-		const endScene = this.scenes.find((s) => s.name === sceneName)!;
-
-		// do twening for camera and camera crane
+	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 3065) {
+		const endScene = this._parseSceneInput(nextScene);
 		const nextCrain = endScene.crane;
 		const nextCamera = endScene.camera;
-		asi.data.CAMERA_CRAIN.tweenTo(nextCrain);
-		asi.data.CAMERA_MANAGER.tweenTo(nextCamera);
 
-		// finish
+		console.warn("CameraScenes.tweenToScene: next crane");
+		console.warn(nextCrain);
+		console.warn("CameraScenes.tweenToScene: next camera ");
+		console.warn(nextCamera);
+
+		const interpolation = TWEEN.Interpolation.Linear;
+		asi.data.CAMERA_CRAIN.tweenTo(nextCrain, tweenTime, interpolation);
+		asi.data.CAMERA_MANAGER.tweenTo(nextCamera, tweenTime * 0.3333, interpolation);
+
 		this._currentScene = endScene;
+	}
+
+	private _parseSceneInput(nextScene: string | CameraScene) {
+		let endScene: CameraScene;
+		if (nextScene instanceof CameraScene) {
+			endScene = nextScene;
+		} else {
+			const x = this.scenes.find((s) => s.name === nextScene);
+			if (x) {
+				endScene = x;
+			} else {
+				throw new Error("scene with name '" + nextScene + "' not found");
+			}
+		}
+		return endScene;
 	}
 }
 
@@ -60,14 +68,15 @@ export class CameraScenesExtractor {
 
 		// get cranes
 		const cranes = ObjectFinder.ByUserData(scene, EGLTF_PARAMS.ROLE.this, EGLTF_PARAMS.ROLE.CAMERA_CRANE);
+		console.warn("CameraScenesExtractor: found '" + cranes.length + "' cranes");
 
-		// for each crane get its camera nad create CameraScene
+		// for each crane get its camera and create CameraScene
 		for (let i = 0; i < cranes.length; i++) {
 			const crane = cranes[i];
 			const sceneName = crane.userData[EGLTF_PARAMS.CAMERA_SCENE_NAME.this];
 
 			const camera = ObjectFinder.ByUserData(
-				crane,
+				crane, // search in this ones childs
 				EGLTF_PARAMS.ROLE.this,
 				EGLTF_PARAMS.ROLE.CRANED_CAMERA
 			)[0] as THREE.PerspectiveCamera;
@@ -81,19 +90,20 @@ export class CameraScenesExtractor {
 	}
 }
 
-export class ECAMERA_SCENE_NAME extends AEnumClass {
+export class ECAMERA_SCENE_NAME implements IEnumClass {
 	public readonly this = "CAMERA_SCENE_NAME";
-	//
-	public readonly INTRO_CUTSCENE_POSITION = "INTRO_CUTSCENE_POSITION";
-	//
-	public readonly MAIN_LAND = "MAIN_LAND";
-	public readonly ABOUT_ME = "ABOUT_ME";
-	public readonly MY_PROJECTS = "MY_PROJECTS";
-	public readonly JOB_EXPERIENCE = "JOB_EXPERIENCE";
-	public readonly EDUCATION_DEGREES_IDKACTUALLY = "EDUCATION_DEGREES_IDKACTUALLY";
-	public readonly WHAT_I_AT_TALLKED_ABOUT = "WHAT_I_AT_TALLKED_ABOUT";
-	//
-	public readonly ERROR_404_PAGE = "ERROR_404_PAGE";
+
+	public readonly INTRO_SECTION = "INTRO_SECTION"; //0
+
+	public readonly LAND_SECTION = "LAND_SECTION"; // 1
+	public readonly ABOUT_SECTION = "ABOUT_SECTION"; // 2
+	public readonly PROJECTS_SECTION = "PROJECTS_SECTION"; // 3
+	public readonly EXPERIENCE_SECTION = "EXPERIENCE_SECTION"; // 4
+	public readonly EDUCATION_SECTION = "EDUCATION_SECTION"; // 5
+	public readonly COMMENT_SECTION = "COMMENT_SECTION"; // 6
+	public readonly CONTACT_SECTION = "CONTACT_SECTION"; // 7
+
+	public readonly ERROR_404_PAGE = "ERROR_404_PAGE"; // 99
 }
 
 /**

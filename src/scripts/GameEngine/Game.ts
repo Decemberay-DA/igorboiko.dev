@@ -1,11 +1,11 @@
-import * as GE from "./index";
-import * as DU from "../DevUnilities/index";
+import { DU } from "../DevUnilities";
+import { GE } from ".";
 
 /**
  * Static definition of update orders.
  * Legit for every type of update: onStart, onFrame, etc cz array is sorted
  */
-export class OnFrameOrders {
+export class OnFrameUpdatePriorities {
 	// any shared base
 	public static readonly GAME_TIME = -10000;
 	public static readonly EARLY_FRAME_UPDATE = -9500;
@@ -21,7 +21,7 @@ export class OnFrameOrders {
 /**
  * game idk
  */
-export class Game implements IEnablable {
+export class Game implements GE.IEnablable {
 	// IEnablable ========-====-====-====-============
 	protected __isEnabled: boolean = true;
 	public get isEnabled(): boolean {

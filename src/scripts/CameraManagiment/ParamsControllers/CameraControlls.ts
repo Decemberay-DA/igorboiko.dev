@@ -64,14 +64,14 @@ export class CameraControlls
 			this.zoom = arg.zoom ?? 40;
 		}
 	}
-	public lerpBetween(start: ICameraControls, end: ICameraControls, factor: number): ICameraControls {
-		const result: ICameraControls = {
+	public lerpBetween(start: ICameraControls, end: ICameraControls, factor: number): CameraControlls {
+		const result: CameraControlls = new CameraControlls({
 			fov: Lerper.lerpNumber(start.fov, end.fov, factor),
 			aspect: Lerper.lerpNumber(start.aspect, end.aspect, factor),
 			near: Lerper.lerpNumber(start.near, end.near, factor),
 			far: Lerper.lerpNumber(start.far, end.far, factor),
 			zoom: Lerper.lerpNumber(start.zoom, end.zoom, factor),
-		};
+		});
 		return result;
 	}
 	public applyParamsTo(camera: THREE.PerspectiveCamera): void {

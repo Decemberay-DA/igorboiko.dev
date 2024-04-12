@@ -1,16 +1,20 @@
-import { Vector2 } from "three";
-import type { THREE } from "../../ThreeJS/THREE";
-import ACursorStranding from "./ACursorStranding";
+import { ACursorStranding } from "./ACursorStranding";
+import * as THREE from 'three';
 
-export default class MouseCursorStranding extends ACursorStranding {
+/**
+ * makes cursor randomly move on screen
+ * and sometimes follow touch
+ */
+export class TouchScreenCursorStranding extends ACursorStranding {
 	public constructor() {
 		super();
 	}
 
+	// seme as cursor for now
 	private mousemoveListener?: (e: MouseEvent) => void;
 	public override onStart(): void {
 		this.mousemoveListener = (e: MouseEvent): void => {
-			this.updatePosition(new Vector2(e.pageX, e.pageY));
+			this.updatePosition(new THREE.Vector2(e.pageX, e.pageY));
 		};
 		document.addEventListener("mousemove", this.mousemoveListener);
 	}

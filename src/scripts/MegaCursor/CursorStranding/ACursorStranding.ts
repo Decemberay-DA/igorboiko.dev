@@ -1,8 +1,6 @@
-import { GE, OnFrameUpdatePriorities } from "@/scripts/GameEngine";
+import { GE } from "@/scripts/GameEngine";
 import type { THREE } from "@/scripts/ThreeJS/THREE";
 import { Vector2 } from "three";
-import TouchScreenCursorStranding from "./TouchScreenCursorStranding";
-import MouseCursorStranding from "./MouseCursorStranding";
 
 /**
  * Handles cursor effects.
@@ -12,12 +10,12 @@ import MouseCursorStranding from "./MouseCursorStranding";
  * got it?
  * like Kojima reference
  */
-export default class ACursorStranding extends GE.ADynamicObject {
+export class ACursorStranding extends GE.ADynamicObject {
 	protected __currentPosition: THREE.Vector2 = new Vector2(0, 0);
 
 	protected constructor() {
 		super();
-		this.__onFrameUpdatePriority = OnFrameUpdatePriorities.EARLY_FRAME_UPDATE - 1;
+		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE - 1;
 	}
 
 	public get currentPosition(): THREE.Vector2 {
@@ -35,17 +33,5 @@ export default class ACursorStranding extends GE.ADynamicObject {
 		const dy = point.y - this.__currentPosition.y;
 		const diatance = Math.sqrt(dx * dx + dy * dy);
 		return diatance;
-	}
-}
-
-export class CursorTraverserBuilder {
-	public static getPlatformDependend(): ACursorStranding {
-		var isTouchScreen = "ontouchstart" in document.documentElement;
-
-		if (isTouchScreen) {
-			return new TouchScreenCursorStranding();
-		} else {
-			return new MouseCursorStranding();
-		}
 	}
 }

@@ -1,3 +1,3 @@
-import AEnumClass from "../utils/AEnumClass";
+import { IEnumClass } from "../utils/AEnumClass";
 
 export default class MegaCursorSpecificks {}

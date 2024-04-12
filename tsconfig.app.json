@@ -3,6 +3,13 @@
 	"include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/custom.d.ts"],
 	"exclude": ["src/**/__tests__/*"],
 	"compilerOptions": {
+		"target": "es5",
+		"strict": true,
+		
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+
 		"composite": true,
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 		"baseUrl": ".",

@@ -1,6 +1,3 @@
-import type { Object3D } from "three";
-
-
 /**
  *
  * Defines a controller for a params pf an object

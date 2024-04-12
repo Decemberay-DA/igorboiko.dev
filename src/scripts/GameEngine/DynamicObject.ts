@@ -1,6 +1,6 @@
-import * as GE from "./index";
+import { GE } from ".";
 
-export abstract class ADynamicObject implements IEnablable {
+export abstract class ADynamicObject implements GE.IEnablable {
 	protected _isEnabled: boolean = true; // is this object should be updated
 	public get isEnabled(): boolean {
 		return this._isEnabled;

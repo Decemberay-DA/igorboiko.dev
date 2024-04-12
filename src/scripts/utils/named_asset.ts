@@ -1,10 +1,17 @@
+export type named_asset = Readonly<_named_asset>;
 /**
  * i might use gltf instance data instead but
  */
-export default class named_asset {
+class _named_asset {
 	public readonly name: string;
 	public readonly id: number;
 	public readonly suffixes: Array<string>;
+
+	public constructor(name: string, id: number, suffixes: Array<string>) {
+		this.name = name;
+		this.id = id;
+		this.suffixes = suffixes;
+	}
 
 	/**
 	 * Breaks name by '_' sign. Example:
@@ -20,16 +27,10 @@ export default class named_asset {
 		const assetId = parseInt(parts[1], 10);
 		const assetSuffixes = parts.slice(2);
 
-		return new named_asset(assetName, assetId, assetSuffixes);
+		return new _named_asset(assetName, assetId, assetSuffixes);
 	}
 
 	public isContainsSuffix(suffix: string): boolean {
 		return this.suffixes.includes(suffix);
-	}
-
-	constructor(name: string, id: number, suffixes: Array<string>) {
-		this.name = name;
-		this.id = id;
-		this.suffixes = suffixes;
 	}
 }

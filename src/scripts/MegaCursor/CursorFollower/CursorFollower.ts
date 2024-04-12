@@ -1,62 +1,60 @@
-import asi from "../../asi/asi";
+import { asi } from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
-import { render, watchEffect, type VNode } from "vue";
-import CursorFollowerStarSmall from "./CursorFollowerStarSmall.vue";
-import VueSpecificks, { DOMContentFinallyWasLoadedOMG } from "@/scripts/VueTSHelper/VueSpecificks";
-import asiSpecificks from "@/scripts/asi/asiSpesificks";
-import { h } from "vue";
-import { requestHandler, type INotificationHandler } from "mediatr-ts";
+import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
+import { THREE } from "@/scripts/ThreeJS/THREE";
+import { Lerper } from "@/scripts/CameraManagiment/Lerper";
 
 export default class CursorFollower extends GE.ADynamicObject {
-	private foregroundStar!: VNode;
-	private backgroundStar!: VNode;
+	private draggerF!: CursorDragger;
+	private draggerB!: CursorDragger;
 
 	public constructor() {
 		super();
+		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 	}
 
-	public initVueVisuals() {
-		if (asi.context.pageType === asiSpecificks.PageTypes.ERROR_404_PAGE) {
-			this.foregroundStar = h(CursorFollowerStarSmall);
-			this.backgroundStar = h(CursorFollowerStarSmall);
-		} else {
-			// load for main page
-			this.foregroundStar = h(CursorFollowerStarSmall);
-			this.backgroundStar = h(CursorFollowerStarSmall);
-		}
+	override onStart(): void {
+		// if (asi.context.pageType === asiSpecificks.PageTypes.ERROR_404_PAGE) {
+		const foregroundStar = DOMSearcher.getElementById(
+			"cursor_betreyal_foregroundStar.f1d525ae-f58e-4746-998a-243effeb900c"
+		);
+		const backgroundStar = DOMSearcher.getElementById(
+			"cursor_betreyal_backgroundStar.f1d545ae-f58e-4746-998a-243effeb900c"
+		);
 
-		const flayer = VueSpecificks.DefinedComponents.CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER.ntmlElement;
-		const blayer = VueSpecificks.DefinedComponents.CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER.ntmlElement;
-		render(this.foregroundStar, flayer);
-		render(this.backgroundStar, blayer);
+		this.draggerF = new CursorDragger(foregroundStar, 0.5);
+		this.draggerB = new CursorDragger(backgroundStar, 0.1);
 	}
 
 	public override onFrameUpdate(): void {
-		CursorFollower.dragComponentToCursor2(this.foregroundStar, 1);
-		CursorFollower.dragComponentToCursor2(this.backgroundStar, 10);
-	}
-	private static dragComponrntToCursor(star: VNode, dragForce: number) {
-		if (star.props && star.props.style) {
-			star.props.style.left = asi.context.Cursor.currentPosition.x + "px";
-			star.props.style.top = asi.context.Cursor.currentPosition.y + "px";
-		}
-	}
-	private static dragComponentToCursor2(star: VNode, dragForce: number) {
-		if (star.props && star.props.style) {
-			try {
-				star.props.style.left = asi.context.Cursor.currentPosition.x + "px";
-				star.props.style.top = asi.context.Cursor.currentPosition.y + "px";
-			} catch (error) {
-				console.error("Error updating component style:", error);
-			}
-		}
+		this.draggerF.doDrag();
+		this.draggerB.doDrag();
 	}
 }
 
-@requestHandler(Request)
-class InitCursorVisuals implements INotificationHandler<DOMContentFinallyWasLoadedOMG> {
-	handle(notification: DOMContentFinallyWasLoadedOMG): Promise<void> {
-		asi.context.CursorFollower.initVueVisuals();
-		return Promise.resolve();
+class CursorDragger {
+	private element: HTMLElement;
+	private _lastPosition: THREE.Vector2 = new THREE.Vector2(0, 0); // todo get center position on page
+	private _dragForce: number;
+
+	public constructor(element: HTMLElement, dragForce: number) {
+		this.element = element;
+		this._dragForce = dragForce;
+	}
+
+	public doDrag() {
+		const currentCursorPosition = new THREE.Vector2(
+			asi.data.Cursor.currentPosition.x,
+			asi.data.Cursor.currentPosition.y
+		);
+		const draggedposition = Lerper.lerpVector2(
+			this._lastPosition,
+			currentCursorPosition,
+			this._dragForce
+		);
+		this._lastPosition = draggedposition;
+
+		this.element.style.left = draggedposition.x + "px";
+		this.element.style.top = draggedposition.y + "px";
 	}
 }

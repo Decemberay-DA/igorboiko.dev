@@ -1,7 +1,4 @@
 import * as THREE from "three";
-import { GE } from "../../GameEngine";
-import * as TWEEN from "@tweenjs/tween.js";
-import type { TJ } from "../../ThreeJS";
 import { Lerper } from "../Lerper";
 import type { IObjectParametersController } from "./IObjectParametersController";
 
@@ -33,6 +30,7 @@ export class Transforms implements ITransforms, IObjectParametersController<ITra
 	public quaternion: THREE.Quaternion;
 	public scale: THREE.Vector3;
 
+	public constructor(refObject: THREE.Object3D);
 	public constructor(params: ITransformsParams);
 	public constructor(arg: THREE.Object3D | ITransformsParams) {
 		if (arg instanceof THREE.Object3D) {

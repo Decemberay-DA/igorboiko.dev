@@ -1,4 +1,4 @@
-import asi from "../asi/asi";
+import { asi } from "../asi/asi";
 import { GE } from "../GameEngine/index";
 import * as THREE from "three";
 
@@ -78,8 +78,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		// Simple animation to differe bg from everything else ========-====-====-====-============
 		const color = new THREE.Color(
 			Math.sin(GE.GameTime.realTimeSinceStartup),
-			asi.context.Cursor.currentPosition.x / window.innerWidth,
-			asi.context.Cursor.currentPosition.y / window.innerHeight
+			asi.data.Cursor.currentPosition.x / window.innerWidth,
+			asi.data.Cursor.currentPosition.y / window.innerHeight
 		);
 		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}

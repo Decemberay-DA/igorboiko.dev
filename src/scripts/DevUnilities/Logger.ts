@@ -1,18 +1,9 @@
-import { GE } from "../GameEngine";
-
 export class Logger {
 	private static _isLogEnabled: boolean = true;
 
 	public static write(message: string, level: number = 0): void {
 		if (!Logger._isLogEnabled) return;
 
-		// const depth = this.getStackDepth();
-		// let indent = " ".repeat(depth * 4);
-		// // if too deep
-		// if (indent.length > 20) {
-		//     indent = indent + ">>";
-		// }
-		// const formattedmessage = `${GE.GameTime.currentFrame} | ${indent}${message}`;
 		const formattedmessage = `${message}`;
 
 		if (level >= 0 && level <= 9) {

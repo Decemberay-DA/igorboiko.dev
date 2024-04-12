@@ -34,8 +34,8 @@ export class Lerper {
 		end: THREE.Quaternion,
 		t: number
 	): THREE.Quaternion {
-		const result = new THREE.Quaternion();
-		result.copy(start).slerp(end, t);
+		const anInstance = new THREE.Quaternion();
+		const result = anInstance.slerpQuaternions(start, end, t);
 		return result;
 	}
 }

@@ -1,17 +1,17 @@
-import * as DU from "../DevUnilities/index";
-import * as GE from "./index";
+import { GE } from ".";
+import { DU } from "../DevUnilities";
 
-export class GameManagering {
-	// private theGame!: GE.Game; // no singletons
-	// private theGameTime!: GE.GameTime;
-
-	private static instance: GameManagering;
+/**
+ * comment
+ */
+export class GameManager {
+	private static _instance: GameManager;
 	private constructor() {}
-	public static getInstance(): GameManagering {
-		if (!GameManagering.instance) {
-			GameManagering.instance = new GameManagering();
+	public static getInstance(): GameManager {
+		if (!GameManager._instance) {
+			GameManager._instance = new GameManager();
 		}
-		return GameManagering.instance;
+		return GameManager._instance;
 	}
 
 	public start(): void {

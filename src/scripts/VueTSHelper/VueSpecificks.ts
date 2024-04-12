@@ -1,20 +1,12 @@
-import { getCurrentInstance, type App } from "vue";
 import type { INotification } from "mediatr-ts";
-import asi from "../asi/asi";
-import { EDefinedLayers } from "./EDefinedLayers";
-
+import { asi } from "../asi/asi";
+import { EDEFINED_LAYERS } from "./EDefinedLayers";
 
 /**
  * duh
  */
 export default class VueSpecificks {
-	public static readonly DefinedComponents = new EDefinedLayers();
-
-	static {
-		document.addEventListener("DOMContentLoaded", function () {
-			asi.mediator.publish(new DOMContentFinallyWasLoadedOMG());
-		});
-	}
+	public static readonly DefinedComponents = new EDEFINED_LAYERS();
 }
 
-export class DOMContentFinallyWasLoadedOMG implements INotification {}
+// export class DOMContentFinallyWasLoadedOMG implements INotification {}

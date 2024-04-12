@@ -1,7 +1,10 @@
-export { ADynamicObject } from "./DynamicObject";
-export { Game, OnFrameOrders as OnFrameUpdatePriorities } from "./Game";
-export { GameManagering as GameManager } from "./GameManager";
-export { GameTime } from "./GameTime";
-export { SceneConfigurator } from "./SceneConfigurator";
-// export { SingletonDynamicObject } from "./SingletonDynamicObject";
+export * from "./IEnablable";
+
+export * from "./Game";
+export * from "./DynamicObject";
+export * from "./GameManager";
+
+export * from "./GameTime";
+export * from "./SceneConfigurator";
+
 export * as GE from "./index";
