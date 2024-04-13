@@ -5,6 +5,7 @@ import type { IModifier } from "../../utils/IModifierStack";
 
 export class TransformsTweenToerModifier implements IModifier<Transforms> {
 	private _tweenedTransforms: Transforms = new Transforms({});
+	private _transformsCoroutine!: Coroutine;
 
 	public apply(object: Transforms): Transforms {
 		return this._tweenedTransforms;
@@ -14,9 +15,13 @@ export class TransformsTweenToerModifier implements IModifier<Transforms> {
 		const startT = new Transforms(this._tweenedTransforms);
 		const endT = new Transforms(translateTo);
 
+		// kill other coroutine of there are one
+		if (this._transformsCoroutine && this._transformsCoroutine.isRunning)
+			this._transformsCoroutine.delete();
+
 		const startTime = GE.GameTime.realTimeSinceStartup;
 		let factor = 0;
-		const transformsCoroutine = new GE.Coroutine({
+		this._transformsCoroutine = new GE.Coroutine({
 			stopOn: () => factor >= 1,
 			onUpdate: () => {
 				factor = Coroutine.calculateRemainingFactor(startTime, tweenTime);
@@ -26,6 +31,6 @@ export class TransformsTweenToerModifier implements IModifier<Transforms> {
 				this._tweenedTransforms = endT;
 			},
 		});
-		transformsCoroutine.launch();
+		this._transformsCoroutine.launch();
 	}
 }

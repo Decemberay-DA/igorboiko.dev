@@ -21,6 +21,11 @@ export class Coroutine extends GE.ADynamicObject {
 	public readonly actionOnDelete: () => void = () => {};
 	public readonly stopCondition: () => boolean;
 
+	private _isRunning: boolean = false;
+	public get isRunning(): boolean {
+		return this._isRunning;
+	}
+
 	public constructor(params: ICoroutineParams) {
 		super();
 		this.disable();
@@ -43,6 +48,7 @@ export class Coroutine extends GE.ADynamicObject {
 
 	public launch() {
 		this.enable();
+		this._isRunning = true;
 		this.onStart();
 	}
 
@@ -53,7 +59,17 @@ export class Coroutine extends GE.ADynamicObject {
 		}
 	}
 
+	private _isKilled = false;
+	/**
+	 * errases this coroutine without executing onDelete
+	 */
+	public kill() {
+		this._isKilled = true;
+		this.delete();
+	}
+
 	public override onDelete(): void {
-		this.actionOnDelete();
+		this._isRunning = false;
+		if (!this._isKilled) this.actionOnDelete();
 	}
 }

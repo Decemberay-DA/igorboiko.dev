@@ -4,9 +4,9 @@ import type { IModifier } from "../../utils/IModifierStack";
 
 export class TransformsSmoother implements IModifier<Transforms> {
 	private _smoothedTransforms: Transforms = new Transforms({});
-	public smoothness = 0.2;
+	public smoothness: number;
 
-	public constructor(smoothness = 0.2) {
+	public constructor(smoothness = 1) {
 		this.smoothness = smoothness;
 	}
 

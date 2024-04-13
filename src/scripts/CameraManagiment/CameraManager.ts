@@ -69,8 +69,10 @@ export class CameraManager extends GE.ADynamicObject {
 		const startCP = new CameraControls(this.camera);
 		const endCP = new CameraControls(cameraControlls);
 
-		const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 0.07);
-		const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 0.01);
+		// const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 0.07);
+		// const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 0.01);
+		const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 1);
+		const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 1);
 
 		smoothedTransforms.applyParamsTo(this.camera);
 		smoothedCameraControls.applyParamsTo(this.camera);
