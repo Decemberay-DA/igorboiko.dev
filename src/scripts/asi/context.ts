@@ -1,6 +1,6 @@
 import { asi } from "./asi";
-// import { type INotification } from "mediatr-ts";
 import asiSpecificks from "./asiSpesificks";
+import { PageScrollListener } from "../DinamicObjects/PageScrollListener";
 
 export default class context {
 	// html ========-====-====-====-============
@@ -9,17 +9,29 @@ export default class context {
 	}
 
 	// three ========-====-====-====-============
-	public get currentCameraScene() {
+	public get cameraScene() {
 		return asi.data.CAMERA_SCENES.currentScene;
+	}
+	// scroll
+	public scroll = new PageScrollListener();
+	public get cursor() {
+		return asi.data.Cursor;
 	}
 
 	// app ========-====-====-====-============
+	/**
+	 * SideEffects:
+	 * - user scroll
+	 *
+	 * not SideEffects:
+	 * - button pressed in navbar
+	 */
+	public get isAllowedToChangeScenesBySideEffects() {
+		return (
+			asi.context.appContext !== asiSpecificks.Contextes.EXPANDED_SUBPAGE_VIEW &&
+			asi.context.appContext !== asiSpecificks.Contextes.INTRO_CUTSCENE
+		);
+	}
 	public appContext = asiSpecificks.Contextes.INTRO_CUTSCENE;
 	public pageType = asiSpecificks.PageTypes.MAIN_PAGE;
 }
-
-// export class IntroCutsceneStarted implements INotification {}
-// export class IntroCutsceneEnded implements INotification {}
-
-// export class SubPageExpanded implements INotification {}
-// export class SubPageCollapsed implements INotification {}

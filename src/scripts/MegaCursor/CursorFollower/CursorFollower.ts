@@ -2,9 +2,9 @@ import { asi } from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
 import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
 import { THREE } from "@/scripts/ThreeJS/THREE";
-import { Lerper } from "@/scripts/CameraManagiment/Lerper";
+import { SmoothLerper } from "@/scripts/CameraManagiment/Lerper";
 
-export default class CursorFollower extends GE.ADynamicObject {
+export class CursorFollower extends GE.ADynamicObject {
 	private draggerF!: CursorDragger;
 	private draggerB!: CursorDragger;
 
@@ -18,43 +18,51 @@ export default class CursorFollower extends GE.ADynamicObject {
 		const foregroundStar = DOMSearcher.getElementById(
 			"cursor_betreyal_foregroundStar.f1d525ae-f58e-4746-998a-243effeb900c"
 		);
+		this.draggerF = new CursorDragger(foregroundStar, 0.5);
+
 		const backgroundStar = DOMSearcher.getElementById(
 			"cursor_betreyal_backgroundStar.f1d545ae-f58e-4746-998a-243effeb900c"
 		);
-
-		this.draggerF = new CursorDragger(foregroundStar, 0.5);
 		this.draggerB = new CursorDragger(backgroundStar, 0.1);
 	}
 
 	public override onFrameUpdate(): void {
-		this.draggerF.doDrag();
-		this.draggerB.doDrag();
+		this.draggerF.doDrugs();
+		this.draggerB.doDrugs();
 	}
 }
 
 class CursorDragger {
-	private element: HTMLElement;
-	private _lastPosition: THREE.Vector2 = new THREE.Vector2(0, 0); // todo get center position on page
+	private _element: HTMLElement;
+	private _lastPosition = new THREE.Vector2(0, 0); // todo get center position on page
 	private _dragForce: number;
+	// private _lerper = new SmoothLerper(0);
 
 	public constructor(element: HTMLElement, dragForce: number) {
-		this.element = element;
+		this._element = element;
 		this._dragForce = dragForce;
 	}
 
-	public doDrag() {
+	public doDrugs() {
 		const currentCursorPosition = new THREE.Vector2(
 			asi.data.Cursor.currentPosition.x,
 			asi.data.Cursor.currentPosition.y
 		);
-		const draggedposition = Lerper.lerpVector2(
-			this._lastPosition,
-			currentCursorPosition,
-			this._dragForce
-		);
+
+		const x = SmoothLerper.number(this._lastPosition.x, currentCursorPosition.x, this._dragForce);
+		const y = SmoothLerper.number(this._lastPosition.y, currentCursorPosition.y, this._dragForce);
+
+		// const draggedposition = this._lerper.Vector2(
+		// 	this._lastPosition,
+		// 	currentCursorPosition,
+		// 	this._dragForce,
+		// 	false
+		// );
+		const draggedposition = asi.data.Cursor.currentPosition;
+		// const draggedposition = new THREE.Vector2(x, y);
 		this._lastPosition = draggedposition;
 
-		this.element.style.left = draggedposition.x + "px";
-		this.element.style.top = draggedposition.y + "px";
+		this._element.style.left = draggedposition.x + "px";
+		this._element.style.top = draggedposition.y + "px";
 	}
 }

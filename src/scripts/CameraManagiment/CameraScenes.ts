@@ -4,8 +4,6 @@ import { ObjectFinder } from "../ThreeJS/Helpers/ObjectFinder";
 import { EGLTF_PARAMS } from "../asi/asiSpesificks";
 import type { IEnumClass } from "../utils/AEnumClass";
 import * as TWEEN from "@tweenjs/tween.js";
-import { Transforms } from "./ParamsControllers/Transforms";
-import { CameraControlls } from "./ParamsControllers/CameraControlls";
 
 /**
  * Contains ordered scenes to easyly interpolate in them idk
@@ -25,7 +23,7 @@ export class CameraScenes {
 		this.tweenToScene(EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION, 0);
 	}
 
-	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 3065) {
+	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 512) {
 		const endScene = this._parseSceneInput(nextScene);
 		const nextCrain = endScene.crane;
 		const nextCamera = endScene.camera;

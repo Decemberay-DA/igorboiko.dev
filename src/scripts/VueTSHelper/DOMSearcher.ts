@@ -20,7 +20,7 @@ export default class DOMSearcher {
 		if (element) {
 			return element;
 		} else {
-			throw new Error("Element with id '" + name + "' not found");
+			throw new Error("Element with id '" + id + "' not found");
 		}
 	}
 }

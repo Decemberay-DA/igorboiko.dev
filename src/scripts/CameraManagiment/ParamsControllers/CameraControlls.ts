@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { Lerper } from "../Lerper";
-import type { IObjectParametersController } from "./IObjectParametersController";
+import type { IMemento } from "./IObjectsGroupeParametersController";
+import type { IClonable } from "@/scripts/utils/Clone";
 
 export interface ICameraControllsParams {
 	// THREE.PerspectiveCamera
@@ -38,8 +38,12 @@ export class IICameraControls {
 		return result;
 	}
 }
-export class CameraControlls
-	implements ICameraControls, IObjectParametersController<ICameraControls, THREE.PerspectiveCamera>
+
+/**
+ * state of camera lense things
+ */
+export class CameraControls
+	implements ICameraControls, IMemento<THREE.PerspectiveCamera>, IClonable<CameraControls>
 {
 	public fov: number;
 	public aspect: number;
@@ -64,16 +68,6 @@ export class CameraControlls
 			this.zoom = arg.zoom ?? 40;
 		}
 	}
-	public lerpBetween(start: ICameraControls, end: ICameraControls, factor: number): CameraControlls {
-		const result: CameraControlls = new CameraControlls({
-			fov: Lerper.lerpNumber(start.fov, end.fov, factor),
-			aspect: Lerper.lerpNumber(start.aspect, end.aspect, factor),
-			near: Lerper.lerpNumber(start.near, end.near, factor),
-			far: Lerper.lerpNumber(start.far, end.far, factor),
-			zoom: Lerper.lerpNumber(start.zoom, end.zoom, factor),
-		});
-		return result;
-	}
 	public applyParamsTo(camera: THREE.PerspectiveCamera): void {
 		camera.fov = this.fov;
 		camera.aspect = this.aspect;
@@ -82,5 +76,8 @@ export class CameraControlls
 		camera.zoom = this.zoom;
 
 		camera.updateProjectionMatrix();
+	}
+	public clone(): CameraControls {
+		return new CameraControls(this);
 	}
 }

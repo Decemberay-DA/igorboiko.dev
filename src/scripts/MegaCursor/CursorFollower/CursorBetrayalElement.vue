@@ -1,8 +1,8 @@
 <template>
 	<div id="cursor_betreyal_backgroundStar.f1d545ae-f58e-4746-998a-243effeb900c" class="base">
-		<!-- <div class="vertical child -translate-y-1/2"></div> -->
-		<div class="relative w-4 h-4 flex-none origin-center bg-green-500"></div>
-		<!-- <div class="horizontal child -translate-x-1/2 translate-y-1/2"></div> -->
+		<div class="vertical child -translate-y-1/2"></div>
+		<!-- <div class="relative w-4 h-4 flex-none origin-center bg-green-500"></div> -->
+		<div class="horizontal child -translate-x-1/2 translate-y-1/2"></div>
 	</div>
 </template>
 

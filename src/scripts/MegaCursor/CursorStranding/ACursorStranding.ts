@@ -11,7 +11,7 @@ import { Vector2 } from "three";
  * like Kojima reference
  */
 export class ACursorStranding extends GE.ADynamicObject {
-	protected __currentPosition: THREE.Vector2 = new Vector2(0, 0);
+	protected __currentPosition: THREE.Vector2 = new Vector2(window.innerWidth / 2, window.innerHeight / 2);
 
 	protected constructor() {
 		super();

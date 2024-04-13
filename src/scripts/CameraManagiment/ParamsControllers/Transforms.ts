@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { Lerper } from "../Lerper";
-import type { IObjectParametersController } from "./IObjectParametersController";
+import type { IMemento } from "./IObjectsGroupeParametersController";
+import { type IClonable } from "@/scripts/utils/Clone";
 
 export interface ITransforms {
 	position: THREE.Vector3;
@@ -22,10 +22,11 @@ export interface ITransformsParams {
 	quaternion?: THREE.Quaternion;
 	scale?: THREE.Vector3;
 }
+
 /**
- * Dataclass custom transform descriptions
+ * Object transform state
  */
-export class Transforms implements ITransforms, IObjectParametersController<ITransforms, THREE.Object3D> {
+export class Transforms implements ITransforms, IMemento<THREE.Object3D>, IClonable<Transforms> {
 	public position: THREE.Vector3;
 	public quaternion: THREE.Quaternion;
 	public scale: THREE.Vector3;
@@ -44,19 +45,14 @@ export class Transforms implements ITransforms, IObjectParametersController<ITra
 		}
 	}
 
-	public lerpBetween(start: ITransforms, end: ITransforms, factor: number): Transforms {
-		const result: ITransforms = {
-			position: Lerper.lerpVector3(start.position, end.position, factor),
-			quaternion: Lerper.lerpQuaternion(start.quaternion, end.quaternion, factor),
-			scale: Lerper.lerpVector3(start.scale, end.scale, factor),
-		};
-		return new Transforms(result);
-	}
 	public applyParamsTo(object: THREE.Object3D) {
 		object.position.copy(this.position);
 		object.quaternion.copy(this.quaternion);
 		object.scale.copy(this.scale);
 
 		object.updateMatrixWorld();
+	}
+	public clone(): Transforms {
+		return new Transforms(this);
 	}
 }

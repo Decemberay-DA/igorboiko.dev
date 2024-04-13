@@ -1,5 +1,8 @@
 import { Mediator, type INotification } from "mediatr-ts";
 
+/**
+ * if only this worked
+ */
 export class mediator {
 	private _mediator: Mediator = new Mediator();
 

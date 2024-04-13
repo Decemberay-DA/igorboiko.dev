@@ -8,8 +8,7 @@ import type { TJ } from "../ThreeJS";
 import type { THREE } from "../ThreeJS/THREE";
 import { EDEFINED_LAYERS } from "../VueTSHelper/EDefinedLayers";
 import EDefinedSections from "../VueTSHelper/EDefinedSections";
-import CursorFollower from "../MegaCursor/CursorFollower/CursorFollower";
-import { Lazy } from "../utils/Lazy";
+import { CursorFollower } from "../MegaCursor/CursorFollower/CursorFollower";
 import type { GLTF } from "three/examples/jsm/Addons.js";
 
 /**
@@ -23,6 +22,8 @@ export class data {
 	public get vueApp(): App<any> {
 		return getCurrentInstance()!.appContext.app;
 	}
+
+	// cursor effects ========-====-====-====-============
 
 	// cursor effects ========-====-====-====-============
 	public Cursor: ACursorStranding = CursorStrandingBuilder.getPlatformDependend();
@@ -50,11 +51,3 @@ export class data {
 }
 
 class EntityRegistry<TEntity> {}
-
-// // @requestHandler(DOMContentFinallyWasLoadedOMG)
-// class InitCursorOnDOMLoaded implements INotificationHandler<DOMContentFinallyWasLoadedOMG> {
-// 	handle(notification: DOMContentFinallyWasLoadedOMG): Promise<void> {
-// 		asi.data.Cursor = CursorStrandingBuilder.getPlatformDependend();
-// 		return Promise.resolve();
-// 	}
-// }

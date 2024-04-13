@@ -1,41 +1,132 @@
-import * as THREE from "three";
+import { THREE } from "../ThreeJS/THREE";
+import { type ICameraControls, CameraControls } from "./ParamsControllers/CameraControlls";
+import { type ITransforms, Transforms } from "./ParamsControllers/Transforms";
 
 /**
- * "Lerp deez nuts in your mouth"
+ * "Lerp deez nuts in your mouth, smoothly"
  * 						- Jason Statham.
  */
-export class Lerper {
-	public static lerpNumber(start: number, end: number, t: number): number {
+export class SmoothLerper {
+	public smoothness = 0;
+	/**
+	 * the actual lerp value that is getting smoothed
+	 */
+	private _smoothed_smoothness: number;
+	private _last_saved_smoothed_smoothness: number;
+
+	/**
+	 * @param smoothness 0 is no 1 is max
+	 */
+	public constructor(smoothness = 1) {
+		this.smoothness = smoothness;
+		this._smoothed_smoothness = smoothness;
+		this._last_saved_smoothed_smoothness = smoothness;
+	}
+
+	/**
+	 * here how smoothing works:
+	 * b - lerp(last_saved_position, needed_position, smoothness)
+	 * afret this method internal this.smoothed_smoothness is smoothed
+	 * and can be used in other methods to smooth stuff
+	 */
+	private updateSmoothness(targetSmoothness: number): number {
+		this._smoothed_smoothness = this.Number(
+			this._last_saved_smoothed_smoothness,
+			targetSmoothness,
+			this.smoothness,
+			false
+		);
+
+		this._last_saved_smoothed_smoothness = this._smoothed_smoothness;
+
+		return this._smoothed_smoothness;
+		// return targetSmoothness; // test
+	}
+
+	/**
+	 * no smoothness applied
+	 */
+	public static number(start: number, end: number, t: number): number {
 		return start * (1 - t) + end * t;
 	}
-	public static lerpVector2(start: THREE.Vector2, end: THREE.Vector2, t: number): THREE.Vector2 {
+	public Number(start: number, end: number, t: number, isSmooth = true): number {
+		if (isSmooth) t = this.updateSmoothness(t);
+
+		const x = SmoothLerper.number(start, end, t);
+
+		return x;
+	}
+	public Vector2(start: THREE.Vector2, end: THREE.Vector2, t: number, isSmooth = true): THREE.Vector2 {
+		if (isSmooth) t = this.updateSmoothness(t);
+
 		const result = new THREE.Vector2();
-		result.x = start.x * (1 - t) + end.x * t;
-		result.y = start.y * (1 - t) + end.y * t;
+		result.x = SmoothLerper.number(start.x, end.x, t);
+		result.y = SmoothLerper.number(start.y, end.y, t);
+
 		return result;
 	}
-	public static lerpVector3(start: THREE.Vector3, end: THREE.Vector3, t: number): THREE.Vector3 {
+	public Vector3(start: THREE.Vector3, end: THREE.Vector3, t: number, isSmooth = true): THREE.Vector3 {
+		if (isSmooth) t = this.updateSmoothness(t);
+
 		const result = new THREE.Vector3();
-		result.x = start.x * (1 - t) + end.x * t;
-		result.y = start.y * (1 - t) + end.y * t;
-		result.z = start.z * (1 - t) + end.z * t;
+		result.x = SmoothLerper.number(start.x, end.x, t);
+		result.y = SmoothLerper.number(start.y, end.y, t);
+		result.z = SmoothLerper.number(start.z, end.z, t);
+
 		return result;
 	}
-	public static lerpVector4(start: THREE.Vector4, end: THREE.Vector4, t: number): THREE.Vector4 {
+	public Vector4(start: THREE.Vector4, end: THREE.Vector4, t: number, isSmooth = true): THREE.Vector4 {
+		if (isSmooth) t = this.updateSmoothness(t);
+
 		const result = new THREE.Vector4();
-		result.x = start.x * (1 - t) + end.x * t;
-		result.y = start.y * (1 - t) + end.y * t;
-		result.z = start.z * (1 - t) + end.z * t;
-		result.w = start.w * (1 - t) + end.w * t;
+		result.x = SmoothLerper.number(start.x, end.x, t);
+		result.y = SmoothLerper.number(start.y, end.y, t);
+		result.z = SmoothLerper.number(start.z, end.z, t);
+		result.w = SmoothLerper.number(start.w, end.w, t);
+
 		return result;
 	}
-	public static lerpQuaternion(
+	public Quaternion(
 		start: THREE.Quaternion,
 		end: THREE.Quaternion,
-		t: number
+		t: number,
+		isSmooth = true
 	): THREE.Quaternion {
+		if (isSmooth) t = this.updateSmoothness(t);
 		const anInstance = new THREE.Quaternion();
+
 		const result = anInstance.slerpQuaternions(start, end, t);
+
+		return result;
+	}
+
+	public Transforms(start: ITransforms, end: ITransforms, t: number, isSmooth = true): Transforms {
+		if (isSmooth) t = this.updateSmoothness(t);
+
+		const result: ITransforms = {
+			position: this.Vector3(start.position, end.position, t, false),
+			quaternion: this.Quaternion(start.quaternion, end.quaternion, t, false),
+			scale: this.Vector3(start.scale, end.scale, t, false),
+		};
+
+		return new Transforms(result);
+	}
+	public CameraControls(
+		start: ICameraControls,
+		end: ICameraControls,
+		t: number,
+		isSmooth = true
+	): CameraControls {
+		if (isSmooth) t = this.updateSmoothness(t);
+
+		const result = new CameraControls({
+			fov: SmoothLerper.number(start.fov, end.fov, t),
+			aspect: SmoothLerper.number(start.aspect, end.aspect, t),
+			near: SmoothLerper.number(start.near, end.near, t),
+			far: SmoothLerper.number(start.far, end.far, t),
+			zoom: SmoothLerper.number(start.zoom, end.zoom, t),
+		});
+
 		return result;
 	}
 }

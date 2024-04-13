@@ -8,8 +8,7 @@ import { TWEENUpdater } from "../DinamicObjects/TWEENUpdater";
 import { CameraManager } from "../CameraManagiment/CameraManager";
 import { asi } from "../asi/asi";
 import { CameraCrain } from "../CameraManagiment/CameraCrain";
-import { CameraScenes, CameraScenesExtractor } from "../CameraManagiment/CameraScenes";
-import { CursorStrandingBuilder } from "../MegaCursor/CursorStranding/CursorStrandingBuilder";
+import { CameraScenesExtractor } from "../CameraManagiment/CameraScenes";
 
 /**
  * its goal is to ckick scene up.
