@@ -4,19 +4,20 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { CameraControls as CameraControls, IICameraControls } from "./ParamsControllers/CameraControlls";
 import { Transforms, IITransforms } from "./ParamsControllers/Transforms";
 import { asi } from "../asi/asi";
-import { SmoothLerper } from "./Lerper";
+import { SmoothLerper as Lerper, SmoothLerper } from "./Lerper";
+import { type IModifier, type IModifierStack, ModifierStack } from "../utils/IModifierStack";
+
+
 
 /**
  * Contralls smooth camera movement or something
  */
 export class CameraManager extends GE.ADynamicObject {
 	public readonly camera: THREE.PerspectiveCamera;
+	public readonly modifierStack: IModifierStack<THREE.PerspectiveCamera> = new ModifierStack();
 
 	private transforms: Transforms;
-	private _lerpertransforms = new SmoothLerper();
-
 	private cameraControlls: CameraControls;
-	private _lerpercameraControlls = new SmoothLerper();
 
 	public static readonly __MAIN_CAMERA__: string = "__MAIN_CAMERA__";
 
@@ -34,46 +35,51 @@ export class CameraManager extends GE.ADynamicObject {
 		this.setToCamera();
 	}
 
-	public tweenTo(
-		translateTo: THREE.PerspectiveCamera,
-		teweenTime: number = 3000,
-		interpolation: (v: number[], k: number) => number = TWEEN.Interpolation.Bezier
-	) {
+	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {
 		const startT = new Transforms(this.camera);
 		const endT = new Transforms(translateTo);
 
 		const startCP = new CameraControls(this.camera);
 		const endCP = new CameraControls(translateTo);
 
-		let f1 = { x: 0 };
-		let f2 = { x: 1 };
-		const rotationTween = new TWEEN.Tween(f1) //
-			.to(f2, teweenTime) //
-			.interpolation(interpolation) //
-			.onUpdate(() => {
-				this.transforms = this._lerpertransforms.Transforms(startT, endT, f1.x);
-				this.cameraControlls = this._lerpercameraControlls.CameraControls(startCP, endCP, f1.x);
-			});
-		rotationTween.start();
-
-		// why it works only here
-		function animate(time: number) {
-			requestAnimationFrame(animate);
-			TWEEN.update(time);
-		}
-		animate(performance.now());
+		const startTime = GE.GameTime.realTimeSinceStartup;
+		let factor = 0;
+		const transformsCoroutine = new GE.Coroutine({
+			stopOn: () => factor >= 1,
+			onUpdate: () => {
+				factor = GE.Coroutine.calculateRemainingFactor(startTime, tweenTime);
+				this.transforms = SmoothLerper.instance.Transforms(startT, endT, factor);
+				this.cameraControlls = SmoothLerper.instance.CameraControls(startCP, endCP, factor);
+			},
+			onDelete: () => {
+				this.transforms = endT;
+				this.cameraControlls = endCP;
+			},
+		});
+		transformsCoroutine.launch();
 	}
+
 	public setToCamera(
 		transforms: Transforms = this.transforms,
 		cameraControlls: CameraControls = this.cameraControlls
 	) {
-		transforms.applyParamsTo(this.camera);
-		cameraControlls.applyParamsTo(this.camera);
+		const startT = new Transforms(this.camera);
+		const endT = new Transforms(transforms);
+
+		const startCP = new CameraControls(this.camera);
+		const endCP = new CameraControls(cameraControlls);
+
+		const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 0.07);
+		const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 0.01);
+
+		smoothedTransforms.applyParamsTo(this.camera);
+		smoothedCameraControls.applyParamsTo(this.camera);
 		this.camera.updateProjectionMatrix();
 	}
 
 	// update camera every frame
 	public override onFrameUpdate(): void {
+		this.modifierStack.apply(this.camera);
 		this.setToCamera();
 	}
 }

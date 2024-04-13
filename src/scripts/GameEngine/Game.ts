@@ -51,6 +51,9 @@ export class Game implements GE.IEnablable {
 		return Object.freeze([...this._dynamicObjects]);
 	}
 	public registerDinamicObject(dynamicObject: GE.ADynamicObject): void {
+		// start this object if it added after first frame start
+		if (this._isStarted) dynamicObject.onStart();
+
 		this._dynamicObjects.push(dynamicObject);
 		this._dynamicObjects.sort((a, b) => a.onFrameUpdatePriority - b.onFrameUpdatePriority);
 		DU.Logger.write(`DynamicObject registered`);
@@ -65,6 +68,7 @@ export class Game implements GE.IEnablable {
 	}
 
 	// Game loop ========-====-====-====-============
+	private _isStarted = false;
 	public triggerStart(): void {
 		this.start();
 	}
@@ -72,6 +76,7 @@ export class Game implements GE.IEnablable {
 		this._dynamicObjects.forEach((dynamicObject) => {
 			dynamicObject.onStart();
 		});
+		this._isStarted = true;
 		this.update();
 	}
 	private update(): void {

@@ -44,8 +44,7 @@ export class CurrentSectionDetector extends GE.ADynamicObject {
 	private byScroll() {
 		const sections = asi.data.DefinedSections.getAllSections;
 
-		for (let i = 0; i < sections.length; i++) {
-			const section = sections[i];
+		for (const section of sections) {
 			const div = section.htmlElement;
 			const isVisible = div && div.offsetWidth > 0 && div.offsetHeight > 0;
 		}

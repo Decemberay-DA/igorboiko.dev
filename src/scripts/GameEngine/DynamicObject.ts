@@ -35,7 +35,7 @@ export abstract class ADynamicObject implements GE.IEnablable {
 	}
 
 	public delete(): void {
-		GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
 		this.onDelete();
+		GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
 	}
 }

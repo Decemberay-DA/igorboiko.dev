@@ -14,22 +14,22 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 	// public safely acessed lazy hidden things ========-====-====-====-============
 	public readonly this = "DefinedLayers";
 
-	public get THREE_SPACE_SCENE_LAYER() {
+	public get THREE_SPACE_SCENE_LAYER(): TReadonlyDefinedLayer {
 		return this._THREE_SPACE_SCENE_LAYER.value;
 	}
-	public get CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER() {
+	public get CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER(): TReadonlyDefinedLayer {
 		return this._CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER.value;
 	}
-	public get CENTER_PAGE_CONTENT() {
+	public get CENTER_PAGE_CONTENT(): TReadonlyDefinedLayer {
 		return this._CENTER_PAGE_CONTENT.value;
 	}
-	public get OPENED_SUBPAGE_LAYER() {
+	public get OPENED_SUBPAGE_LAYER(): TReadonlyDefinedLayer {
 		return this._OPENED_SUBPAGE_LAYER.value;
 	}
-	public get CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER() {
+	public get CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER(): TReadonlyDefinedLayer {
 		return this._CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER.value;
 	}
-	public get FOREGROUND_PINNED_LAYER() {
+	public get FOREGROUND_PINNED_LAYER(): TReadonlyDefinedLayer {
 		return this._FOREGROUND_PINNED_LAYER.value;
 	}
 
@@ -38,7 +38,7 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 		return {
 			name: "THREE_SPACE_SCENE_LAYER",
 			zIndex: -2000,
-			ntmlElement: DOMSearcher.getFirstHTMLElementByClassName("THREE_SPACE_SCENE_LAYER"),
+			ntmlElement: DOMSearcher.getElementById("THREE_SPACE_SCENE_LAYER"),
 		};
 	});
 	private _CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER: Lazy<TReadonlyDefinedLayer> =
@@ -46,23 +46,21 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 			return {
 				name: "CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER",
 				zIndex: -1000,
-				ntmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-					"CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER"
-				),
+				ntmlElement: DOMSearcher.getElementById("CURSOR_STAR_BACKGROUND_FOLLOWER_LAYER"),
 			};
 		});
 	private _CENTER_PAGE_CONTENT: Lazy<TReadonlyDefinedLayer> = new Lazy<TReadonlyDefinedLayer>(() => {
 		return {
 			name: "CENTER_PAGE_CONTENT",
 			zIndex: 0,
-			ntmlElement: DOMSearcher.getFirstHTMLElementByClassName("CENTER_PAGE_CONTENT"),
+			ntmlElement: DOMSearcher.getElementById("CENTER_PAGE_CONTENT"),
 		};
 	});
 	private _OPENED_SUBPAGE_LAYER: Lazy<TReadonlyDefinedLayer> = new Lazy<TReadonlyDefinedLayer>(() => {
 		return {
 			name: "OPENED_SUBPAGE_LAYER",
 			zIndex: +500,
-			ntmlElement: DOMSearcher.getFirstHTMLElementByClassName("OPENED_SUBPAGE_LAYER"),
+			ntmlElement: DOMSearcher.getElementById("OPENED_SUBPAGE_LAYER"),
 		};
 	});
 	private _CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER: Lazy<TReadonlyDefinedLayer> =
@@ -70,16 +68,14 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 			return {
 				name: "CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER",
 				zIndex: +1000,
-				ntmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-					"CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER"
-				),
+				ntmlElement: DOMSearcher.getElementById("CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER"),
 			};
 		});
 	private _FOREGROUND_PINNED_LAYER: Lazy<TReadonlyDefinedLayer> = new Lazy<TReadonlyDefinedLayer>(() => {
 		return {
 			name: "FOREGROUND_PINNED_LAYER",
 			zIndex: +2000,
-			ntmlElement: DOMSearcher.getFirstHTMLElementByClassName("FOREGROUND_PINNED_LAYER"),
+			ntmlElement: DOMSearcher.getElementById("FOREGROUND_PINNED_LAYER"),
 		};
 	});
 }

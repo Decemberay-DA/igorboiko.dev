@@ -7,6 +7,7 @@ const app = createApp(App);
 app.mount("#app");
 
 // start all game scripts
+// without them its pure html
 const sc = new GE.SceneConfigurator();
 sc.setupMainScenePage();
 const gm = GE.GameManager.getInstance();

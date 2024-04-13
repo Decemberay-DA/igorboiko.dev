@@ -1,12 +1,17 @@
 import { THREE } from "../ThreeJS/THREE";
 import { type ICameraControls, CameraControls } from "./ParamsControllers/CameraControlls";
 import { type ITransforms, Transforms } from "./ParamsControllers/Transforms";
+import { instance } from "three/examples/jsm/nodes/Nodes.js";
 
 /**
  * "Lerp deez nuts in your mouth, smoothly"
  * 						- Jason Statham.
  */
 export class SmoothLerper {
+	private static _instance = new SmoothLerper();
+	public static get instance() {
+		return SmoothLerper._instance;
+	}
 	public smoothness = 0;
 	/**
 	 * the actual lerp value that is getting smoothed

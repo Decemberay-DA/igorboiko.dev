@@ -13,7 +13,8 @@ export class AnonimousDynamicObject extends GE.ADynamicObject {
 	constructor(params: AnonimousDynamicObjectParams) {
 		super();
 		this.params = params;
-		this.__onFrameUpdatePriority = params.onFrameUpdatePriority ?? GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
+		this.__onFrameUpdatePriority =
+			params.onFrameUpdatePriority ?? GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
 	}
 
 	public override onStart() {

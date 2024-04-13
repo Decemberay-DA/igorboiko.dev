@@ -11,6 +11,9 @@ export interface ISection {
 }
 type TReadonlySection = Readonly<ISection>;
 
+/**
+ * why? whywhywhwyhwywh to use some complex data registry system if o could just every time search all COMthree for html element and game scene for camera
+ */
 export default class EDefinedSections extends ASeflSeqrchedEnumeration implements IEnumClass {
 	public readonly this = "DefinedSections";
 
@@ -50,65 +53,47 @@ export default class EDefinedSections extends ASeflSeqrchedEnumeration implement
 		this.INTRO_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION,
 			order: 0,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION),
 		};
 		this.LAND_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.LAND_SECTION,
 			order: 0,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.LAND_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.LAND_SECTION),
 		};
 		this.ABOUT_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.ABOUT_SECTION,
 			order: 1,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.ABOUT_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.ABOUT_SECTION),
 		};
 		this.PROJECTS_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.PROJECTS_SECTION,
 			order: 2,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.PROJECTS_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.PROJECTS_SECTION),
 		};
 		this.EXPERIENCE_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.EXPERIENCE_SECTION,
 			order: 3,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.EXPERIENCE_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.EXPERIENCE_SECTION),
 		};
 		this.EDUCATION_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.EDUCATION_SECTION,
 			order: 4,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.EDUCATION_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.EDUCATION_SECTION),
 		};
 		this.COMMENT_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.COMMENT_SECTION,
 			order: 5,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.COMMENT_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.COMMENT_SECTION),
 		};
 		this.CONTACT_SECTION = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.CONTACT_SECTION,
 			order: 6,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.CONTACT_SECTION
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.CONTACT_SECTION),
 		};
 		this.ERROR_404_PAGE = {
 			name: EGLTF_PARAMS.CAMERA_SCENE_NAME.ERROR_404_PAGE,
 			order: 99,
-			htmlElement: DOMSearcher.getFirstHTMLElementByClassName(
-				EGLTF_PARAMS.CAMERA_SCENE_NAME.ERROR_404_PAGE
-			),
+			htmlElement: DOMSearcher.getElementById(EGLTF_PARAMS.CAMERA_SCENE_NAME.ERROR_404_PAGE),
 		};
 	}
 }

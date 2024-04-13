@@ -15,14 +15,10 @@ export class CursorFollower extends GE.ADynamicObject {
 
 	override onStart(): void {
 		// if (asi.context.pageType === asiSpecificks.PageTypes.ERROR_404_PAGE) {
-		const foregroundStar = DOMSearcher.getElementById(
-			"cursor_betreyal_foregroundStar.f1d525ae-f58e-4746-998a-243effeb900c"
-		);
+		const foregroundStar = DOMSearcher.getElementById("cursor_betreyal_foregroundStar");
 		this.draggerF = new CursorDragger(foregroundStar, 0.5);
 
-		const backgroundStar = DOMSearcher.getElementById(
-			"cursor_betreyal_backgroundStar.f1d545ae-f58e-4746-998a-243effeb900c"
-		);
+		const backgroundStar = DOMSearcher.getElementById("cursor_betreyal_backgroundStar");
 		this.draggerB = new CursorDragger(backgroundStar, 0.1);
 	}
 

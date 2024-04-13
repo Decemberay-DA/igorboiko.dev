@@ -1,5 +1,5 @@
 import { ACursorStranding } from "./ACursorStranding";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 /**
  * makes cursor randomly move on screen

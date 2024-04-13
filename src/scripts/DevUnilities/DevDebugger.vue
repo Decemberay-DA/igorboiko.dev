@@ -6,8 +6,10 @@
 		<p class="c-debuger__debug-info">DO registered: {{ dynamick_objects_registered }}</p>
 		<p class="c-debuger__debug-info">DO enabled: {{ dynamick_objects_enabled }}</p>
 		<p class="c-debuger__debug-info">frame: {{ frame }}</p>
-		<button class="c-debuger__button" @click="alertPause">pause alert</button>
-		<button class="c-debuger__button" @click="gameOnFrameUpdateToggle">pause game</button>
+		<div class="flex flex-row gap-5">
+			<button class="c-debuger__button" @click="alertPause">pause alert</button>
+			<button class="c-debuger__button" @click="gameOnFrameUpdateToggle">pause game</button>
+		</div>
 	</div>
 </template>
 
@@ -63,7 +65,7 @@ onMounted(() => {
 	background-color: rgb(244, 114, 182, 0.75);
 
 	&__debug-info {
-		@apply text-base text-black;
+		@apply text-black;
 	}
 	&__button {
 		@apply w-full h-fit bg-red-400 hover:bg-red-300 text-white;

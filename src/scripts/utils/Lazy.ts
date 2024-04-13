@@ -8,7 +8,7 @@ export class Lazy<T> {
 
 	constructor(private factory: Factory<T>) {}
 
-	get value(): T {
+	public get value(): T {
 		if (!this.isValueSet) {
 			this.factoryOutput = this.factory();
 			this.isValueSet = true;

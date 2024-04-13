@@ -11,10 +11,20 @@ export class GameTime extends GE.ADynamicObject {
 		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.GAME_TIME;
 	}
 
+	/**
+	 * in seconds
+	 */
 	private static previousFrameTimestamp: DOMHighResTimeStamp = 0;
+	/**
+	 * in seconds
+	 */
 	public static deltaTime: number = 0;
 	public static currentFrame: number = 0;
+	/**
+	 * in seconds
+	 */
 	public static realTimeSinceStartup: number = 0;
+	
 
 	private static updateTime(time: DOMHighResTimeStamp = performance.now()): void {
 		GameTime.deltaTime = (time - GameTime.previousFrameTimestamp) / 1000;

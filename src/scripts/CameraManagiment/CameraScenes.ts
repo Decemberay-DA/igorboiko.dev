@@ -23,7 +23,7 @@ export class CameraScenes {
 		this.tweenToScene(EGLTF_PARAMS.CAMERA_SCENE_NAME.INTRO_SECTION, 0);
 	}
 
-	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 512) {
+	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 2) {
 		const endScene = this._parseSceneInput(nextScene);
 		const nextCrain = endScene.crane;
 		const nextCamera = endScene.camera;
@@ -33,9 +33,10 @@ export class CameraScenes {
 		console.warn("CameraScenes.tweenToScene: next camera ");
 		console.warn(nextCamera);
 
+		tweenTime = 1;
 		const interpolation = TWEEN.Interpolation.Linear;
-		asi.data.CAMERA_CRAIN.tweenTo(nextCrain, tweenTime, interpolation);
-		asi.data.CAMERA_MANAGER.tweenTo(nextCamera, tweenTime * 0.3333, interpolation);
+		asi.data.CAMERA_CRAIN.tweenTo(nextCrain, tweenTime);
+		asi.data.CAMERA_MANAGER.tweenTo(nextCamera, tweenTime);
 
 		this._currentScene = endScene;
 	}

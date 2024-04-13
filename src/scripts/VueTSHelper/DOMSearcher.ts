@@ -2,6 +2,9 @@
  *
  */
 export default class DOMSearcher {
+	/**
+	 * @deprecated use DOMSearcher.getElementById
+	 */
 	public static getDomElementsByIDSelector(className: string): Element[] {
 		const nodeList = document.querySelectorAll(`#${className}`);
 		const array = Array.from(nodeList);

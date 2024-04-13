@@ -31,11 +31,10 @@ export class ThreeScene extends GE.ADynamicObject {
 		this.scene = new THREE.Scene();
 		this.scene.background = new THREE.Color(0x808080);
 		this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		const renderParameters: THREE.WebGLRendererParameters = {
+		this.renderer = new THREE.WebGLRenderer({
 			antialias: true,
 			precision: "lowp",
-		};
-		this.renderer = new THREE.WebGLRenderer(renderParameters);
+		});
 		this.renderer.setPixelRatio(window.devicePixelRatio);
 	}
 	public mountTo(newMountedElement: HTMLElement): void {
@@ -49,7 +48,7 @@ export class ThreeScene extends GE.ADynamicObject {
 		this.renderer.domElement.style.height = "100%";
 
 		newMountedElement.appendChild(this.renderer.domElement);
-		window.addEventListener("resize", this.onWindowResize, false);
+		window.addEventListener("resize", this.onWindowResize);
 	}
 	public unMount() {
 		if (!this._HTMLContainer || !this._HTMLContainer.contains(this.renderer.domElement)) return;
@@ -58,18 +57,20 @@ export class ThreeScene extends GE.ADynamicObject {
 
 		this._HTMLContainer.removeChild(this.renderer.domElement);
 
-		window.removeEventListener("resize", this.onWindowResize, false);
+		window.removeEventListener("resize", this.onWindowResize);
 	}
 
 	private onWindowResize() {
 		if (!this._HTMLContainer) return;
 
+		// const width = window.innerWidth;
+		// const height = window.innerHeight;
 		const width = this._HTMLContainer.clientWidth;
 		const height = this._HTMLContainer.clientHeight;
 
-		this.renderer.setSize(width, height);
 		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
+		this.renderer.setSize(width, height);
 	}
 
 	public override onFrameUpdate() {
@@ -78,8 +79,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		// Simple animation to differe bg from everything else ========-====-====-====-============
 		const color = new THREE.Color(
 			Math.sin(GE.GameTime.realTimeSinceStartup),
-			asi.data.Cursor.currentPosition.x / window.innerWidth,
-			asi.data.Cursor.currentPosition.y / window.innerHeight
+			asi.data.Cursor.currentPosition0to1.x,
+			asi.data.Cursor.currentPosition0to1.y
 		);
 		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}
