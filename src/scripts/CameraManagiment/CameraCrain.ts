@@ -24,10 +24,10 @@ export class CameraCrain extends GE.ADynamicObject {
 
 		this.crane = crane;
 		this.tweener = new TransformsTweenToerModifier();
-		this.smoother = new TransformsSmoother(0.1);
+		this.smoother = new TransformsSmoother(0.05);
 
 		this._modifierStack.modifiers.push(this.tweener);
-		// this._modifierStack.modifiers.push(this.smoother);
+		this._modifierStack.modifiers.push(this.smoother);
 	}
 
 	public tweenTo(translateTo: THREE.Object3D, tweenTime: number = 3) {

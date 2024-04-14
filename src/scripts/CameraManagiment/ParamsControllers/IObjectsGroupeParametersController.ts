@@ -12,7 +12,7 @@ export interface IApplyParamsTo<T> {
 /**
  * defines a groupe (state) of object
  */
-export type IMemento<T> = IApplyParamsTo<T> & MData;
+export type TMemento<T> = IApplyParamsTo<T> & MData;
 
 /**
  * a groupe of states for this object idk

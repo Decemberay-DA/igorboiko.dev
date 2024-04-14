@@ -52,28 +52,6 @@ export class SceneConfigurator {
 		const cameraScenes = CameraScenesExtractor.extract();
 		asi.data.CAMERA_SCENES = cameraScenes;
 
-		// setRandomCameraAsActiveController ========-====-====-====-============
-		let currentCameraIndex = 0;
-		async function setNextCameraAsActive() {
-			currentCameraIndex++;
-			if (currentCameraIndex > gltfBG.cameras.length - 1) {
-				currentCameraIndex = 0;
-			}
-			const randomCameraIndex = Math.floor(currentCameraIndex);
-			const nextCamera = gltfBG.cameras[randomCameraIndex] as THREE.PerspectiveCamera; // here may be a bug due to cast
-			console.warn("Next camera name is: " + nextCamera.name);
-			console.warn("Current active camera is: " + bgScene.camera.name);
-
-			asi.data.CAMERA_MANAGER.tweenTo(nextCamera); // move active camera to position of next camera
-		}
-		const keydownListener = (event: KeyboardEvent) => {
-			if (event.key === "f") setNextCameraAsActive();
-		};
-		const setRandomCameraAsActiveController = new DO.AnonimousDynamicObject({
-			onStart: () => window.addEventListener("keydown", keydownListener),
-			onDelete: () => window.removeEventListener("keydown", keydownListener),
-		});
-
 		// create cursor ========-====-====-====-============
 		// const cursorStranding = CursorStrandingBuilder.getPlatformDependend();
 		// asi.data.Cursor = cursorStranding;

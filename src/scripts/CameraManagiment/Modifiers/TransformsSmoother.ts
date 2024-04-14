@@ -6,16 +6,16 @@ export class TransformsSmoother implements IModifier<Transforms> {
 	private _smoothedTransforms: Transforms = new Transforms({});
 	public smoothness: number;
 
-	public constructor(smoothness = 1) {
+	public constructor(smoothness = 0.5) {
 		this.smoothness = smoothness;
 	}
 
 	public apply(object: Transforms): Transforms {
-		const startT = this._smoothedTransforms;
+		const startT = new Transforms(this._smoothedTransforms);
 		const endT = object;
 
-		const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, this.smoothness);
+		this._smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, this.smoothness);
 
-		return smoothedTransforms;
+		return this._smoothedTransforms;
 	}
 }

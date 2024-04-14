@@ -1,6 +1,7 @@
 import * as THREE from "three";
-import type { IMemento } from "./IObjectsGroupeParametersController";
+import type { TMemento } from "./IObjectsGroupeParametersController";
 import { type IClonable } from "@/scripts/utils/Clone";
+import type { TDataRecord } from "./TDataRecord";
 
 export interface ITransforms {
 	position: THREE.Vector3;
@@ -26,7 +27,7 @@ export interface ITransformsParams {
 /**
  * Object transform state
  */
-export class Transforms implements ITransforms, IMemento<THREE.Object3D>, IClonable<Transforms> {
+export class Transforms implements ITransforms, TDataRecord<THREE.Object3D, Transforms> {
 	public position: THREE.Vector3;
 	public quaternion: THREE.Quaternion;
 	public scale: THREE.Vector3;

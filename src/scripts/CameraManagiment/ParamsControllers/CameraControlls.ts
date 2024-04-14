@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import type { IMemento } from "./IObjectsGroupeParametersController";
-import type { IClonable } from "@/scripts/utils/Clone";
+import type { TDataRecord } from "./TDataRecord";
 
 export interface ICameraControllsParams {
 	// THREE.PerspectiveCamera
@@ -42,9 +41,7 @@ export class IICameraControls {
 /**
  * state of camera lense things
  */
-export class CameraControls
-	implements ICameraControls, IMemento<THREE.PerspectiveCamera>, IClonable<CameraControls>
-{
+export class CameraControls implements ICameraControls, TDataRecord<THREE.PerspectiveCamera, CameraControls> {
 	public fov: number;
 	public aspect: number;
 	public near: number;

@@ -1,23 +1,25 @@
 import * as THREE from "three";
 import { GE } from "../GameEngine";
-import * as TWEEN from "@tweenjs/tween.js";
-import { CameraControls as CameraControls, IICameraControls } from "./ParamsControllers/CameraControlls";
-import { Transforms, IITransforms } from "./ParamsControllers/Transforms";
+import { CameraControls as CameraControls } from "./ParamsControllers/CameraControlls";
+import { Transforms } from "./ParamsControllers/Transforms";
 import { asi } from "../asi/asi";
-import { SmoothLerper as Lerper, SmoothLerper } from "./Lerper";
-import { type IModifier, type IModifierStack, ModifierStack } from "../utils/IModifierStack";
-
-
+import { ModifierStack } from "../utils/IModifierStack";
+import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
+import { TransformsSmoother } from "./Modifiers/TransformsSmoother";
+import { CameraControlsSmoother } from "./Modifiers/CameraControlsSmoother";
 
 /**
  * Contralls smooth camera movement or something
  */
 export class CameraManager extends GE.ADynamicObject {
 	public readonly camera: THREE.PerspectiveCamera;
-	public readonly modifierStack: IModifierStack<THREE.PerspectiveCamera> = new ModifierStack();
 
-	private transforms: Transforms;
-	private cameraControlls: CameraControls;
+	private readonly _modifierStackCameraControls = new ModifierStack<CameraControls>();
+	// private smootherCC: GenerickSmoother<CameraControls, THREE.PerspectiveCamera>;
+
+	private readonly _modifierStackTransforms = new ModifierStack<Transforms>();
+	private tweener: TransformsTweenToerModifier;
+	private smoother: TransformsSmoother;
 
 	public static readonly __MAIN_CAMERA__: string = "__MAIN_CAMERA__";
 
@@ -26,62 +28,38 @@ export class CameraManager extends GE.ADynamicObject {
 		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 
 		this.camera = camera;
-		this.transforms = new Transforms(camera);
-		this.cameraControlls = new CameraControls(camera);
 
 		// set as main camera of all scene
 		asi.data.THREE_MANAGIMENTED_SCENE.setCamera(camera);
 
-		this.setToCamera();
+		const smootherCC = new CameraControlsSmoother(0.07);
+		// const smootherCCgen = new GenerickSmoother<CameraControls, THREE.PerspectiveCamera>(
+		// 	0.07,
+		// 	new CameraControls(this.camera),
+		// 	Lerper.instance.CameraControls
+		// );
+		this._modifierStackCameraControls.modifiers.push(smootherCC);
+
+		this.tweener = new TransformsTweenToerModifier();
+		this.smoother = new TransformsSmoother(0.07);
+		this._modifierStackTransforms.modifiers.push(this.tweener);
+		this._modifierStackTransforms.modifiers.push(this.smoother);
 	}
 
 	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {
-		const startT = new Transforms(this.camera);
-		const endT = new Transforms(translateTo);
-
-		const startCP = new CameraControls(this.camera);
-		const endCP = new CameraControls(translateTo);
-
-		const startTime = GE.GameTime.realTimeSinceStartup;
-		let factor = 0;
-		const transformsCoroutine = new GE.Coroutine({
-			stopOn: () => factor >= 1,
-			onUpdate: () => {
-				factor = GE.Coroutine.calculateRemainingFactor(startTime, tweenTime);
-				this.transforms = SmoothLerper.instance.Transforms(startT, endT, factor);
-				this.cameraControlls = SmoothLerper.instance.CameraControls(startCP, endCP, factor);
-			},
-			onDelete: () => {
-				this.transforms = endT;
-				this.cameraControlls = endCP;
-			},
-		});
-		transformsCoroutine.launch();
+		this.tweener.tweenTo(translateTo, tweenTime);
 	}
 
-	public setToCamera(
-		transforms: Transforms = this.transforms,
-		cameraControlls: CameraControls = this.cameraControlls
-	) {
-		const startT = new Transforms(this.camera);
-		const endT = new Transforms(transforms);
-
-		const startCP = new CameraControls(this.camera);
-		const endCP = new CameraControls(cameraControlls);
-
-		// const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 0.07);
-		// const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 0.01);
-		const smoothedTransforms = SmoothLerper.instance.Transforms(startT, endT, 1);
-		const smoothedCameraControls = SmoothLerper.instance.CameraControls(startCP, endCP, 1);
-
-		smoothedTransforms.applyParamsTo(this.camera);
-		smoothedCameraControls.applyParamsTo(this.camera);
-		this.camera.updateProjectionMatrix();
-	}
-
-	// update camera every frame
 	public override onFrameUpdate(): void {
-		this.modifierStack.apply(this.camera);
-		this.setToCamera();
+		const startTransforms = new Transforms(this.camera);
+		const startcameraControlls = new CameraControls(this.camera);
+
+		const endtransforms = this._modifierStackTransforms.apply(startTransforms);
+		const endcameraControlls = this._modifierStackCameraControls.apply(startcameraControlls);
+
+		endtransforms.applyParamsTo(this.camera);
+		// endcameraControlls.applyParamsTo(this.camera);
+
+		this.camera.updateProjectionMatrix();
 	}
 }
