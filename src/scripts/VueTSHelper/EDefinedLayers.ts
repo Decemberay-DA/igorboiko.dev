@@ -29,8 +29,8 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 	public get CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER(): TReadonlyDefinedLayer {
 		return this._CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER.value;
 	}
-	public get FOREGROUND_PINNED_LAYER(): TReadonlyDefinedLayer {
-		return this._FOREGROUND_PINNED_LAYER.value;
+	public get NAVIGATION_LAYER(): TReadonlyDefinedLayer {
+		return this._NAVIGATION_LAYER.value;
 	}
 
 	// private lazy things cz statick fields are getting initialized before html dom ========-====-====-====-============
@@ -71,11 +71,11 @@ export class EDEFINED_LAYERS extends ASeflSeqrchedEnumeration implements IEnumCl
 				ntmlElement: DOMSearcher.getElementById("CURSOR_STAR_FOREGROUND_FOLLOWER_LAYER"),
 			};
 		});
-	private _FOREGROUND_PINNED_LAYER: Lazy<TReadonlyDefinedLayer> = new Lazy<TReadonlyDefinedLayer>(() => {
+	private _NAVIGATION_LAYER: Lazy<TReadonlyDefinedLayer> = new Lazy<TReadonlyDefinedLayer>(() => {
 		return {
-			name: "FOREGROUND_PINNED_LAYER",
+			name: "NAVIGATION_LAYER",
 			zIndex: +2000,
-			ntmlElement: DOMSearcher.getElementById("FOREGROUND_PINNED_LAYER"),
+			ntmlElement: DOMSearcher.getElementById("NAVIGATION_LAYER"),
 		};
 	});
 }

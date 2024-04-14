@@ -4,6 +4,8 @@ import { Transforms } from "./ParamsControllers/Transforms";
 import { ModifierStack } from "../utils/IModifierStack";
 import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
 import { TransformsSmoother } from "./Modifiers/TransformsSmoother";
+import { GenerickSmoother } from "./Modifiers/GenerickSmoother";
+import { SmoothLerper } from "./Lerper";
 
 /**
  * Controlls camera crane omg
@@ -23,14 +25,14 @@ export class CameraCrain extends GE.ADynamicObject {
 		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 
 		this.crane = crane;
-		this.tweener = new TransformsTweenToerModifier();
-		this.smoother = new TransformsSmoother(0.05);
 
+		this.tweener = new TransformsTweenToerModifier();
+		this.smoother = new TransformsSmoother(0.05 * 2);
 		this._modifierStack.modifiers.push(this.tweener);
 		this._modifierStack.modifiers.push(this.smoother);
 	}
 
-	public tweenTo(translateTo: THREE.Object3D, tweenTime: number = 3) {
+	public tweenTo(translateTo: THREE.Object3D, tweenTime: number = 1) {
 		this.tweener.tweenTo(translateTo, tweenTime);
 	}
 

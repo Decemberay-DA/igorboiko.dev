@@ -7,6 +7,9 @@ import { ModifierStack } from "../utils/IModifierStack";
 import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
 import { TransformsSmoother } from "./Modifiers/TransformsSmoother";
 import { CameraControlsSmoother } from "./Modifiers/CameraControlsSmoother";
+import { TransformsCursorLeaner } from "./Modifiers/TransformsCursorLeaner";
+import { SmoothLerper } from "./Lerper";
+import { math } from "../utils/Math";
 
 /**
  * Contralls smooth camera movement or something
@@ -14,12 +17,15 @@ import { CameraControlsSmoother } from "./Modifiers/CameraControlsSmoother";
 export class CameraManager extends GE.ADynamicObject {
 	public readonly camera: THREE.PerspectiveCamera;
 
-	private readonly _modifierStackCameraControls = new ModifierStack<CameraControls>();
+	// private readonly _modifierStackCameraControls = new ModifierStack<CameraControls>();
 	// private smootherCC: GenerickSmoother<CameraControls, THREE.PerspectiveCamera>;
 
-	private readonly _modifierStackTransforms = new ModifierStack<Transforms>();
-	private tweener: TransformsTweenToerModifier;
-	private smoother: TransformsSmoother;
+	// private readonly _modifiersReal = new ModifierStack<Transforms>();
+	// private readonly _modifiersAdditionals = new ModifierStack<Transforms>();
+	private tweener: TransformsTweenToerModifier = new TransformsTweenToerModifier();
+	private _realTransforms: Transforms;
+	private leaner: TransformsCursorLeaner = new TransformsCursorLeaner(1.024);
+	private smoother: TransformsSmoother = new TransformsSmoother(0.07 * 2);
 
 	public static readonly __MAIN_CAMERA__: string = "__MAIN_CAMERA__";
 
@@ -28,37 +34,26 @@ export class CameraManager extends GE.ADynamicObject {
 		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 
 		this.camera = camera;
+		this._realTransforms = new Transforms(this.camera);
 
 		// set as main camera of all scene
 		asi.data.THREE_MANAGIMENTED_SCENE.setCamera(camera);
-
-		const smootherCC = new CameraControlsSmoother(0.07);
-		// const smootherCCgen = new GenerickSmoother<CameraControls, THREE.PerspectiveCamera>(
-		// 	0.07,
-		// 	new CameraControls(this.camera),
-		// 	Lerper.instance.CameraControls
-		// );
-		this._modifierStackCameraControls.modifiers.push(smootherCC);
-
-		this.tweener = new TransformsTweenToerModifier();
-		this.smoother = new TransformsSmoother(0.07);
-		this._modifierStackTransforms.modifiers.push(this.tweener);
-		this._modifierStackTransforms.modifiers.push(this.smoother);
 	}
 
-	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {
+	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 1) {
 		this.tweener.tweenTo(translateTo, tweenTime);
 	}
 
 	public override onFrameUpdate(): void {
-		const startTransforms = new Transforms(this.camera);
-		const startcameraControlls = new CameraControls(this.camera);
+		// get tweening
+		this._realTransforms = this.tweener.apply(this._realTransforms);
 
-		const endtransforms = this._modifierStackTransforms.apply(startTransforms);
-		const endcameraControlls = this._modifierStackCameraControls.apply(startcameraControlls);
-
-		endtransforms.applyParamsTo(this.camera);
-		// endcameraControlls.applyParamsTo(this.camera);
+		// calculate leaning and smoothing
+		let additionalTransforms = this._realTransforms;
+		// this.leaner.influence = math.clamp(Math.sin(GE.GameTime.realTimeSinceStartup) + 0.5);
+		additionalTransforms = this.leaner.apply(additionalTransforms);
+		additionalTransforms = this.smoother.apply(additionalTransforms);
+		additionalTransforms.applyParamsTo(this.camera);
 
 		this.camera.updateProjectionMatrix();
 	}

@@ -24,7 +24,7 @@ export class CameraScenes {
 	}
 
 	public tweenToScene(nextScene: string | CameraScene, tweenTime: number = 2) {
-		const endScene = this._parseSceneInput(nextScene);
+		const endScene = this.findSceneFromName(nextScene);
 		const nextCrain = endScene.crane;
 		const nextCamera = endScene.camera;
 
@@ -41,7 +41,7 @@ export class CameraScenes {
 		this._currentScene = endScene;
 	}
 
-	private _parseSceneInput(nextScene: string | CameraScene) {
+	public findSceneFromName(nextScene: string | CameraScene) {
 		let endScene: CameraScene;
 		if (nextScene instanceof CameraScene) {
 			endScene = nextScene;

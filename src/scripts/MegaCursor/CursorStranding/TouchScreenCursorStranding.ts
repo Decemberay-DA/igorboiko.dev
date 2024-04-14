@@ -27,6 +27,6 @@ export class TouchScreenCursorStranding extends ACursorStranding {
 	}
 
 	private updatePosition(newPosition: THREE.Vector2): void {
-		this.__currentPosition = newPosition;
+		this.__pagePosition = newPosition;
 	}
 }

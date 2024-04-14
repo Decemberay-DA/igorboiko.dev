@@ -1,6 +1,7 @@
 export type named_asset = Readonly<_named_asset>;
 /**
  * i might use gltf instance data instead but
+ * the most usersull thing i have ever write omg
  */
 class _named_asset {
 	public readonly name: string;

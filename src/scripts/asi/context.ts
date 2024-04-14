@@ -13,7 +13,7 @@ export default class context {
 		return asi.data.CAMERA_SCENES.currentScene;
 	}
 	// scroll
-	public scroll = new PageScrollListener();
+	public readonly scroll = new PageScrollListener();
 	public get cursor() {
 		return asi.data.Cursor;
 	}
@@ -29,9 +29,11 @@ export default class context {
 	public get isAllowedToChangeScenesBySideEffects() {
 		return (
 			asi.context.appContext !== asiSpecificks.Contextes.EXPANDED_SUBPAGE_VIEW &&
-			asi.context.appContext !== asiSpecificks.Contextes.INTRO_CUTSCENE
+			asi.context.appContext !== asiSpecificks.Contextes.INTRO_CUTSCENE &&
+			this.isAbleCursorSectionSwitching
 		);
 	}
-	public appContext = asiSpecificks.Contextes.INTRO_CUTSCENE;
-	public pageType = asiSpecificks.PageTypes.MAIN_PAGE;
+	public isAbleCursorSectionSwitching = true;
+	public readonly appContext = asiSpecificks.Contextes.INTRO_CUTSCENE;
+	public readonly pageType = asiSpecificks.PageTypes.MAIN_PAGE;
 }

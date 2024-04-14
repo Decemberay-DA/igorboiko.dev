@@ -17,7 +17,7 @@ export class TransformsTweenToerModifier implements IModifier<Transforms> {
 
 		// kill other coroutine of there are one
 		if (this._transformsCoroutine && this._transformsCoroutine.isRunning)
-			this._transformsCoroutine.delete();
+			this._transformsCoroutine.kill();
 
 		const startTime = GE.GameTime.realTimeSinceStartup;
 		let factor = 0;

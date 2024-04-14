@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import type { TMemento } from "./IObjectsGroupeParametersController";
-import { type IClonable } from "@/scripts/utils/Clone";
+import { type IClonable } from "@/scripts/utils/IClonable";
 import type { TDataRecord } from "./TDataRecord";
 
 export interface ITransforms {

@@ -10,6 +10,7 @@ import { EDEFINED_LAYERS } from "../VueTSHelper/EDefinedLayers";
 import EDefinedSections from "../VueTSHelper/EDefinedSections";
 import { CursorFollower } from "../MegaCursor/CursorFollower/CursorFollower";
 import type { GLTF } from "three/examples/jsm/Addons.js";
+import { CurrentSectionDetector } from "../VueTSHelper/CurrentSectionDetector";
 
 /**
  * compile time complete thing
@@ -17,6 +18,7 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 export class data {
 	// html ========-====-====-====-============
 	public readonly DefinedSections = new EDefinedSections();
+	public readonly CurrentSectionDetector = new CurrentSectionDetector();
 	public readonly DefinedLayers = new EDEFINED_LAYERS();
 
 	public get vueApp(): App<any> {
@@ -28,17 +30,12 @@ export class data {
 	// cursor effects ========-====-====-====-============
 	public Cursor: ACursorStranding = CursorStrandingBuilder.getPlatformDependend();
 	public readonly CursorFollower = new CursorFollower();
-	// public get Cursor(): ACursorStranding {
-	// 	return this._cursor.value;
-	// }
-	// private _cursor: Lazy<ACursorStranding> = new Lazy<ACursorStranding>(() =>
-	// 	CursorStrandingBuilder.getPlatformDependend()
-	// );
 
 	// three ========-====-====-====-============
-	// camera
+	// camera controllers
 	public CAMERA_MANAGER!: CameraManager;
 	public CAMERA_CRAIN!: CameraCrain;
+	// camera scenes
 	public CAMERA_SCENES!: CameraScenes;
 	// three
 	public THREE_MANAGIMENTED_SCENE!: TJ.ThreeScene;

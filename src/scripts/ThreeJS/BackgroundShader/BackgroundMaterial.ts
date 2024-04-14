@@ -30,8 +30,8 @@ export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
 
 	public override onFrameUpdate(): void {
 		this.__shader.uniforms.time.value = GE.GameTime.realTimeSinceStartup;
-		this.__shader.uniforms.pallete_mix_factor.value = asi.data.Cursor.currentPosition0to1.x;
-		this.__shader.uniforms.sin_factor.value = asi.data.Cursor.currentPosition0to1.x * 50 + 1;
+		this.__shader.uniforms.pallete_mix_factor.value = asi.data.Cursor.clientRelstive.position0to1.x;
+		this.__shader.uniforms.sin_factor.value = asi.data.Cursor.clientRelstive.position0to1.x * 50 + 1;
 		this.__shader.uniforms.resolution.value.set(window.innerWidth, window.innerHeight);
 	}
 }

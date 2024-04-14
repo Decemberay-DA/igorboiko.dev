@@ -9,35 +9,57 @@ import VueSpecificks from "./VueSpecificks";
  */
 export class CurrentSectionDetector extends GE.ADynamicObject {
 	public override onStart(): void {
-		document.addEventListener("mousemove", this.byCursorOverlap);
+		document.addEventListener("mousemove", this.detect);
+		document.addEventListener("scroll", this.detect);
 	}
 	public override onDelete(): void {
-		document.removeEventListener("mousemove", this.byCursorOverlap);
+		document.removeEventListener("mousemove", this.detect);
+		document.removeEventListener("scroll", this.detect);
 	}
 
-	private byCursorOverlap() {
+	public constructor() {
+		super();
+	}
+
+	private detect(): void {
+		if (GE.GameTime.currentFrame > 1) {
+			CurrentSectionDetector.byHorizontallCursorOverlap();
+		}
+		// if (asi.context.cursor.window.isCursorWithinScreen) {
+		// 	this.byHorizontallCursorOverlap();
+		// } else {
+		// 	this.byHorizontallCursorOverlap();
+		// 	// this.byScroll();
+		// }
+	}
+
+	private static byHorizontallCursorOverlap(): void {
 		const previousActiveSection = asi.data.DefinedSections.curentSection;
 		const sections = asi.data.DefinedSections.getAllSections;
-		const activeSections = new Array<ISection>();
+		let activeSection: ISection | null = null;
 
-		for (let i = 0; i < sections.length; i++) {
-			const section = sections[i];
-			const is = VueSpecificks.isCursorOverlaps(
-				asi.context.cursor.currentPosition,
-				section.htmlElement
+		const checkParams = {
+			vertical: false,
+			horizontal: true,
+		};
+		for (const section of sections) {
+			console.warn("checking section: " + section.name);
+			const isOverlaps = VueSpecificks.isCursorOverlaps(
+				asi.context.cursor.clientRelstive.position,
+				section.htmlElement,
+				checkParams
 			);
-			if (is) activeSections.push(section);
-		}
+			if (!isOverlaps) continue;
 
-		if (activeSections.length === 0) {
-			return;
-		}
+			activeSection = section;
+			console.warn(">>> ACTIVE SECTION IS >>>: " + section.name);
 
-		const newSection = activeSections[0];
-		const isSectionWasChanged = previousActiveSection === newSection;
+			const newSection = activeSection;
+			const isSectionWasChanged = previousActiveSection !== newSection;
 
-		if (isSectionWasChanged && asi.context.isAllowedToChangeScenesBySideEffects) {
-			asi.data.CAMERA_SCENES.tweenToScene(newSection.name);
+			if (isSectionWasChanged && asi.context.isAbleCursorSectionSwitching) {
+				asi.data.CAMERA_SCENES.tweenToScene(newSection.name);
+			}
 		}
 	}
 

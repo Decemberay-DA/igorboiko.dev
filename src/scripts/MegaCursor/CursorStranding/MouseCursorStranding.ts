@@ -1,39 +1,30 @@
 import { Vector2 } from "three";
-import type { THREE } from "../../ThreeJS/THREE";
 import { ACursorStranding } from "./ACursorStranding";
 
+/**
+ *
+ */
 export class MouseCursorStranding extends ACursorStranding {
 	private _mousemoveListener = (e: MouseEvent): void => {
-		const position = new Vector2(e.pageX, e.pageY);
+		const page = new Vector2(e.pageX, e.pageY);
+		if (page !== new Vector2(0, 0)) {
+			this.__pagePosition = page;
+		}
 
-		if (position !== new Vector2(0, 0)) {
-			this.updatePosition(position);
-			// console.warn(
-			// 	"MouseCursorStranding: Current cursor position : x = '" +
-			// 		this.__currentPosition.x +
-			// 		"' y = '" +
-			// 		this.__currentPosition.y +
-			// 		"'"
-			// );
+		const client = new Vector2(e.clientX, e.clientY);
+		if (client !== new Vector2(0, 0)) {
+			this.__clientPosition = client;
 		}
 	};
 
-	public constructor() {
-		super();
-		console.warn("MouseCursorStranding was created");
-	}
-
 	public override onStart(): void {
 		document.addEventListener("mousemove", this._mousemoveListener);
-		console.warn("MouseCursorStranding was started");
+		// document.addEventListener("scroll", this._mousemoveListener);
 	}
 
 	public override onDelete(): void {
 		super.onDelete();
 		document.removeEventListener("mousemove", this._mousemoveListener);
-	}
-
-	private updatePosition(newPosition: THREE.Vector2): void {
-		this.__currentPosition = newPosition;
+		// document.removeEventListener("scroll", this._mousemoveListener);
 	}
 }

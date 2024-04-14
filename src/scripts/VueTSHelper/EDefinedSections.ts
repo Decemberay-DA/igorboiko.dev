@@ -41,12 +41,22 @@ export default class EDefinedSections extends ASeflSeqrchedEnumeration implement
 			this.EDUCATION_SECTION,
 			this.COMMENT_SECTION,
 			this.CONTACT_SECTION,
+			this.ERROR_404_PAGE,
 		];
 		return sections;
 	}
 
 	override onStart(): void {
 		this.seqrchSections();
+	}
+
+	public findSectionByName(name: string): TReadonlySection {
+		const x = this.getAllSections.find((s) => s.name === name);
+		if (x) {
+			return x;
+		} else {
+			throw new Error("section with name '" + name + "' not found");
+		}
 	}
 
 	private seqrchSections() {

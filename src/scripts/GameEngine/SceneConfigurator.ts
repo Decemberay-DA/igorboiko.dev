@@ -1,14 +1,12 @@
-import * as DO from "../DinamicObjects/index";
-import * as DU from "../DevUnilities/index";
-import * as TJ from "../ThreeJS/index";
+import type { GLTF } from "three/examples/jsm/Addons.js";
 import { GE } from ".";
-import * as THREE from "three";
-import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { TWEENUpdater } from "../DinamicObjects/TWEENUpdater";
-import { CameraManager } from "../CameraManagiment/CameraManager";
 import { asi } from "../asi/asi";
 import { CameraCrain } from "../CameraManagiment/CameraCrain";
+import { CameraManager } from "../CameraManagiment/CameraManager";
 import { CameraScenesExtractor } from "../CameraManagiment/CameraScenes";
+import { DU } from "../DevUnilities";
+import { TJ } from "../ThreeJS";
+import { THREE } from "../ThreeJS/THREE";
 
 /**
  * its goal is to ckick scene up.
@@ -24,7 +22,6 @@ export class SceneConfigurator {
 	public async setupMainScenePage() {
 		// Base Game setup ========-====-====-====-============
 		const timeUpdater = new GE.GameTime(); // just init and add to Game update cycle
-		const tweenUpdater = new TWEENUpdater();
 
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
@@ -59,13 +56,14 @@ export class SceneConfigurator {
 		// add test rotation to planet ========-====-====-====-============
 		const planet = bgScene.scene.getObjectByName("Globa") as THREE.Object3D;
 		const innerplanet = bgScene.scene.getObjectByName("Sphere") as THREE.Object3D;
-		const planetRotator = new DO.AnonimousDynamicObject({
-			onFrameUpdate: () => {
+		const planetRotator = new GE.AnemicDynamicObject({
+			onStart() {},
+			onFrameUpdate() {
 				planet.rotation.y =
-					planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0002 * GE.GameTime.deltaTime;
+					planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.002 * GE.GameTime.deltaTime;
 				innerplanet.rotation.y =
 					innerplanet.rotation.y +
-					GE.GameTime.realTimeSinceStartup * 0.0003 * GE.GameTime.deltaTime;
+					GE.GameTime.realTimeSinceStartup * -0.003 * GE.GameTime.deltaTime;
 			},
 		});
 

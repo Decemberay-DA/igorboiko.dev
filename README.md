@@ -14,6 +14,7 @@ the tuuouodus:
     - [ ] Create statick project block in figma // that will have a defined names like { "image_a", "image_b", "image_c", "title", "description", "tags", "link"} and export them to html via some extensions
     - [ ] Create locations in blender
     - [ ] Create shaders in THREE
+       - [ ] use just vertex colors
     - [x] make scene alive when setting it up
     - [ ] Create initial cutscene
 
@@ -37,10 +38,10 @@ the tuuouodus:
     - [ ] logo
     - [ ] letters
     - [ ] match colors
-    - [ ] create events when i scroll site to new section wor 3d scene to ve transleted to // my english is good btw its 4 of night
+    - [x] create events when i scroll site to new section wor 3d scene to ve transleted to // my english is good btw its 4 of night
 
 - [x] code pages
-- [ ] FIXFWCINMEDIATOR
+- [-] FIXFWCINMEDIATOR
 - [ ] create pages
     - [ ] main
         - [ ] intro

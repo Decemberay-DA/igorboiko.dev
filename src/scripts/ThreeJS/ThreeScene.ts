@@ -79,8 +79,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		// Simple animation to differe bg from everything else ========-====-====-====-============
 		const color = new THREE.Color(
 			Math.sin(GE.GameTime.realTimeSinceStartup),
-			asi.data.Cursor.currentPosition0to1.x,
-			asi.data.Cursor.currentPosition0to1.y
+			asi.data.Cursor.clientRelstive.position.x,
+			asi.data.Cursor.clientRelstive.position.y
 		);
 		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}

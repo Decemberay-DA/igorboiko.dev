@@ -2,6 +2,7 @@ export * from "./IEnablable";
 
 export * from "./Game";
 export * from "./DynamicObject";
+export * from "./AnemicDynamicObject";
 export * from "./Coroutine";
 export * from "./GameManager";
 
