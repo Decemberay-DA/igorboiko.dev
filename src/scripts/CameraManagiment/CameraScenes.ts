@@ -38,6 +38,8 @@ export class CameraScenes {
 		asi.data.CAMERA_CRAIN.tweenTo(nextCrain, tweenTime);
 		asi.data.CAMERA_MANAGER.tweenTo(nextCamera, tweenTime);
 
+		// asi.data.DefinedSections.curentSection = endScene. from name idllldld
+
 		this._currentScene = endScene;
 	}
 

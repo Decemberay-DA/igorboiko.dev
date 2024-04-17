@@ -26,4 +26,7 @@ export default class DOMSearcher {
 			throw new Error("Element with id '" + id + "' not found");
 		}
 	}
+	public static maybeElementById(id: string): HTMLElement | null {
+		return document.getElementById(id);
+	}
 }

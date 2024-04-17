@@ -43,7 +43,7 @@ export class CurrentSectionDetector extends GE.ADynamicObject {
 			horizontal: true,
 		};
 		for (const section of sections) {
-			console.warn("checking section: " + section.name);
+			// console.warn("checking section: " + section.name);
 			const isOverlaps = VueSpecificks.isCursorOverlaps(
 				asi.context.cursor.clientRelstive.position,
 				section.htmlElement,
@@ -52,13 +52,14 @@ export class CurrentSectionDetector extends GE.ADynamicObject {
 			if (!isOverlaps) continue;
 
 			activeSection = section;
-			console.warn(">>> ACTIVE SECTION IS >>>: " + section.name);
+			// console.warn(">>> ACTIVE SECTION IS >>>: " + section.name);
 
 			const newSection = activeSection;
 			const isSectionWasChanged = previousActiveSection !== newSection;
 
 			if (isSectionWasChanged && asi.context.isAbleCursorSectionSwitching) {
 				asi.data.CAMERA_SCENES.tweenToScene(newSection.name);
+				asi.data.DefinedSections.curentSection = newSection;
 			}
 		}
 	}
