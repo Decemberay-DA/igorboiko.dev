@@ -26,6 +26,8 @@ export class BackgroundMaterial extends TJ.AManagimentedShaderMaterial {
 				},
 			},
 		});
+
+		this.__shader.name = "BackgroundMaterial";
 	}
 
 	public override onFrameUpdate(): void {

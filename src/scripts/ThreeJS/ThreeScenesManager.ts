@@ -49,6 +49,7 @@ class ThreeSceneDOMBridge {
 
 /**
  * Data about existing bridges beetween three scenes and DOM
+ * hahahahhahah i finish as using ONLY one scene heheh
  */
 export class ThreeScenesManager {
 	/**

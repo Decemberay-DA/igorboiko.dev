@@ -1,5 +1,5 @@
-<template>
-	<div id="three_scene_backgroung" class="fixed top-0 left-0 w-full h-full"></div>
+<template lang="pug">
+	div(id="three_scene_backgroung" class="fixed top-0 left-0 w-full h-full z-[-9999999999]")
 </template>
 
 <script setup lang="ts">

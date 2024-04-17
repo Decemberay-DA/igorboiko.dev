@@ -53,6 +53,17 @@ export class ObjectFinder {
 
 		return matchingObjects;
 	}
+	public static getAllMeshesFromScene(scene: THREE.Scene): THREE.Mesh[] {
+		const meshes: THREE.Mesh[] = [];
+
+		scene.traverse((object) => {
+			if (object instanceof THREE.Mesh) {
+				meshes.push(object);
+			}
+		});
+
+		return meshes;
+	}
 }
 
 export interface GLTFAsset {

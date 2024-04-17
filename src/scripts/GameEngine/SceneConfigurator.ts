@@ -7,6 +7,8 @@ import { CameraScenesExtractor } from "../CameraManagiment/CameraScenes";
 import { DU } from "../DevUnilities";
 import { TJ } from "../ThreeJS";
 import { THREE } from "../ThreeJS/THREE";
+import { ObjectFinder } from "../ThreeJS/Helpers/ObjectFinder";
+import { ObjectsTransformsNoiser } from "../DinamicObjects/ObjectsTransformsNoiser";
 
 /**
  * its goal is to ckick scene up.
@@ -54,29 +56,28 @@ export class SceneConfigurator {
 		// asi.data.Cursor = cursorStranding;
 
 		// add test rotation to planet ========-====-====-====-============
-		const planet = bgScene.scene.getObjectByName("Globa") as THREE.Object3D;
-		const innerplanet = bgScene.scene.getObjectByName("Sphere") as THREE.Object3D;
+		const planet = bgScene.scene.getObjectByName("planetSurface_01") as THREE.Object3D;
 		const planetRotator = new GE.AnemicDynamicObject({
-			onStart() {},
 			onFrameUpdate() {
 				planet.rotation.y =
 					planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.002 * GE.GameTime.deltaTime;
-				innerplanet.rotation.y =
-					innerplanet.rotation.y +
-					GE.GameTime.realTimeSinceStartup * -0.003 * GE.GameTime.deltaTime;
 			},
 		});
 
-		// create a test bg plane ========-====-====-====-============
-		const bgGeometryPlane = new THREE.PlaneGeometry(6, 6);
-		const bgMaterial = new TJ.BackgroundMaterial();
-		const bgMesh = new THREE.Mesh(bgGeometryPlane, bgMaterial.shader);
-		bgMesh.position.z = -3;
-		bgScene.scene.add(bgMesh);
-		bgScene.camera.position.z = 1;
+		// add noised transform motion to stars ========-====-====-====-============
+		const starClusters = ObjectFinder.ByUserData(bgScene.scene, "ROLE", "STAR_CLUSTER");
+		for (const cluster of starClusters) {
+			const floater = new ObjectsTransformsNoiser(cluster);
+			floater.noiser.influencePosition = 0; // bug
+			floater.noiser.speedPosition = 0;
+			floater.noiser.influenceQuaternion = 0.0001;
+			floater.noiser.speedQuaternion = 0.2;
+		}
 
-		// test assing fractals to planet
-		(planet as THREE.Mesh).material = bgMaterial.shader;
+		// apply vertex color material on everything ========-====-====-====-============
+		const vertexColored = new TJ.VertexColoredMaterial();
+		TJ.VertexColoredMaterial.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
+		asi.data.THREE_MANAGIMENTED_SCENE.scene.overrideMaterial = vertexColored.shader;
 
 		DU.Logger.write("Scene was builded");
 	}

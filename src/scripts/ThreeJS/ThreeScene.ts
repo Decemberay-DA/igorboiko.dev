@@ -14,6 +14,8 @@ export class ThreeScene extends GE.ADynamicObject {
 		return this._camera;
 	}
 	public setCamera(newCamera: THREE.PerspectiveCamera): void {
+		newCamera.near = 0.1;
+		newCamera.far = 10000;
 		this._camera = newCamera;
 	}
 
@@ -29,8 +31,8 @@ export class ThreeScene extends GE.ADynamicObject {
 
 		// Scene ========-====-====-====-============
 		this.scene = new THREE.Scene();
-		this.scene.background = new THREE.Color(0x808080);
-		this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		this.scene.background = new THREE.Color(0, 0, 0);
+		this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 		this.renderer = new THREE.WebGLRenderer({
 			antialias: true,
 			precision: "lowp",
@@ -77,12 +79,12 @@ export class ThreeScene extends GE.ADynamicObject {
 		this.renderer.render(this.scene, this.camera);
 
 		// Simple animation to differe bg from everything else ========-====-====-====-============
-		const color = new THREE.Color(
-			Math.sin(GE.GameTime.realTimeSinceStartup),
-			asi.data.Cursor.clientRelstive.position.x,
-			asi.data.Cursor.clientRelstive.position.y
-		);
-		this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
+		// const color = new THREE.Color(
+		// 	Math.sin(GE.GameTime.realTimeSinceStartup),
+		// 	asi.data.Cursor.clientRelstive.position.x,
+		// 	asi.data.Cursor.clientRelstive.position.y
+		// );
+		// this.scene.background = color.lerp(new THREE.Color(0.5, 0.5, 0.5), 0.75);
 	}
 
 	public override onDelete(): void {
