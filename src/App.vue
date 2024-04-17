@@ -29,10 +29,8 @@
 						:sectionTitle="'who i am idk'"
 						class="SECTION"
 					>
-						<template v-slot:default> 
-
-							<baseIcon  />
-
+						<template v-slot:default>
+							<div class="flex flex-col gap-4">icon</div>
 						</template>
 					</SECTION>
 
@@ -41,7 +39,14 @@
 						:sectionTitle="'some of my project'"
 						class="SECTION GLASS--transparent"
 					>
-						<template v-slot:default> </template>
+						<template v-slot:default>
+							<iconYoutube />
+							<iconYoutube :sizepx="32" />
+							<iconYoutube :sizepx="32" />
+							<iconYoutube :sizepx="64" />
+							<iconYoutube :sizepx="96" />
+							<iconYoutube :sizepx="128" />
+						</template>
 					</SECTION>
 
 					<SECTION
@@ -128,7 +133,7 @@ import Header from "./views/Layers/NAVIGATION_LAYER/Header.vue";
 import LAYER from "./views/Layers/CENTER_LAYER/LAYER.vue";
 import SECTION from "./views/Layers/CENTER_LAYER/sections/SECTION.vue";
 import Section_unreachable from "./views/Layers/CENTER_LAYER/sections/Section_unreachable.vue";
-import baseIcon from "./views/icons/baseIcon.vue";
+import iconYoutube from "./views/icons/iconYoutube.vue";
 </script>
 
 <style lang="scss">
