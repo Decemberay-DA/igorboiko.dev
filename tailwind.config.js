@@ -11,9 +11,8 @@ export default {
 				GWHITE: "#ccd6f6",
 
 				GACTIVEABLE: "#1BC3E9",
-
 				GACTIVE: "#64ffda",
-				// eq from combination of thouse onew GACTIVE creates
+				
 				GACTIVERIGHT: "#FF3333",
 				GACTIVELEFT: "#00CCCC",
 			},
