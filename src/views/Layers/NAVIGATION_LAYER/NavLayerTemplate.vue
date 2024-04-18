@@ -16,7 +16,7 @@ div.side-stack.absolute.left-0.bottom-0.items-center.justify-start
     div.sgap.flex.flex-col.pointer-events-auto.h-fit(id="side-stack-89906bb0-5f3d-401d-9d8c-109faf03b099")
         IconArtStation
         IconGitHub
-        IconTelegram
+        IconInstagram
         IconTelegram
         IconTelegram
     //- div.flex.flex-col.h-full
@@ -41,6 +41,8 @@ import Header from "./Header.vue";
 import IconArtStation from "@/views/icons/IconArtStation.vue";
 import IconGitHub from "@/views/icons/IconGitHub.vue";
 import IconTelegram from "@/views/icons/IconTelegram.vue";
+import IconInstagram from "@/views/icons/IconInstagram.vue";
+
 import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
 import { THREE } from "@/scripts/ThreeJS/THREE";
 import { asi } from "@/scripts/asi/asi";

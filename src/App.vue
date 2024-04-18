@@ -14,9 +14,10 @@
 	<LAYER :definedLayerID="'CENTER_LAYER'" :isScrollable="true" class="pointer-events-auto">
 		<template v-slot:default>
 			<div class="w-fit p-20 SECTION__inner-container flex-shrink">
-				<SECTION :definedSectionID="'INTRO_SECTION'" class="SECTION">
-					<template v-slot:default>
+				<SECTION :definedSectionID="'INTRO_SECTION'" class="SECTION h-screen justify-end">
+					<template v-slot:default class="align-middle justify-end">
 						<LandSectionTemplate />
+						<div class="h-1/3"></div>
 					</template>
 				</SECTION>
 
@@ -123,6 +124,10 @@ import LandSectionTemplate from "./views/Layers/CENTER_LAYER/sections/0_Land/Lan
 	box-sizing: border-box;
 	outline: none;
 }
+body {
+	font-family: Montserrat, Arial, sans-serif;
+}
+
 .cover-whole-screen-fixed {
 	@apply fixed inset-0;
 }
@@ -130,14 +135,14 @@ import LandSectionTemplate from "./views/Layers/CENTER_LAYER/sections/0_Land/Lan
 // ========-====-====-====-============ ========-====-====-====-============
 // common styles idk ========-====-====-====-============
 // ========-====-====-====-============ ========-====-====-====-============
-.PANNEL {
-	&--white {
-		@apply backdrop-blur-sm bg-white/25;
-	}
-	&--gray {
-		@apply backdrop-blur-sm bg-white/25;
-	}
-}
+// .PANNEL {
+// 	&--white {
+// 		@apply backdrop-blur-sm bg-white/25;
+// 	}
+// 	&--gray {
+// 		@apply backdrop-blur-sm bg-white/25;
+// 	}
+// }
 .GLASS {
 	&--transparent {
 		@apply backdrop-blur-sm bg-white/25;
@@ -200,6 +205,13 @@ p {
 	font-size: 18px;
 	font-weight: normal;
 	line-height: 10%;
+	// omg
+	font-family: var(--p-font-family);
+	font-size: var(--p-font-size);
+	font-style: var(--p-font-style);
+	font-weight: var(--p-font-weight);
+	letter-spacing: var(--p-letter-spacing);
+	line-height: var(--p-line-height);
 }
 .p-bold {
 	@apply _font_base _Montserrat;

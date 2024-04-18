@@ -1,5 +1,5 @@
 <template lang="pug">
-div(:id="definedSectionID")
+div.w-full.h-full.flex.flex-col(:id="definedSectionID")
 	//- name row
 	div.flex.flex-row.h-fit.items-center(v-if="sectionTitle")
 		.flex-none.w-6
@@ -12,8 +12,7 @@ div(:id="definedSectionID")
 				.line.line-gradient
 				.line
 		.flex-none.w-6
-	div(v-else) 
-	slot
+	slot.w-full.h-full.flex.flex-col
 </template>
 
 <script setup lang="ts">
@@ -36,15 +35,11 @@ const props = defineProps({
 	@apply h-[2px] w-full;
 }
 .line-gradient {
-	@apply bg-gradient-to-r from-GACTIVE via-GACTIVATABLE to-transparent;
+	@apply bg-gradient-to-r from-GACTIVE via-GACTIVEABLE to-transparent;
 }
 .one-line-text {
 	@apply w-fit h-fit pointer-events-auto;
 	overflow: visible;
-	// padding: 0.5rem;
-	// line-height: 1.5;
 	white-space: nowrap;
 }
-
-
 </style>

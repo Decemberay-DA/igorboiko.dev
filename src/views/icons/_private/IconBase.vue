@@ -1,6 +1,9 @@
 <template lang="pug">
 //- a(:href="iconLinkPath" target="_blank")
-svg(xmlns="http://www.w3.org/2000/svg" :width="sizepx" :height="sizepx" viewBox="0 0 16 16")
+svg(xmlns="http://www.w3.org/2000/svg" 
+:width="sizepx" 
+:height="sizepx" 
+:viewBox="`0 0 ${viewBoxSize} ${viewBoxSize}`")
 	path.iconBase(:d="svgPath")
 </template>
 
@@ -21,6 +24,11 @@ const props = defineProps({
 		type: String,
 		required: false,
 		default: "",
+	},
+	viewBoxSize: {
+		type: Number,
+		required: false,
+		default: 16,
 	},
 });
 </script>
