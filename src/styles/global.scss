@@ -148,4 +148,13 @@ h3 {
 			@apply transform -translate-y-4;
 		}
 	}
+	&--hover-hard-shadow {
+		box-shadow: 0px 0px 0 0;
+		@apply shadow-GACTIVEABLE;
+
+		&:hover {
+			box-shadow: -10px 10px 0 0;
+			@apply shadow-GACTIVE;
+		}
+	}
 }

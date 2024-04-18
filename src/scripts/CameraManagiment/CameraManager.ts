@@ -25,7 +25,7 @@ export class CameraManager extends GE.ADynamicObject {
 	private tweener: TransformsTweenToerModifier = new TransformsTweenToerModifier();
 	private _realTransforms: Transforms;
 	private leaner: TransformsCursorLeaner = new TransformsCursorLeaner(1.024);
-	private smoother: TransformsSmoother = new TransformsSmoother(0.07 * 2);
+	private smoother: TransformsSmoother;
 
 	public static readonly __MAIN_CAMERA__: string = "__MAIN_CAMERA__";
 
@@ -35,12 +35,13 @@ export class CameraManager extends GE.ADynamicObject {
 
 		this.camera = camera;
 		this._realTransforms = new Transforms(this.camera);
+		this.smoother = new TransformsSmoother(0.07 * 2, this._realTransforms);
 
 		// set as main camera of all scene
 		asi.data.THREE_MANAGIMENTED_SCENE.setCamera(camera);
 	}
 
-	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 1) {
+	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {
 		this.tweener.tweenTo(translateTo, tweenTime);
 	}
 

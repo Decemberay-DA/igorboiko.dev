@@ -23,11 +23,8 @@
 					</template>
 				</SECTION>
 
-				<SECTION
-					:definedSectionID="'LAND_SECTION'"
-					:sectionTitle="'what is it for if i have intro?'"
-					class="SECTION hidden"
-				>
+				<!-- hidden  i have intro -->
+				<SECTION :definedSectionID="'LAND_SECTION'" class="SECTION hidden">
 					<template v-slot:default>
 						<h3>land deez nuts on your mouth</h3>
 					</template>
@@ -49,14 +46,12 @@
 					</template>
 				</SECTION>
 
-				<SECTION
-					:definedSectionID="'EXPERIENCE_SECTION'"
-					:sectionTitle="'00:'"
-					class="SECTION hidden"
-				>
+				<!-- hidden -->
+				<SECTION :definedSectionID="'EXPERIENCE_SECTION'" class="SECTION hidden">
 					<template v-slot:default> </template>
 				</SECTION>
 
+				<!-- hidden -->
 				<SECTION
 					:definedSectionID="'EDUCATION_SECTION'"
 					:sectionTitle="'03:'"
@@ -65,6 +60,7 @@
 					<template v-slot:default> </template>
 				</SECTION>
 
+				<!-- hidden -->
 				<SECTION :definedSectionID="'COMMENT_SECTION'" :sectionTitle="'??:'" class="SECTION hidden">
 					<template v-slot:default> </template>
 				</SECTION>
@@ -78,6 +74,7 @@
 					</template>
 				</SECTION>
 
+				<!-- hidden -->
 				<Section_unreachable
 					:definedSectionID="'ERROR_404_PAGE'"
 					class="SECTION unreachable-section hidden"

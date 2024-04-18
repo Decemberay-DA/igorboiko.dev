@@ -43,11 +43,16 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	public static doesMeshHasVertexColor(mesh: THREE.Mesh): boolean {
 		return mesh.geometry.attributes.color && mesh.geometry.attributes.color.count > 0;
 	}
-	public static assignWhiteVertexColors(mesh: THREE.Mesh): void {
+	public static assignWhiteVertexColors(mesh: THREE.Mesh, color: THREE.Color): void {
 		if (!VertexColoredMaterial.doesMeshHasVertexColor(mesh)) {
 			const numVertices = mesh.geometry.attributes.position.count;
 			const colors = new Float32Array(numVertices * 4);
-			colors.fill(1);
+			for (let i = 0; i < numVertices * 4; i += 4) {
+				colors[i] = color.r;
+				colors[i + 1] = color.g;
+				colors[i + 2] = color.b;
+				colors[i + 3] = 1.0;
+			}
 
 			const colorAttribute = new THREE.BufferAttribute(colors, 4);
 
@@ -57,7 +62,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	public static assignWhiteVertexColorsToSceneIfHasNoVC(scene: THREE.Scene): void {
 		scene.traverse((object) => {
 			if (object instanceof THREE.Mesh) {
-				VertexColoredMaterial.assignWhiteVertexColors(object);
+				VertexColoredMaterial.assignWhiteVertexColors(object, new THREE.Color(1, 1, 0.95));
 			}
 		});
 	}

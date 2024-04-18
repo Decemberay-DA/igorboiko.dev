@@ -36,16 +36,16 @@ export class SceneConfigurator {
 		bgScene.scene.add(gltfBG.scene);
 
 		// Camera managiment ========-====-====-====-============
-		const mainCameraRef = bgScene.scene.getObjectByName(
+		const mainCamera = bgScene.scene.getObjectByName(
 			CameraManager.__MAIN_CAMERA__
 		) as THREE.PerspectiveCamera;
-		const cameraManager = new CameraManager(mainCameraRef);
+		const cameraManager = new CameraManager(mainCamera);
 		asi.data.CAMERA_MANAGER = cameraManager;
 
-		const mainCameraCrainRef = bgScene.scene.getObjectByName(
+		const mainCameraCrain = bgScene.scene.getObjectByName(
 			CameraCrain.__MAIN_CAMERA_CRANE__
 		) as THREE.Object3D;
-		const cameraCrain = new CameraCrain(mainCameraCrainRef);
+		const cameraCrain = new CameraCrain(mainCameraCrain);
 		asi.data.CAMERA_CRAIN = cameraCrain;
 
 		const cameraScenes = CameraScenesExtractor.extract();
@@ -55,12 +55,21 @@ export class SceneConfigurator {
 		// const cursorStranding = CursorStrandingBuilder.getPlatformDependend();
 		// asi.data.Cursor = cursorStranding;
 
-		// add test rotation to planet ========-====-====-====-============
-		const planet = bgScene.scene.getObjectByName("planetSurface_01") as THREE.Object3D;
-		const planetRotator = new GE.AnemicDynamicObject({
+		// add test rotation to ========-====-====-====-============
+		const ringRoot = bgScene.scene.getObjectByName("_RING_ROOT_grp") as THREE.Object3D;
+		const rongRotator = new GE.AnemicDynamicObject({
 			onFrameUpdate() {
-				planet.rotation.y =
-					planet.rotation.y + GE.GameTime.realTimeSinceStartup * 0.002 * GE.GameTime.deltaTime;
+				ringRoot.rotation.y =
+					ringRoot.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0034 * GE.GameTime.deltaTime;
+			},
+		});
+		// add test rotation to ========-====-====-====-============
+		const planetSurface = bgScene.scene.getObjectByName("planetSurface") as THREE.Object3D;
+		const planetSurfaceRotator = new GE.AnemicDynamicObject({
+			onFrameUpdate() {
+				planetSurface.rotation.y =
+					planetSurface.rotation.y -
+					GE.GameTime.realTimeSinceStartup * 0.0021 * GE.GameTime.deltaTime;
 			},
 		});
 

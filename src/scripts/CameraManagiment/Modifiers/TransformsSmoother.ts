@@ -6,8 +6,9 @@ export class TransformsSmoother implements IModifier<Transforms> {
 	private _smoothedTransforms: Transforms = new Transforms({});
 	public smoothness: number;
 
-	public constructor(smoothness = 0.5) {
+	public constructor(smoothness = 0.5, initialTransforms?: Transforms) {
 		this.smoothness = smoothness;
+		this._smoothedTransforms = initialTransforms ?? new Transforms({});
 	}
 
 	public apply(object: Transforms): Transforms {
