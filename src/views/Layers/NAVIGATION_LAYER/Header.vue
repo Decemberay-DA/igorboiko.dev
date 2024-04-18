@@ -1,22 +1,24 @@
 <template lang="pug">
 div.pointer-events-none.left-0
 	div.h-20.w-full.pr-20.flex.flex-row-reversed.gap-10.items-center.justify-end 
+		p(@click="HM.scrollTo(SN.INTRO_SECTION.name)")
+			span.num(class="p") 00. 
+			span.txt(class="p", id="INTRO_SECTION-header") Main
 		p(@click="HM.scrollTo(SN.ABOUT_SECTION.name)")
-			span.num 00. 
-			span.txt(id="ABOUT_SECTION-header") About
+			span.num(class="p") 01. 
+			span.txt(class="p", id="ABOUT_SECTION-header") About
 		p(@click="HM.scrollTo(SN.PROJECTS_SECTION.name)")
-			span.num 01. 
-			span.txt(id="PROJECTS_SECTION-header") Projects
-		p(@click="HM.scrollTo(SN.EXPERIENCE_SECTION.name)")
-			span.num 02. 
-			span.w-10.flex-none
-			span.txt(id="EXPERIENCE_SECTION-header") Experience
-		p(@click="HM.scrollTo(SN.EDUCATION_SECTION.name)")
-			span.num 03. 
-			span.txt(id="EDUCATION_SECTION-header") Education
-		p(@click="HM.scrollTo(SN.CONTACT_SECTION.name)")
-			span.num 04. 
-			span.txt(id="CONTACT_SECTION-header") Contact
+			span.num(class="p") 02. 
+			span.txt(class="p", id="PROJECTS_SECTION-header") Projects
+		//- p(@click="HM.scrollTo(SN.EXPERIENCE_SECTION.name)")
+		//- 	span.num(class="p") 02. 
+		//- 	span.txt(class="p", id="EXPERIENCE_SECTION-header") Experience
+		//- p(@click="HM.scrollTo(SN.EDUCATION_SECTION.name)")
+		//- 	span.num(class="p") 03. 
+		//- 	span.txt(class="p", id="EDUCATION_SECTION-header") Education
+		//- p(@click="HM.scrollTo(SN.CONTACT_SECTION.name)")
+		//- 	span.num(class="p") 04. 
+		//- 	span.txt(class="p", id="CONTACT_SECTION-header") Contact
 </template>
 
 <script setup lang="ts">
@@ -90,15 +92,8 @@ const HM = new HeaderManager();
 </script>
 
 <style scoped lang="scss">
-::v-deep p {
-	@apply w-fit h-fit pointer-events-auto;
-	overflow: visible;
-	padding: 0.5rem;
-	line-height: 1.5;
-	white-space: nowrap;
-}
 .txt {
-	@apply text-GWHITE;
+	@apply text-GWHITE pointer-events-auto cursor-pointer;
 	transition: color 0.3s ease-in-out;
 
 	&__current {

@@ -1,7 +1,7 @@
 <template lang="pug">
 
 //- left top icon
-div.absolute.left-0.top-0
+//- div.absolute.left-0.top-0
     div.h-20.w-20.flex.items-center.justify-center
        .logo.pointer-events-auto.h-10.w-10.bg-GWHITE.allign-center(@click="scrollTo(asi.data.DefinedSections.INTRO_SECTION.name)")
 
@@ -16,8 +16,8 @@ div.side-stack.absolute.left-0.bottom-0.items-center.justify-start
     div.sgap.flex.flex-col.pointer-events-auto.h-fit(id="side-stack-89906bb0-5f3d-401d-9d8c-109faf03b099")
         IconArtStation
         IconGitHub
+        IconYouTube
         IconInstagram
-        IconTelegram
         IconTelegram
     //- div.flex.flex-col.h-full
     .h-4.flex-none
@@ -25,6 +25,7 @@ div.side-stack.absolute.left-0.bottom-0.items-center.justify-start
 
 //- just a rignt lines with mail
 div.side-stack.absolute.right-0.bottom-0.items-center.justify-start
+    div.the-stick.invisible
     div.the-stick.invisible
     .h-28.flex-none
     a.h-fit.w-fit.pointer-events-auto(href="https://v4.brittanychiang.com/" target="_blank")
@@ -42,6 +43,7 @@ import IconArtStation from "@/views/icons/IconArtStation.vue";
 import IconGitHub from "@/views/icons/IconGitHub.vue";
 import IconTelegram from "@/views/icons/IconTelegram.vue";
 import IconInstagram from "@/views/icons/IconInstagram.vue";
+import IconYouTube from "@/views/icons/IconYouTube.vue";
 
 import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
 import { THREE } from "@/scripts/ThreeJS/THREE";
@@ -93,6 +95,8 @@ const SM = new SideStackMagician();
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/global.scss";
+
 .side-stack {
 	@apply w-20 h-full flex flex-col;
 }
@@ -110,11 +114,6 @@ const SM = new SideStackMagician();
 }
 .the-stick {
 	@apply w-[2px] h-full bg-GWHITE;
-}
-.one-line-text {
-	@apply w-fit h-fit pointer-events-auto;
-	overflow: visible;
-	white-space: nowrap;
 }
 .logo {
 	@apply bg-GWHITE;

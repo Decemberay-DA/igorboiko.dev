@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
-import MainPageView from "@/views/MainPageView.vue";
-import NotFoundView from "@/views/NotFoundView.vue";
 import ScrollBehaviour from "./scrollBehaviour";
+import App from "@/App.vue";
+
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/",
 		name: "home",
-		component: MainPageView,
+		component: App,
 		meta: { preserveState: true },
 	},
 	{
 		path: "/:pathMatch(.*)*",
 		name: "NotFound",
-		component: NotFoundView,
+		component: App,
 	},
 ];
 

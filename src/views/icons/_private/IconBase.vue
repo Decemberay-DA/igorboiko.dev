@@ -1,10 +1,16 @@
 <template lang="pug">
-//- a(:href="iconLinkPath" target="_blank")
-svg(xmlns="http://www.w3.org/2000/svg" 
-:width="sizepx" 
-:height="sizepx" 
-:viewBox="`0 0 ${viewBoxSize} ${viewBoxSize}`")
-	path.iconBase(:d="svgPath")
+a.w-full.h-full.pointer-events-auto(:href="iconLinkPath" target="_blank" v-if="iconLinkPath")
+	svg(xmlns="http://www.w3.org/2000/svg" 
+	:width="sizepx" 
+	:height="sizepx" 
+	:viewBox="`0 0 ${viewBoxSize} ${viewBoxSize}`")
+		path.iconBase(:d="svgPath")
+div(v-else="iconLinkPath")
+	svg(xmlns="http://www.w3.org/2000/svg" 
+	:width="sizepx" 
+	:height="sizepx" 
+	:viewBox="`0 0 ${viewBoxSize} ${viewBoxSize}`")
+		path.iconBase(:d="svgPath")
 </template>
 
 <script setup lang="ts">
@@ -23,7 +29,6 @@ const props = defineProps({
 	iconLinkPath: {
 		type: String,
 		required: false,
-		default: "",
 	},
 	viewBoxSize: {
 		type: Number,

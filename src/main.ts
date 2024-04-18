@@ -1,5 +1,5 @@
 import "./assets/styles/styles.min.css";
-import './styles/global.scss';
+import "./styles/global.scss";
 import { createApp } from "vue";
 import App from "./App.vue";
 import * as GE from "./scripts/GameEngine/index";

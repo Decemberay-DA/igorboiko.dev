@@ -2,17 +2,150 @@
 @tailwind components;
 @tailwind utilities;
 
+// ========-====-====-====-============ ========-====-====-====-============
+// Cleaner ========-====-====-====-============
+// ========-====-====-====-============ ========-====-====-====-============
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+body {
+	font-family: Montserrat, Arial, sans-serif;
+}
 
+// ========-====-====-====-============ ========-====-====-====-============
+// base stuff overrides ========-====-====-====-============
+// ========-====-====-====-============ ========-====-====-====-============
+img {
+	object-fit: cover;
+}
 
+// fonts ========-====-====-====-============
+._font_base {
+	@apply text-GWHITE;
+}
+._Montserrat {
+	font-family: Montserrat, Arial, sans-serif;
+}
+._Helvetica {
+	font-family: Helvetica, Arial, sans-serif;
+}
 
+.p {
+	@apply _font_base _Montserrat;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 10%;
+	// omg
+	line-height: var(--p-line-height);
+}
+p {
+	@apply p;
+}
+a {
+	@apply p;
+}
+.p-bold {
+	@apply p;
+	font-weight: bold;
+}
+.section-pointer {
+	@apply p _font_base _Montserrat;
+	@apply text-GACTIVE;
+}
+ol {
+	@apply p p-bold section-pointer;
+}
+li {
+	@apply p;
+}
 
+.h1 {
+	@apply _font_base _Helvetica;
+	font-size: 123.36px;
+	font-weight: 800;
+	line-height: 108%;
+}
+h1 {
+	@apply h1;
+}
 
+.h2 {
+	@apply _font_base _Helvetica;
+	font-size: 47.12px;
+	font-weight: bold;
+	line-height: 108%;
+}
+h2 {
+	@apply h2;
+}
 
+.h3 {
+	@apply _font_base _Helvetica;
+	font-size: 29.12px;
+	font-weight: normal;
+	line-height: 140%;
+}
+h3 {
+	@apply h3;
+}
+
+.interactible {
+	@apply cursor-pointer;
+	@apply text-GWHITE;
+	transition: color 0.3s ease-in-out;
+
+	&:hover {
+		@apply text-GACTIVE;
+	}
+
+	&--hilighted {
+		@apply cursor-pointer;
+		@apply text-GACTIVEABLE;
+		transition: color 0.3s ease-in-out;
+
+		&:hover {
+			@apply text-GACTIVE;
+		}
+	}
+}
+.one-line-text {
+	@apply w-fit h-fit pointer-events-auto;
+	overflow: visible;
+	white-space: nowrap;
+}
+
+// ========-====-====-====-============ ========-====-====-====-============
+// common styles idk ========-====-====-====-============
+// ========-====-====-====-============ ========-====-====-====-============
 .PANNEL {
 	&--white {
-		@apply backdrop-blur-sm bg-white/25;
+		@apply backdrop-blur-sm bg-GWHITE opacity-50;
 	}
 	&--gray {
-		@apply backdrop-blur-sm bg-white/25;
+		@apply backdrop-blur-sm bg-GWHITE opacity-25;
+	}
+}
+.GLASS {
+	&--transparent {
+		@apply backdrop-blur-sm bg-GWHITE opacity-25;
+	}
+	&--rought {
+		@apply backdrop-blur-md bg-GWHITE opacity-50;
+	}
+}
+
+// ========-====-====-====-============ ========-====-====-====-============
+// common animations ========-====-====-====-============
+// ========-====-====-====-============ ========-====-====-====-============
+.ANIM {
+	&--hover-up {
+		transition: transform 0.3s ease-in-out;
+
+		&:hover {
+			@apply transform -translate-y-4;
+		}
 	}
 }

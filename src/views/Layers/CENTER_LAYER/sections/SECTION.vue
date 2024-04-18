@@ -9,10 +9,14 @@ div.w-full.h-full.flex.flex-col(:id="definedSectionID")
 			.line.line-gradient
 			.flex-none.h-2
 			div.flex.flex-row
+				//- .line.invisible.w-6
 				.line.line-gradient
-				.line
+				.line.invisible
 		.flex-none.w-6
-	slot.w-full.h-full.flex.flex-col
+	//- inner section content
+	div.w-full.flex.flex-row.content-center.justify-center
+		div(class="w-5/6")
+			slot
 </template>
 
 <script setup lang="ts">
@@ -30,16 +34,13 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+@import "@/styles/global.scss";
+
 .line {
 	@apply h-[2px] w-full;
 }
 .line-gradient {
 	@apply bg-gradient-to-r from-GACTIVE via-GACTIVEABLE to-transparent;
-}
-.one-line-text {
-	@apply w-fit h-fit pointer-events-auto;
-	overflow: visible;
-	white-space: nowrap;
 }
 </style>

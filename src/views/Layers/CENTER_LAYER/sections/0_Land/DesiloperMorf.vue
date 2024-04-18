@@ -1,40 +1,51 @@
 <template lang="pug">
-.Base
-    .Designer DESIGNER
-    .Developer DEVELOPER
+div.Base
+    h1.Left DESIGNER
+    h1.Right DEVELOPER
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { GE } from "@/scripts/GameEngine";
+import { onMounted } from "vue";
 
-<style lang="scss">
+class DesiloperMorpher extends GE.ADynamicObject {
+	private designer!: HTMLElement;
+	private developer!: HTMLElement;
+
+	public constructor() {
+		super();
+	}
+}
+const DM = new DesiloperMorpher();
+</script>
+
+<style scoped lang="scss">
 .Base {
 	@apply relative h-[250px] w-fit;
 }
 
-.Designer {
-	@apply absolute text-GACTIVELEFT mix-blend-screen;
-	font-family: "Montserrat-ExtraBold", Helvetica;
+.___meta {
 	font-size: 180px;
 	font-weight: 800;
-	height: 194px;
-	left: 0;
 	letter-spacing: 0;
 	line-height: 194.4px;
 	text-align: center;
-	top: 14px;
 	white-space: nowrap;
+	font-family: "Montserrat-ExtraBold", Helvetica;
+	height: 194px;
 }
 
-.Developer {
+.Left {
+	@apply ___meta;
+	@apply absolute text-GACTIVELEFT mix-blend-screen;
+	left: 0;
+	top: 14px;
+}
+
+.Right {
+	@apply ___meta;
 	@apply absolute text-GACTIVERIGHT mix-blend-screen h-[200px];
-	font-family: "Montserrat-ExtraBold", Helvetica;
-	font-size: 180px;
-	font-weight: 800;
 	left: 14px;
-	letter-spacing: 0;
-	line-height: 194.4px;
-	text-align: center;
 	top: 0;
-	white-space: nowrap;
 }
 </style>

@@ -6,9 +6,11 @@ export default {
 		extend: {
 			colors: {
 				GBACKGROUND: "#0a192f",
+
 				GGRAY: "#8892b0",
 				GWHITE: "#ccd6f6",
-				GACTIVEABLE: "#17304b",
+
+				GACTIVEABLE: "#1BC3E9",
 
 				GACTIVE: "#64ffda",
 				// eq from combination of thouse onew GACTIVE creates
