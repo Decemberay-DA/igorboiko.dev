@@ -1,7 +1,7 @@
 import { asi } from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
-import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
-import { THREE } from "@/scripts/ThreeJS/THREE";
+import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { SmoothLerper } from "@/scripts/CameraManagiment/Lerper";
 
 export class CursorFollower extends GE.ADynamicObject {
@@ -15,10 +15,10 @@ export class CursorFollower extends GE.ADynamicObject {
 
 	override onStart(): void {
 		// if (asi.context.pageType === asiSpecificks.PageTypes.ERROR_404_PAGE) {
-		const foregroundStar = DOMSearcher.getElementById("cursor_betreyal_foregroundStar");
+		const foregroundStar = DOMSearcherH.getElementById("cursor_betreyal_foregroundStar");
 		this.draggerF = new CursorDragger(foregroundStar, 0.5);
 
-		const backgroundStar = DOMSearcher.getElementById("cursor_betreyal_backgroundStar");
+		const backgroundStar = DOMSearcherH.getElementById("cursor_betreyal_backgroundStar");
 		this.draggerB = new CursorDragger(backgroundStar, 0.1);
 	}
 

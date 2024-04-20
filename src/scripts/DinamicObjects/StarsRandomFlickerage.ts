@@ -1,5 +1,5 @@
 import { GE } from "../GameEngine";
-import type { THREE } from "../ThreeJS/THREE";
+import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
 
 interface IProcess {
 	star: THREE.Object3D;

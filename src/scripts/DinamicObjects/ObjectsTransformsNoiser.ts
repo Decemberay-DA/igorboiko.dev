@@ -1,7 +1,7 @@
 import { TransformsNoiser } from "../CameraManagiment/Modifiers/TransformsNoiser";
 import { Transforms } from "../CameraManagiment/ParamsControllers/Transforms";
 import { GE } from "../GameEngine";
-import type { THREE } from "../ThreeJS/THREE";
+import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
 
 export class ObjectsTransformsNoiser extends GE.ADynamicObject {
 	public readonly noiser = new TransformsNoiser();

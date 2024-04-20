@@ -1,24 +1,26 @@
 import { type App, getCurrentInstance } from "vue";
-import type { CameraCrain } from "../CameraManagiment/CameraCrain";
 import type { CameraManager } from "../CameraManagiment/CameraManager";
-import type { CameraScenes } from "../CameraManagiment/CameraScenes";
+import type { CameraScenes } from "../CameraManagiment/CameraScenes___";
 import type { ACursorStranding } from "../MegaCursor/CursorStranding/ACursorStranding";
-import { CursorStrandingBuilder } from "../MegaCursor/CursorStranding/CursorStrandingBuilder";
+import { CursorStrandingBuilderH } from "../MegaCursor/CursorStranding/CursorStrandingBuilderH";
 import type { TJ } from "../ThreeJS";
-import type { THREE } from "../ThreeJS/THREE";
-import { EDEFINED_LAYERS } from "../VueTSHelper/EDefinedLayers";
-import EDefinedSections from "../VueTSHelper/EDefinedSections";
+import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
+import { EDEFINED_LAYERS } from "../VueTSHelper/EDefinedLayers___";
+import EDefinedSections from "../VueTSHelper/EDefinedSections___";
 import { CursorFollower } from "../MegaCursor/CursorFollower/CursorFollower";
 import type { GLTF } from "three/examples/jsm/Addons.js";
-import { CurrentSectionDetector } from "../VueTSHelper/CurrentSectionDetector";
+import { CurrentSceneFromDOMDetector } from "../VueTSHelper/CurrentSceneFromDOMDetector";
+import { ScenesRegistry } from "../CameraManagiment/DefinedScenes/ScenesRegistry";
 
 /**
  * compile time complete thing
  */
 export class data {
 	// html ========-====-====-====-============
+	/**@deprecated asi.data SceneRegistry */
 	public readonly DefinedSections = new EDefinedSections();
-	public readonly CurrentSectionDetector = new CurrentSectionDetector();
+	public readonly CurrentSectionDetector = new CurrentSceneFromDOMDetector();
+	/**@deprecated */
 	public readonly DefinedLayers = new EDEFINED_LAYERS();
 
 	public get vueApp(): App<any> {
@@ -28,23 +30,23 @@ export class data {
 	// cursor effects ========-====-====-====-============
 
 	// cursor effects ========-====-====-====-============
-	public Cursor: ACursorStranding = CursorStrandingBuilder.getPlatformDependend();
+	public Cursor: ACursorStranding = CursorStrandingBuilderH.getPlatformDependend();
 	public readonly CursorFollower = new CursorFollower();
 
 	// three ========-====-====-====-============
+	public ScenesRegistry = new ScenesRegistry();
+
 	// camera controllers
-	public CAMERA_MANAGER!: CameraManager;
-	public CAMERA_CRAIN!: CameraCrain;
+	public CameraManager!: CameraManager;
 	// camera scenes
+	/**@deprecated asi.data SceneRegistry */
 	public CAMERA_SCENES!: CameraScenes;
 	// three
-	public THREE_MANAGIMENTED_SCENE!: TJ.ThreeScene;
-	public GLTF_THREE_SCENE!: GLTF;
-	public get THREE_SCENE(): THREE.Scene {
-		return this.THREE_MANAGIMENTED_SCENE.scene;
+	public ThreeSceneManagimented!: TJ.ThreeScene;
+	public ThreeSceneGLTF!: GLTF;
+	public get ThreeScene(): THREE.Scene {
+		return this.ThreeSceneManagimented.scene;
 	}
 
 	// app ========-====-====-====-============
 }
-
-class EntityRegistry<TEntity> {}

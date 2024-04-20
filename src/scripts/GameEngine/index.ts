@@ -1,12 +1,13 @@
-export * from "./IEnablable";
+export * from "./Game/IEnablable";
 
-export * from "./Game";
-export * from "./DynamicObject";
-export * from "./AnemicDynamicObject";
-export * from "./Coroutine";
-export * from "./GameManager";
+export * from "./Game/Game";
+export * from "./Game/OnFrameUpdatePriorities";
+export * from "./Types/DynamicObject";
+export * from "./Types/AnemicDynamicObject";
+export * from "./Types/Coroutine";
+export * from "./Game/GameManager";
 
-export * from "./GameTime";
-export * from "./SceneConfigurator";
+export * from "./Game/GameTime";
+export * from "./SceneConfiguratorH";
 
 export * as GE from "./index";

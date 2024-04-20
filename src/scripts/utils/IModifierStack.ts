@@ -1,5 +1,10 @@
+
+
+/**
+ * 
+ */
 export class ModifierStack<TObj> implements IModifierStack<TObj> {
-	public readonly modifiers: Array<IModifier<TObj>> = new Array<IModifier<TObj>>();
+	public readonly modifiers: IModifier<TObj>[] = [];
 
 	public apply(object: TObj): TObj {
 		for (const modifier of this.modifiers) {

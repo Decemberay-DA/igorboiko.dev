@@ -1,6 +1,6 @@
 import { asi } from "@/scripts/asi/asi";
 import { GE } from "@/scripts/GameEngine";
-import type { THREE } from "@/scripts/ThreeJS/THREE";
+import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { Vector2 } from "three";
 
 /**
@@ -56,9 +56,7 @@ class CursorPositionWindowDataProvider {
 	public get isCursorWithinScreen(): boolean {
 		const x = this.getter().x;
 		const y = this.getter().y;
-		const width = window.innerWidth;
-		const height = window.innerHeight;
 
-		return x >= 0 && x <= width && y >= 0 && y <= height;
+		return x >= 0 && x <= window.innerWidth && y >= 0 && y <= window.innerHeight;
 	}
 }

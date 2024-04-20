@@ -16,6 +16,10 @@ export class MouseCursorStranding extends ACursorStranding {
 			this.__clientPosition = client;
 		}
 	};
+	
+	public constructor() {
+		super();
+	}
 
 	public override onStart(): void {
 		document.addEventListener("mousemove", this._mousemoveListener);

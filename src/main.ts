@@ -9,7 +9,11 @@ app.mount("#app");
 
 // start all game scripts
 // without them its pure DEATH html
-const sc = new GE.SceneConfigurator();
-sc.setupMainScenePage();
+
+// setup asi
+
+// const sc = new GE.Scene
+// sc.setupMainScenePage();
+
 const gm = GE.GameManager.getInstance();
 gm.start();

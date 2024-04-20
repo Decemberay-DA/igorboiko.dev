@@ -55,8 +55,7 @@
 				<SECTION
 					:definedSectionID="'EDUCATION_SECTION'"
 					:sectionTitle="'03:'"
-					class="SECTION GLASS--transparent hidden"
-				>
+					class="SECTION GLASS--transparent hidden">
 					<template v-slot:default> </template>
 				</SECTION>
 
@@ -77,8 +76,7 @@
 				<!-- hidden -->
 				<Section_unreachable
 					:definedSectionID="'ERROR_404_PAGE'"
-					class="SECTION unreachable-section hidden"
-				>
+					class="SECTION unreachable-section hidden">
 					<template v-slot:default> </template>
 				</Section_unreachable>
 			</div>

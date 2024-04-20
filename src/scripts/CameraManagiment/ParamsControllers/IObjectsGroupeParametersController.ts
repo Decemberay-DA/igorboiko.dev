@@ -1,5 +1,5 @@
 import { GE } from "@/scripts/GameEngine";
-import type IEnumerable from "@/scripts/utils/IEnumerable";
+import type { IEnumerable } from "@/scripts/utils/IEnumerable";
 import type { MData } from "@/scripts/utils/markers";
 
 /**

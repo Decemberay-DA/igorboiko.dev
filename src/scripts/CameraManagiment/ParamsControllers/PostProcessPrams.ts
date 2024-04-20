@@ -1,4 +1,4 @@
-import type { THREE } from "@/scripts/ThreeJS/THREE";
+import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import type { TMemento } from "./IObjectsGroupeParametersController";
 
 /**

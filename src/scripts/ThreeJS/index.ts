@@ -1,12 +1,11 @@
-export { ThreeScene } from "./ThreeScene";
+export { ThreeScene } from "./ThreeEngine/ThreeScene";
 
-export { ThreeScenesManager } from "./ThreeScenesManager";
+export { ThreeScenesManager } from "./ThreeEngine/ThreeScenesManager";
 
-export { AManagimentedShaderMaterial } from "./AManagimentedShaderMaterial";
+export { AManagimentedShaderMaterial } from "./ThreeEngine/AManagimentedShaderMaterial";
 
-export { BackgroundMaterial } from "./BackgroundShader/BackgroundMaterial";
 export { VertexColoredMaterial } from "./VertexColoredMaterial/VertexColoredMaterial";
 
-export { GLTFLoaderchik } from "./GLTFLoader/GLTFLoader";
+export { GLTFLoaderH } from "./GLTFPipline/GLTFLoaderH";
 
 export * as TJ from "./index";

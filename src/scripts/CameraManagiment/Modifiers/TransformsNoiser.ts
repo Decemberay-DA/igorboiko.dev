@@ -2,7 +2,7 @@ import { SimplexNoise } from "three/examples/jsm/Addons.js";
 import type { IModifier } from "../../utils/IModifierStack";
 import { Transforms } from "../ParamsControllers/Transforms";
 import { GE } from "../../GameEngine";
-import { THREE } from "../../ThreeJS/THREE";
+import { THREE } from "../../ThreeJS/ThreeEngine/THREE";
 import { SmoothLerper } from "../Lerper";
 
 /**

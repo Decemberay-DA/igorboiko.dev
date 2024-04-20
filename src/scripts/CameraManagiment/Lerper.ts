@@ -1,4 +1,4 @@
-import { THREE } from "../ThreeJS/THREE";
+import { THREE } from "../ThreeJS/ThreeEngine/THREE";
 import { type ICameraControls, CameraControls } from "./ParamsControllers/CameraControlls";
 import { type ITransforms, Transforms } from "./ParamsControllers/Transforms";
 import { instance } from "three/examples/jsm/nodes/Nodes.js";

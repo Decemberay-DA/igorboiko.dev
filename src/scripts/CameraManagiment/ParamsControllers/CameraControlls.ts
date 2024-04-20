@@ -25,7 +25,7 @@ export interface ICameraControls {
 	far: number;
 	zoom: number;
 }
-export class IICameraControls {
+export class ICameraControlsEX {
 	public static fromCamera(camera: THREE.PerspectiveCamera): ICameraControllsParams {
 		const result: ICameraControls = {
 			fov: camera.fov,

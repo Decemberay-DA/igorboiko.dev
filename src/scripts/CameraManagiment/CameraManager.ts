@@ -1,15 +1,10 @@
 import * as THREE from "three";
 import { GE } from "../GameEngine";
-import { CameraControls as CameraControls } from "./ParamsControllers/CameraControlls";
 import { Transforms } from "./ParamsControllers/Transforms";
 import { asi } from "../asi/asi";
-import { ModifierStack } from "../utils/IModifierStack";
 import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
 import { TransformsSmoother } from "./Modifiers/TransformsSmoother";
-import { CameraControlsSmoother } from "./Modifiers/CameraControlsSmoother";
 import { TransformsCursorLeaner } from "./Modifiers/TransformsCursorLeaner";
-import { SmoothLerper } from "./Lerper";
-import { math } from "../utils/Math";
 
 /**
  * Contralls smooth camera movement or something
@@ -17,11 +12,6 @@ import { math } from "../utils/Math";
 export class CameraManager extends GE.ADynamicObject {
 	public readonly camera: THREE.PerspectiveCamera;
 
-	// private readonly _modifierStackCameraControls = new ModifierStack<CameraControls>();
-	// private smootherCC: GenerickSmoother<CameraControls, THREE.PerspectiveCamera>;
-
-	// private readonly _modifiersReal = new ModifierStack<Transforms>();
-	// private readonly _modifiersAdditionals = new ModifierStack<Transforms>();
 	private tweener: TransformsTweenToerModifier = new TransformsTweenToerModifier();
 	private _realTransforms: Transforms;
 	private leaner: TransformsCursorLeaner = new TransformsCursorLeaner(1.024);
@@ -38,7 +28,7 @@ export class CameraManager extends GE.ADynamicObject {
 		this.smoother = new TransformsSmoother(0.07 * 2, this._realTransforms);
 
 		// set as main camera of all scene
-		asi.data.THREE_MANAGIMENTED_SCENE.setCamera(camera);
+		asi.data.ThreeSceneManagimented.setCamera(camera);
 	}
 
 	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {

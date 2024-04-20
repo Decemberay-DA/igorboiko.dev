@@ -2,6 +2,7 @@ export interface Factory<TResult> {
 	(): TResult;
 }
 
+
 export class Lazy<T> {
 	private factoryOutput: T | undefined;
 	private isValueSet: boolean = false;

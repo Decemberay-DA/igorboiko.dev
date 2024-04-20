@@ -22,10 +22,66 @@ div.pointer-events-none.left-0
 </template>
 
 <script setup lang="ts">
-import { ScrollToSectionCoroutined } from "@/scripts/CameraManagiment/Commands/ScrollToSectionCoroutined";
+import { ScrollToSectionCoroutined } from "@/scripts/CameraManagiment/Commands/ScrollToSectionCoroutined___";
 import { asi } from "../../../scripts/asi/asi";
 import { GE } from "@/scripts/GameEngine";
-import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
+import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import { pipe } from "fp-ts/lib/function";
+import { array, string } from "fp-ts";
+import type { IHTMLScene } from "@/scripts/CameraManagiment/DefinedScenes/IScene";
+
+/**
+ * takes name like "ABOUT_ME_SCENE_ID"
+ * 0 removes "SCENE_ID" postfix
+ * 1 replaces "_" with " "
+ * 2 makes all symbols lowercase
+ * 3 makes first letter capital
+ * final: "About me"
+ */
+const humanizeSceneName = (nameID: string) => {
+	return pipe(
+		nameID,
+		(str) => str.replace(/_SCENE_ID$/, ""),
+		(str) => str.replace(/_/g, " "),
+		(str) => str.toLowerCase(),
+		(str) => str.charAt(0).toUpperCase() + str.slice(1)
+	);
+};
+
+const processSectionName = (nameID: string) => {
+	switch (nameID) {
+		// some extraordinary cases
+		case "ABOUT_ME_SCENE_ID":
+			return "About me";
+		default:
+			return humanizeSceneName(nameID);
+	}
+};
+
+/**
+ * make number always be 2 letters as example
+ * 1 => 01
+ * 5 => 05
+ * 0 => 00
+ */
+const addPrefixValue = (i: number, sectionName: string) => {
+	return `0${i} ${sectionName}`;
+};
+
+const buildDisplayReadyDataArray = (htmlScenes: IHTMLScene[]): { title: string; section: HTMLElement }[] => {
+	return pipe(
+		htmlScenes,
+		array.mapWithIndex((i, scene) => ({
+			title: pipe(scene.nameID, processSectionName, (s: string) => addPrefixValue(i, s));
+			section: scene.htmlElement;
+		}))
+	);
+};
+
+const htmlSection = pipe(
+	asi.data.ScenesRegistry.cahsedIHTMLScene,
+	array.map((s) => s.nameID)
+);
 
 class HeaderManager extends GE.ADynamicObject {
 	private headers!: HTMLElement[];
@@ -44,7 +100,7 @@ class HeaderManager extends GE.ADynamicObject {
 	public override onStart(): void {
 		this.headers = asi.data.DefinedSections.getAllSections
 			.map((section) =>
-				DOMSearcher.maybeElementById(HeaderManager.sectionNameToHeaderIDName(section.name))
+				DOMSearcherH.maybeElementById(HeaderManager.sectionNameToHeaderIDName(section.name))
 			)
 			.filter((element): element is HTMLElement => element !== null);
 	}
@@ -54,7 +110,7 @@ class HeaderManager extends GE.ADynamicObject {
 	 * since i wasn`t able to stup mediator i am checking stuff framely
 	 */
 	public override onFrameUpdate(): void {
-		const currentSection = asi.context.section;
+		const currentSection = asi.data.DefinedSections.curentSection;
 		if (!currentSection) return;
 		this.activeHeader = this.headerHTMLElementFromSectionName(currentSection.name) ?? null;
 		if (this.activeHeader) {

@@ -1,9 +1,7 @@
 import { asi } from "@/scripts/asi/asi";
 import type { IModifier } from "../../utils/IModifierStack";
 import { Transforms } from "../ParamsControllers/Transforms";
-import { THREE } from "@/scripts/ThreeJS/THREE";
-import { Vector2 } from "three";
-import { math } from "@/scripts/utils/Math";
+import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 
 /**
  * make object lean towards cursor relative to inpot transforms
@@ -26,7 +24,7 @@ export class TransformsCursorLeaner implements IModifier<Transforms> {
 	}
 
 	public apply(object: Transforms): Transforms {
-		let cursor = asi.context.cursor.clientRelstive.positionNegative1toPositive1;
+		let cursor = asi.data.Cursor.clientRelstive.positionNegative1toPositive1;
 		cursor.multiplyScalar(this.influensedStrength);
 
 		const t = new Transforms(object);

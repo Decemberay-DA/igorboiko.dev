@@ -45,10 +45,10 @@ import IconTelegram from "@/views/icons/IconTelegram.vue";
 import IconInstagram from "@/views/icons/IconInstagram.vue";
 import IconYouTube from "@/views/icons/IconYouTube.vue";
 
-import DOMSearcher from "@/scripts/VueTSHelper/DOMSearcher";
-import { THREE } from "@/scripts/ThreeJS/THREE";
+import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { asi } from "@/scripts/asi/asi";
-import { ScrollToSectionCoroutined } from "@/scripts/CameraManagiment/Commands/ScrollToSectionCoroutined";
+import { ScrollToSectionCoroutined } from "@/scripts/CameraManagiment/Commands/ScrollToSectionCoroutined___";
 
 const scrollTo = (sectionName: string) => {
 	ScrollToSectionCoroutined.instance.launchTransitionCoroutine(sectionName);
@@ -63,7 +63,7 @@ class SideStackMagician extends GE.ADynamicObject {
 	}
 
 	public override onStart(): void {
-		this.stack = DOMSearcher.getElementById("side-stack-89906bb0-5f3d-401d-9d8c-109faf03b099");
+		this.stack = DOMSearcherH.getElementById("side-stack-89906bb0-5f3d-401d-9d8c-109faf03b099");
 	}
 
 	private transitionDistanceTreshold = 300;
@@ -74,7 +74,7 @@ class SideStackMagician extends GE.ADynamicObject {
 		const centerY = rect.top + rect.height / 2;
 		const centerOfElement = new THREE.Vector2(centerX, centerY);
 
-		const dustanceToCursor = asi.context.cursor.clientRelstive.position.distanceTo(centerOfElement);
+		const dustanceToCursor = asi.data.Cursor.clientRelstive.position.distanceTo(centerOfElement);
 
 		const isInRange = dustanceToCursor < this.transitionDistanceTreshold;
 

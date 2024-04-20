@@ -8,7 +8,7 @@ export interface ITransforms {
 	quaternion: THREE.Quaternion;
 	scale: THREE.Vector3;
 }
-export class IITransforms {
+export class ITransformsEX {
 	public static fromObject3D(object: THREE.Object3D): ITransforms {
 		const result: ITransforms = {
 			position: object.position,
