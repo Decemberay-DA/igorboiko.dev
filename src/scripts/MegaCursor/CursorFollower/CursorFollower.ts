@@ -1,6 +1,6 @@
 import asi from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
-import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import SmoothLerper from "@/scripts/CameraManagiment/Lerper";
 

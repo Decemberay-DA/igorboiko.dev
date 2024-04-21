@@ -1,5 +1,5 @@
 import asi from "@/scripts/asi/asi";
-import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
 import { Easing, Tween } from "@tweenjs/tween.js";
 import { notificationHandler, requestHandler, type INotificationHandler } from "mediatr-ts";
 import NThreeSceneLoaded from "../Events/NThreeSceneLoaded";

@@ -1,7 +1,7 @@
 import asi from "@/scripts/asi/asi";
 import { GE } from "@/scripts/GameEngine";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
-import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
+import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
 
 export default class SideStackMagician extends GE.ADynamicObject {
 	private stack!: HTMLElement;

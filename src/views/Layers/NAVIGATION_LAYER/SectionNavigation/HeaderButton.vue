@@ -6,7 +6,7 @@ p(@click="scroll")
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import PageScrollH from '../../../../scripts/VueTSHelper/PageScrollH';
+import PageScrollH from "../../../../scripts/VueTSHelpers/PageScrollH";
 
 const scroll = () => PageScrollH.scrollToHTMLElement(props.scrollToSectionElement);
 

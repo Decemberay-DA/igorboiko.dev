@@ -6,7 +6,7 @@ import type { TJ } from "../ThreeJS";
 import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
 import { CursorFollower } from "../MegaCursor/CursorFollower/CursorFollower";
 import type { GLTF } from "three/examples/jsm/Addons.js";
-import { CurrentSceneFromDOMDetector } from "../VueTSHelper/CurrentSceneFromDOMDetector";
+import { CurrentSceneFromDOMDetector } from "../VueTSHelpers/CurrentSceneFromDOMDetector";
 import ScenesRegistry from "../CameraManagiment/DefinedScenes/SceneRegistry/ScenesRegistry";
 
 /**

@@ -1,6 +1,6 @@
 import { Container } from "inversify";
 import "reflect-metadata";
-import { CurrentSceneFromDOMDetector } from "../VueTSHelper/CurrentSceneFromDOMDetector";
+import { CurrentSceneFromDOMDetector } from "../VueTSHelpers/CurrentSceneFromDOMDetector";
 
 export default class InjectionContainerBuilderH {
 	private constructor() {}

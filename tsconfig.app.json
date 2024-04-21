@@ -5,7 +5,10 @@
 	"compilerOptions": {
 		"target": "es2017",
 		"strict": true,
-		
+		"moduleResolution": "Node16",
+
+		"allowImportingTsExtensions": true,
+
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"skipLibCheck": true,
