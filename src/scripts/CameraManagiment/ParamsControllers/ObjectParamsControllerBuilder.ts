@@ -1,7 +1,7 @@
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { ObjectParamsController, type IApplyParamsTo } from "./IObjectsGroupeParametersController";
-import { CameraControls } from "./CameraControlls";
-import { Transforms } from "./Transforms";
+import { CameraControls } from "./CameraControls/CameraControls";
+import { Transforms } from "./Transforms/Transforms";
 
 /**
  * builder

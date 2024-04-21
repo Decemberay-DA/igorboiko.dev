@@ -1,5 +1,5 @@
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
-import type { TMemento } from "./IObjectsGroupeParametersController";
+import type { TMemento } from "../IObjectsGroupeParametersController";
 
 /**
  * yo gess

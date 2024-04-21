@@ -2,6 +2,8 @@ import { Mediator } from "mediatr-ts";
 import context from "./context";
 import { data } from "./data";
 import { mediator } from "./mediator";
+import InjectionContainerBuilderH from "./injector";
+import type { Container } from "inversify";
 
 /**
  * Description:
@@ -16,5 +18,5 @@ export class asi {
 	public static readonly context: context = new context();
 	public static readonly data: data = new data();
 	public static readonly mediator: Readonly<mediator> = new mediator();
-	// public static readonly injector: Readonly<mediator> = new mediator();
+	public static readonly injector: Readonly<Container> = InjectionContainerBuilderH.build();
 }

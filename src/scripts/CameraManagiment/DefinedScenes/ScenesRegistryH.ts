@@ -6,7 +6,7 @@ import { map } from "fp-ts/lib/Array";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import EGLTF_PARAMS from "@/scripts/ThreeJS/GLTFPipline/Enums/EGLTF_PARAMS";
 import { GLTFH } from "../../ThreeJS/GLTFPipline/GLTFH";
-import { array, option } from "fp-ts";
+import { array, option, ord } from "fp-ts";
 import * as O from "fp-ts/Option";
 import type { IHTMLScene, IScene, ITHREEScene, TAnyScene } from "./IScene";
 
@@ -72,7 +72,6 @@ export default class ScenesRegistryH {
 			}))
 		);
 	}
-
 	public static findISceneByName(nameID: string): option.Option<IScene> {
 		return pipe(
 			asi.data.ScenesRegistry.getScenes,
@@ -82,26 +81,24 @@ export default class ScenesRegistryH {
 	}
 
 	public static findTAnySceneByNameID(nameID: string): option.Option<TAnyScene> {
-		var anyScene: option.Option<TAnyScene> = option.none;
-
 		const IScene = pipe(
 			asi.data.ScenesRegistry.cahsedIScenes,
 			array.findFirst((a) => a.nameID === nameID)
 		);
-		if (option.isSome(IScene)) anyScene = IScene;
+		if (option.isSome(IScene)) return IScene;
 
 		const IHTMLScene = pipe(
 			asi.data.ScenesRegistry.cahsedIHTMLScene,
 			array.findFirst((a) => a.nameID === nameID)
 		);
-		if (option.isSome(IHTMLScene)) anyScene = IHTMLScene;
+		if (option.isSome(IHTMLScene)) return IHTMLScene;
 
 		const ITHREEScene = pipe(
 			asi.data.ScenesRegistry.cahsedITHREEScene,
 			array.findFirst((a) => a.nameID === nameID)
 		);
-		if (option.isSome(ITHREEScene)) anyScene = ITHREEScene;
+		if (option.isSome(ITHREEScene)) return ITHREEScene;
 
-		return anyScene;
+		return option.none;
 	}
 }

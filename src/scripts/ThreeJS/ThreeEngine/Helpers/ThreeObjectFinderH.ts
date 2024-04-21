@@ -3,7 +3,7 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import type { TGLTFAsset } from "../../GLTFPipline/TGLTFAsset";
-import { array } from "fp-ts";
+import { array, option } from "fp-ts";
 
 export class ThreeObjectFinderH {
 	public static byUserData(

@@ -2,11 +2,9 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import { GE } from ".";
 import { asi } from "../asi/asi";
 import { CameraManager } from "../CameraManagiment/CameraManager";
-import { CameraScenesExtractorH___ } from "../CameraManagiment/CameraScenes___";
-import { ObjectsTransformsNoiser } from "../DinamicObjects/ObjectsTransformsNoiser";
 import { TJ } from "../ThreeJS";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
-import { ThreeSceneWasLoaded } from "../ThreeJS/LoadCurtains/Events/ThreeSceneWasLoaded";
+import { ThreeSceneWasLoaded as ThreeSceneWasLoadedAndInited } from "../ThreeJS/LoadCurtains/Events/ThreeSceneWasLoaded";
 import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
 import { VertexColoredMaterialH } from "../ThreeJS/VertexColoredMaterial/VertexColoredMaterialH";
 
@@ -31,7 +29,7 @@ export default class SceneConfiguratorH {
 		asi.data.ThreeSceneManagimented = bgScene;
 
 		// add gltf stuff ========-====-====-====-============
-		const gltfBG: GLTF = await TJ.GLTFLoaderH.aGelLoadedGLTF();
+		const gltfBG: GLTF = await TJ.GLTFLoaderH.aGetLoadedGLTF();
 		asi.data.ThreeSceneGLTF = gltfBG;
 		bgScene.scene.add(gltfBG.scene);
 
@@ -48,8 +46,8 @@ export default class SceneConfiguratorH {
 		// const cameraCrain = new CameraCrain(mainCameraCrain);
 		// asi.data.CAMERA_CRAIN = cameraCrain;
 
-		const cameraScenes = CameraScenesExtractorH___.extract__();
-		asi.data.CAMERA_SCENES = cameraScenes;
+		// const cameraScenes = CameraScenesExtractorH___.extract__();
+		// asi.data.CAMERA_SCENES = cameraScenes;
 
 		// create cursor ========-====-====-====-============
 		// const cursorStranding = CursorStrandingBuilder.getPlatformDependend();
@@ -57,30 +55,32 @@ export default class SceneConfiguratorH {
 
 		// add test rotation to ========-====-====-====-============
 		const ringRoot = bgScene.scene.getObjectByName("_RING_ROOT_grp") as THREE.Object3D;
-		const rongRotator = new GE.AnemicDynamicObject({
+		const ringRotator = new GE.AnemicDynamicObject({
 			onFrameUpdate() {
-				ringRoot.rotation.y =
-					ringRoot.rotation.y + GE.GameTime.realTimeSinceStartup * 0.0034 * GE.GameTime.deltaTime;
+				ringRoot.rotation.y = GE.GameTime.realTimeSinceStartup * 0.0034;
 			},
 		});
 		// add test rotation to ========-====-====-====-============
 		const planetSurface = bgScene.scene.getObjectByName("planetSurface") as THREE.Object3D;
 		const planetSurfaceRotator = new GE.AnemicDynamicObject({
 			onFrameUpdate() {
-				planetSurface.rotation.y =
-					planetSurface.rotation.y -
-					GE.GameTime.realTimeSinceStartup * 0.0021 * GE.GameTime.deltaTime;
+				planetSurface.rotation.y = GE.GameTime.realTimeSinceStartup * 0.0021;
 			},
 		});
 
 		// add noised transform motion to stars ========-====-====-====-============
 		const starClusters = ThreeObjectFinderH.byUserData(bgScene.scene, "ROLE", "STAR_CLUSTER");
 		for (const cluster of starClusters) {
-			const floater = new ObjectsTransformsNoiser(cluster);
-			floater.noiser.influencePosition = 0; // bug
-			floater.noiser.speedPosition = 0;
-			floater.noiser.influenceQuaternion = 0.0001;
-			floater.noiser.speedQuaternion = 0.2;
+			const starClusterRotator = new GE.AnemicDynamicObject({
+				onFrameUpdate() {
+					cluster.rotation.y = GE.GameTime.realTimeSinceStartup * 0.0121;
+				},
+			});
+			// const floater = new ObjectsTransformsNoiser(cluster);
+			// floater.noiser.influencePosition = 0; // bug
+			// floater.noiser.speedPosition = 0;
+			// floater.noiser.influenceQuaternion = 0.0001;
+			// floater.noiser.speedQuaternion = 0.2;
 		}
 
 		// apply vertex color material on everything ========-====-====-====-============
@@ -88,6 +88,6 @@ export default class SceneConfiguratorH {
 		VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
 		asi.data.ThreeSceneManagimented.scene.overrideMaterial = vertexColored.shader;
 
-		asi.mediator.publish(new ThreeSceneWasLoaded());
+		asi.mediator.publish(new ThreeSceneWasLoadedAndInited());
 	}
 }

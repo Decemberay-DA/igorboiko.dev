@@ -1,10 +1,8 @@
 import { pipe } from "fp-ts/lib/function";
 import { asi } from "../asi/asi";
 import { GE } from "../GameEngine";
-import type { ISection } from "./EDefinedSections___";
 import HTMLElementEX from "./HTMLElementEX";
 import { array } from "fp-ts";
-import RequestTweenSceneToAny from "../CameraManagiment/Events/RequestTweenSceneToAny";
 import SectionWasChangedToID from "../CameraManagiment/DefinedScenes/Events/SectionWasChangedTo";
 
 /**

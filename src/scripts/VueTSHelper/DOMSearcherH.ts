@@ -1,15 +1,9 @@
+import { option } from "fp-ts";
+
 /**
  *
  */
 export default class DOMSearcherH {
-	/**
-	 * @deprecated use DOMSearcher.getElementById
-	 */
-	public static getDomElementsByIDSelector(className: string): Element[] {
-		const nodeList = document.querySelectorAll(`#${className}`);
-		const array = Array.from(nodeList);
-		return array;
-	}
 	public static getFirstHTMLElementByClassName(className: string): HTMLElement {
 		const elements = document.getElementsByClassName(className);
 		if (elements.length > 0) {
@@ -26,7 +20,7 @@ export default class DOMSearcherH {
 			throw new Error("Element with id '" + id + "' not found");
 		}
 	}
-	public static maybeElementById(id: string): HTMLElement | null {
-		return document.getElementById(id);
+	public static maybeElementById(id: string): option.Option<HTMLElement> {
+		return option.fromNullable(document.getElementById(id));
 	}
 }

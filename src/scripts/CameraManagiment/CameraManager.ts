@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GE } from "../GameEngine";
-import { Transforms } from "./ParamsControllers/Transforms";
+import { Transforms } from "./ParamsControllers/Transforms/Transforms";
 import { asi } from "../asi/asi";
 import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
 import { TransformsSmoother } from "./Modifiers/TransformsSmoother";

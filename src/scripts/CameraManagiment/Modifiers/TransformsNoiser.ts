@@ -1,6 +1,6 @@
 import { SimplexNoise } from "three/examples/jsm/Addons.js";
 import type { IModifier } from "../../utils/IModifierStack";
-import { Transforms } from "../ParamsControllers/Transforms";
+import { Transforms } from "../ParamsControllers/Transforms/Transforms";
 import { GE } from "../../GameEngine";
 import { THREE } from "../../ThreeJS/ThreeEngine/THREE";
 import { SmoothLerper } from "../Lerper";

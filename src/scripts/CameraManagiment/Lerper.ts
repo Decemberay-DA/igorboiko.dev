@@ -1,6 +1,8 @@
 import { THREE } from "../ThreeJS/ThreeEngine/THREE";
-import { type ICameraControls, CameraControls } from "./ParamsControllers/CameraControlls";
-import { type ITransforms, Transforms } from "./ParamsControllers/Transforms";
+import { CameraControls } from "./ParamsControllers/CameraControls/CameraControls";
+import { type ICameraControls } from "./ParamsControllers/CameraControls/ICameraControls";
+import { Transforms } from "./ParamsControllers/Transforms/Transforms";
+import { type ITransforms } from "./ParamsControllers/Transforms/ITransforms";
 import { instance } from "three/examples/jsm/nodes/Nodes.js";
 
 /**

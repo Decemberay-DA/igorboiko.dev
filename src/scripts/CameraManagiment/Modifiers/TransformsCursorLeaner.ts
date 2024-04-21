@@ -1,6 +1,6 @@
 import { asi } from "@/scripts/asi/asi";
 import type { IModifier } from "../../utils/IModifierStack";
-import { Transforms } from "../ParamsControllers/Transforms";
+import { Transforms } from "../ParamsControllers/Transforms/Transforms";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 
 /**

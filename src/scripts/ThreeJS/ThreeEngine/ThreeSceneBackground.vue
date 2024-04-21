@@ -4,7 +4,7 @@ div(id="three_scene_backgroung" class="fixed top-0 left-0 w-full h-full z-[-9999
 
 <script setup lang="ts">
 import * as VUE from "vue";
-import { TJ } from "./ThreeEngine/index";
+import { TJ } from "..";
 
 const threeSceneBackground = VUE.ref<HTMLElement | null>(null);
 let sceneInstance!: TJ.ThreeScene;

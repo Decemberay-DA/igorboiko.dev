@@ -1,4 +1,3 @@
-import { ECAMERA_SCENE_NAME___ } from "../../../CameraManagiment/CameraScenes___";
 import type { IEnumClass } from "../../../utils/AEnumClass";
 import EROLE from "./EROLE";
 import ESUBROLE from "./ESUBROLE";
@@ -12,5 +11,4 @@ export default class EGLTF_PARAMS implements IEnumClass {
 
 	public static readonly ROLE = new EROLE();
 	public static readonly SUBROLE = new ESUBROLE();
-	public static readonly CAMERA_SCENE_NAME = new ECAMERA_SCENE_NAME___();
 }

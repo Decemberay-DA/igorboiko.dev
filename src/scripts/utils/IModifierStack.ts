@@ -20,3 +20,4 @@ export interface IModifierStack<TObj> extends IModifier<TObj> {
 export interface IModifier<TObj> {
 	apply(object: TObj): TObj;
 }
+
