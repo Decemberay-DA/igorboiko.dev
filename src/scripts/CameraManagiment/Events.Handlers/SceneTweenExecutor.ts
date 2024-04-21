@@ -1,11 +1,11 @@
 import { requestHandler, type INotificationHandler } from "mediatr-ts";
 import SectionWasChangedToID from "../DefinedScenes/Events/SectionWasChangedTo";
-import ISceneEX from "../DefinedScenes/ISceneEX";
-import ScenesRegistryH from "../DefinedScenes/ScenesRegistryH";
+import ISceneEX from "../DefinedScenes/IScene/ISceneEX";
+import ScenesRegistryH from "../DefinedScenes/SceneRegistry/ScenesRegistryH";
 import { option } from "fp-ts";
 
 @requestHandler(SectionWasChangedToID)
-class SceneTweenExecutor implements INotificationHandler<SectionWasChangedToID> {
+export default class SceneTweenExecutor implements INotificationHandler<SectionWasChangedToID> {
 	async handle(notification: SectionWasChangedToID): Promise<void> {
 		const anyScene = ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
 

@@ -10,7 +10,7 @@ div.w-full.h-full.flex.flex-col(:id="definedSectionID")
 			.flex-none.h-2
 			div.flex.flex-row
 				//- .line.invisible.w-6
-				.line.line-gradient
+				.line.line-gradient--right
 				.line.invisible
 		.flex-none.w-6
 	//- inner section content
@@ -42,5 +42,9 @@ const props = defineProps({
 }
 .line-gradient {
 	@apply bg-gradient-to-r from-GACTIVE via-GACTIVEABLE to-transparent;
+
+	&--right {
+		@apply bg-gradient-to-r from-GACTIVERIGHT via-GWHITE to-transparent;
+	}
 }
 </style>

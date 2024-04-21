@@ -3,7 +3,7 @@ uniform float sceneTime;
 uniform vec3 defaultColor;
 
 varying vec2 vUv;
-varying vec4 vColor;
+varying vec3 vColor;
 
 // noiseTexture ========-====-====-====-============
 uniform sampler2D noiseTexture;

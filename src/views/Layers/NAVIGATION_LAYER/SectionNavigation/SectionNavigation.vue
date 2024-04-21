@@ -10,16 +10,17 @@ div.pointer-events-none.left-0.bg-red-600
 </template>
 
 <script setup lang="ts">
-import { asi } from "../../../../scripts/asi/asi";
+import asi from "../../../../scripts/asi/asi";
 import { pipe } from "fp-ts/lib/function";
 import { array } from "fp-ts";
-import type { IHTMLScene } from "@/scripts/CameraManagiment/DefinedScenes/IScene";
+import type { IHTMLScene } from "@/scripts/CameraManagiment/DefinedScenes/IScene/IScene";
 import HeaderButton from "./HeaderButton.vue";
+import ScenesRegistryH from "../../../../scripts/CameraManagiment/DefinedScenes/SceneRegistry/ScenesRegistryH";
 
 const humanizeSceneName = (nameID: string) => {
 	return pipe(
 		nameID,
-		(str) => str.replace(/_SCENE_ID$/, ""),
+		(str) => str.replace(ScenesRegistryH.SCENE_ID_IDENTIFICATOR, ""),
 		(str) => str.replace(/_/g, " "),
 		(str) => str.toLowerCase(),
 		(str) => str.charAt(0).toUpperCase() + str.slice(1)

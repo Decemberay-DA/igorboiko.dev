@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import type { ICameraControls } from "./ICameraControls";
+import type ICameraControls from "./ICameraControls";
 
-export class ICameraControlsEX {
+export default class ICameraControlsEX {
 	public static newFromCamera(camera: THREE.PerspectiveCamera): ICameraControls {
 		const result: ICameraControls = {
 			fov: camera.fov,

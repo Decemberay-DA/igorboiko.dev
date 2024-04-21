@@ -1,4 +1,4 @@
-import { asi } from "@/scripts/asi/asi";
+import asi from "@/scripts/asi/asi";
 import { GE } from "@/scripts/GameEngine";
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { Vector2 } from "three";

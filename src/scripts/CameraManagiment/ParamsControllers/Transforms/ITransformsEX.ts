@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import type { ITransforms } from "./ITransforms";
+import type ITransforms from "./ITransforms";
 
-export class ITransformsEX {
+export default class ITransformsEX {
 	public static newIdentity(): ITransforms {
 		const result: ITransforms = {
 			position: new THREE.Vector3(),

@@ -1,11 +1,13 @@
 import * as THREE from "three";
 import type { TDataRecord } from "../TDataRecord";
-import type { ICameraControls } from "./ICameraControls";
+import type ICameraControls from "./ICameraControls";
 
 /**
  * state of camera lense things
  */
-export class CameraControls implements ICameraControls, TDataRecord<THREE.PerspectiveCamera, CameraControls> {
+export default class CameraControls
+	implements ICameraControls, TDataRecord<THREE.PerspectiveCamera, CameraControls>
+{
 	public fov: number;
 	public aspect: number;
 	public near: number;

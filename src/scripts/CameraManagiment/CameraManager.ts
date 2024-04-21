@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { GE } from "../GameEngine";
-import { Transforms } from "./ParamsControllers/Transforms/Transforms";
-import { asi } from "../asi/asi";
+import Transforms from "./ParamsControllers/Transforms/Transforms";
+import asi from "../asi/asi";
 import { TransformsTweenToerModifier } from "./Modifiers/TransformsTweenToerModifier";
 import { TransformsSmoother } from "./Modifiers/TransformsSmoother";
 import { TransformsCursorLeaner } from "./Modifiers/TransformsCursorLeaner";
@@ -9,7 +9,7 @@ import { TransformsCursorLeaner } from "./Modifiers/TransformsCursorLeaner";
 /**
  * Contralls smooth camera movement or something
  */
-export class CameraManager extends GE.ADynamicObject {
+export default class CameraManager extends GE.ADynamicObject {
 	public readonly camera: THREE.PerspectiveCamera;
 
 	private tweener: TransformsTweenToerModifier = new TransformsTweenToerModifier();
@@ -28,7 +28,7 @@ export class CameraManager extends GE.ADynamicObject {
 		this.smoother = new TransformsSmoother(0.07 * 2, this._realTransforms);
 
 		// set as main camera of all scene
-		asi.data.ThreeSceneManagimented.setCamera(camera);
+		// asi.data.ThreeSceneManagimented.setCamera(this.camera);
 	}
 
 	public tweenTo(translateTo: THREE.PerspectiveCamera, tweenTime: number = 3) {

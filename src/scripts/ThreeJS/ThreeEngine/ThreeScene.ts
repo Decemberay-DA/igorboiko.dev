@@ -1,4 +1,4 @@
-import { asi } from "../../asi/asi";
+import asi from "../../asi/asi";
 import { GE } from "../../GameEngine/index";
 import * as THREE from "three";
 

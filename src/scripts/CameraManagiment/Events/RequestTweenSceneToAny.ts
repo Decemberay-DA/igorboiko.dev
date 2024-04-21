@@ -1,8 +1,8 @@
-import type { INotification } from "mediatr-ts";
-import type { TAnyScene } from "../DefinedScenes/IScene";
+import { notificationHandler, type INotification, type INotificationHandler } from "mediatr-ts";
+import type { TAnyScene } from "../DefinedScenes/IScene/IScene";
 import WasRequestedTweenSceneToAny from "./WasRequestedTweenSceneToAny";
 
-export default class RequestTweenSceneToAny extends WasRequestedTweenSceneToAny implements INotification {
+export default class NRequestTweenSceneToAny extends WasRequestedTweenSceneToAny implements INotification {
 	public readonly oldScene: TAnyScene;
 	public readonly newScene: TAnyScene;
 
@@ -13,3 +13,10 @@ export default class RequestTweenSceneToAny extends WasRequestedTweenSceneToAny 
 		this.newScene = newScene;
 	}
 }
+
+// @notificationHandler(NRequestTweenSceneToAny)
+// class EHDefault_on_NRequestTweenSceneToAny implements INotificationHandler<NRequestTweenSceneToAny> {
+// 	public async handle(notification: NRequestTweenSceneToAny): Promise<void> {
+// 		return Promise.resolve();
+// 	}
+// }

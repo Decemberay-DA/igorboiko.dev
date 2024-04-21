@@ -1,6 +1,6 @@
-import { ACursorStranding } from "./ACursorStranding";
-import { TouchScreenCursorStranding } from "./TouchScreenCursorStranding";
+import type { ACursorStranding } from "./ACursorStranding";
 import { MouseCursorStranding } from "./MouseCursorStranding";
+import { TouchScreenCursorStranding } from "./TouchScreenCursorStranding";
 
 export class CursorStrandingBuilderH {
 	public static getPlatformDependend(): ACursorStranding {

@@ -1,9 +1,9 @@
-import { Coroutine, GE } from "../../GameEngine";
-import { Transforms } from "../ParamsControllers/Transforms/Transforms";
-import { type ITransforms } from "../ParamsControllers/Transforms/ITransforms";
-import { SmoothLerper } from "../Lerper";
-import type { IModifier } from "../../utils/IModifierStack";
-import { ITransformsEX } from "../ParamsControllers/Transforms/ITransformsEX";
+import { Coroutine, GE } from "@/scripts/GameEngine";
+import type { IModifier } from "@/scripts/utils";
+import SmoothLerper from "../Lerper";
+import type ITransforms from "../ParamsControllers/Transforms/ITransforms";
+import ITransformsEX from "../ParamsControllers/Transforms/ITransformsEX";
+import Transforms from "../ParamsControllers/Transforms/Transforms";
 
 export class TransformsTweenToerModifier implements IModifier<Transforms> {
 	private _tweenedTransforms: Transforms = new Transforms(ITransformsEX.newIdentity());

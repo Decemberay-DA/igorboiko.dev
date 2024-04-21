@@ -1,8 +1,8 @@
-import { asi } from "../../asi/asi";
+import asi from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
 import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
-import { SmoothLerper } from "@/scripts/CameraManagiment/Lerper";
+import SmoothLerper from "@/scripts/CameraManagiment/Lerper";
 
 export class CursorFollower extends GE.ADynamicObject {
 	private draggerF!: CursorDragger;

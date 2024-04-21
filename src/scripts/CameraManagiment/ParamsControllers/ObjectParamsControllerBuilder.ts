@@ -1,12 +1,12 @@
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { ObjectParamsController, type IApplyParamsTo } from "./IObjectsGroupeParametersController";
-import { CameraControls } from "./CameraControls/CameraControls";
-import { Transforms } from "./Transforms/Transforms";
+import CameraControls from "./CameraControls/CameraControls";
+import Transforms from "./Transforms/Transforms";
 
 /**
  * builder
  */
-export class ObjectParamsControllerBuilder {
+export default class ObjectParamsControllerBuilder {
 	public static forCameraCrane(crane: THREE.Object3D) {
 		const transforms = new Transforms(crane);
 

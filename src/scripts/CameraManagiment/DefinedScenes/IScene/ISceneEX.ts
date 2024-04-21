@@ -1,4 +1,4 @@
-import { asi } from "@/scripts/asi/asi";
+import asi from "@/scripts/asi/asi";
 import type { IHTMLScene, IScene, ITHREEScene, TAnyScene } from "./IScene";
 
 /**

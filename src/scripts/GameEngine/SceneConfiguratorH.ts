@@ -1,25 +1,23 @@
 import type { GLTF } from "three/examples/jsm/Addons.js";
 import { GE } from ".";
-import { asi } from "../asi/asi";
-import { CameraManager } from "../CameraManagiment/CameraManager";
-import { TJ } from "../ThreeJS";
+import asi from "../asi/asi";
+import CameraManager from "../CameraManagiment/CameraManager";
+import NSceneConfigurationChanged from "../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
+import { TJ, THREE, VertexColoredMaterialH } from "../ThreeJS";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
-import { ThreeSceneWasLoaded as ThreeSceneWasLoadedAndInited } from "../ThreeJS/LoadCurtains/Events/ThreeSceneWasLoaded";
-import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
-import { VertexColoredMaterialH } from "../ThreeJS/VertexColoredMaterial/VertexColoredMaterialH";
 
 /**
- * its goal is to ckick scene up.
+ * its goal is to buld scene up.
  */
 export default class SceneConfiguratorH {
-	public constructor() {}
+	private constructor() {}
 
 	/**
 	 * Here i am setting up scene.
 	 * like adding main stuff in to it.
 	 * like in unity lol.
 	 */
-	public async setupMainScenePage() {
+	public static async asetupMainScenePage() {
 		// Base Game setup ========-====-====-====-============
 		const timeUpdater = new GE.GameTime(); // just init and add to Game update cycle
 
@@ -39,6 +37,7 @@ export default class SceneConfiguratorH {
 		) as THREE.PerspectiveCamera;
 		const cameraManager = new CameraManager(mainCamera);
 		asi.data.CameraManager = cameraManager;
+		asi.data.ThreeSceneManagimented.setCamera(mainCamera);
 
 		// const mainCameraCrain = bgScene.scene.getObjectByName(
 		// 	CameraCrain.__MAIN_CAMERA_CRANE__
@@ -88,6 +87,7 @@ export default class SceneConfiguratorH {
 		VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
 		asi.data.ThreeSceneManagimented.scene.overrideMaterial = vertexColored.shader;
 
-		asi.mediator.publish(new ThreeSceneWasLoadedAndInited());
+		// asi.mediator.publish(new ThreeSceneWasLoadedAndInited());
+		asi.mediator.publish(new NSceneConfigurationChanged());
 	}
 }

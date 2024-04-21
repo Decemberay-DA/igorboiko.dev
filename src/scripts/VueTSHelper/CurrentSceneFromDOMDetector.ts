@@ -1,5 +1,5 @@
 import { pipe } from "fp-ts/lib/function";
-import { asi } from "../asi/asi";
+import asi from "../asi/asi";
 import { GE } from "../GameEngine";
 import HTMLElementEX from "./HTMLElementEX";
 import { array } from "fp-ts";
@@ -29,8 +29,8 @@ export class CurrentSceneFromDOMDetector extends GE.ADynamicObject {
 	}
 
 	private static byHorizontallCursorOverlap(): void {
-		const previousActiveScene = asi.data.ScenesRegistry.currentScene;
-		const scenes = asi.data.ScenesRegistry.getScenes;
+		const previousActiveScene = asi.data.ScenesRegistry.currentAnyScene;
+		const scenes = asi.data.ScenesRegistry.cahsedIHTMLScene;
 
 		const checkParams = {
 			vertical: false,

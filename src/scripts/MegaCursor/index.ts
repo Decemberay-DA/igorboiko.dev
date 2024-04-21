@@ -1,4 +1,3 @@
-import { CursorStranding } from "./CursorStranding";
-import { CursorFollower } from "./CursorFollower";
-
+export * from "./CursorFollower";
+export * from "./CursorStranding";
 export * as MC from "./index";

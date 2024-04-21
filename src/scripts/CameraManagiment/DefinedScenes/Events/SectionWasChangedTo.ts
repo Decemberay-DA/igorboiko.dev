@@ -1,4 +1,4 @@
-import { type INotification } from "mediatr-ts";
+import { notificationHandler, type INotification, type INotificationHandler } from "mediatr-ts";
 
 /**
  *
@@ -9,3 +9,10 @@ export default class SectionWasChangedToID implements INotification {
 		this.newSectionNameID = newSectionNameID;
 	}
 }
+
+// @notificationHandler(SectionWasChangedToID)
+// class EHDefault_on_SectionWasChangedToID implements INotificationHandler<SectionWasChangedToID> {
+// 	public async handle(notification: SectionWasChangedToID): Promise<void> {
+// 		return Promise.resolve();
+// 	}
+// }

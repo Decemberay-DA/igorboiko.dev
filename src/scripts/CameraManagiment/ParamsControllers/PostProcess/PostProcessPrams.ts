@@ -4,7 +4,7 @@ import type { TMemento } from "../IObjectsGroupeParametersController";
 /**
  * yo gess
  */
-export class PostProcessPrams {
+export default class PostProcessPrams {
 	public distanceToCenter!: THREE.Vector3;
 	public noisiness!: number;
 	public screenCursorPosition!: THREE.Vector2;

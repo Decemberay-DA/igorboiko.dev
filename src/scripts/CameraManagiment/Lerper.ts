@@ -1,15 +1,14 @@
-import { THREE } from "../ThreeJS/ThreeEngine/THREE";
-import { CameraControls } from "./ParamsControllers/CameraControls/CameraControls";
-import { type ICameraControls } from "./ParamsControllers/CameraControls/ICameraControls";
-import { Transforms } from "./ParamsControllers/Transforms/Transforms";
-import { type ITransforms } from "./ParamsControllers/Transforms/ITransforms";
-import { instance } from "three/examples/jsm/nodes/Nodes.js";
+import { THREE } from "../ThreeJS";
+import CameraControls from "./ParamsControllers/CameraControls/CameraControls";
+import type ICameraControls from "./ParamsControllers/CameraControls/ICameraControls";
+import type ITransforms from "./ParamsControllers/Transforms/ITransforms";
+import Transforms from "./ParamsControllers/Transforms/Transforms";
 
 /**
  * "Lerp deez nuts in your mouth, smoothly"
  * 						- Jason Statham.
  */
-export class SmoothLerper {
+export default class SmoothLerper {
 	private static _instance = new SmoothLerper();
 	public static get instance() {
 		return SmoothLerper._instance;

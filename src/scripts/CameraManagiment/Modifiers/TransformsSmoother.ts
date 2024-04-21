@@ -1,7 +1,7 @@
-import { Transforms } from "../ParamsControllers/Transforms/Transforms";
-import { SmoothLerper } from "../Lerper";
+import Transforms from "../ParamsControllers/Transforms/Transforms";
+import SmoothLerper from "../Lerper";
 import type { IModifier } from "../../utils/IModifierStack";
-import { ITransformsEX } from "../ParamsControllers/Transforms/ITransformsEX";
+import ITransformsEX from "../ParamsControllers/Transforms/ITransformsEX";
 
 export class TransformsSmoother implements IModifier<Transforms> {
 	private _smoothedTransforms: Transforms;

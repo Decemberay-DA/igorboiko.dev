@@ -18,15 +18,14 @@ export class VertexColoredMaterialH {
 	public static assignWhiteVertexColors(mesh: THREE.Mesh, color: THREE.Color): void {
 		if (!VertexColoredMaterialH.doesMeshHasVertexColor(mesh)) {
 			const numVertices = mesh.geometry.attributes.position.count;
-			const colors = new Float32Array(numVertices * 4);
-			for (let i = 0; i < numVertices * 4; i += 4) {
-				colors[i] = color.r;
-				colors[i + 1] = color.g;
-				colors[i + 2] = color.b;
-				colors[i + 3] = 1;
+			const colors = new Float32Array(numVertices * 3);
+			for (let i = 0; i < numVertices; i++) {
+				colors[i * 3] = color.r;
+				colors[i * 3 + 1] = color.g;
+				colors[i * 3 + 2] = color.b;
 			}
 
-			const colorAttribute = new THREE.BufferAttribute(colors, 4);
+			const colorAttribute = new THREE.BufferAttribute(colors, 3);
 
 			mesh.geometry.setAttribute("color", colorAttribute);
 		}

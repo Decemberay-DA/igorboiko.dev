@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import type { TDataRecord } from "../TDataRecord";
-import type { ITransforms } from "./ITransforms";
+import type ITransforms from "./ITransforms";
 
 /**
  * Object transform state
  */
-export class Transforms implements ITransforms, TDataRecord<THREE.Object3D, Transforms> {
+export default class Transforms implements ITransforms, TDataRecord<THREE.Object3D, Transforms> {
 	public position: THREE.Vector3;
 	public quaternion: THREE.Quaternion;
 	public scale: THREE.Vector3;

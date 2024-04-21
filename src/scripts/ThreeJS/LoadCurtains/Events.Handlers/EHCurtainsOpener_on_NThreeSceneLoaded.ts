@@ -1,14 +1,17 @@
-import { asi } from "@/scripts/asi/asi";
+import asi from "@/scripts/asi/asi";
 import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
 import { Easing, Tween } from "@tweenjs/tween.js";
 import { notificationHandler, requestHandler, type INotificationHandler } from "mediatr-ts";
-import { ThreeSceneWasLoaded } from "../Events/ThreeSceneWasLoaded";
-import { CurtainsOpened } from "../Events/CurtainsOpened";
+import NThreeSceneLoaded from "../Events/NThreeSceneLoaded";
+import NCurtainsOpened from "../Events/NCurtainsOpened";
 import { option } from "fp-ts";
 import { GE } from "@/scripts/GameEngine";
 
-@notificationHandler(ThreeSceneWasLoaded)
-export class CurtainsOpener extends GE.ADynamicObject implements INotificationHandler<ThreeSceneWasLoaded> {
+@notificationHandler(NThreeSceneLoaded)
+class EHCurtainsOpener_on_NThreeSceneLoaded
+	extends GE.ADynamicObject
+	implements INotificationHandler<NThreeSceneLoaded>
+{
 	private currentTween: option.Option<Tween<CSSStyleDeclaration>> = option.none;
 
 	public override onFrameUpdate(): void {
@@ -17,7 +20,7 @@ export class CurtainsOpener extends GE.ADynamicObject implements INotificationHa
 		}
 	}
 
-	public async handle(notification: ThreeSceneWasLoaded): Promise<void> {
+	public async handle(notification: NThreeSceneLoaded): Promise<void> {
 		const curtains = DOMSearcherH.getElementById("__LoadCurtain__");
 
 		if (option.isSome(this.currentTween)) {
@@ -30,7 +33,7 @@ export class CurtainsOpener extends GE.ADynamicObject implements INotificationHa
 			.to({ opacity: 0 }, 3000)
 			.easing(Easing.Quadratic.Out)
 			.onComplete(() => {
-				asi.mediator.publish(new CurtainsOpened());
+				asi.mediator.publish(new NCurtainsOpened());
 			})
 			.start();
 		this.currentTween = option.some(newTween);
