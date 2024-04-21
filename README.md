@@ -90,3 +90,6 @@ The fetures to have to finally put online
     - [ ] Shum
     - [ ] Hover Infinity
 - [ ] ADAPT FOR OTHER SCREEN RESOLUTIONS
+
+
+moved to new project folder
