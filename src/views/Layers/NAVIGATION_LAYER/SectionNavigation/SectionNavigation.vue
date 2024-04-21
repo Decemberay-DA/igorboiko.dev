@@ -1,12 +1,12 @@
 <template lang="pug">
-div.pointer-events-none.left-0
-	div.h-20.w-full.pr-20.flex.flex-row-reversed.gap-10.items-center.justify-end 
-		HeaderButton(
-			v-for="button in displayReadyDataArray" 
-			:number="button.title.number" 
-			:title="button.title.text" 
-			:scrollToSectionElement="button.section")
-		div.hidden
+div.pointer-events-none.left-0.bg-red-600
+    div.h-20.w-full.pr-20.flex.flex-row-reversed.gap-10.items-center.justify-end
+        HeaderButton(
+            v-for="button in displayReadyDataArray"
+            :number="button.number"
+            :title="button.title"
+            :scrollToSectionElement="button.scrollToSectionElement")
+        div.hidden
 </template>
 
 <script setup lang="ts">

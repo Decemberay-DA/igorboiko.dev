@@ -6,7 +6,7 @@ div.w-full.h-full.flex.flex-col.justify-end
         h2.w-fit Igor Boiko:
         DesiloperMorf
         div.w-fit.h-fit.flex.flex-row.justify-end
-            p(class="w-3/5") I’m a software engineer specializing in developing (and occasionally designing) software. Currently, I’m focused on working on secret mindblowing project at #[a.interactible--hilighted(href="your_link_here") Aramco Innovations Company]. 
+            p(class="w-3/5") I’m a software engineer specializing in developing (and occasionally designing) software. Currently, I’m focused on working on secret mindblowing project at #[a.interactible--hilighted(href="https://go.click.ly/UKhe") Aramco Innovations Company]. 
 </template>
 
 <script setup lang="ts">

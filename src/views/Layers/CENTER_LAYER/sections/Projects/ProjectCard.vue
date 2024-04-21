@@ -58,7 +58,7 @@ const props = defineProps({
 		default: "no description",
 	},
 	variation: {
-		type: Object as PropType<TVariations>,
+		type: Number,
 		required: false,
 		default: 0,
 	},

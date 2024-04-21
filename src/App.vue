@@ -6,8 +6,8 @@
 	<!-- 3d background THREE_SPACE_SCENE_LAYER -->
 	<LAYER :definedLayerID="'THREE_SPACE_SCENE_LAYER'" class="absolute w-full h-full pointer-events-none">
 		<template v-slot:default>
-			<!-- <div class="fixed inset-0 bg-black z-[-9999999]"></div> -->
-			<ThreeSceneBackground class="DEFINED_LAYER" />
+			<div class="fixed inset-0 bg-black z-[-9999999]"></div>
+			<ThreeSceneBackground class="DEFINED_LAYER hidden" />
 		</template>
 	</LAYER>
 

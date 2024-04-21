@@ -15,6 +15,11 @@ div.side-stack.items-center.justify-start
 </template>
 
 <script setup lang="ts">
+import IconGitHub from "@/views/icons/IconGitHub.vue";
+import IconArtStation from "@/views/icons/IconArtStation.vue";
+import IconYouTube from "@/views/icons/IconYouTube.vue";
+import IconInstagram from "@/views/icons/IconInstagram.vue";
+import IconTelegram from "@/views/icons/IconTelegram.vue";
 import SideStackMagician from "./LinkStickMagician";
 
 const SM = new SideStackMagician();
