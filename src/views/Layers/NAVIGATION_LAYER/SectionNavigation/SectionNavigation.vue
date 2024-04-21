@@ -7,7 +7,7 @@ div.pointer-events-none.left-0
 			:title="button.title.text" 
 			:scrollToSectionElement="button.section")
 		div.hidden
-<template>
+</template>
 
 <script setup lang="ts">
 import { asi } from "../../../../scripts/asi/asi";

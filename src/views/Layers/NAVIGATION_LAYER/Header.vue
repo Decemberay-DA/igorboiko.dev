@@ -10,25 +10,13 @@ div.pointer-events-none.left-0
 		p(@click="HM.scrollTo(SN.PROJECTS_SECTION.name)")
 			span.num(class="p") 02. 
 			span.txt(class="p", id="PROJECTS_SECTION-header") Projects
-		//- p(@click="HM.scrollTo(SN.EXPERIENCE_SECTION.name)")
-		//- 	span.num(class="p") 02. 
-		//- 	span.txt(class="p", id="EXPERIENCE_SECTION-header") Experience
-		//- p(@click="HM.scrollTo(SN.EDUCATION_SECTION.name)")
-		//- 	span.num(class="p") 03. 
-		//- 	span.txt(class="p", id="EDUCATION_SECTION-header") Education
-		//- p(@click="HM.scrollTo(SN.CONTACT_SECTION.name)")
-		//- 	span.num(class="p") 04. 
-		//- 	span.txt(class="p", id="CONTACT_SECTION-header") Contact
 </template>
 
 <script setup lang="ts">
-import { ScrollToSectionCoroutined } from "@/scripts/CameraManagiment/Commands/ScrollToSectionCoroutined___";
 import { asi } from "../../../scripts/asi/asi";
-import { GE } from "@/scripts/GameEngine";
-import DOMSearcherH from "@/scripts/VueTSHelper/DOMSearcherH";
 import { pipe } from "fp-ts/lib/function";
 import { array, string } from "fp-ts";
-import type { IHTMLScene } from "@/scripts/CameraManagiment/DefinedScenes/IScene";
+import type { IHTMLScene } from "../../../scripts/CameraManagiment/DefinedScenes/IScene";
 
 /**
  * takes name like "ABOUT_ME_SCENE_ID"
@@ -72,8 +60,8 @@ const buildDisplayReadyDataArray = (htmlScenes: IHTMLScene[]): { title: string; 
 	return pipe(
 		htmlScenes,
 		array.mapWithIndex((i, scene) => ({
-			title: pipe(scene.nameID, processSectionName, (s: string) => addPrefixValue(i, s));
-			section: scene.htmlElement;
+			title: pipe(scene.nameID, processSectionName, (s: string) => addPrefixValue(i, s)),
+			section: scene.htmlElement,
 		}))
 	);
 };
@@ -82,69 +70,6 @@ const htmlSection = pipe(
 	asi.data.ScenesRegistry.cahsedIHTMLScene,
 	array.map((s) => s.nameID)
 );
-
-class HeaderManager extends GE.ADynamicObject {
-	private headers!: HTMLElement[];
-	private activeHeader: HTMLElement | null = null;
-	private lastKnownHeader: HTMLElement | null = null;
-
-	public constructor() {
-		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.GUI_EFFECTS;
-	}
-
-	public scrollTo(sectionName: string) {
-		ScrollToSectionCoroutined.instance.launchTransitionCoroutine(sectionName);
-	}
-
-	public override onStart(): void {
-		this.headers = asi.data.DefinedSections.getAllSections
-			.map((section) =>
-				DOMSearcherH.maybeElementById(HeaderManager.sectionNameToHeaderIDName(section.name))
-			)
-			.filter((element): element is HTMLElement => element !== null);
-	}
-
-	private _previousHeader: HTMLElement | null = null;
-	/**
-	 * since i wasn`t able to stup mediator i am checking stuff framely
-	 */
-	public override onFrameUpdate(): void {
-		const currentSection = asi.data.DefinedSections.curentSection;
-		if (!currentSection) return;
-		this.activeHeader = this.headerHTMLElementFromSectionName(currentSection.name) ?? null;
-		if (this.activeHeader) {
-			this.lastKnownHeader = this.activeHeader;
-		}
-
-		const isSame = this.activeHeader === this._previousHeader;
-		if (!isSame) {
-			this.triggerUpdateHeaderStyle();
-		}
-
-		this._previousHeader = this.activeHeader;
-	}
-
-	public static sectionNameToHeaderIDName(sectionName: string) {
-		return sectionName + "-header";
-	}
-	private headerHTMLElementFromSectionName(sectionName: string) {
-		return this.headers.find(
-			(header) => header.id === HeaderManager.sectionNameToHeaderIDName(sectionName)
-		);
-	}
-	private triggerUpdateHeaderStyle() {
-		this.headers.forEach((header) => {
-			header.classList.remove("txt__current");
-		});
-		if (this.lastKnownHeader) {
-			this.lastKnownHeader.classList.add("txt__current");
-		}
-	}
-}
-
-const SN = asi.data.DefinedSections;
-const HM = new HeaderManager();
 </script>
 
 <style scoped lang="scss">

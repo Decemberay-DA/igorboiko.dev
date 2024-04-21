@@ -67,6 +67,7 @@ The fetures to have to finally put online
 - [ ] have custom selection color for text => https://hamishw.com/
 - [ ] underscores for links => https://hamishw.com/
 - [ ] make a logo for myself (ib)
+- [ ] sick scroll apperence animation => https://www.shanemielke.com/work/
 
 #### three
 
@@ -91,5 +92,3 @@ The fetures to have to finally put online
     - [ ] Hover Infinity
 - [ ] ADAPT FOR OTHER SCREEN RESOLUTIONS
 
-
-moved to new project folder
