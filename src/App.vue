@@ -99,10 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import ThreeSceneBackground from "./scripts/ThreeJS/ThreeSceneBackground.vue";
-
-import ChangeCameraSceneButton from "./scripts/CameraManagiment/Commands/ChangeCameraSceneButton.vue";
-import Header from "./views/Layers/NAVIGATION_LAYER/Header.vue";
+import ThreeSceneBackground from "./scripts/ThreeJS/ThreeEngine/ThreeSceneBackground.vue";
 import LAYER from "./views/Layers/CENTER_LAYER/LAYER.vue";
 import SECTION from "./views/Layers/CENTER_LAYER/sections/SECTION.vue";
 import Section_unreachable from "./views/Layers/CENTER_LAYER/sections/Section_unreachable.vue";

@@ -23,15 +23,13 @@
   </a>
 </p> -->
 
-# Current demos
+# Current demo
 ![demo](https://github.com/Decemberay-DA/igorboiko.dev/blob/main/gitView/_%5Bfirefox%5DIgor_Boyko_-_Desigher_%26_Developer_%E2%80%94_Mozilla_Firefo_1692%20(2).png)
 
 
 # work still in progress
 
 The fetures to have to finally put online
-
-> **Plan epoch: 2.0**
 
 ## what i want to have
 
@@ -78,7 +76,7 @@ The fetures to have to finally put online
 - [ ] make vertex shader more versitile and interesting
 - [ ] increase antializsing samples
 
-### extra
+### extra (additional)
 
 - [ ] add subpages ability*
     - [ ] can open project page on top of current page or in separete url
