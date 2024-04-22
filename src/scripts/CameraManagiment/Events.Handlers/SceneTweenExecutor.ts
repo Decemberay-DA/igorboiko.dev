@@ -1,11 +1,11 @@
-import { requestHandler, type INotificationHandler } from "mediatr-ts";
+import asi from "@/scripts/asi/asi";
+import { option } from "fp-ts";
 import SectionWasChangedToID from "../DefinedScenes/Events/SectionWasChangedTo";
 import ISceneEX from "../DefinedScenes/IScene/ISceneEX";
 import ScenesRegistryH from "../DefinedScenes/SceneRegistry/ScenesRegistryH";
-import { option } from "fp-ts";
+import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
 
-@requestHandler(SectionWasChangedToID)
-export default class SceneTweenExecutor implements INotificationHandler<SectionWasChangedToID> {
+export default class EHSceneTweenExecutor implements INotificationHandler<SectionWasChangedToID> {
 	async handle(notification: SectionWasChangedToID): Promise<void> {
 		const anyScene = ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
 
@@ -18,3 +18,4 @@ export default class SceneTweenExecutor implements INotificationHandler<SectionW
 		return Promise.resolve();
 	}
 }
+asi.mediator.register(SectionWasChangedToID.name, new EHSceneTweenExecutor());

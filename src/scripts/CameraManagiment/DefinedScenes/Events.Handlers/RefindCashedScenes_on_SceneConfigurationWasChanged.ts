@@ -1,9 +1,8 @@
 import asi from "@/scripts/asi/asi";
-import { requestHandler, type INotificationHandler } from "mediatr-ts";
 import NSceneConfigurationChanged from "../Events/SceneConfigurationWasChanged";
 import SceneRegistryEX from "../SceneRegistry/SceneRegistryEX";
+import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
 
-@requestHandler(NSceneConfigurationChanged)
 export default class RefindCashedScenes_on_SceneConfigurationWasChanged
 	implements INotificationHandler<NSceneConfigurationChanged>
 {
@@ -19,3 +18,8 @@ export default class RefindCashedScenes_on_SceneConfigurationWasChanged
 		return Promise.resolve();
 	}
 }
+
+asi.mediator.register(
+	NSceneConfigurationChanged.name,
+	new RefindCashedScenes_on_SceneConfigurationWasChanged()
+);

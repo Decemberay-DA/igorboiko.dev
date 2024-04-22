@@ -25,6 +25,9 @@ export class Mediator {
 		this._mapping.set(notificationType, handlers);
 	}
 
+	/**
+	 * use name of event like "INotification.name"
+	 */
 	public unregister<TNotification extends INotification>(
 		notificationType: string,
 		notificationHandler: INotificationHandler<TNotification>

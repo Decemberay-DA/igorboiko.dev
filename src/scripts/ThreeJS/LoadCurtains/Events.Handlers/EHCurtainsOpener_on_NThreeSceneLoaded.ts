@@ -1,17 +1,21 @@
-import asi from "@/scripts/asi/asi.ts";
-import { GE } from "@/scripts/GameEngine/index.ts";
-import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH.ts";
+import asi from "@/scripts/asi/asi";
+import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
+import { GE } from "@/scripts/GameEngine";
+import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
 import { Tween, Easing } from "@tweenjs/tween.js";
 import { option } from "fp-ts";
-import NCurtainsOpened from "../Events/NCurtainsOpened.ts";
-import type NThreeSceneLoaded from "../Events/NThreeSceneLoaded.ts";
-import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator.ts";
+import NCurtainsOpened from "../Events/NCurtainsOpened";
+import NThreeSceneLoaded from "../Events/NThreeSceneLoaded";
 
 export default class EHCurtainsOpener_on_NThreeSceneLoaded
 	extends GE.ADynamicObject
 	implements INotificationHandler<NThreeSceneLoaded>
 {
 	private currentTween: option.Option<Tween<CSSStyleDeclaration>> = option.none;
+
+	public constructor() {
+		super();
+	}
 
 	public override onFrameUpdate(): void {
 		if (option.isSome(this.currentTween)) {
@@ -40,3 +44,5 @@ export default class EHCurtainsOpener_on_NThreeSceneLoaded
 		return Promise.resolve();
 	}
 }
+
+asi.mediator.register(NThreeSceneLoaded.name, new EHCurtainsOpener_on_NThreeSceneLoaded());

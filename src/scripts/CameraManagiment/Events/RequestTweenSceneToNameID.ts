@@ -1,7 +1,10 @@
-import type { INotification } from "mediatr-ts";
+import type { INotification } from "@/scripts/asi/OneFileMediator/OneFileMediator";
 import WasRequestedTweenSceneToAny from "./WasRequestedTweenSceneToAny";
 
-export default class RequestTweenToSceneByNameID extends WasRequestedTweenSceneToAny implements INotification {
+export default class RequestTweenToSceneByNameID
+	extends WasRequestedTweenSceneToAny
+	implements INotification
+{
 	public readonly nameID: string;
 
 	constructor(nameID: string) {
@@ -10,5 +13,3 @@ export default class RequestTweenToSceneByNameID extends WasRequestedTweenSceneT
 		this.nameID = nameID;
 	}
 }
-
-

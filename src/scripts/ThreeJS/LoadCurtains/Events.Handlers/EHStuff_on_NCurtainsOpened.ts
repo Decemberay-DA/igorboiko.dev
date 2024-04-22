@@ -7,11 +7,14 @@ export default class EHStuff_on_NCurtainsOpened
 	extends GE.ADynamicObject
 	implements INotificationHandler<NCurtainsOpened>
 {
+	public constructor() {
+		super();
+	}
+
 	public async handle(notification: NCurtainsOpened): Promise<void> {
+		console.warn("CURTAINS WAS OPENED! RUN!");
 		return Promise.resolve();
 	}
 }
-/**
- * rewrite everything like this
- */
+
 asi.mediator.register(NCurtainsOpened.name, new EHStuff_on_NCurtainsOpened());
