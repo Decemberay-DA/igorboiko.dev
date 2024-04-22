@@ -1,5 +1,3 @@
-import type { Type } from "typescript";
-
 export interface INotification {}
 
 export interface INotificationHandler<TNotification extends INotification> {

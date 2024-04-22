@@ -50,6 +50,7 @@ The fetures to have to finally put online
 ### base
 
 - [ ] remove all deez nuts jokes from codebase
+- [ ] use my silly implementation of mediator
 - [ ] never use anymore defined registryes of scenes id in this badly extend as before oh my god
 
 #### html
