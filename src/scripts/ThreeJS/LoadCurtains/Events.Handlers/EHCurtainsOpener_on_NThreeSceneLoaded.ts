@@ -1,14 +1,13 @@
-import asi from "@/scripts/asi/asi";
-import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
-import { Easing, Tween } from "@tweenjs/tween.js";
-import { notificationHandler, requestHandler, type INotificationHandler } from "mediatr-ts";
-import NThreeSceneLoaded from "../Events/NThreeSceneLoaded";
-import NCurtainsOpened from "../Events/NCurtainsOpened";
+import asi from "@/scripts/asi/asi.ts";
+import { GE } from "@/scripts/GameEngine/index.ts";
+import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH.ts";
+import { Tween, Easing } from "@tweenjs/tween.js";
 import { option } from "fp-ts";
-import { GE } from "@/scripts/GameEngine";
+import NCurtainsOpened from "../Events/NCurtainsOpened.ts";
+import type NThreeSceneLoaded from "../Events/NThreeSceneLoaded.ts";
+import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator.ts";
 
-@notificationHandler(NThreeSceneLoaded)
-class EHCurtainsOpener_on_NThreeSceneLoaded
+export default class EHCurtainsOpener_on_NThreeSceneLoaded
 	extends GE.ADynamicObject
 	implements INotificationHandler<NThreeSceneLoaded>
 {

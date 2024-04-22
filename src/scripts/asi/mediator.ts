@@ -1,6 +1,8 @@
-import { Mediator, type INotification, type IRequest } from "mediatr-ts";
+// import { Mediator, type INotification, type IRequest } from "mediatr-ts";
 // export * from "src/scripts/asi/mediator.order";
 // export * from "src/scripts/asi/mediator.order/mediator.orderedImport.ts";
+
+import { Mediator, type INotification } from "./OneFileMediator/OneFileMediator.ts";
 
 // // load Ns
 // /**
@@ -22,16 +24,6 @@ import { Mediator, type INotification, type IRequest } from "mediatr-ts";
  */
 export default class mediator {
 	private _mediator = new Mediator();
-
-	public send<T>(request: IRequest<T>): Promise<T> {
-		// sometimes it cant find map for Notifications that have no handlers
-		try {
-			return this._mediator.send<T>(request);
-		} catch (error) {
-			console.warn("asi.mediator error : " + error);
-			return Promise.reject(error);
-		}
-	}
 
 	public publish(notification: INotification): Promise<void> {
 		try {
