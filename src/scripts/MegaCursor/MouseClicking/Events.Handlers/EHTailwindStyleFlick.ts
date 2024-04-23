@@ -58,6 +58,7 @@ export default class EHTailwindStyleFlick
 			return startColor;
 		}
 
+		// try to sest this css variables in to css sheet so they are initedd
 		const startColor = threeColorFromTailwindVariable("--tw-GACTIVERIGHT");
 		const endColor = threeColorFromTailwindVariable("--tw-GACTIVELEFT");
 
@@ -75,13 +76,13 @@ export default class EHTailwindStyleFlick
 		// const threeColorB = new THREE.Color("#00CCCC");
 		// const threeColorA = new THREE.Color(1, 0.5, 0.5);
 		// const threeColorB = new THREE.Color(0, 1, 0.5);
-        
+
 		function listCssColorVariables() {
 			const styles = getComputedStyle(document.documentElement);
 
 			for (let i = 0; i < styles.length; i++) {
 				const propertyName = styles[i];
-				if (propertyName.startsWith("--") && propertyName.endsWith("color")) {
+				if (propertyName.startsWith("--tw-G")) {
 					const variableValue = getComputedStyle(document.documentElement)
 						.getPropertyValue(propertyName)
 						.trim();
