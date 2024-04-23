@@ -10,11 +10,11 @@ export default {
 				GGRAY: "#8892b0",
 				GWHITE: "#ccd6f6",
 
-				GACTIVEABLE: "#1BC3E9",
-				GACTIVE: "#64ffda",
+				GACTIVEABLE: "var(--tw-GACTIVEABLE, #1BC3E9)",
+				GACTIVE: "var(--tw-GACTIVE, #64ffda)",
 
-				GACTIVERIGHT: "#FF3333",
-				GACTIVELEFT: "#00CCCC",
+				GACTIVERIGHT: "var(--tw-GACTIVERIGHT, #FF3333)",
+				GACTIVELEFT: "var(--tw-GACTIVELEFT, #00CCCC)",
 
 				// stolen hahah
 				Navy: "#0a192f",

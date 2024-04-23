@@ -16,6 +16,9 @@ export class Mediator {
 		}
 	}
 
+	/**
+	 * use name of event like "INotification.name"
+	 */
 	public register<TNotification extends INotification>(
 		notificationType: string,
 		notificationHandler: INotificationHandler<TNotification>
@@ -23,26 +26,6 @@ export class Mediator {
 		const handlers = this._mapping.get(notificationType) || [];
 		handlers.push(notificationHandler);
 		this._mapping.set(notificationType, handlers);
-	}
-
-	/**
-	 * use name of event like "INotification.name"
-	 */
-	public unregister<TNotification extends INotification>(
-		notificationType: string,
-		notificationHandler: INotificationHandler<TNotification>
-	) {
-		const handlers = this._mapping.get(notificationType);
-		if (!handlers) return;
-
-		const index = handlers.indexOf(notificationHandler);
-		if (index === -1) return;
-
-		handlers.splice(index, 1);
-		if (handlers.length === 0) {
-			this._mapping.delete(notificationType);
-		} else {
-			this._mapping.set(notificationType, handlers);
-		}
+		console.log("Mediator : Registered handles for event : " + notificationType);
 	}
 }

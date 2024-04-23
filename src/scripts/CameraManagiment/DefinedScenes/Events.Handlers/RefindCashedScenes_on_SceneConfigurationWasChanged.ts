@@ -19,7 +19,3 @@ export default class RefindCashedScenes_on_SceneConfigurationWasChanged
 	}
 }
 
-asi.mediator.register(
-	NSceneConfigurationChanged.name,
-	new RefindCashedScenes_on_SceneConfigurationWasChanged()
-);

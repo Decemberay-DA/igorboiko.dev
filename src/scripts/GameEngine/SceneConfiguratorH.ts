@@ -5,6 +5,7 @@ import CameraManager from "../CameraManagiment/CameraManager";
 import NSceneConfigurationChanged from "../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
 import { TJ, THREE, VertexColoredMaterialH } from "../ThreeJS";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
+import TAnyInterractionListener from "../MegaCursor/MouseClicking/TAnyInterractionListener";
 
 /**
  * its goal is to buld scene up.
@@ -20,6 +21,7 @@ export default class SceneConfiguratorH {
 	public static async asetupMainScenePage() {
 		// Base Game setup ========-====-====-====-============
 		const timeUpdater = new GE.GameTime(); // just init and add to Game update cycle
+		const listenerA = new TAnyInterractionListener();
 
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
@@ -27,7 +29,9 @@ export default class SceneConfiguratorH {
 		asi.data.ThreeSceneManagimented = bgScene;
 
 		// add gltf stuff ========-====-====-====-============
-		const gltfBG: GLTF = await TJ.GLTFLoaderH.aGetLoadedGLTF();
+		const gltfBG: GLTF = await TJ.GLTFLoaderH.aGetLoadedGLTF((perc) =>
+			console.log("GLTF load percentage: " + perc)
+		);
 		asi.data.ThreeSceneGLTF = gltfBG;
 		bgScene.scene.add(gltfBG.scene);
 
@@ -75,16 +79,11 @@ export default class SceneConfiguratorH {
 					cluster.rotation.y = GE.GameTime.realTimeSinceStartup * 0.0121;
 				},
 			});
-			// const floater = new ObjectsTransformsNoiser(cluster);
-			// floater.noiser.influencePosition = 0; // bug
-			// floater.noiser.speedPosition = 0;
-			// floater.noiser.influenceQuaternion = 0.0001;
-			// floater.noiser.speedQuaternion = 0.2;
 		}
 
 		// apply vertex color material on everything ========-====-====-====-============
 		const vertexColored = new TJ.VertexColoredMaterial();
-		VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
+		await VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
 		asi.data.ThreeSceneManagimented.scene.overrideMaterial = vertexColored.shader;
 
 		// asi.mediator.publish(new ThreeSceneWasLoadedAndInited());

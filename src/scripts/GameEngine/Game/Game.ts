@@ -32,7 +32,7 @@ export class Game implements GE.IEnablable {
 	public get dynamicObjects(): Readonly<Array<GE.ADynamicObject>> {
 		return Object.freeze([...this._dynamicObjects]);
 	}
-	public registerDinamicObject(dynamicObject: GE.ADynamicObject): void {
+	public async registerDinamicObject(dynamicObject: GE.ADynamicObject): Promise<void> {
 		this._dynamicObjects.push(dynamicObject);
 		this._dynamicObjects.sort((a, b) => a.onFrameUpdatePriority - b.onFrameUpdatePriority);
 		// console.log(`DynamicObject registered`);
@@ -42,7 +42,7 @@ export class Game implements GE.IEnablable {
 		// 	dynamicObject.onStart();
 		// }
 	}
-	public unRegisterDinamicObject(dynamicObject: GE.ADynamicObject): void {
+	public async unRegisterDinamicObject(dynamicObject: GE.ADynamicObject): Promise<void> {
 		const index = this._dynamicObjects.indexOf(dynamicObject);
 		if (index > -1) {
 			// if found
@@ -50,7 +50,6 @@ export class Game implements GE.IEnablable {
 			// console.log(`DynamicObject un registered`);
 		}
 	}
-
 	// Game loop ========-====-====-====-============
 	// private _isStarted = false;
 	public triggerStart(): void {

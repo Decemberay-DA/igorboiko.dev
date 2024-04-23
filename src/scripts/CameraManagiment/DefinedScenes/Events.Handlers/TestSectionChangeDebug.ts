@@ -4,12 +4,10 @@ import { option } from "fp-ts";
 import SectionWasChangedToID from "../Events/SectionWasChangedTo";
 import ScenesRegistryH from "../SceneRegistry/ScenesRegistryH";
 
-export default class SetChangedSection implements INotificationHandler<SectionWasChangedToID> {
+export default class EHTestSectionChangeDebug implements INotificationHandler<SectionWasChangedToID> {
 	async handle(notification: SectionWasChangedToID): Promise<void> {
-		const anyScene = await ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
-
-		if (option.isSome(anyScene)) {
-			asi.data.ScenesRegistry.currentAnyScene = anyScene.value;
-		}
+		console.warn("EHTestSectionChangeDebug handled transfer to scene : " + notification.newSectionNameID);
+		return Promise.resolve();
 	}
 }
+

@@ -5,8 +5,8 @@ import { GLTFLoader, type GLTF } from "three/examples/jsm/loaders/GLTFLoader.js"
  */
 export class GLTFLoaderH {
 	public static async aGetLoadedGLTF(
-		loadFromPath: string = "/public/models/scene.gltf",
-		onProgress: (percentage: number) => void = () => {}
+		onProgress: (percentage: number) => void = () => {},
+		loadFromPath: string = "/public/models/scene.gltf"
 	): Promise<GLTF> {
 		return new Promise((resolve, reject) => {
 			new GLTFLoader().load(

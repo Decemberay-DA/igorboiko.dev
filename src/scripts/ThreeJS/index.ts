@@ -1,5 +1,5 @@
-export * from "./GLTFPipline";
 export * from "./ThreeEngine";
-export * from "./LoadCurtains";
+export * from "./GLTFPipline";
 export * from "./VertexColoredMaterial";
+export * from "./LoadCurtains";
 export * as TJ from "./index";

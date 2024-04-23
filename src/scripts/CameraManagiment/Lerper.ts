@@ -81,6 +81,16 @@ export default class SmoothLerper {
 
 		return result;
 	}
+	public Color(start: THREE.Color, end: THREE.Color, t: number, isSmooth = true): THREE.Color {
+		if (isSmooth) t = this.updateSmoothness(t);
+
+		const result = new THREE.Color();
+		result.r = SmoothLerper.number(start.r, end.r, t);
+		result.g = SmoothLerper.number(start.g, end.g, t);
+		result.b = SmoothLerper.number(start.b, end.b, t);
+
+		return result;
+	}
 	public Vector4(start: THREE.Vector4, end: THREE.Vector4, t: number, isSmooth = true): THREE.Vector4 {
 		if (isSmooth) t = this.updateSmoothness(t);
 

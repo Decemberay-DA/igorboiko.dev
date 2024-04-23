@@ -77,7 +77,8 @@ export default class ScenesRegistryH {
 			}))
 		);
 	}
-	public static findISceneByName(nameID: string): option.Option<IScene> {
+
+	public static async findISceneByName(nameID: string): Promise<option.Option<IScene>> {
 		return pipe(
 			asi.data.ScenesRegistry.cahsedIScenes,
 			(scenes) => scenes.find((s) => s.nameID === nameID),
@@ -85,7 +86,7 @@ export default class ScenesRegistryH {
 		);
 	}
 
-	public static findTAnySceneByNameID(nameID: string): option.Option<TAnyScene> {
+	public static async findTAnySceneByNameID(nameID: string): Promise<option.Option<TAnyScene>> {
 		const IScene = pipe(
 			asi.data.ScenesRegistry.cahsedIScenes,
 			array.findFirst((a) => a.nameID === nameID)

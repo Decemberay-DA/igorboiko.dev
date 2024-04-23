@@ -45,4 +45,3 @@ export default class EHCurtainsOpener_on_NThreeSceneLoaded
 	}
 }
 
-asi.mediator.register(NThreeSceneLoaded.name, new EHCurtainsOpener_on_NThreeSceneLoaded());

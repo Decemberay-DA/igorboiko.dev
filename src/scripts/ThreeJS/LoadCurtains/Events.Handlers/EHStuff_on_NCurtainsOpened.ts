@@ -16,5 +16,3 @@ export default class EHStuff_on_NCurtainsOpened
 		return Promise.resolve();
 	}
 }
-
-asi.mediator.register(NCurtainsOpened.name, new EHStuff_on_NCurtainsOpened());

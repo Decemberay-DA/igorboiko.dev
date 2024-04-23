@@ -7,7 +7,7 @@ import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFile
 
 export default class EHSceneTweenExecutor implements INotificationHandler<SectionWasChangedToID> {
 	async handle(notification: SectionWasChangedToID): Promise<void> {
-		const anyScene = ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
+		const anyScene = await ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
 
 		if (option.isSome(anyScene)) {
 			ISceneEX.tweenTo(anyScene.value);
@@ -18,4 +18,3 @@ export default class EHSceneTweenExecutor implements INotificationHandler<Sectio
 		return Promise.resolve();
 	}
 }
-asi.mediator.register(SectionWasChangedToID.name, new EHSceneTweenExecutor());

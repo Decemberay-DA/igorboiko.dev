@@ -9,6 +9,9 @@ div.side-stack.items-center.justify-start
         IconYouTube
         IconInstagram
         IconTelegram
+        div.h-6.w-6.flex-none.bg-white(@click="mediateOut('deez')")
+        div.h-6.w-6.flex-none.bg-white(@click="mediateOut('nut')")
+        div.h-6.w-6.flex-none.bg-white(@click="mediateOut('banana')")
     //- div.flex.flex-col.h-full
     .h-4.flex-none
     div.the-stick
@@ -21,6 +24,13 @@ import IconYouTube from "@/views/icons/IconYouTube.vue";
 import IconInstagram from "@/views/icons/IconInstagram.vue";
 import IconTelegram from "@/views/icons/IconTelegram.vue";
 import SideStackMagician from "./LinkStickMagician";
+import asi from "@/scripts/asi/asi";
+import SectionWasChangedToID from "@/scripts/CameraManagiment/DefinedScenes/Events/SectionWasChangedTo";
+
+const mediateOut = (message: string) => {
+	console.warn("mediated : " + message);
+	asi.mediator.publish(new SectionWasChangedToID(message));
+};
 
 const SM = new SideStackMagician();
 </script>
