@@ -33,14 +33,17 @@ The fetures to have to finally put online
 
 ## what i want to have
 
-- my photo
+- some z-gen description
 - some small three visuals
+- my photo
 - sections
     - about
-    - 3d projects
-    - code projects
-    - education
+    - projects
+      - 3d projects
+      - code projects
+    - education* (show in resume only)
     - work experience
+    - doodes i have freelanced for (the project and their comment)
     - contact me
 - pdf resume link for HRs
 - host on the web under igorboiko.dev url => https://www.netlify.com/
@@ -50,8 +53,14 @@ The fetures to have to finally put online
 ### base
 
 - [ ] remove all deez nuts jokes from codebase
-- [ ] use my silly implementation of mediator
+- [x] use my silly implementation of mediator
 - [ ] never use anymore defined registryes of scenes id in this badly extend as before oh my god
+
+- [ ] intro cutscene like in SPORE*
+- [ ] like maybe fast loading hahahhaha*
+- [ ] finally finish and add current unfinished works to 3d portfolio*
+    - [ ] Shum*
+    - [ ] Hover Infinity*
 
 #### html
 
@@ -63,33 +72,33 @@ The fetures to have to finally put online
     - [ ] animated with events
 - [ ] have techUsed chip row under some of cards
 
+- [ ] add subpages ability*
+    - [ ] can open project page on top of current page or in separete url*
+- [ ] compress images*
+- [ ] ADAPT FOR OTHER SCREEN RESOLUTIONS*
+
 #### html.styling
 
 - [ ] have custom selection color for text => https://hamishw.com/
 - [ ] underscores for links => https://hamishw.com/
+- [ ] ability to manipulate tailwind css color variables via typeScript => TailwindH
 - [ ] make a logo for myself (ib)
 - [ ] sick scroll apperence animation => https://www.shanemielke.com/work/
 
+- [ ] have some cool cursor style responce in html and or three on events*
+
 #### three
 
-- [ ] smoothe camera movement between threeScenes
+- [x] smoothe camera movement between threeScenes
 - [ ] create loading curtains
 - [ ] fix initial camera position smoothing error (maybe by enabeling smoothing on after CurtainsOpened)
 - [ ] make vertex shader more versitile and interesting
 - [ ] increase antializsing samples
-
-### extra (additional)
-
-- [ ] add subpages ability*
-    - [ ] can open project page on top of current page or in separete url
-- [ ] have some cool cursor style responce in html and or three on events
-- [ ] Add global postprocess effect
-    - [ ] have all shaders react to mouse over them
 - [ ] fix image stretching on brouser window aspect ratio changes
-- [ ] like maybe fast loading hahahhaha
-- [ ] compress scene.gltf
-- [ ] finally finish and add current unfinished works to 3d portfolio
-    - [ ] Shum
-    - [ ] Hover Infinity
-- [ ] ADAPT FOR OTHER SCREEN RESOLUTIONS
+
+- [ ] Add global postprocess effect*
+    - [ ] have all shaders react to mouse over them*
+- [ ] compress scene.gltf*
+
+
 

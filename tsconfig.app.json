@@ -1,6 +1,6 @@
 {
 	"extends": "@vue/tsconfig/tsconfig.dom.json",
-	"include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/custom.d.ts"],
+	"include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/custom.d.ts", "tailwind.config.js"],
 	"exclude": ["src/**/__tests__/*"],
 	"compilerOptions": {
 		"target": "es2017",

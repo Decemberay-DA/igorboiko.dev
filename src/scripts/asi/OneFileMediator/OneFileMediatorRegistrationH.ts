@@ -22,8 +22,6 @@ export default class OneFileMediatorRegistrationH {
 	 * force to register handlers from other files
 	 */
 	public static registerHandlers(mediator: Mediator): Mediator {
-		//
-
 		mediator.register(
 			NSceneConfigurationChanged.name,
 			new RefindCashedScenes_on_SceneConfigurationWasChanged()
