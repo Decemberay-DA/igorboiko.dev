@@ -11,6 +11,15 @@ declare module "*.frag" {
 	const fragmentShader: string;
 	export default fragmentShader;
 }
+declare module "*.config.js" {
+	const config: any;
+	export default config;
+}
+declare module "tailwind.config" {
+	const config: any;
+	export default config;
+}
+
 // declare module "*.gltf" {
 // 	const a: string;
 // 	export default a;
