@@ -22,6 +22,7 @@ export abstract class ADynamicObject implements GE.IEnablable {
 	public onStart(): void {
 		return;
 	}
+	
 	// define the order in which dynamick objects are sorted and updated
 	protected __onFrameUpdatePriority: number = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
 	public get onFrameUpdatePriority(): number {
@@ -34,8 +35,13 @@ export abstract class ADynamicObject implements GE.IEnablable {
 		return;
 	}
 
+	private _isDeleted = false;
+	public get isDeleted() {
+		return this._isDeleted;
+	}
 	public delete(): void {
 		this.onDelete();
 		GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
+		this._isDeleted = true;
 	}
 }

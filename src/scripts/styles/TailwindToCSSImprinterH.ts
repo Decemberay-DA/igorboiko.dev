@@ -1,22 +1,5 @@
 import TailwindH from "./TailwindH";
-import tailwindConfigJS from "tailwind.config";
-
-interface INamedColor {
-	name: string;
-	value: string;
-}
-
-export interface ITailwindConfigColorsJS {
-	GBACKGROUND: INamedColor;
-	GGRAY: INamedColor;
-	GWHITE: INamedColor;
-	GACTIVEABLE: INamedColor;
-	GACTIVE: INamedColor;
-	GACTIVERIGHT: INamedColor;
-	GACTIVELEFT: INamedColor;
-
-	[key: string]: INamedColor;
-}
+import type { IColorToken } from "./TailwindMirrorH";
 
 export default class TailwindToCSSImprinterH {
 	public static async imprint() {
@@ -32,26 +15,26 @@ export default class TailwindToCSSImprinterH {
 			document.head.appendChild(styleTag);
 		}
 
-		const colorVariables = tailwindConfigJS.theme.extend.colors;
+		// const colorVariables = tailwindConfigJS.theme.extend.colors;
 
 		let cssVariables = "";
-		for (const [key, value] of Object.entries(colorVariables)) {
-			cssVariables += `--tw-${key}: ${value};\n`;
-		}
+		// for (const [key, value] of Object.entries(colorVariables)) {
+		// 	cssVariables += `--tw-${key}: ${value};\n`;
+		// }
 
 		styleTag.textContent = `:root {\n${cssVariables}}`;
 
 		console.log("Tailwind color variables injected to css document");
 	}
 
-	public static async initCSSColors(twColors: ITailwindConfigColorsJS) {
+	public static async initCSSColors(twColors: Record<string, IColorToken>) {
 		for (const colorName in twColors) {
 			if (!twColors.hasOwnProperty(colorName)) return;
 
 			const color = twColors[colorName];
 
-			const cssVariableName = TailwindH.TWVariableNameToCSSVariableName(colorName);
-			document.documentElement.style.setProperty(cssVariableName, color.value);
+			const cssVariableName = TailwindH.TWVariableName_To_CSSVariableName(colorName);
+			document.documentElement.style.setProperty(cssVariableName, color.value.toString());
 		}
 	}
 }

@@ -1,75 +1,47 @@
 import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
-import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
-import { number, option } from "fp-ts";
-import type { Tween } from "@tweenjs/tween.js";
 import { TWEEN } from "@/scripts/FrameworksExport";
 import { GE } from "@/scripts/GameEngine";
-import { THREE } from "@/scripts/ThreeJS";
-import { lerp } from "three/src/math/MathUtils.js";
-import SmoothLerper from "@/scripts/CameraManagiment/Lerper";
-import ColorH from "../../../styles/ColorH";
-import CSSH from "../../../styles/CSSSH";
+import ColorH from "@/scripts/styles/ColorH";
 import TailwindH from "@/scripts/styles/TailwindH";
+import TailwindMirrorH from "@/scripts/styles/TailwindMirrorH";
+import { Tween } from "@tweenjs/tween.js";
+import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
+import { flow, pipe } from "fp-ts/lib/function";
 
 /**
  *
  */
-export default class EHTailwindStyleFlick
-	extends GE.ADynamicObject
-	implements INotificationHandler<ETAnyInterractionOccured>
-{
-	private _tween: option.Option<Tween<any>> = option.none;
-
-	public constructor() {
-		super();
-	}
-
-	public override onFrameUpdate(): void {
-		if (option.isSome(this._tween)) {
-			this._tween.value.update(performance.now());
-		}
-	}
-
+export default class EHTailwindStyleFlick implements INotificationHandler<ETAnyInterractionOccured> {
 	async handle(notification: ETAnyInterractionOccured): Promise<void> {
-		this.startTheFlick();
+		const startColor = TailwindH.getColorToken(TailwindMirrorH.colorTokens.GACTIVERIGHT.name);
+		const endColor = TailwindH.getColorToken(TailwindMirrorH.colorTokens.GACTIVELEFT.name);
+
+		const toBool = (val: number): number => {
+			return val > 0.5 ? 1 : 0;
+		};
+
+		const tween = new Tween(startColor) //
+			.to(endColor, 3024)
+			// .easing(TWEEN.Easing.Exponential.Out)
+			.easing(
+				flow(
+					TWEEN.Easing.Exponential.In,
+					TWEEN.Easing.Exponential.Out,
+					(x) => x * 100,
+					(x) => x % 1,
+					(x) => Math.sin(x)
+					// toBool
+				)
+			)
+			.onUpdate((data) => {
+				document.documentElement.style.setProperty(
+					TailwindH.TWVariableName_To_CSSVariableName(TailwindMirrorH.colorTokens.GACTIVE.name),
+					ColorH.IRGB_to_CSSRGBAString(data)
+				);
+			});
+
+		const coroutine = GE.Coroutine.newFromTween(tween);
+
 		return Promise.resolve();
-	}
-
-	private _isBool = false;
-	private startTheFlick() {
-		const startColor = CSSH.newRGBFromTWVariable("GACTIVERIGHT");
-		const endColor = CSSH.newRGBFromTWVariable("GACTIVELEFT");
-
-		if (option.isSome(this._tween)) this._tween.value.stop();
-
-		console.log(CSSH.listCssColorVariables());
-
-		if (this._isBool) {
-			document.documentElement.style.setProperty(
-				TailwindH.TWVariableNameToCSSVariableName("GACTIVE"),
-				ColorH.RGBToCSSRGBAString(startColor)
-			);
-			this._isBool = !this._isBool;
-		} else {
-			document.documentElement.style.setProperty(
-				TailwindH.TWVariableNameToCSSVariableName("GACTIVE"),
-				ColorH.RGBToCSSRGBAString(new THREE.Color(0, 0, 1))
-			);
-			this._isBool = !this._isBool;
-		}
-		// this._tween = option.some(
-		// 	new TWEEN.Tween({ lerp: 0 })
-		// 		.to({ lerp: 1 }, 3025)
-		// 		.easing(TWEEN.Easing.Exponential.Out)
-		// 		.onUpdate((data) => {
-		// 			document.documentElement.style.setProperty(
-		// 				TailwindH.TWVariableNameToCSSVariableName("GACTIVE"),
-		// 				ColorH.threeColorToCSSRGBA(
-		// 					SmoothLerper.instance.Color(startColor, endColor, data.lerp)
-		// 				)
-		// 			);
-		// 		})
-		// 		.start()
-		// );
 	}
 }

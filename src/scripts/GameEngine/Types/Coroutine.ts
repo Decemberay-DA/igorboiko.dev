@@ -1,75 +1,35 @@
+import type { Tween } from "@tweenjs/tween.js";
 import { GE } from "..";
-import { math } from "../../utils/math";
-
-export type ICoroutineParams = Readonly<_ICoroutineParams>;
-interface _ICoroutineParams {
-	stopOn: () => boolean;
-	onStart?: () => void;
-	onUpdate?: () => void;
-	onDelete?: () => void;
-}
 
 /**
- * executes some things untill end, then getting destrouyed.
- * analogues to TWEEN but with custom controll
- *
- * maybe create separete GAME that will deliberately work with coroutines
+ * wrapped TWEEN.Tween thingy
  */
-export class Coroutine extends GE.ADynamicObject {
-	public readonly actionOnStart: () => void = () => {};
-	public readonly actionOnFrameUpdate: () => void = () => {};
-	public readonly actionOnDelete: () => void = () => {};
-	public readonly stopCondition: () => boolean;
-
-	private _isRunning: boolean = false;
-	public get isRunning(): boolean {
-		return this._isRunning;
+export class Coroutine<T extends Record<string, any>> extends GE.ADynamicObject {
+	private _tween: Tween<T>;
+	public get tween() {
+		return this._tween;
 	}
 
-	public constructor(params: ICoroutineParams) {
+	public static newFromTween<T extends Record<string, any>>(tween: Tween<T>) {
+		tween.start();
+		const cr = new Coroutine(tween);
+		return cr;
+	}
+
+	private constructor(tween: Tween<T>) {
 		super();
-		this.disable();
 
-		this.actionOnStart = params.onStart ?? this.actionOnStart;
-		this.actionOnFrameUpdate = params.onUpdate ?? this.actionOnFrameUpdate;
-		this.actionOnDelete = params.onDelete ?? this.actionOnDelete;
+		// delete this ADynamick object when tween finishes
+		tween.onComplete((params) => this.delete());
 
-		this.stopCondition = params.stopOn;
+		this._tween = tween;
 	}
 
-	public static calculateRemainingFactor(startTime: number, duration: number): number {
-		const endTime = startTime + duration;
-		const remainsms = endTime - GE.GameTime.realTimeSinceStartup;
-		const remains0to1 = (duration / 1) * remainsms;
-		const factor = 1 - remains0to1;
-
-		return math.clamp(factor);
-	}
-
-	public launch() {
-		this.enable();
-		this._isRunning = true;
-		this.onStart();
+	public start() {
+		this._tween.start();
 	}
 
 	public override onFrameUpdate(): void {
-		this.actionOnFrameUpdate();
-		if (this.stopCondition()) {
-			this.delete();
-		}
-	}
-
-	private _isKilled = false;
-	/**
-	 * errases this coroutine without executing onDelete
-	 */
-	public kill() {
-		this._isKilled = true;
-		this.delete();
-	}
-
-	public override onDelete(): void {
-		this._isRunning = false;
-		if (!this._isKilled) this.actionOnDelete();
+		this._tween.update(performance.now());
 	}
 }

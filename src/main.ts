@@ -4,7 +4,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import * as GE from "./scripts/GameEngine";
 import SceneConfiguratorH from "./scripts/GameEngine/SceneConfiguratorH";
-import TailwindToCSSImprinterH from "./scripts/styles/TailwindToCSSImprinterH";
+import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 
 createApp(App).mount("#app");
 
@@ -12,7 +12,8 @@ createApp(App).mount("#app");
 // without them its pure DEATH html
 
 // init utils
-TailwindToCSSImprinterH.injectTailwindVariablesToDocument();
+// TailwindToCSSImprinterH.injectTailwindVariablesToDocument();
+TailwindMirrorH.injectColorTokensToCSSDocument();
 
 // setup asi
 // ni

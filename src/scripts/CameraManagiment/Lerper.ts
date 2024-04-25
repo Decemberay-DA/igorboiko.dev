@@ -1,4 +1,5 @@
 import { THREE } from "../ThreeJS";
+import type { IRGB } from "../utils/IRGB";
 import CameraControls from "./ParamsControllers/CameraControls/CameraControls";
 import type ICameraControls from "./ParamsControllers/CameraControls/ICameraControls";
 import type ITransforms from "./ParamsControllers/Transforms/ITransforms";
@@ -81,13 +82,14 @@ export default class SmoothLerper {
 
 		return result;
 	}
-	public Color(start: THREE.Color, end: THREE.Color, t: number, isSmooth = true): THREE.Color {
+	public IRGB(start: IRGB, end: IRGB, t: number, isSmooth = true): IRGB {
 		if (isSmooth) t = this.updateSmoothness(t);
 
-		const result = new THREE.Color();
-		result.r = SmoothLerper.number(start.r, end.r, t);
-		result.g = SmoothLerper.number(start.g, end.g, t);
-		result.b = SmoothLerper.number(start.b, end.b, t);
+		const result: IRGB = {
+			r: SmoothLerper.number(start.r, end.r, t),
+			g: SmoothLerper.number(start.g, end.g, t),
+			b: SmoothLerper.number(start.b, end.b, t),
+		};
 
 		return result;
 	}

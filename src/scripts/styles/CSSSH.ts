@@ -1,27 +1,18 @@
-import type RGB from "../utils/RGB";
-import ColorH from "./ColorH";
-import TailwindH from "./TailwindH";
+import { option } from "fp-ts";
 
 export default class CSSH {
-	public static getCssVariable(variableName: string): string {
-		return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+	public static getCssVariableValueAsString(cssVariableName: string): option.Option<string> {
+		const val = getComputedStyle(document.documentElement).getPropertyValue(cssVariableName).trim();
+
+		return val === "" ? getNone() : option.some(val);
+
+		function getNone(): option.Option<string> {
+			console.warn("failed to get css variable named " + cssVariableName + " from document");
+			return option.none;
+		}
 	}
 
-	public static newRGBFromTWVariable(twColorVariableName: string): RGB {
-		const cssName = TailwindH.TWVariableNameToCSSVariableName(twColorVariableName);
-
-		const cssV = CSSH.getCssVariable(cssName);
-		const isValuePresent = cssV !== "";
-		if (!isValuePresent) console.warn("CSS value " + cssName + " is not present in document");
-		console.log("Color getCssVariable: " + JSON.stringify(cssV));
-
-		const c = ColorH.hexToRgb(cssV) ?? { r: 1, g: 0, b: 1 };
-		console.log("Color hexToRgb: " + JSON.stringify(c));
-
-		return c;
-	}
-
-	public static listCssColorVariables(): string {
+	public static listAllCssColorVariables(): string {
 		const styles = getComputedStyle(document.documentElement);
 		let result = "";
 

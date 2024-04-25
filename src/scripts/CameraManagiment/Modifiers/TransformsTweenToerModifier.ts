@@ -33,6 +33,6 @@ export class TransformsTweenToerModifier implements IModifier<Transforms> {
 				this._tweenedTransforms = endT;
 			},
 		});
-		this._transformsCoroutine.launch();
+		this._transformsCoroutine.start();
 	}
 }

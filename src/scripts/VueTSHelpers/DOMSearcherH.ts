@@ -12,6 +12,9 @@ export default class DOMSearcherH {
 			throw new Error("First element with className '" + className + "' not found");
 		}
 	}
+	/**
+	 * @deprecated ues DOMSearcherH.maybeElementById
+	 */
 	public static getElementById(id: string): HTMLElement {
 		const element = document.getElementById(id);
 		if (element) {
