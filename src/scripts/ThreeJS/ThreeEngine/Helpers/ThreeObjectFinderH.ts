@@ -23,13 +23,14 @@ export class ThreeObjectFinderH {
 	}
 
 	public static byUserDataGLTF(
-		gltfScene: GLTF,
+		scene: THREE.Object3D,
+		// gltfScene: GLTF,
 		propertyName: string,
 		propertyValue: string
 	): THREE.Object3D[] {
 		const matchingObjects: THREE.Object3D[] = [];
 
-		gltfScene.scene.traverse((child) => {
+		scene.traverse((child) => {
 			if (child as TGLTFAsset) {
 				const gltfChild = child as TGLTFAsset;
 				gltfChild.extras[propertyName] === propertyValue;

@@ -1,25 +1,25 @@
 <template lang="pug">
 div.w-fit.px-20.pt-20.ssection__inner-container.flex-shrink
     SECTION.ssection(
-    :definedSectionID="'INTRO_SCENE_ID'")
+    :definedSectionID="'INTRO_SCENE_ID_IDENTIFICATOR'")
         div.w-full.flex.flex-col(class="h-[900px]")
             LandSectionTemplate
             div(class="h-1/3")
 
     //- hidden  i have intro
     SECTION.ssection.hidden(
-    :definedSectionID="'LAND_SCENE_ID'")
+    :definedSectionID="'LAND_SCENE_ID_IDENTIFICATOR'")
         h3 land deez nuts on your mouth
 
     SECTION.ssection(
-    :definedSectionID="'ABOUT_SCENE_ID'", 
+    :definedSectionID="'ABOUT_SCENE_ID_IDENTIFICATOR'", 
     :sectionTitle="'01:'")
         div(class="h-[120px]")
         AboutSectionTemplate
         div(class="h-[120px]")
 
     SECTION.ssection(
-    :definedSectionID="'PROJECTS_SCENE_ID'", 
+    :definedSectionID="'PROJECTS_SCENE_ID_IDENTIFICATOR'", 
     :sectionTitle="'02:'")
         div(class="h-[120px]")
         ProjectSectionTemplate
@@ -27,28 +27,28 @@ div.w-fit.px-20.pt-20.ssection__inner-container.flex-shrink
 
     //- hidden
     SECTION.ssection.hidden(
-    :definedSectionID="'EXPERIENCE_SCENE_ID'")
+    :definedSectionID="'EXPERIENCE_SCENE_ID_IDENTIFICATOR'")
 
     //- hidden
     SECTION.ssection.GLASS--transparent.hidden(
-    :definedSectionID="'EDUCATION_SCENE_ID'", 
+    :definedSectionID="'EDUCATION_SCENE_ID_IDENTIFICATOR'", 
     :sectionTitle="'03:'")
 
     //- hidden
     SECTION.ssection.hidden(
-    :definedSectionID="'COMMENT_SCENE_ID'", 
+    :definedSectionID="'COMMENT_SCENE_ID_IDENTIFICATOR'", 
     :sectionTitle="'??:'")
 
     //- WebsiteCredits_section
     SECTION.ssection.justify-center.content-center(
-    :definedSectionID="'CONTACT_SCENE_ID'")
+    :definedSectionID="'CONTACT_ME_SCENE_ID_IDENTIFICATOR'")
         div(class="h-[120px]")
         WebsiteCredits
         div(class="h-[120px]")
 
     //- hidden
     Section_unreachable.ssection.unreachable-section.hidden(
-    :definedSectionID="'ERROR_404_SCENE_ID'")
+    :definedSectionID="'ERROR_404_SCENE_ID_IDENTIFICATOR'")
 </template>
 
 <script setup lang="ts">

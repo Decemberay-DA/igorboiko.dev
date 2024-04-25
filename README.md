@@ -104,3 +104,11 @@ The fetures to have to finally put online
 
 
 
+
+
+
+
+#### etc
+
+- add tags to git repo
+  - functional typescript

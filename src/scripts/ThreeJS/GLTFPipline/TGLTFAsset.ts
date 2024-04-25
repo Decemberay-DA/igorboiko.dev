@@ -1,4 +1,6 @@
-export type TGLTFAsset = {
+import type { THREE } from "../ThreeEngine";
+
+export type TGLTFAsset = THREE.Object3D & {
 	copyright?: string | undefined;
 	generator?: string | undefined;
 	version?: string | undefined;

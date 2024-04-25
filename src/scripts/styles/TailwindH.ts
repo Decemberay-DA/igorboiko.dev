@@ -1,8 +1,9 @@
-import { option } from "fp-ts";
+import { option, string } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
 import ColorH from "./ColorH";
 import CSSH from "./CSSSH";
 import type { IRGB } from "../utils/IRGB";
+import TailwindMirrorH from "./TailwindMirrorH";
 
 /**
  *
@@ -10,6 +11,7 @@ import type { IRGB } from "../utils/IRGB";
 export default class TailwindH {
 	/**
 	 * @param twColorTokenName from @see TailwindMirrorH
+	 * @returns current css document value of this color. Fr original value use TailwindMirrorH.colors
 	 */
 	public static readonly getColorToken = (twColorTokenName: string): IRGB =>
 		pipe(
@@ -23,6 +25,23 @@ export default class TailwindH {
 			ColorH.CSSRGBAString_to_IRGBA,
 			option.match(
 				() => ({ r: 0, g: 1, b: 0 }),
+				(some) => some
+			)
+		);
+
+	/**
+	 * @param twColorTokenName from @see TailwindMirrorH
+	 * @returns returns original reference values
+	 */
+	public static readonly getOriginalColorToken = (twColorTokenName: string): IRGB =>
+		pipe(
+			// what if it is grb? then i doomed probably
+			TailwindMirrorH.colorsRecord[twColorTokenName].originalValue.toString(),
+			// do silly check
+			(str) => (str === "" ? "#0ffff" : str),
+			ColorH.CSSHEXString_to_IRGB,
+			option.match(
+				() => ({ r: 1, g: 0, b: 0 }),
 				(some) => some
 			)
 		);

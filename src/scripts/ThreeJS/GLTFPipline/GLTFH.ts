@@ -1,5 +1,4 @@
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
-import type { Option } from "fp-ts/lib/Option";
 import { option } from "fp-ts";
 import { pipe } from "fp-ts/function";
 import type { TGLTFAsset } from "./TGLTFAsset";
@@ -8,11 +7,38 @@ import type { TGLTFAsset } from "./TGLTFAsset";
  *
  */
 export class GLTFH {
-	public static getUserDataValue(object: THREE.Object3D, propertyName: string): Option<string> {
+	public static getuserDataPropertyValue(
+		object: THREE.Object3D,
+		propertyName: string
+	): option.Option<string> {
 		return pipe(
-			(object as TGLTFAsset).extras,
+			object.userData,
+			// (data) => {
+			// 	console.log("extras:");
+			// 	console.log(JSON.stringify(data));
+			// 	console.log(data);
+			// 	return data;
+			// },
 			option.fromNullable,
-			option.map((extras) => extras[propertyName])
+			option.match(
+				() => {
+					console.warn("GLTFH.getUserPropertyValue: not found extras for object: " + object.name);
+					return option.none;
+				},
+				(data) => (data ? option.some<string>(data[propertyName]) : option.none)
+			),
+			option.match(
+				() => {
+					console.warn(
+						"GLTFH.getUserPropertyValue: not found property named: " +
+							propertyName +
+							" on object: " +
+							object.name
+					);
+					return option.none;
+				},
+				(value) => option.some<string>(value)
+			)
 		);
 	}
 }

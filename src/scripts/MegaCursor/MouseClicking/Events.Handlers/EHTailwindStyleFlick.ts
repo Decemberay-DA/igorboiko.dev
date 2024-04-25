@@ -6,37 +6,24 @@ import TailwindH from "@/scripts/styles/TailwindH";
 import TailwindMirrorH from "@/scripts/styles/TailwindMirrorH";
 import { Tween } from "@tweenjs/tween.js";
 import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
-import { flow, pipe } from "fp-ts/lib/function";
+import type { IRGB } from "@/scripts/utils/IRGB";
 
 /**
  *
  */
 export default class EHTailwindStyleFlick implements INotificationHandler<ETAnyInterractionOccured> {
 	async handle(notification: ETAnyInterractionOccured): Promise<void> {
-		const startColor = TailwindH.getColorToken(TailwindMirrorH.colorTokens.GACTIVERIGHT.name);
-		const endColor = TailwindH.getColorToken(TailwindMirrorH.colorTokens.GACTIVELEFT.name);
+		const startColor = TailwindH.getColorToken(TailwindMirrorH.colors.GACTIVERIGHT.name);
+		const endColor = TailwindH.getOriginalColorToken(TailwindMirrorH.colors.GACTIVE.name);
 
-		const toBool = (val: number): number => {
-			return val > 0.5 ? 1 : 0;
-		};
-
-		const tween = new Tween(startColor) //
-			.to(endColor, 3024)
-			// .easing(TWEEN.Easing.Exponential.Out)
-			.easing(
-				flow(
-					TWEEN.Easing.Exponential.In,
-					TWEEN.Easing.Exponential.Out,
-					(x) => x * 100,
-					(x) => x % 1,
-					(x) => Math.sin(x)
-					// toBool
-				)
-			)
-			.onUpdate((data) => {
+		// let accumulated = startColor;
+		const tween = new Tween(startColor)
+			.to(endColor, 1024)
+			.easing(TWEEN.Easing.Exponential.Out)
+			.onUpdate((params) => {
 				document.documentElement.style.setProperty(
-					TailwindH.TWVariableName_To_CSSVariableName(TailwindMirrorH.colorTokens.GACTIVE.name),
-					ColorH.IRGB_to_CSSRGBAString(data)
+					TailwindH.TWVariableName_To_CSSVariableName(TailwindMirrorH.colors.GACTIVE.name),
+					ColorH.IRGB_to_CSSRGBAString(params)
 				);
 			});
 

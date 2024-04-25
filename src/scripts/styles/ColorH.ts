@@ -1,8 +1,24 @@
 import type { IRGB, IRGBA } from "../utils/IRGB";
 import { option } from "fp-ts";
 
+export type TColorEncodings =
+	//
+	| "RGB"
+	// starts with "#"
+	| "HEX";
+
 export default class ColorH {
-	public static HEX_to_IRGB(hex: string): option.Option<IRGB> {
+	public static detectTColorEncoding(colorString: string): TColorEncodings {
+		if (colorString.startsWith("#")) {
+			return "HEX";
+		} else if (colorString.startsWith("rgba")) {
+			return "RGB";
+		} else {
+			throw new Error("Invalid color encoding");
+		}
+	}
+
+	public static CSSHEXString_to_IRGB(hex: string): option.Option<IRGB> {
 		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 		return result
 			? option.some({
@@ -13,6 +29,23 @@ export default class ColorH {
 			: option.none;
 	}
 
+	/**
+	 * @returns #0055ff like
+	 */
+	public static IRGB_to_CSSHEXString(rgb: IRGB): option.Option<string> {
+		function toHex(value: number) {
+			return Math.round(value * 255)
+				.toString(16)
+				.padStart(2, "0");
+		}
+
+		const rHex = toHex(rgb.r);
+		const gHex = toHex(rgb.g);
+		const bHex = toHex(rgb.b);
+
+		return option.some(`#${rHex}${gHex}${bHex}`);
+	}
+
 	public static IRGB_to_CSSRGBAString(color: IRGB, alpha = 1) {
 		const r = Math.round(color.r * 255);
 		const g = Math.round(color.g * 255);
@@ -21,7 +54,7 @@ export default class ColorH {
 	}
 
 	/**
-	 * @param rgbaCSSColor "rgba(0, 120, 255, 1)"
+	 * @param rgbaCSSColor "rgba(0, 120, 255, 1)" like
 	 */
 	public static CSSRGBAString_to_IRGBA(rgbaCSSColor: string): option.Option<IRGBA> {
 		const rgba = rgbaCSSColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([01]?(?:\.\d+)?)\)/);

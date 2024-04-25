@@ -10,17 +10,26 @@ export class Coroutine<T extends Record<string, any>> extends GE.ADynamicObject 
 		return this._tween;
 	}
 
-	public static newFromTween<T extends Record<string, any>>(tween: Tween<T>) {
+	public static newFromTween<T extends Record<string, any>>(
+		tween: Tween<T>,
+		onComplete: (object: T) => void = () => {}
+	) {
+		const coroutine = new Coroutine(tween);
+
+		// delete this ADynamick object when tween finishes
+		tween.onComplete((params) => {
+			onComplete(params);
+			coroutine.delete();
+		});
+
+		// autostart tween
 		tween.start();
-		const cr = new Coroutine(tween);
-		return cr;
+
+		return coroutine;
 	}
 
 	private constructor(tween: Tween<T>) {
 		super();
-
-		// delete this ADynamick object when tween finishes
-		tween.onComplete((params) => this.delete());
 
 		this._tween = tween;
 	}
