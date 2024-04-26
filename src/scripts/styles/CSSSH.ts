@@ -6,7 +6,7 @@ export default class CSSH {
 
 		return val === "" ? getNone() : option.some(val);
 
-		function getNone(): option.Option<string> {
+		function getNone(){
 			console.warn("failed to get css variable named " + cssVariableName + " from document");
 			return option.none;
 		}

@@ -1,6 +1,6 @@
 import { option } from "fp-ts";
 import { THREE } from "../ThreeJS";
-import ColorH from "./ColorH";
+import ColorEncodeH from "./ColorEncodeH";
 import CSSH from "./CSSSH";
 import TailwindH from "./TailwindH";
 
@@ -46,7 +46,7 @@ export default class TailwindMirrorH {
 			const { originalValue: value } = TailwindMirrorH.colorsRecord[key];
 
 			const cssName = TailwindH.TWVariableName_To_CSSVariableName(key);
-			const cssvalue = ColorH.IRGB_to_CSSRGBAString(new THREE.Color(value));
+			const cssvalue = ColorEncodeH.IRGB_to_CSSRGBAString(new THREE.Color(value));
 
 			document.documentElement.style.setProperty(cssName, cssvalue);
 			console.log(

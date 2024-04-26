@@ -4,7 +4,7 @@ import type {
 	RouterScrollBehavior,
 } from "vue-router";
 
-export default class ScrollBehaviour {
+export default class ScrollBehaviourH {
 	private constructor() {}
 
 	public static readonly behaviour: RouterScrollBehavior = (

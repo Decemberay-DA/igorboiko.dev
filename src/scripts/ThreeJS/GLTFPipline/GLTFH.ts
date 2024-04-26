@@ -1,7 +1,7 @@
 import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { option } from "fp-ts";
 import { pipe } from "fp-ts/function";
-import type { TGLTFAsset } from "./TGLTFAsset";
+
 
 /**
  *

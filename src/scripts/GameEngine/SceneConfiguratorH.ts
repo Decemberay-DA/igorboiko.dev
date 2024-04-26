@@ -6,13 +6,15 @@ import NSceneConfigurationChanged from "../CameraManagiment/DefinedScenes/Events
 import { TJ, THREE, VertexColoredMaterialH } from "../ThreeJS";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import TAnyInterractionListener from "../MegaCursor/MouseClicking/TAnyInterractionListener";
+import { pipe } from "fp-ts/lib/function";
+import { array } from "fp-ts";
+import randomH from "../utils/randomH";
+import { math } from "../utils";
 
 /**
  * its goal is to buld scene up.
  */
 export default class SceneConfiguratorH {
-	private constructor() {}
-
 	/**
 	 * Here i am setting up scene.
 	 * like adding main stuff in to it.
@@ -73,13 +75,19 @@ export default class SceneConfiguratorH {
 
 		// add noised transform motion to stars ========-====-====-====-============
 		const starClusters = ThreeObjectFinderH.byUserData(bgScene.scene, "ROLE", "STAR_CLUSTER");
-		for (const cluster of starClusters) {
-			const starClusterRotator = new GE.AnemicDynamicObject({
-				onFrameUpdate() {
-					cluster.rotation.y = GE.GameTime.realTimeSinceStartup * 0.0121;
-				},
-			});
-		}
+		const rotatorses = pipe(
+			starClusters,
+			array.map(
+				(sc) =>
+					new GE.AnemicDynamicObject({
+						onFrameUpdate() {
+							sc.rotation.y =
+								GE.GameTime.realTimeSinceStartup *
+								math.lerp(0.0121, 0.0321, randomH.float0to1());
+						},
+					})
+			)
+		);
 
 		// apply vertex color material on everything ========-====-====-====-============
 		const vertexColored = new TJ.VertexColoredMaterial();

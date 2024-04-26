@@ -7,7 +7,7 @@ export type TColorEncodings =
 	// starts with "#"
 	| "HEX";
 
-export default class ColorH {
+export default class ColorEncodeH {
 	public static detectTColorEncoding(colorString: string): TColorEncodings {
 		if (colorString.startsWith("#")) {
 			return "HEX";
