@@ -1,5 +1,7 @@
 import { GE } from "..";
-
+/**
+ * @deprecated use somwthing from GameEngineFunctional
+ */
 export type TAnemicDynamicObjectParams = Readonly<_IAnemicDynamicObject>;
 interface _IAnemicDynamicObject {
 	onStart?: () => void;
@@ -7,7 +9,9 @@ interface _IAnemicDynamicObject {
 	onDelete?: () => void;
 	onFrameUpdatePriority?: number;
 }
-
+/**
+ * @deprecated use ADT mixing from functional
+ */
 export class AnemicDynamicObject extends GE.ADynamicObject {
 	public readonly params: TAnemicDynamicObjectParams;
 

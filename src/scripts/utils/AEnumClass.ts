@@ -2,5 +2,5 @@
  *
  */
 export interface IEnumClass {
-	this: string;
+	selfName: string;
 }

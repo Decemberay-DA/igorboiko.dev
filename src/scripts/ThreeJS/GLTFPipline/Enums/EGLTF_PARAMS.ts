@@ -7,7 +7,7 @@ import ESUBROLE from "./ESUBROLE";
  */
 
 export default class EGLTF_PARAMS implements IEnumClass {
-	public readonly this = "GLTF_PARAMS";
+	public readonly selfName = "GLTF_PARAMS";
 
 	public static readonly ROLE = new EROLE();
 	public static readonly SUBROLE = new ESUBROLE();

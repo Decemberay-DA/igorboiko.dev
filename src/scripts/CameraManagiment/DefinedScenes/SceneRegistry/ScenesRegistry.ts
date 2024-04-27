@@ -28,14 +28,21 @@ export default class ScenesRegistry {
 
 	public updateCache() {
 		const updateCacheAsync = async () => {
+			//
+			const cahsedIHTMLScenes = await ScenesRegistryH.findHTMLScenes();
 			this.cahsedIHTMLScene.length = 0;
-			this.cahsedIHTMLScene.push(...(await ScenesRegistryH.findHTMLScenes()));
+			this.cahsedIHTMLScene.push(...cahsedIHTMLScenes);
+			//
+			const cahsedITHREEScenes = await ScenesRegistryH.findTHREEScenes();
 			this.cahsedITHREEScene.length = 0;
-			this.cahsedITHREEScene.push(...(await ScenesRegistryH.findTHREEScenes()));
-			this.cahsedIScenes.length = 0;
-			this.cahsedIScenes.push(
-				...(await ScenesRegistryH.findCommonIScenes(this.cahsedIHTMLScene, this.cahsedITHREEScene))
+			this.cahsedITHREEScene.push(...cahsedITHREEScenes);
+			//
+			const cahsedISceness = await ScenesRegistryH.findCommonIScenes(
+				this.cahsedIHTMLScene,
+				this.cahsedITHREEScene
 			);
+			this.cahsedIScenes.length = 0;
+			this.cahsedIScenes.push(...cahsedISceness);
 		};
 		updateCacheAsync().then(() => {
 			SceneRegistryEX.debugState(this);

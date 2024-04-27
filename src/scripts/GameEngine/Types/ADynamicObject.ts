@@ -1,6 +1,10 @@
+import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import { GE } from "..";
 
-export abstract class ADynamicObject implements GE.IEnablable {
+/**
+ * it is a class based on functional ADTs
+ */
+export abstract class ADynamicObject implements IDinamicObject {
 	protected _isEnabled: boolean = true; // is this object should be updated
 	public get isEnabled(): boolean {
 		return this._isEnabled;
@@ -22,7 +26,7 @@ export abstract class ADynamicObject implements GE.IEnablable {
 	public onStart(): void {
 		return;
 	}
-	
+
 	// define the order in which dynamick objects are sorted and updated
 	protected __onFrameUpdatePriority: number = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
 	public get onFrameUpdatePriority(): number {

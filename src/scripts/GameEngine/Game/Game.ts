@@ -2,6 +2,7 @@ import { GE } from "..";
 
 /**
  * game idk
+ * @deprecated use somwthing from GameEngineFunctional
  */
 export class Game implements GE.IEnablable {
 	// IEnablable ========-====-====-====-============

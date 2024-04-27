@@ -1,3 +1,4 @@
+import { pipe } from "fp-ts/lib/function";
 import asi from "../asi/asi";
 import { GE } from "../GameEngine";
 import { THREE } from "../ThreeJS/ThreeEngine/THREE";
@@ -11,10 +12,23 @@ export class CameraAlligner extends GE.ADynamicObject {
 		return asi.data.ThreeSceneManagimented.camera;
 	}
 	public override onFrameUpdate(): void {
-		const direction = new THREE.Vector3()
-			.subVectors(this.camera.position, this.object.position)
-			.normalize();
+		CameraAllignerH.alignObject(this.object, this.camera);
+	}
+}
 
-		this.object.lookAt(this.camera.position);
+export class CameraAllignerH {
+	public static alignObject(
+		object: THREE.Object3D,
+		camera: THREE.Object3D = asi.data.ThreeSceneManagimented.camera
+	): THREE.Object3D {
+		const direction = pipe(
+			new THREE.Vector3(),
+			(v) => v.subVectors(camera.position, camera.position),
+			(v) => v.normalize()
+		);
+
+		object.lookAt(camera.position);
+
+		return object;
 	}
 }

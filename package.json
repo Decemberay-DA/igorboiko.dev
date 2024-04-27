@@ -12,8 +12,10 @@
     },
     "dependencies": {
         "@tweenjs/tween.js": "^23.1.1",
+        "@types/mathjs": "^9.4.2",
         "fp-ts": "^2.16.5",
         "inversify": "^6.0.2",
+        "mathjs": "^12.4.2",
         "process": "^0.11.10",
         "reflect-metadata": "^0.2.2",
         "three": "^0.162.0",

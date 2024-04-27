@@ -3,6 +3,7 @@ import { GE } from "../index";
 /**
  * Handles time managiment in all scenes.
  * Singleton.
+ * @deprecated use somwthing from GameEngineFunctional
  */
 export class GameTime extends GE.ADynamicObject {
 	public constructor() {

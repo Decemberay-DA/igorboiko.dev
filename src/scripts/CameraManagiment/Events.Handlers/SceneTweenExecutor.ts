@@ -1,7 +1,7 @@
 import asi from "@/scripts/asi/asi";
 import { option } from "fp-ts";
 import SectionWasChangedToID from "../DefinedScenes/Events/SectionWasChangedTo";
-import ISceneEX from "../DefinedScenes/IScene/ISceneEX";
+import ISceneH from "../DefinedScenes/IScene/ISceneH";
 import ScenesRegistryH from "../DefinedScenes/SceneRegistry/ScenesRegistryH";
 import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
 
@@ -10,7 +10,7 @@ export default class EHSceneTweenExecutor implements INotificationHandler<Sectio
 		const anyScene = await ScenesRegistryH.findTAnySceneByNameID(notification.newSectionNameID);
 
 		if (option.isSome(anyScene)) {
-			ISceneEX.tweenTo(anyScene.value);
+			ISceneH.tweenTo(anyScene.value);
 		} else {
 			console.error(notification.newSectionNameID + " is not found anySection id");
 		}

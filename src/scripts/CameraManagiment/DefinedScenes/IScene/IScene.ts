@@ -23,6 +23,7 @@ export interface ISceneID {
 export interface IHTMLScene extends ISceneID {
 	htmlElement: HTMLElement;
 }
+
 /**
  * camera position in 3d three scene
  */

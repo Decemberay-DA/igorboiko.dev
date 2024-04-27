@@ -1,13 +1,24 @@
-import { pipe } from "fp-ts/lib/function";
-import { Coroutine, GE } from "../GameEngine";
+import { pipe, type LazyArg } from "fp-ts/lib/function";
+import { GE } from "../GameEngine";
 import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
-import { array } from "fp-ts";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { Tween } from "@tweenjs/tween.js";
 import { TWEEN } from "../FrameworksExport";
 import SmoothLerper from "../CameraManagiment/Lerper";
 import { math } from "../utils";
 import randomH from "../utils/randomH";
+
+export class CoroutineFlick {
+	public static newStarFlick(
+		stars: THREE.Object3D[],
+		chouseAlgorithm: (array: THREE.Object3D[]) => THREE.Object3D,
+		coroutineBuilder: (target: THREE.Object3D) => GE.Coroutine<THREE.Object3D>,
+		CoroutineLauncher: (coroutine: GE.Coroutine<THREE.Object3D>) => void
+	): GE.ADynamicObject {
+		const hgdfs: LazyArg<number> = () => 456;
+		return new GE.AnemicDynamicObject({});
+	}
+}
 
 /**
  * sometimes launches coruotines to animate stars

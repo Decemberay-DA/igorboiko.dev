@@ -4,20 +4,21 @@ import type { IHTMLScene, IScene, ITHREEScene, TAnyScene } from "./IScene";
 /**
  * doing stuff
  */
-export default class ISceneEX {
-	public static tweenTo(scene: TAnyScene) {
+export default class ISceneH {
+	static readonly tweenTo = (scene: TAnyScene): TAnyScene => {
 		if ("htmlElement" in scene) {
-			ISceneEX.tweenToHtmlScene(scene);
+			ISceneH.tweenToHtmlScene(scene);
 		} else if ("camera" in scene) {
-			ISceneEX.tweenToThreeScene(scene);
+			ISceneH.tweenToThreeScene(scene);
 		} else {
-			ISceneEX.tweenToScene(scene);
+			ISceneH.tweenToScene(scene);
 		}
-	}
+		return scene;
+	};
 
 	public static tweenToScene(scene: IScene) {
-		ISceneEX.tweenToHtmlScene(scene);
-		ISceneEX.tweenToThreeScene(scene);
+		ISceneH.tweenToHtmlScene(scene);
+		ISceneH.tweenToThreeScene(scene);
 	}
 	public static tweenToHtmlScene(threeScene: IHTMLScene) {
 		// launch html page scroll tween

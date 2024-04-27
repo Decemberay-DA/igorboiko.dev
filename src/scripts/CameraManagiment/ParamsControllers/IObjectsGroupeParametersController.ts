@@ -1,5 +1,4 @@
 import { GE } from "@/scripts/GameEngine";
-import type { IEnumerable } from "@/scripts/utils/IEnumerable";
 import type { MData } from "@/scripts/utils/markers";
 
 /**
@@ -21,7 +20,7 @@ export type IObjectState<T> = IApplyParamsTo<T>;
 
 export class ObjectParamsController<T>
 	extends GE.ADynamicObject
-	implements IObjectState<T>, IEnumerable<IApplyParamsTo<T>>
+	implements IObjectState<T>
 {
 	public readonly object: T;
 	public readonly paramses: Array<IApplyParamsTo<T>>;

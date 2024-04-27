@@ -1,7 +1,7 @@
 import { GE } from "..";
 
 /**
- * comment
+ * @deprecated use somwthing from GameEngineFunctional
  */
 export class GameManagerH {
 	private constructor() {}

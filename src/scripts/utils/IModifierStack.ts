@@ -1,7 +1,7 @@
-
+import type { Apply } from "fp-ts/lib/Apply";
 
 /**
- * 
+ *
  */
 export class ModifierStack<TObj> implements IModifierStack<TObj> {
 	public readonly modifiers: IModifier<TObj>[] = [];
@@ -20,4 +20,3 @@ export interface IModifierStack<TObj> extends IModifier<TObj> {
 export interface IModifier<TObj> {
 	apply(object: TObj): TObj;
 }
-

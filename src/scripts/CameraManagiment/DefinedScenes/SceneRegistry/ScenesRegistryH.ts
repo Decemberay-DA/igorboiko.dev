@@ -55,7 +55,7 @@ export default class ScenesRegistryH {
 			ThreeObjectFinderH.byUserData(
 				// asi.data.ThreeScene,
 				asi.data.ThreeSceneGLTF.scene,
-				EGLTF_PARAMS.ROLE.this,
+				EGLTF_PARAMS.ROLE.selfName,
 				EGLTF_PARAMS.ROLE.CAMERA_CRANE
 			),
 			// for each crete ITHREEScene
@@ -70,7 +70,7 @@ export default class ScenesRegistryH {
 				crane: crane,
 				camera: ThreeObjectFinderH.byUserData(
 					crane, // search in this ones childs
-					EGLTF_PARAMS.ROLE.this,
+					EGLTF_PARAMS.ROLE.selfName,
 					EGLTF_PARAMS.ROLE.CRANED_CAMERA
 				)[0] as THREE.PerspectiveCamera,
 			}))
