@@ -2,7 +2,7 @@ import { MATHJS } from "@/scripts/FrameworksExport";
 import type { ITimeMoment } from "./ITimeMoment";
 
 /**
- *
+ * 
  */
 export class ITimeMomentH {
 	static readonly calculateDeltaTime =

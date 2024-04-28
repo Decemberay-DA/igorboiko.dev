@@ -112,3 +112,6 @@ The fetures to have to finally put online
 
 - add tags to git repo
   - functional typescript
+
+
+

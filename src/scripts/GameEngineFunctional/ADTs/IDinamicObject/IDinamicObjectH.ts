@@ -1,9 +1,9 @@
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { array } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
-import type { IGame } from "../IGame/IGame";
+import type { IGame } from "../IDinamicUpdate/IDinamicUpdates/IGame/IGame";
 import type { IDinamicObject } from "./IDinamicObject";
-import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
 import type { IGameBounded } from "../IGameBounded/IGameBounded";
 import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";

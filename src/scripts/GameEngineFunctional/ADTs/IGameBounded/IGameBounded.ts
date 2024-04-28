@@ -1,4 +1,4 @@
-import type { IGame } from "../IGame/IGame";
+import type { IGame } from "../IDinamicUpdate/IDinamicUpdates/IGame/IGame";
 
 /**
  * knows about its own game

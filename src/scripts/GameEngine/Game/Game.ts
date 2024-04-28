@@ -1,4 +1,6 @@
+import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import { GE } from "..";
+import { BridgeH } from "../_bridge/Bridge";
 
 /**
  * game idk
@@ -29,26 +31,18 @@ export class Game implements GE.IEnablable {
 	}
 
 	// DynamicObject registration ========-====-====-====-============
-	private _dynamicObjects: GE.ADynamicObject[] = [];
-	public get dynamicObjects(): Readonly<Array<GE.ADynamicObject>> {
+	private _dynamicObjects: IDinamicObject[] = [];
+	public get dynamicObjects(): Readonly<Array<IDinamicObject>> {
 		return Object.freeze([...this._dynamicObjects]);
 	}
-	public async registerDinamicObject(dynamicObject: GE.ADynamicObject): Promise<void> {
+	public async registerDinamicObject(dynamicObject: IDinamicObject): Promise<void> {
 		this._dynamicObjects.push(dynamicObject);
-		this._dynamicObjects.sort((a, b) => a.updateOrder - b.updateOrder);
-		// console.log(`DynamicObject registered`);
-
-		// start this object if it added after first frame start of the game
-		// if (this._isStarted !== true) {
-		// 	dynamicObject.onStart();
-		// }
+		this._dynamicObjects.sort((a, b) => a.onFrameUpdateOrder - b.onFrameUpdateOrder);
 	}
-	public async unRegisterDinamicObject(dynamicObject: GE.ADynamicObject): Promise<void> {
+	public async unRegisterDinamicObject(dynamicObject: IDinamicObject): Promise<void> {
 		const index = this._dynamicObjects.indexOf(dynamicObject);
 		if (index > -1) {
-			// if found
 			this._dynamicObjects.splice(index, 1);
-			// console.log(`DynamicObject un registered`);
 		}
 	}
 	// Game loop ========-====-====-====-============
@@ -58,7 +52,7 @@ export class Game implements GE.IEnablable {
 	}
 	private start(): void {
 		this._dynamicObjects.forEach((dynamicObject) => {
-			dynamicObject.onStart();
+			dynamicObject.onStart(BridgeH.getCurrentITimeMomentFrom_GEGameTime());
 		});
 		// this._isStarted = true;
 		this.update();
@@ -70,7 +64,7 @@ export class Game implements GE.IEnablable {
 
 		this._dynamicObjects.forEach((dynamicObject) => {
 			if (dynamicObject.isEnabled) {
-				dynamicObject.onFrameUpdate();
+				dynamicObject.onFrameUpdate(BridgeH.getCurrentITimeMomentFrom_GEGameTime());
 			}
 		});
 

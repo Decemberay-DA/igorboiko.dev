@@ -1,9 +1,9 @@
-import { IDinamicObjectH } from "../IDinamicObject/IDinamicObjectH";
+import { IDinamicObjectH } from "../../../IDinamicObject/IDinamicObjectH";
 import type { IGame } from "./IGame";
-import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdateB";
-import { IEnableableB } from "../IEnableable/IEnableableB";
-import { GameTimeB } from "../../Types/GameTime";
-import type { IDinamicObject } from "../IDinamicObject/IDinamicObject";
+import { IDinamicUpdateB } from "../../IDinamicUpdate/IDinamicUpdateB";
+import { IEnableableB } from "../../../IEnableable/IEnableableB";
+import { GameTimeB } from "../../../../Types/GameTime";
+import type { IDinamicObject } from "../../../IDinamicObject/IDinamicObject";
 import { IGameH } from "./IGameH";
 
 /**

@@ -21,7 +21,7 @@ export class ACursorStranding extends GE.ADynamicObject {
 
 	protected constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE - 1;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE - 1;
 
 		this.pageRelative = new CursorPositionDataProvider(() => this.__pagePosition);
 		this.clientRelstive = new CursorPositionDataProvider(() => this.__clientPosition);

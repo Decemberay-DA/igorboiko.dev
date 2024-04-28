@@ -8,7 +8,7 @@ import { GE } from "../index";
 export class GameTime extends GE.ADynamicObject {
 	public constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.GAME_TIME;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.GAME_TIME;
 	}
 
 	/**
@@ -19,7 +19,7 @@ export class GameTime extends GE.ADynamicObject {
 	 * in seconds
 	 */
 	public static deltaTime: number = 0;
-	public static currentFrame: number = 0;
+	public static frame: number = 0;
 	/**
 	 * in seconds
 	 */
@@ -29,7 +29,7 @@ export class GameTime extends GE.ADynamicObject {
 		GameTime.deltaTime = (time - GameTime.previousFrameTimestamp) / 1000;
 		GameTime.realTimeSinceStartup += GameTime.deltaTime;
 		GameTime.previousFrameTimestamp = time;
-		GameTime.currentFrame++;
+		GameTime.frame++;
 	}
 
 	public override onStart(): void {

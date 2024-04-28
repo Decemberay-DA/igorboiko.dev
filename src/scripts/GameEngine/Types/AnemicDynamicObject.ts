@@ -7,7 +7,7 @@ interface _IAnemicDynamicObject {
 	onStart?: () => void;
 	onFrameUpdate?: () => void;
 	onDelete?: () => void;
-	onFrameUpdatePriority?: number;
+	onFrameUpdateOrder?: number;
 }
 /**
  * @deprecated use ADT mixing from functional
@@ -20,8 +20,7 @@ export class AnemicDynamicObject extends GE.ADynamicObject {
 
 		this.params = params;
 
-		this.__onFrameUpdatePriority =
-			params.onFrameUpdatePriority ?? GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
+		this.onFrameUpdateOrder = params.onFrameUpdateOrder ?? GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
 	}
 
 	public override onStart() {

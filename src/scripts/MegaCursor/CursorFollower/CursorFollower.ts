@@ -10,7 +10,7 @@ export class CursorFollower extends GE.ADynamicObject {
 
 	public constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 	}
 
 	override onStart(): void {

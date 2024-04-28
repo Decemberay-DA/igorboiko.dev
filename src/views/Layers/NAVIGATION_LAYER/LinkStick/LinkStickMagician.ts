@@ -8,7 +8,7 @@ export default class SideStackMagician extends GE.ADynamicObject {
 
 	public constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.GUI_EFFECTS;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.GUI_EFFECTS;
 	}
 
 	public override onStart(): void {

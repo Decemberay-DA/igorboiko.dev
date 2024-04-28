@@ -24,7 +24,7 @@ export class CurrentSceneFromDOMDetector extends GE.ADynamicObject {
 	}
 
 	private _detect(): void {
-		if (GE.GameTime.currentFrame < 1) return;
+		if (GE.GameTime.frame < 1) return;
 		CurrentSceneFromDOMDetector.byHorizontallCursorOverlap();
 	}
 

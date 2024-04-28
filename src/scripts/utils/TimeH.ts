@@ -1,6 +1,6 @@
 import { pipe } from "fp-ts/lib/function";
 import { GE } from "../GameEngine";
-import { math } from "./math";
+import { mathH } from "./math";
 
 export type TTimeEncoding = "MS" | "SEC" | "MIN" | "HOUR" | "DAY";
 
@@ -55,6 +55,6 @@ export class TimeH {
 		const remains0to1 = (duration / 1) * remainsms;
 		const factor = 1 - remains0to1;
 
-		return math.clamp(factor);
+		return mathH.clamp(factor);
 	}
 }

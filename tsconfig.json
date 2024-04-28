@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"target": "es2017"
+		"target": "ES5"
+		// "target": "es2017"
 		// "module": "esnext"
 	},
 	"references": [

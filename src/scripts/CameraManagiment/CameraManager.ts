@@ -21,7 +21,7 @@ export default class CameraManager extends GE.ADynamicObject {
 
 	public constructor(camera: THREE.PerspectiveCamera) {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
 
 		this.camera = camera;
 		this._realTransforms = new Transforms(this.camera);

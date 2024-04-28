@@ -27,7 +27,7 @@ export class ThreeScene extends GE.ADynamicObject {
 	public constructor() {
 		super();
 		this.disable(); // disabled untill being mounted to htmlelement
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.THREE_SCENE;
 
 		// Scene ========-====-====-====-============
 		this.scene = new THREE.Scene();

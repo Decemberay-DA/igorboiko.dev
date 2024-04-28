@@ -5,7 +5,7 @@ import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFi
 import { Tween } from "@tweenjs/tween.js";
 import { TWEEN } from "../FrameworksExport";
 import SmoothLerper from "../CameraManagiment/Lerper";
-import { math } from "../utils";
+import { mathH } from "../utils";
 import randomH from "../utils/randomH";
 
 export class CoroutineFlick {
@@ -59,7 +59,9 @@ export class StarFlick extends GE.ADynamicObject {
 
 	private static _runFlickFor(star: THREE.Object3D): void {
 		const initialScale = star.scale.clone();
-		const peakScale = star.scale.clone().multiplyScalar(math.lerp(1.33333, 1.99999, randomH.float0to1()));
+		const peakScale = star.scale
+			.clone()
+			.multiplyScalar(mathH.lerp(1.33333, 1.99999, randomH.float0to1()));
 
 		const tween = new Tween({ progress: 0 })
 			.to({ progress: 1 }, 1024)

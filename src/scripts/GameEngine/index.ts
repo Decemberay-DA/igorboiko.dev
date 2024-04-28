@@ -1,5 +1,5 @@
 export * from "./Game";
 export * from "./Types";
-export * from "./SceneConfiguratorH";
+export * from "./Configurations/SceneConfiguratorH";
 
 export * as GE from "./index";

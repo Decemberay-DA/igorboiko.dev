@@ -10,7 +10,7 @@ export default class TAnyInterractionListener extends GE.ADynamicObject {
 
 	public constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE;
 	}
 
 	public override onStart(): void {

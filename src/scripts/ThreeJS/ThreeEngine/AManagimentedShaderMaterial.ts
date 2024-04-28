@@ -9,6 +9,6 @@ export abstract class AManagimentedShaderMaterial extends GE.ADynamicObject {
 
 	protected constructor() {
 		super();
-		this.__onFrameUpdatePriority = GE.OnFrameUpdatePriorities.THREE_SCENE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.THREE_SCENE;
 	}
 }

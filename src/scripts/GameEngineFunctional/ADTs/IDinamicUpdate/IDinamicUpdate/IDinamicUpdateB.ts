@@ -1,5 +1,5 @@
 import { GE } from "@/scripts/GameEngine";
-import { type ITimeMoment } from "../ITimeMoment/ITimeMoment";
+import { type ITimeMoment } from "../../ITimeMoment/ITimeMoment";
 import type { IDinamicUpdate, IDinamicUpdateFields } from "./IDinamicUpdate";
 
 /**
@@ -16,7 +16,7 @@ export class IDinamicUpdateB {
 		onDelete = (time: ITimeMoment) => {},
 	}: IDinamicUpdateFields): IDinamicUpdate => ({
 		onStart: onStart,
-		updateOrder: onFrameUpdatePriority,
+		onFrameUpdateOrder: onFrameUpdatePriority,
 		onFrameUpdate: onFrameUpdate,
 		onDelete: onDelete,
 	});
