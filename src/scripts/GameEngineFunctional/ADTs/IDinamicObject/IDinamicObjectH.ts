@@ -3,7 +3,7 @@ import { array } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
 import type { IGame } from "../IGame/IGame";
 import type { IDinamicObject } from "./IDinamicObject";
-import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IGameBounded } from "../IGameBounded/IGameBounded";
 import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";
@@ -16,7 +16,7 @@ import { SedeffectsH } from "../../SedeffectsH";
 export class IDinamicObjectH {
 	static readonly start =
 		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicUpdates & IEnableable>(obj: A): A => {
+		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
 			return pipe(
 				obj,
 				IEnableableH.executeIfEnabled(() => obj.onStart(time))
@@ -24,7 +24,7 @@ export class IDinamicObjectH {
 		};
 	static readonly frameUpdate =
 		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicUpdates & IEnableable>(obj: A): A => {
+		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
 			return pipe(
 				obj,
 				BroH.logThisOnePLZ,
@@ -35,7 +35,7 @@ export class IDinamicObjectH {
 			);
 		};
 
-	static readonly destroyItself = <A extends IDinamicUpdates & IEnableable & IGameBounded>(obj: A): A => {
+	static readonly destroyItself = <A extends IDinamicUpdate & IEnableable & IGameBounded>(obj: A): A => {
 		const game = obj.parentGame;
 
 		const deleted = pipe(
@@ -54,7 +54,7 @@ export class IDinamicObjectH {
 
 	static readonly destroyFrom =
 		<G extends IGame>(game: G) =>
-		<A extends IDinamicUpdates & IEnableable>(obj: A): G => {
+		<A extends IDinamicUpdate & IEnableable>(obj: A): G => {
 			obj.onDelete(game.timeMoment);
 
 			game.participants = pipe(

@@ -21,3 +21,9 @@ TailwindMirrorH.injectColorTokensToCSSDocument();
 // init game
 await SceneConfiguratorH.asetupMainScenePage();
 GE.Game.getInstance().triggerStart();
+
+
+
+
+// new way to load stuff
+// create array of async finctions and start them at the same time without waiting fot completetion 

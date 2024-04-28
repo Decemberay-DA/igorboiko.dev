@@ -29,7 +29,7 @@ export abstract class ADynamicObject implements IDinamicObject {
 
 	// define the order in which dynamick objects are sorted and updated
 	protected __onFrameUpdatePriority: number = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
-	public get onFrameUpdatePriority(): number {
+	public get updateOrder(): number {
 		return this.__onFrameUpdatePriority;
 	}
 	public onFrameUpdate(): void {

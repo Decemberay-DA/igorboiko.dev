@@ -1,24 +1,22 @@
 import { GE } from "@/scripts/GameEngine";
 import { type ITimeMoment } from "../ITimeMoment/ITimeMoment";
-import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
-import type { IDinamicUpdates, IDinamicUpdatesFields } from "./IDinamicUpdates";
+import type { IDinamicUpdate, IDinamicUpdateFields } from "./IDinamicUpdate";
 
 /**
  *
  */
-export class IDinamicUpdatesB {
+export class IDinamicUpdateB {
 	/**
 	 * creates IDinamicUpdates from optional params
-	 * @see IDinamicUpdates
 	 */
 	static readonly new = ({
 		onStart = (time: ITimeMoment) => {},
-		onFrameUpdatePriority = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
+		updateOrder: onFrameUpdatePriority = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
 		onFrameUpdate = (time: ITimeMoment) => {},
 		onDelete = (time: ITimeMoment) => {},
-	}: IDinamicUpdatesFields): IDinamicUpdates => ({
+	}: IDinamicUpdateFields): IDinamicUpdate => ({
 		onStart: onStart,
-		onFrameUpdatePriority: onFrameUpdatePriority,
+		updateOrder: onFrameUpdatePriority,
 		onFrameUpdate: onFrameUpdate,
 		onDelete: onDelete,
 	});

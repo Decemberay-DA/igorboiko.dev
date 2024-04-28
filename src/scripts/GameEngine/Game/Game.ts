@@ -35,7 +35,7 @@ export class Game implements GE.IEnablable {
 	}
 	public async registerDinamicObject(dynamicObject: GE.ADynamicObject): Promise<void> {
 		this._dynamicObjects.push(dynamicObject);
-		this._dynamicObjects.sort((a, b) => a.onFrameUpdatePriority - b.onFrameUpdatePriority);
+		this._dynamicObjects.sort((a, b) => a.updateOrder - b.updateOrder);
 		// console.log(`DynamicObject registered`);
 
 		// start this object if it added after first frame start of the game

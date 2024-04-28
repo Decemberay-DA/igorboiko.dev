@@ -1,14 +1,14 @@
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 
-export interface IDinamicUpdatesFields {
-	onFrameUpdatePriority?: number;
+export interface IDinamicUpdateFields {
+	updateOrder?: number;
 	onStart?: (time: ITimeMoment) => void;
 	onFrameUpdate?: (time: ITimeMoment) => void;
 	onDelete?: (time: ITimeMoment) => void;
 }
 
-export interface IDinamicUpdates {
-	onFrameUpdatePriority: number;
+export interface IDinamicUpdate {
+	updateOrder: number;
 	onStart: (time: ITimeMoment) => void;
 	onFrameUpdate: (time: ITimeMoment) => void;
 	onDelete: (time: ITimeMoment) => void;

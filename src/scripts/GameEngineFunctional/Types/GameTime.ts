@@ -2,7 +2,7 @@ import { GE } from "@/scripts/GameEngine";
 import { type IDinamicObject } from "../ADTs/IDinamicObject/IDinamicObject";
 import { IGameBoundedB } from "../ADTs/IGameBounded/IGameBoundedB";
 import { type IGameBounded } from "../ADTs/IGameBounded/IGameBounded";
-import { IDinamicUpdatesB } from "../ADTs/IDinamicUpdates/IDinamicUpdatesB";
+import { IDinamicUpdateB } from "../ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { type IEnableable } from "../ADTs/IEnableable/IEnableable";
 import { IEnableableB } from "../ADTs/IEnableable/IEnableableB";
 import type { IGame } from "../ADTs/IGame/IGame";
@@ -32,8 +32,8 @@ export class GameTimeB {
 		const timeMoment = ITimeMomentB.new(startTime);
 		return {
 			...IEnableableB.enabled(),
-			...IDinamicUpdatesB.new({
-				onFrameUpdatePriority: GE.OnFrameUpdatePriorities.GAME_TIME,
+			...IDinamicUpdateB.new({
+				updateOrder: GE.OnFrameUpdatePriorities.GAME_TIME,
 				onFrameUpdate(time) {
 					timeMoment.frame = time.frame + 1;
 					timeMoment.delta = pipe(

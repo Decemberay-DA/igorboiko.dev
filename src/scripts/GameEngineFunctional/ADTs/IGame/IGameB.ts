@@ -1,6 +1,6 @@
 import { IDinamicObjectH } from "../IDinamicObject/IDinamicObjectH";
 import type { IGame } from "./IGame";
-import { IDinamicUpdatesB } from "../IDinamicUpdates/IDinamicUpdatesB";
+import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdateB";
 import { IEnableableB } from "../IEnableable/IEnableableB";
 import { GameTimeB } from "../../Types/GameTime";
 import type { IDinamicObject } from "../IDinamicObject/IDinamicObject";
@@ -21,7 +21,7 @@ export class IGameB {
 		return {
 			...IEnableableB.enabled(),
 			...sIGame,
-			...IDinamicUpdatesB.new({
+			...IDinamicUpdateB.new({
 				// or is it better to use its own time??? // here a time bug probably i thunk
 				onStart(time) {
 					IGameH.traverce((ch) => IDinamicObjectH.start(time)(ch))(sIGame);

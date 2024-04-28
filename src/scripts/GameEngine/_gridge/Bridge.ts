@@ -1,4 +1,4 @@
-import type { IDinamicUpdates } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdates";
+import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
 import type { GE } from "..";
 import type { IEnableable } from "@/scripts/GameEngineFunctional/ADTs/IEnableable/IEnableable";
 
@@ -8,7 +8,7 @@ import type { IEnableable } from "@/scripts/GameEngineFunctional/ADTs/IEnableabl
 export class BridgeH {
 	static readonly ADinamicObject_to_ADTs = <D extends GE.ADynamicObject>(
 		object: D
-	): IDinamicUpdates & IEnableable => {
+	): IDinamicUpdate & IEnableable => {
 		return object;
 	};
 }

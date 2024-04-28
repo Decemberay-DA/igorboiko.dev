@@ -1,7 +1,7 @@
-import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IEnableable } from "../IEnableable/IEnableable";
 
 /**
- *
+ * here is no difference from IGame actually
  */
-export interface IDinamicObject extends IDinamicUpdates, IEnableable {}
+export interface IDinamicObject extends IDinamicUpdate, IEnableable {}
