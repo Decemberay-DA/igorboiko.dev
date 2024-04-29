@@ -1,6 +1,17 @@
 import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import { GE } from "..";
 import { BridgeH } from "../_bridge/Bridge";
+import type { ITimeMoment } from "@/scripts/GameEngineFunctional/ADTs/ITimeMoment/ITimeMoment";
+
+export type __oop_localDinamicObject = {
+	isEnabled: boolean;
+	readonly onFrameUpdateOrder: number;
+	// _isStarted: boolean;
+	readonly onStart: (time: ITimeMoment) => void;
+	readonly onFrameUpdate: (time: ITimeMoment) => void;
+	// _isDeleted: boolean;
+	readonly onDelete: (time: ITimeMoment) => void;
+};
 
 /**
  * game idk
@@ -31,15 +42,15 @@ export class Game implements GE.IEnablable {
 	}
 
 	// DynamicObject registration ========-====-====-====-============
-	private _dynamicObjects: IDinamicObject[] = [];
-	public get dynamicObjects(): Readonly<Array<IDinamicObject>> {
+	private _dynamicObjects: __oop_localDinamicObject[] = [];
+	public get dynamicObjects(): Readonly<Array<__oop_localDinamicObject>> {
 		return Object.freeze([...this._dynamicObjects]);
 	}
-	public async registerDinamicObject(dynamicObject: IDinamicObject): Promise<void> {
+	public async registerDinamicObject(dynamicObject: __oop_localDinamicObject): Promise<void> {
 		this._dynamicObjects.push(dynamicObject);
 		this._dynamicObjects.sort((a, b) => a.onFrameUpdateOrder - b.onFrameUpdateOrder);
 	}
-	public async unRegisterDinamicObject(dynamicObject: IDinamicObject): Promise<void> {
+	public async unRegisterDinamicObject(dynamicObject: __oop_localDinamicObject): Promise<void> {
 		const index = this._dynamicObjects.indexOf(dynamicObject);
 		if (index > -1) {
 			this._dynamicObjects.splice(index, 1);
@@ -58,8 +69,6 @@ export class Game implements GE.IEnablable {
 		this.update();
 	}
 	private update(): void {
-		// what about WASM???? dooooodeee noooooooooo
-		// dont update anything if disable
 		if (!this.__isEnabled) return;
 
 		this._dynamicObjects.forEach((dynamicObject) => {
@@ -67,10 +76,6 @@ export class Game implements GE.IEnablable {
 				dynamicObject.onFrameUpdate(BridgeH.getCurrentITimeMomentFrom_GEGameTime());
 			}
 		});
-
-		// console.log(
-		// 	`Game updated "${GE.GameTime.currentFrame}", current time "${GE.GameTime.realTimeSinceStartup}", delta time "${GE.GameTime.deltaTime}"`
-		// );
 
 		requestAnimationFrame(() => this.update()); // Continue the loop
 	}

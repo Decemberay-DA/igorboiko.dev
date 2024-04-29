@@ -2,11 +2,9 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import asi from "../../asi/asi";
 import NSceneConfigurationChanged from "../../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
 import { TJ, THREE, VertexColoredMaterialH } from "../../ThreeJS";
-import TAnyInterractionListener from "../../MegaCursor/MouseClicking/TAnyInterractionListener";
-import { ConfigurationH } from "./ConfigurationH";
+import { TAnyInterractionListenerB } from "../../MegaCursor/MouseClicking/TAnyInterractionListener";
 import { pipe, type LazyArg } from "fp-ts/lib/function";
 import { array } from "fp-ts";
-import { IDinamicUpdatesB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesB";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
 import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
@@ -14,7 +12,8 @@ import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUp
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { BroH } from "@/scripts/GameEngineFunctional/FunctionalBroH";
-import { IDinamicObjectH } from "../../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectH";
+import { GameB } from "@/scripts/GameEngineFunctional/Types/GameB";
+
 /**
  * its goal is to buld scene up.
  */
@@ -26,8 +25,10 @@ export default class SceneConfiguratorH {
 	 */
 	public static async asetupMainScenePage() {
 		// Base Game setup ========-====-====-====-============
-		ConfigurationH.time();
-		const listenerA = new TAnyInterractionListener();
+		// ConfigurationH.time(); // obsolete
+		// const listenerA = new TAnyInterractionListener();
+		const listenerGame = GameB.listenerGame();
+		const anyListener = TAnyInterractionListenerB.new(listenerGame.self);
 
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
@@ -52,18 +53,9 @@ export default class SceneConfiguratorH {
 		// const cameraPilot = FPSPilotB.new(mainCamera);
 		// GE.Game.getInstance().registerDinamicObject(cameraPilot);
 
-		const rootGame = pipe(
-			{
-				onStart(time) {
-					console.log("Root game started");
-				},
-			},
-			IDinamicUpdatesB.new,
-			IDinamicObjectB.newRoot,
-			IDB.new
-		);
+		const rootGame = GameB.rootGame();
 
-		const newTimeBasedRotator =
+		const newTimeBasedRotation =
 			(axis: "x" | "y" | "z") =>
 			(speed: LazyArg<number>) =>
 			(obj: THREE.Object3D): IDinamicUpdate =>
@@ -79,9 +71,9 @@ export default class SceneConfiguratorH {
 			array.map((cube) =>
 				pipe(
 					cube,
-					newTimeBasedRotator("y")(() => 0.0003375),
-					IDinamicObjectB.newFromIDinamicUpdate,
-					IDinamicUpdatesH.newInsertedAndBinded(rootGame.self),
+					newTimeBasedRotation("y")(() => 0.0003375),
+					IDinamicObjectB.new,
+					IDinamicUpdatesH.newInsertedAndParented(rootGame.self),
 					IDB.new,
 					BroH.logThisOnePLZ
 					// BroH.meanwhile((id) => console.log(id))

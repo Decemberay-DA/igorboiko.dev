@@ -1,10 +1,9 @@
-import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
-import { GE } from "..";
+import { GE, type __oop_localDinamicObject } from "..";
 
 /**
  * it is a class based on functional ADTs
  */
-export abstract class ADynamicObject implements IDinamicObject {
+export abstract class ADynamicObject implements __oop_localDinamicObject {
 	protected _isEnabled: boolean = true; // is this object should be updated
 	public get isEnabled(): boolean {
 		return this._isEnabled;
@@ -18,8 +17,9 @@ export abstract class ADynamicObject implements IDinamicObject {
 		console.log("DynamicObject '" + this.constructor.name + "' disabled.");
 	}
 
+	public isRegistersItSelfInOOPGame = true;
 	protected constructor() {
-		GE.Game.getInstance().registerDinamicObject(this);
+		if (this.isRegistersItSelfInOOPGame) GE.Game.getInstance().registerDinamicObject(this);
 		console.log("DynamicObject '" + this.constructor.name + "' created.");
 	}
 
@@ -36,13 +36,10 @@ export abstract class ADynamicObject implements IDinamicObject {
 		return;
 	}
 
-	private _isDeleted = false;
-	public get isDeleted() {
-		return this._isDeleted;
-	}
+	public _isDeleted = false;
 	public delete(): void {
 		this.onDelete();
-		GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
+		if (this.isRegistersItSelfInOOPGame) GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
 		this._isDeleted = true;
 	}
 }

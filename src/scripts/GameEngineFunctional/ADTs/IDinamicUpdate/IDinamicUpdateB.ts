@@ -10,14 +10,16 @@ export class IDinamicUpdateB {
 	 * creates IDinamicUpdates from optional params
 	 */
 	static readonly new = ({
-		onStart = (time: ITimeMoment) => {},
 		onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
+		onStart = (time: ITimeMoment) => {},
 		onFrameUpdate = (time: ITimeMoment) => {},
 		onDelete = (time: ITimeMoment) => {},
 	}: IDinamicUpdateFields): IDinamicUpdate => ({
-		onStart: onStart,
 		onFrameUpdateOrder: onFrameUpdateOrder,
+		_isStarted: false,
+		onStart: onStart,
 		onFrameUpdate: onFrameUpdate,
+		_isDeleted: false,
 		onDelete: onDelete,
 	});
 }

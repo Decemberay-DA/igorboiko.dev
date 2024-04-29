@@ -1,12 +1,6 @@
-import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
-
 /**
- * knows about its own game
+ * knows about its parent context
  */
-export interface IParented extends IParented2<IDinamicUpdates> {
-	parent: IDinamicUpdates;
-}
-
-export interface IParented2<Parent> {
+export interface IParented<Parent> {
 	parent: Parent;
 }

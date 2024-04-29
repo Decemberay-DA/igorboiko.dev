@@ -19,10 +19,12 @@ export interface IRootGame {
  *
  */
 export class IDinamicObjectB {
-	// /**
-	//  * @returns root top dinamic object that is updating itself
-	//  */
-	static newRoot = <A extends IDinamicUpdate>(updateability: A): A & IDinamicObject & IRootGame => {
+	/**
+	 * @returns root top dinamic object that is updating itself
+	 */
+	static newRootSelfUpdating = <A extends IDinamicUpdate>(
+		updateability: A
+	): A & IDinamicObject & IRootGame => {
 		const IRootGameData: IRootGame = {
 			startedAt: performance.now(),
 			rootTime: ITimeMomentB.new(0),
@@ -81,7 +83,7 @@ export class IDinamicObjectB {
 		return rootObject;
 	};
 
-	static newFromIDinamicUpdate = <A extends IDinamicUpdate>(updateability: A): A & IDinamicObject => {
+	static new = <A extends IDinamicUpdate>(updateability: A): A & IDinamicObject => {
 		return {
 			...updateability,
 			...IEnableableB.enabled(),

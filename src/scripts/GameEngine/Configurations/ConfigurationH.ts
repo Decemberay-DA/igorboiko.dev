@@ -1,10 +1,7 @@
 import { GE } from "..";
 
 /**
- *
+ * contains smoll chunck of configuration procedures so i could 
  */
 export class ConfigurationH {
-	static readonly time = () => {
-		const timeUpdater = new GE.GameTime();
-	};
 }

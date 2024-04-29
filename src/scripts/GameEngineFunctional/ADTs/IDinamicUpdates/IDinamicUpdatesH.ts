@@ -21,17 +21,19 @@ export class IDinamicUpdatesH {
 			return updateability;
 		};
 
-	static newInsertedAndBinded =
+	static newInsertedAndParented =
 		<A extends IDinamicUpdates>(collection: A) =>
-		<B extends IDinamicUpdate>(updateability: B): B & IParented => {
+		<B extends IDinamicUpdate>(updateability: B): B & IParented<A> => {
 			return {
 				...IDinamicUpdatesH.insert(collection)(updateability),
 				parent: collection,
 			};
 		};
-	static newRemovedAndUnBinded =
+	static newRemovedAndUnParented =
 		<A extends IDinamicUpdates>(collection: A) =>
-		<B extends IDinamicUpdate & IParented>(updateability: B): Omit<B, keyof IParented> => {
+		<B extends IDinamicUpdate & IParented<IDinamicUpdates>>(
+			updateability: B
+		): Omit<B, keyof IParented<IDinamicUpdates>> => {
 			return {
 				...IDinamicUpdatesH.remove(collection)(updateability),
 			};

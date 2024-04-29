@@ -1,5 +1,5 @@
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
-import { array } from "fp-ts";
+import { array, option } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IParented } from "../IParented/IParented";
@@ -15,16 +15,34 @@ import type { IDinamicObject } from "./IDinamicObject";
 export class IDinamicObjectH {
 	static readonly start =
 		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
+		<A extends IDinamicObject>(obj: A): A => {
 			return pipe(
 				obj,
-				IEnableableH.executeIfEnabled(() => obj.onStart(time)),
+				IEnableableH.executeIfEnabled(() => {
+					obj.onStart(time);
+					obj._isStarted = true;
+				}),
 				BroH.meanwhile((bro) => console.log("started: " + bro))
 			);
 		};
+	static readonly tryStart =
+		<T extends ITimeMoment>(time: T) =>
+		<A extends object>(obj: A): A => {
+			// the worst typescript i have ever wrote
+			if ("onStart" in obj === false) return obj;
+			return pipe(
+				obj as any as IDinamicObject,
+				option.fromNullable,
+				option.match(
+					() => obj,
+					(casted) => IDinamicObjectH.start(time)(casted) as A
+				)
+			);
+		};
+
 	static readonly frameUpdate =
 		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
+		<A extends IDinamicObject>(obj: A): A => {
 			return pipe(
 				obj,
 				// BroH.logThisOnePLZ,

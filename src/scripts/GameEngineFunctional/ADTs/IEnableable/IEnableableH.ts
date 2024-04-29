@@ -16,7 +16,7 @@ export class IEnableableH {
 		obj.isEnabled = !obj.isEnabled;
 		return obj;
 	};
-	static readonly cloneFrom =
+	static readonly copyFrom =
 		<A extends IEnableable>(obj: A) =>
 		(reference: A): A => {
 			obj.isEnabled = reference.isEnabled;

@@ -1,7 +1,7 @@
-import { mathH } from "../utils/mathH";
+import { mathH } from "./mathH";
 
 /**
- *
+ * moves arguments aroud and over
  */
 export class ArgumentsH {
 	/**
