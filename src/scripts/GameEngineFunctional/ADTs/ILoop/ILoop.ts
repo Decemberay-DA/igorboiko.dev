@@ -17,7 +17,7 @@ export class ILoopB {
 					everyFrameUpdate({
 						frame: count,
 					});
-					console.log("LoopBehaviour: lopped: " + count);
+					// console.log("LoopBehaviour: lopped: " + count);
 					count++;
 				}
 

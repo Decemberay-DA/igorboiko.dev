@@ -1,7 +1,7 @@
 import { GE } from "@/scripts/GameEngine";
 import { type IDinamicObject } from "../ADTs/IDinamicObject/IDinamicObject";
 import { IGameBoundedB } from "../ADTs/IGameBounded/IGameBoundedB";
-import { type IGameBounded } from "../ADTs/IGameBounded/IGameBounded";
+import { type IParented } from "../ADTs/IGameBounded/IGameBounded";
 import { IDinamicUpdateB } from "../ADTs/IDinamicUpdate/IDinamicUpdate/IDinamicUpdateB";
 import { type IEnableable } from "../ADTs/IEnableable/IEnableable";
 import { IEnableableB } from "../ADTs/IEnableable/IEnableableB";
@@ -17,7 +17,7 @@ import { pipe } from "fp-ts/lib/function";
 export class GameTimeB {
 	static readonly newTracker =
 		(startTime: number = 0) =>
-		<A extends IGame>(game: A): IDinamicObject & IGameBounded & ITimeMoment => {
+		<A extends IGame>(game: A): IDinamicObject & IParented & ITimeMoment => {
 			const root = GameTimeB.newRootTracker(startTime);
 			return {
 				...root,

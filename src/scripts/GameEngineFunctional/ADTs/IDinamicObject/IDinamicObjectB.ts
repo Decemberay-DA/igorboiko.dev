@@ -22,7 +22,7 @@ export class IDinamicObjectB {
 	// /**
 	//  * @returns root top dinamic object that is updating itself
 	//  */
-	static newRoot = <A extends IDinamicUpdate>(updateability: A): A & IEnableable & IRootGame => {
+	static newRoot = <A extends IDinamicUpdate>(updateability: A): A & IDinamicObject & IRootGame => {
 		const IRootGameData: IRootGame = {
 			startedAt: performance.now(),
 			rootTime: ITimeMomentB.new(0),
@@ -79,5 +79,12 @@ export class IDinamicObjectB {
 		loop();
 
 		return rootObject;
+	};
+
+	static newFromIDinamicUpdate = <A extends IDinamicUpdate>(updateability: A): A & IDinamicObject => {
+		return {
+			...updateability,
+			...IEnableableB.enabled(),
+		};
 	};
 }

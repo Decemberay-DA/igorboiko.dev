@@ -1,3 +1,4 @@
+import type { IParented } from "../../IGameBounded/IGameBounded";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
 
@@ -5,26 +6,34 @@ export class IDinamicUpdatesH {
 	/**
 	 * adds in collection new functions to sorted position
 	 */
-	static insertAndSort =
-		(updateability: IDinamicUpdate) =>
-		(collection: IDinamicUpdates): IDinamicUpdates => {
-			const arr = { ...collection.participants };
-			arr.push(updateability);
-			arr.sort((a, b) => a.onFrameUpdateOrder - b.onFrameUpdateOrder);
+	static insert =
+		<A extends IDinamicUpdates>(collection: A) =>
+		<B extends IDinamicUpdate>(updateability: B): B => {
+			collection.participants.push(updateability);
+			collection.participants.sort((a, b) => a.onFrameUpdateOrder - b.onFrameUpdateOrder);
+			return updateability;
+		};
+	static remove =
+		<A extends IDinamicUpdates>(collection: A) =>
+		<B extends IDinamicUpdate>(updateability: B): B => {
+			const index = collection.participants.indexOf(updateability);
+			if (index > -1) collection.participants.splice(index, 1);
+			return updateability;
+		};
+
+	static newInsertedAndBinded =
+		<A extends IDinamicUpdates>(collection: A) =>
+		<B extends IDinamicUpdate>(updateability: B): B & IParented => {
 			return {
-				...collection,
-				participants: arr,
+				...IDinamicUpdatesH.insert(collection)(updateability),
+				parentExecutor: collection,
 			};
 		};
-	static removeAndSort =
-		(updateability: IDinamicUpdate) =>
-		(collection: IDinamicUpdates): IDinamicUpdates => {
-			const arr = { ...collection.participants };
-			const index = arr.indexOf(updateability);
-			if (index > -1) arr.splice(index, 1);
+	static newRemovedAndUnBinded =
+		<A extends IDinamicUpdates>(collection: A) =>
+		<B extends IDinamicUpdate & IParented>(updateability: B): Omit<B, "parentExecutor"> => {
 			return {
-				...collection,
-				participants: arr,
+				...IDinamicUpdatesH.remove(collection)(updateability),
 			};
 		};
 }

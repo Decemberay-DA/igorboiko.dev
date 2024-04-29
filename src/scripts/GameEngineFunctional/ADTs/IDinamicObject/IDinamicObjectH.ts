@@ -4,7 +4,7 @@ import { pipe } from "fp-ts/lib/function";
 import type { IGame } from "../IDinamicUpdate/IDinamicUpdates/IGame/IGame";
 import type { IDinamicObject } from "./IDinamicObject";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
-import type { IGameBounded } from "../IGameBounded/IGameBounded";
+import type { IParented } from "../IGameBounded/IGameBounded";
 import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";
 import { BroH } from "../../FunctionalBroH";
@@ -36,8 +36,8 @@ export class IDinamicObjectH {
 			);
 		};
 
-	static readonly destroyItself = <A extends IDinamicUpdate & IEnableable & IGameBounded>(obj: A): A => {
-		const game = obj.parentGame;
+	static readonly destroyItself = <A extends IDinamicUpdate & IEnableable & IParented>(obj: A): A => {
+		const game = obj.parentExecutor;
 
 		const deleted = pipe(
 			obj,
