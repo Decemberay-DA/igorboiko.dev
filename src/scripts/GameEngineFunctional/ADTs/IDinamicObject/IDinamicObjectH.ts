@@ -19,7 +19,8 @@ export class IDinamicObjectH {
 		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
 			return pipe(
 				obj,
-				IEnableableH.executeIfEnabled(() => obj.onStart(time))
+				IEnableableH.executeIfEnabled(() => obj.onStart(time)),
+				BroH.meanwhile((bro) => console.log("started: " + bro))
 			);
 		};
 	static readonly frameUpdate =
@@ -27,9 +28,9 @@ export class IDinamicObjectH {
 		<A extends IDinamicUpdate & IEnableable>(obj: A): A => {
 			return pipe(
 				obj,
-				BroH.logThisOnePLZ,
-				IEnableableH.executeIfEnabled(() => obj.onFrameUpdate(time)),
-				BroH.meanwhile((bro) => console.log("meanwhiled " + bro))
+				// BroH.logThisOnePLZ,
+				IEnableableH.executeIfEnabled(() => obj.onFrameUpdate(time))
+				// BroH.meanwhile((bro) => console.log("meanwhiled " + bro))
 				// SedeffectsH.doIf((obj) => console.log(obj))((obj) => true)
 				// SedeffectsH.doIf((obj)=>obj.)
 			);

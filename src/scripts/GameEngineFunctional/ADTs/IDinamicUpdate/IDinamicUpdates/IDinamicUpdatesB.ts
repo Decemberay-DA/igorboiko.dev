@@ -1,6 +1,6 @@
 import type { IDinamicUpdate, IDinamicUpdateFields } from "../IDinamicUpdate/IDinamicUpdate";
 import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdateB";
-import { IDinamicUpdates } from "./IDinamicUpdates";
+import type { IDinamicUpdates } from "./IDinamicUpdates";
 
 export class IDinamicUpdatesB {
 	private static traverce =
