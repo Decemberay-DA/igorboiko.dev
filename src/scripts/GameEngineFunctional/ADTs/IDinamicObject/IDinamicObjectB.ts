@@ -3,16 +3,16 @@ import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate
 import type { IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableB } from "../IEnableable/IEnableableB";
 import { IEnableableH } from "../IEnableable/IEnableableH";
-import { ILoopB } from "../ILoop/ILoop";
+import { ILoopB, type ILoopDataBag } from "../ILoop/ILoop";
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicObjectH } from "./IDinamicObjectH";
+import { OnFrameUpdatePriorities } from "../../../GameEngine/Game/OnFrameUpdatePriorities";
 
 export interface IRootGame {
 	readonly startedAt: number;
 	rootTime: ITimeMoment;
-	isStarted: boolean;
 }
 
 /**
@@ -21,94 +21,61 @@ export interface IRootGame {
 export class IDinamicObjectB {
 	// /**
 	//  * @returns root top dinamic object that is updating itself
-	//  * TODO -> i need ID here actually very much
 	//  */
-	// static newRoot = (updateability: IDinamicUpdate): IDinamicObject & IRootGame => {
-	// 	const data: IRootGame = {
-	// 		startedAt: performance.now(),
-	// 		rootTime: ITimeMomentB.new(0),
-	// 		isStarted: false,
-	// 		isLooping: true,
-	// 	};
-
-	// 	const currentTime = () => performance.now() - data.startedAt;
-	// 	const updateRootTime = () => (data.rootTime = ITimeMomentB.current(data.rootTime)(currentTime()));
-
-	// 	const rootupdateability = IDinamicUpdateB.new({
-	// 		...updateability,
-	// 		onDelete(time) {
-	// 			updateability.onDelete(time);
-	// 			data.isLooping = false; // exit loop when deleted
-	// 		},
-	// 	});
-	// 	const rootObject: IDinamicObject & IRootGame = {
-	// 		...data,
-	// 		...rootupdateability,
-	// 		...IEnableableB.enabled(),
-	// 	};
-
-	// 	const loop = () => {
-	// 		if (!data.isStarted) {
-	// 			if (rootObject.isEnabled === false) return; // start only when object enabled
-
-	// 			updateRootTime();
-	// 			IDinamicObjectH.start(data.rootTime)(rootObject);
-	// 			data.isStarted = true;
-	// 		}
-	// 		if (!data.isLooping) return; // exit loop
-
-	// 		updateRootTime();
-	// 		IDinamicObjectH.frameUpdate(data.rootTime)(rootObject);
-
-	// 		requestAnimationFrame(() => loop());
-	// 	};
-
-	// 	// starting the loop
-	// 	loop();
-
-	// 	return rootObject;
-	// };
-	static newRoot = (updateability: IDinamicUpdate): IDinamicObject & IRootGame => {
-		const data: IRootGame = {
+	static newRoot = <A extends IDinamicUpdate>(updateability: A): A & IEnableable & IRootGame => {
+		const IRootGameData: IRootGame = {
 			startedAt: performance.now(),
 			rootTime: ITimeMomentB.new(0),
-			isStarted: false,
 		};
-		let killSignal = () => false;
+		let _isStarted = false;
+		let _killSignal = () => false;
 
-		const currentTime = () => performance.now() - data.startedAt;
-		const updateRootTime = () => (data.rootTime = ITimeMomentB.current(data.rootTime)(currentTime()));
+		const _currentRelativeTime = () => performance.now() - IRootGameData.startedAt;
+		const _updateRootTime = (currentFrame: number) =>
+			(IRootGameData.rootTime = {
+				...ITimeMomentB.current(IRootGameData.rootTime)(_currentRelativeTime()),
+				frame: currentFrame,
+			});
 
 		const rootupdateability = IDinamicUpdateB.new({
 			...updateability,
+			onStart(time) {
+				updateability.onStart(time);
+				_isStarted = true;
+			},
+			onFrameUpdateOrder: updateability.onFrameUpdateOrder,
+			onFrameUpdate(time) {
+				updateability.onFrameUpdate(time);
+			},
 			onDelete(time) {
 				updateability.onDelete(time);
-				killSignal = () => true;
+				_killSignal = () => true;
 			},
 		});
-		const rootObject: IDinamicObject & IRootGame = {
-			...data,
+		// yo this mixing is crazy omg
+		const rootObject: A & IEnableable & IRootGame = {
+			...updateability,
+			...IRootGameData,
 			...rootupdateability,
 			...IEnableableB.enabled(),
 		};
 
-		const onLoopUpdate = () => {
-			if (!data.isStarted) {
+		const _onLoopUpdate = (loopDataBag: ILoopDataBag) => {
+			if (!_isStarted) {
 				if (rootObject.isEnabled === false) return; // start only when object enabled
 
 				// console.log("started in LOOP");
 
-				updateRootTime();
-				IDinamicObjectH.start(data.rootTime)(rootObject);
-				data.isStarted = true;
+				_updateRootTime(loopDataBag.frame);
+				IDinamicObjectH.start(IRootGameData.rootTime)(rootObject);
 			}
 
-			updateRootTime();
-			IDinamicObjectH.frameUpdate(data.rootTime)(rootObject);
+			_updateRootTime(loopDataBag.frame);
+			IDinamicObjectH.frameUpdate(IRootGameData.rootTime)(rootObject);
 			// console.log("UPDATED in LOOP");
 		};
 
-		const loop = ILoopB.newLoopBehaviour(killSignal)(() => rootObject.isEnabled)(onLoopUpdate);
+		const loop = ILoopB.newLoopBehaviour(_killSignal)(() => rootObject.isEnabled)(_onLoopUpdate);
 		loop();
 
 		return rootObject;

@@ -11,12 +11,12 @@ export class IDinamicUpdateB {
 	 */
 	static readonly new = ({
 		onStart = (time: ITimeMoment) => {},
-		updateOrder: onFrameUpdatePriority = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
+		onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
 		onFrameUpdate = (time: ITimeMoment) => {},
 		onDelete = (time: ITimeMoment) => {},
 	}: IDinamicUpdateFields): IDinamicUpdate => ({
 		onStart: onStart,
-		onFrameUpdateOrder: onFrameUpdatePriority,
+		onFrameUpdateOrder: onFrameUpdateOrder,
 		onFrameUpdate: onFrameUpdate,
 		onDelete: onDelete,
 	});

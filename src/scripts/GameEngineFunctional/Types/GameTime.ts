@@ -33,7 +33,7 @@ export class GameTimeB {
 		return {
 			...IEnableableB.enabled(),
 			...IDinamicUpdateB.new({
-				updateOrder: GE.OnFrameUpdatePriorities.GAME_TIME,
+				onFrameUpdateOrder: GE.OnFrameUpdatePriorities.GAME_TIME,
 				onFrameUpdate(time) {
 					timeMoment.frame = time.frame + 1;
 					timeMoment.delta = pipe(

@@ -16,6 +16,7 @@ import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinami
 import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdates/IDinamicUpdatesH";
 import { PromisseH } from "@/scripts/utils/PromisseH";
 import { ILoopB } from "@/scripts/GameEngineFunctional/ADTs/ILoop/ILoop";
+import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 /**
  * its goal is to buld scene up.
  */
@@ -88,21 +89,17 @@ export default class SceneConfiguratorH {
 		// 	),
 		// ]);
 
-		const testRootGame = IDinamicObjectB.newRoot(
-			IDinamicUpdatesB.new({
-				onStart(time) {
-					console.log("started time: " + time.frame + " " + time.delta);
-				},
-				onFrameUpdate(time) {
-					console.log("frame updated time: " + time.frame + " " + time.delta);
-				},
-			})
-		);
-
-		// // new collection
-		// const collectionUpdateability = IDinamicUpdatesB.new({});
-		// // new root collection updater
-		// const rootGame = IDinamicObjectB.newRoot(collectionUpdateability)(IEnableableB.enabled());
+		// new collection
+		const rootGameLooppingParticipants = IDinamicUpdatesB.new({
+			onStart(time) {
+				console.warn("started time: " + time.frame + " " + time.delta);
+			},
+			onFrameUpdate(time) {
+				console.warn("frame updated on root object time: " + time.frame + " " + time.delta);
+			},
+		});
+		const rootGameLoopping = IDinamicObjectB.newRoot(rootGameLooppingParticipants);
+		const rootGame = IDB.new(rootGameLoopping);
 
 		// const cubeRotators = pipe(
 		// 	asi.data.ThreeScene.children,
