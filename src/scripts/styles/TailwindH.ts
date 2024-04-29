@@ -18,15 +18,9 @@ export default class TailwindH {
 			twColorTokenName,
 			TailwindH.TWVariableName_To_CSSVariableName,
 			CSSH.getCssVariableValueAsString,
-			option.match(
-				() => ColorEncodeH.IRGB_to_CSSRGBAString({ r: 1, g: 0, b: 0 }),
-				(some) => some
-			),
+			option.getOrElse(() => ColorEncodeH.IRGB_to_CSSRGBAString({ r: 1, g: 0, b: 0 })),
 			ColorEncodeH.CSSRGBAString_to_IRGBA,
-			option.match(
-				() => ({ r: 0, g: 1, b: 0 }),
-				(some) => some
-			)
+			option.getOrElse(() => ({ r: 0, g: 1, b: 0 }))
 		);
 
 	/**
@@ -40,10 +34,7 @@ export default class TailwindH {
 			// do silly check
 			(str) => (str === "" ? "#00ffff" : str),
 			ColorEncodeH.CSSHEXString_to_IRGB,
-			option.match(
-				() => ({ r: 1, g: 0, b: 0 }),
-				(some) => some
-			)
+			option.getOrElse(() => ({ r: 1, g: 0, b: 0 }))
 		);
 
 	public static readonly TWVariableName_To_CSSVariableName = (tailwingVariableName: string): string =>

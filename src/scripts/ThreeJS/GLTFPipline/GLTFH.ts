@@ -2,7 +2,6 @@ import type { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
 import { option } from "fp-ts";
 import { pipe } from "fp-ts/function";
 
-
 /**
  *
  */
@@ -22,14 +21,14 @@ export class GLTFH {
 			option.fromNullable,
 			option.match(
 				() => {
-					console.warn("GLTFH.getUserPropertyValue: not found extras for object: " + object.name);
+					console.error("GLTFH.getUserPropertyValue: not found extras for object: " + object.name);
 					return option.none;
 				},
 				(data) => (data ? option.some<string>(data[propertyName]) : option.none)
 			),
 			option.match(
 				() => {
-					console.warn(
+					console.error(
 						"GLTFH.getUserPropertyValue: not found property named: " +
 							propertyName +
 							" on object: " +

@@ -29,6 +29,7 @@ export class IDinamicObjectH {
 		<T extends ITimeMoment>(time: T) =>
 		<A extends object>(obj: A): A => {
 			// the worst typescript i have ever wrote
+			// i am expecting bug here
 			if ("onStart" in obj === false) return obj;
 			return pipe(
 				obj as any as IDinamicObject,

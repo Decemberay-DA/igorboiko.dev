@@ -1,6 +1,8 @@
 import type { IParented } from "../IParented/IParented";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
+import { pipe } from "fp-ts/lib/function";
+import { URIB } from "../_IURI/URIB";
 
 export class IDinamicUpdatesH {
 	/**

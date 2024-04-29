@@ -13,6 +13,7 @@ import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { BroH } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { GameB } from "@/scripts/GameEngineFunctional/Types/GameB";
+import { URIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/URIB";
 
 /**
  * its goal is to buld scene up.
@@ -74,8 +75,8 @@ export default class SceneConfiguratorH {
 					newTimeBasedRotation("y")(() => 0.0003375),
 					IDinamicObjectB.new,
 					IDinamicUpdatesH.newInsertedAndParented(rootGame.self),
-					IDB.new,
-					BroH.logThisOnePLZ
+					URIB.newImprinted("CubeRotator"),
+					IDB.new
 					// BroH.meanwhile((id) => console.log(id))
 				)
 			)
