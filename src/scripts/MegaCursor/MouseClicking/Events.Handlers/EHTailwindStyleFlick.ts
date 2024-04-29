@@ -1,12 +1,11 @@
 import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFileMediator";
 import { TWEEN } from "@/scripts/FrameworksExport";
-import { GE } from "@/scripts/GameEngine";
 import ColorEncodeH from "@/scripts/styles/ColorEncodeH";
 import TailwindH from "@/scripts/styles/TailwindH";
 import TailwindMirrorH from "@/scripts/styles/TailwindMirrorH";
 import { Tween } from "@tweenjs/tween.js";
 import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
-import type { IRGB } from "@/scripts/utils/IRGB";
+import { CoroutineB } from "@/scripts/GameEngineFunctional/Types/CoroutineB";
 
 /**
  *
@@ -27,7 +26,8 @@ export default class EHTailwindStyleFlick implements INotificationHandler<ETAnyI
 				);
 			});
 
-		const coroutine = GE.Coroutine.newFromTween(tween);
+		// const coroutine = GE.Coroutine.newFromTween(tween);
+		const coroutine = CoroutineB.newFromTweenAsGameRoot(tween);
 
 		return Promise.resolve();
 	}

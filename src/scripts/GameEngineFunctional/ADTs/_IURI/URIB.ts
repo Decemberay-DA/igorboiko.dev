@@ -4,13 +4,13 @@ import { URICommonOnes, type URI } from "./URI";
  *
  */
 export class URIB {
-	static new = (uris: string[]): URI => ({ _uri: uris });
+	static new = (...uris: string[]): URI => ({ _uri: uris });
 
 	static newImprinted =
 		(uriToimprint: string) =>
 		<A>(obj: A): URI & A => ({
 			...obj,
-			_uri: [...(obj as URI)._uri, uriToimprint],
+			_uri: [...((obj as URI)._uri || []), uriToimprint],
 		});
 
 	static newErrazed =

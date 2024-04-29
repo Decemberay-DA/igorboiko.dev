@@ -2,9 +2,9 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import asi from "../../asi/asi";
 import NSceneConfigurationChanged from "../../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
 import { TJ, THREE, VertexColoredMaterialH } from "../../ThreeJS";
-import { TAnyInterractionListenerB } from "../../MegaCursor/MouseClicking/TAnyInterractionListener";
-import { pipe, type LazyArg } from "fp-ts/lib/function";
-import { array } from "fp-ts";
+import { TAnyInterractionListenerB } from "../../MegaCursor/MouseClicking/TAnyInterractionListenerB";
+import { pipe, tupled, untupled, type LazyArg } from "fp-ts/lib/function";
+import { array, monad, monoid, tuple } from "fp-ts";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
 import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
@@ -77,7 +77,6 @@ export default class SceneConfiguratorH {
 					IDinamicUpdatesH.newInsertedAndParented(rootGame.self),
 					URIB.newImprinted("CubeRotator"),
 					IDB.new
-					// BroH.meanwhile((id) => console.log(id))
 				)
 			)
 		);

@@ -3,6 +3,7 @@ import type { IDinamicUpdate, IDinamicUpdateFields } from "../IDinamicUpdate/IDi
 import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdateB";
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
+import { MixinB } from "../Utils/MixinB";
 
 export class IDinamicUpdatesB {
 	private static _traverce =
@@ -20,12 +21,11 @@ export class IDinamicUpdatesB {
 		mf.onFrameUpdate(time);
 	};
 
-	static new = (dinamicUpdateFields: IDinamicUpdateFields) => {
+	static new = (dinamicUpdateFields: IDinamicUpdateFields): IDinamicUpdates => {
 		// also getting inserted in to this
 		const selfUpdateability = IDinamicUpdateB.new(dinamicUpdateFields);
-		const collector: IDinamicUpdates = {
-			participants: [],
-			...IDinamicUpdateB.new({
+		const collector: IDinamicUpdates & IDinamicUpdates = pipe(
+			{
 				onStart(time) {
 					selfUpdateability.onStart(time);
 					IDinamicUpdatesB._traverce(flow(IDinamicUpdatesB._updateThismf(time)))(collector);
@@ -39,8 +39,12 @@ export class IDinamicUpdatesB {
 					IDinamicUpdatesB._traverce((ch) => ch.onDelete(time))(collector);
 					selfUpdateability.onDelete(time);
 				},
-			}),
-		};
+			},
+			IDinamicUpdateB.new,
+			MixinB.newWith({
+				participants: [],
+			})
+		);
 		return collector;
 	};
 }

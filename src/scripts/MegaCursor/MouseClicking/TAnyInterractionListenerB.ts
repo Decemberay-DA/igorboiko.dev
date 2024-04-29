@@ -10,7 +10,7 @@ import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpd
 
 export class TAnyInterractionListenerB {
 	private static _listener = (e: TAnyInterraction) => asi.mediator.publish(new ETAnyInterractionOccured(e));
-	static new = (game: IDinamicUpdates) => {
+	static new = <A extends IDinamicUpdates>(game: A) => {
 		return pipe(
 			{
 				onStart(time) {

@@ -15,5 +15,5 @@ export interface ID<Self> {
 	 * access to selfs subtipes
 	 * Getting cloned fully or partially every operation
 	 */
-	readonly self: Self;
+	self: Self;
 }

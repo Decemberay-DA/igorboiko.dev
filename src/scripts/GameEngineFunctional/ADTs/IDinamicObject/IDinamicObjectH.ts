@@ -8,11 +8,16 @@ import { IEnableableH } from "../IEnableable/IEnableableH";
 import { BroH } from "../../FunctionalBroH";
 import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
 import type { IDinamicObject } from "./IDinamicObject";
+import { IDinamicUpdatesH } from "../IDinamicUpdates/IDinamicUpdatesH";
+import { URIB } from "../_IURI/URIB";
+import { IParentedH } from "../IParented/IParentedH";
 
 /**
  *
  */
 export class IDinamicObjectH {
+	static readonly URI = "DinamicObject";
+	
 	static readonly start =
 		<T extends ITimeMoment>(time: T) =>
 		<A extends IDinamicObject>(obj: A): A => {
@@ -51,6 +56,31 @@ export class IDinamicObjectH {
 				// BroH.meanwhile((bro) => console.log("meanwhiled " + bro))
 				// SedeffectsH.doIf((obj) => console.log(obj))((obj) => true)
 				// SedeffectsH.doIf((obj)=>obj.)
+			);
+		};
+
+	static readonly newDelete =
+		<T extends ITimeMoment>(time: T) =>
+		<A extends IDinamicObject>(obj: A): A => {
+			return pipe(
+				obj,
+				(x) => {
+					x.onDelete(time);
+					x._isDeleted = true;
+					return x;
+				},
+				IEnableableH.disable,
+				URIB.newErrazed(IParentedH.URI)
+			);
+		};
+	static readonly newDeleteParented =
+		<T extends ITimeMoment>(time: T) =>
+		<C, A extends IDinamicObject & IParented<C>>(obj: A): A => {
+			return pipe(
+				obj,
+				IDinamicObjectH.newDelete(time),
+				IDinamicUpdatesH.tryRemoveAndUnParent(obj.parent),
+				URIB.newErrazed(IParentedH.URI)
 			);
 		};
 }

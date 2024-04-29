@@ -1,8 +1,7 @@
 import type { IParented } from "../IParented/IParented";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
-import { pipe } from "fp-ts/lib/function";
-import { URIB } from "../_IURI/URIB";
+import { option } from "fp-ts";
 
 export class IDinamicUpdatesH {
 	/**
@@ -28,16 +27,23 @@ export class IDinamicUpdatesH {
 		<B extends IDinamicUpdate>(updateability: B): B & IParented<A> => {
 			return {
 				...IDinamicUpdatesH.insert(collection)(updateability),
-				parent: collection,
+				parent: option.some(collection),
 			};
 		};
-	static newRemovedAndUnParented =
+	static removeAndUnParent =
 		<A extends IDinamicUpdates>(collection: A) =>
-		<B extends IDinamicUpdate & IParented<IDinamicUpdates>>(
-			updateability: B
-		): Omit<B, keyof IParented<IDinamicUpdates>> => {
-			return {
-				...IDinamicUpdatesH.remove(collection)(updateability),
-			};
+		<B extends IDinamicUpdate & IParented<A>>(updateability: B): B => {
+			IDinamicUpdatesH.remove(collection)(updateability);
+			updateability.parent = option.none;
+			return updateability;
+		};
+	static tryRemoveAndUnParent =
+		<A extends any>(collection: option.Option<A>) =>
+		<B extends IDinamicUpdate & IParented<A>>(updateability: B): B => {
+			if (option.isSome(collection)) {
+				IDinamicUpdatesH.remove(collection.value as any)(updateability);
+				updateability.parent = option.none;
+			}
+			return updateability;
 		};
 }

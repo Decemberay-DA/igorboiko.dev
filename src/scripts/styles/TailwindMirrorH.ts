@@ -1,8 +1,9 @@
-import { option } from "fp-ts";
+import { option, pointed } from "fp-ts";
 import { THREE } from "../ThreeJS";
 import ColorEncodeH from "./ColorEncodeH";
 import CSSH from "./CSSSH";
 import TailwindH from "./TailwindH";
+import { type LazyArg } from "fp-ts/lib/function";
 
 export type TColorTokens = Readonly<Record<string, IColorToken>>;
 
@@ -42,6 +43,9 @@ export default class TailwindMirrorH {
 	};
 
 	static async injectColorTokensToCSSDocument() {
+		
+		const pointeds: LazyArg<boolean> = () => true;
+
 		for (const key in TailwindMirrorH.colorsRecord) {
 			const { originalValue: value } = TailwindMirrorH.colorsRecord[key];
 

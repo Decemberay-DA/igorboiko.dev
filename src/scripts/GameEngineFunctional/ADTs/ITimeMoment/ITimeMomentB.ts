@@ -19,6 +19,11 @@ export class ITimeMomentB {
 			delta: currentTime - previousMoment.sinceStart,
 			frame: -1,
 		});
+	static readonly newPerformanceNow = (): ITimeMoment => ({
+		sinceStart: performance.now(),
+		delta: 60 / 60 / 1000,
+		frame: -1,
+	});
 
 	static readonly toArray = (timeMoment: ITimeMoment): number[] => {
 		return [timeMoment.sinceStart, timeMoment.delta, timeMoment.frame];

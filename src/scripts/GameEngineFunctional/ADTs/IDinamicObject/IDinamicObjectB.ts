@@ -9,6 +9,12 @@ import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicObjectH } from "./IDinamicObjectH";
 import { OnFrameUpdatePriorities } from "../../../GameEngine/Game/OnFrameUpdatePriorities";
+import { pipe } from "fp-ts/lib/function";
+import { IDinamicUpdatesB } from "../IDinamicUpdates/IDinamicUpdatesB";
+import { MixinB } from "../Utils/MixinB";
+import { IDB } from "../ID.ts/IDB";
+import { URIB } from "../_IURI/URIB";
+import { pointed } from "fp-ts";
 
 export interface IRootGame {
 	readonly startedAt: number;
@@ -25,42 +31,40 @@ export class IDinamicObjectB {
 	static newRootSelfUpdating = <A extends IDinamicUpdate>(
 		updateability: A
 	): A & IDinamicObject & IRootGame => {
-		const IRootGameData: IRootGame = {
-			startedAt: performance.now(),
-			rootTime: ITimeMomentB.new(0),
-		};
 		let _isStarted = false;
 		let _killSignal = () => false;
 
-		const _currentRelativeTime = () => performance.now() - IRootGameData.startedAt;
+		const _currentRelativeTime = () => performance.now() - rootObject.startedAt;
 		const _updateRootTime = (currentFrame: number) =>
-			(IRootGameData.rootTime = {
-				...ITimeMomentB.current(IRootGameData.rootTime)(_currentRelativeTime()),
+			(rootObject.rootTime = {
+				...ITimeMomentB.current(rootObject.rootTime)(_currentRelativeTime()),
 				frame: currentFrame,
 			});
 
-		const rootupdateability = IDinamicUpdateB.new({
-			...updateability,
-			onStart(time) {
-				updateability.onStart(time);
-				_isStarted = true;
+		const rootObject = pipe(
+			{
+				// wrapped to also controll the loop
+				...updateability, // =>> TypeError: collection.participants is undefined
+				onStart(time) {
+					updateability.onStart(time);
+					_isStarted = true;
+				},
+				onFrameUpdate(time) {
+					updateability.onFrameUpdate(time);
+				},
+				onDelete(time) {
+					updateability.onDelete(time);
+					_killSignal = () => true;
+				},
 			},
-			onFrameUpdateOrder: updateability.onFrameUpdateOrder,
-			onFrameUpdate(time) {
-				updateability.onFrameUpdate(time);
-			},
-			onDelete(time) {
-				updateability.onDelete(time);
-				_killSignal = () => true;
-			},
-		});
-		// yo this mixing is crazy omg
-		const rootObject: A & IEnableable & IRootGame = {
-			...updateability,
-			...IRootGameData,
-			...rootupdateability,
-			...IEnableableB.enabled(),
-		};
+			IDinamicUpdateB.new,
+			IDinamicObjectB.new,
+			MixinB.newWith<IRootGame>({
+				startedAt: performance.now(),
+				rootTime: ITimeMomentB.newPerformanceNow(),
+			})
+		) as A & IDinamicObject & IRootGame; // =>> cz of this czst that is used cz i cant get A type of ...updateability passed throught IDinamicUpdateB.new function
+		// TODO fix
 
 		const _onLoopUpdate = (loopDataBag: ILoopDataBag) => {
 			if (!_isStarted) {
@@ -69,12 +73,12 @@ export class IDinamicObjectB {
 				// console.log("started in LOOP");
 
 				_updateRootTime(loopDataBag.frame);
-				IDinamicObjectH.start(IRootGameData.rootTime)(rootObject);
+				IDinamicObjectH.start(rootObject.rootTime)(rootObject);
 			}
 
 			_updateRootTime(loopDataBag.frame);
-			IDinamicObjectH.frameUpdate(IRootGameData.rootTime)(rootObject);
-			// console.log("UPDATED in LOOP");
+			IDinamicObjectH.frameUpdate(rootObject.rootTime)(rootObject);
+			// console.log("UPDATED in LOooOP");
 		};
 
 		const loop = ILoopB.newLoopBehaviour(_killSignal)(() => rootObject.isEnabled)(_onLoopUpdate);
