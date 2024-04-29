@@ -1,4 +1,4 @@
-import { mathH } from "../utils/math";
+import { mathH } from "../utils/mathH";
 
 /**
  *

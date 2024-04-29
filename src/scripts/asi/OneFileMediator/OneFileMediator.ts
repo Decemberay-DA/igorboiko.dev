@@ -1,7 +1,15 @@
-import { array } from "fp-ts";
+import { PromisseH } from "@/scripts/utils/PromisseH";
+import { array, option } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
+
+/**
+ *
+ */
 export interface INotification {}
 
+/**
+ *
+ */
 export interface INotificationHandler<TNotification extends INotification> {
 	handle(notification: TNotification): Promise<void>;
 }
@@ -16,9 +24,22 @@ export class Mediator {
 	public constructor() {}
 
 	public async publish(notification: INotification): Promise<void> {
-		const flowd = await pipe(
-			(await this._mapping.get(notification.constructor.name)) || [], //
-			await array.map(async (handler) => await handler.handle(notification).then().catch())
+		// const flowd = await pipe(
+		// 	(await this._mapping.get(notification.constructor.name)) || [], //
+		// 	await array.map(async (handler) => await handler.handle(notification).then().catch())
+		// );
+		const flowd = pipe(
+			this._mapping.get(notification.constructor.name),
+			option.fromNullable,
+			option.match(
+				() => {
+					console.log("No handlers registered for notification: " + notification.constructor.name);
+					return [];
+				},
+				(ok) => ok
+			),
+			array.map((handler) => handler.handle(notification)),
+			PromisseH.runSimultaneously
 		);
 	}
 
@@ -26,12 +47,12 @@ export class Mediator {
 	 * use name of event like "INotification.name"
 	 */
 	public register<TNotification extends INotification>(
-		notificationType: string,
+		notificationName: string,
 		notificationHandler: INotificationHandler<TNotification>
 	) {
-		const handlers = this._mapping.get(notificationType) || [];
+		const handlers = this._mapping.get(notificationName) || [];
 		handlers.push(notificationHandler);
-		this._mapping.set(notificationType, handlers);
-		console.log("Mediator : Registered handles for event : " + notificationType);
+		this._mapping.set(notificationName, handlers);
+		console.log("Mediator : Registered handles for notification: " + notificationName);
 	}
 }

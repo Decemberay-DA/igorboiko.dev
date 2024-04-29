@@ -1,3 +1,4 @@
+import { pipe } from "fp-ts/lib/function";
 import type { IRGB, IRGBA } from "../utils/IRGB";
 import { option } from "fp-ts";
 
@@ -18,16 +19,20 @@ export default class ColorEncodeH {
 		}
 	}
 
-	public static CSSHEXString_to_IRGB(hex: string): option.Option<IRGB> {
-		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-		return result
-			? option.some({
-					r: parseInt(result[1], 16) / 255,
-					g: parseInt(result[2], 16) / 255,
-					b: parseInt(result[3], 16) / 255,
-			  })
-			: option.none;
-	}
+	static CSSHEXString_to_IRGB = (hex: string): option.Option<IRGB> =>
+		pipe(
+			/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex),
+			option.fromNullable,
+			option.match(
+				() => option.none,
+				(ok) =>
+					option.some({
+						r: parseInt(ok[1], 16) / 255,
+						g: parseInt(ok[2], 16) / 255,
+						b: parseInt(ok[3], 16) / 255,
+					})
+			)
+		);
 
 	/**
 	 * @returns #0055ff like

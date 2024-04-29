@@ -4,15 +4,9 @@ import asi from "../../asi/asi";
 import CameraManager from "../../CameraManagiment/CameraManager";
 import NSceneConfigurationChanged from "../../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
 import { TJ, THREE, VertexColoredMaterialH } from "../../ThreeJS";
-import { ThreeObjectFinderH } from "../../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import TAnyInterractionListener from "../../MegaCursor/MouseClicking/TAnyInterractionListener";
-import { pipe, type LazyArg } from "fp-ts/lib/function";
-import { array } from "fp-ts";
-import randomH from "../../utils/randomH";
-import { mathH } from "../../utils";
 import { ConfigurationH } from "./ConfigurationH";
 import { FPSPilotB } from "@/scripts/CameraManagiment/FPSPilotB";
-import { BridgeH } from "../_bridge/Bridge";
 
 /**
  * its goal is to buld scene up.

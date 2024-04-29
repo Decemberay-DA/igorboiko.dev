@@ -1,6 +1,6 @@
 import { pipe } from "fp-ts/lib/function";
 import { GE } from "../GameEngine";
-import { mathH } from "./math";
+import { mathH } from "./mathH";
 
 export type TTimeEncoding = "MS" | "SEC" | "MIN" | "HOUR" | "DAY";
 

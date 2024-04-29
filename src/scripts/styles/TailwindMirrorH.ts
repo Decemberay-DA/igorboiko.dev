@@ -24,11 +24,11 @@ interface _IColorToken {
  *
  */
 export default class TailwindMirrorH {
-	public static get colorsRecord() {
-		return TailwindMirrorH.colors as Readonly<TColorTokens>;
+	static get colorsRecord() {
+		return TailwindMirrorH.colors as TColorTokens;
 	}
 
-	public static readonly colors = {
+	static readonly colors = {
 		GBACKGROUND: { name: "GBACKGROUND", originalValue: "#0a192f" } as IColorToken,
 
 		GGRAY: { name: "GGRAY", originalValue: "#8892b0" } as IColorToken,
@@ -41,7 +41,7 @@ export default class TailwindMirrorH {
 		GACTIVELEFT: { name: "GACTIVELEFT", originalValue: "#00CCCC" } as IColorToken,
 	};
 
-	public static async injectColorTokensToCSSDocument() {
+	static async injectColorTokensToCSSDocument() {
 		for (const key in TailwindMirrorH.colorsRecord) {
 			const { originalValue: value } = TailwindMirrorH.colorsRecord[key];
 

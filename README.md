@@ -110,8 +110,9 @@ The fetures to have to finally put online
 
 #### etc
 
-- add tags to git repo
-  - functional typescript
+ - [ ] create new test envs
+ - [ ] create new test 3d scene
+ - [ ] add some fgame to it 
 
 
 

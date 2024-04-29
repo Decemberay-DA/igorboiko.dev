@@ -1,18 +1,18 @@
 import { option } from "fp-ts";
 
 export default class CSSH {
-	public static getCssVariableValueAsString(cssVariableName: string): option.Option<string> {
+	static getCssVariableValueAsString(cssVariableName: string): option.Option<string> {
 		const val = getComputedStyle(document.documentElement).getPropertyValue(cssVariableName).trim();
 
 		return val === "" ? getNone() : option.some(val);
 
-		function getNone(){
+		function getNone() {
 			console.warn("failed to get css variable named " + cssVariableName + " from document");
 			return option.none;
 		}
 	}
 
-	public static listAllCssColorVariables(): string {
+	static listAllCssColorVariables(): string {
 		const styles = getComputedStyle(document.documentElement);
 		let result = "";
 
