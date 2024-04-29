@@ -1,5 +1,5 @@
 import { THREE } from "../ThreeJS";
-import { IDinamicUpdateB } from "../GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate/IDinamicUpdateB";
+import { IDinamicUpdateB } from "../GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { IEnableableB } from "../GameEngineFunctional/ADTs/IEnableable/IEnableableB";
 import type { IDinamicObject } from "../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import type { LazyArg } from "fp-ts/lib/function";

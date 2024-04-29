@@ -1,5 +1,5 @@
 import { GE } from "@/scripts/GameEngine";
-import { type ITimeMoment } from "../../ITimeMoment/ITimeMoment";
+import { type ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import type { IDinamicUpdate, IDinamicUpdateFields } from "./IDinamicUpdate";
 
 /**

@@ -1,9 +1,9 @@
-import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
-import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdateB";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
+import { IDinamicUpdateB } from "../IDinamicUpdate/IDinamicUpdateB";
 import type { IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableB } from "../IEnableable/IEnableableB";
 import { IEnableableH } from "../IEnableable/IEnableableH";
-import { ILoopB, type ILoopDataBag } from "../ILoop/ILoop";
+import { ILoopB, type ILoopDataBag } from "../ILoop/ILoopB";
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
 import type { IDinamicObject } from "./IDinamicObject";

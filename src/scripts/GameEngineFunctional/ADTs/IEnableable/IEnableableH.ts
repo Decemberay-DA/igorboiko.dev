@@ -1,4 +1,3 @@
-import type { Endomorphism } from "fp-ts/lib/Endomorphism";
 import type { IEnableable } from "./IEnableable";
 
 /**

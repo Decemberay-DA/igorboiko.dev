@@ -6,24 +6,15 @@ import TAnyInterractionListener from "../../MegaCursor/MouseClicking/TAnyInterra
 import { ConfigurationH } from "./ConfigurationH";
 import { pipe, type LazyArg } from "fp-ts/lib/function";
 import { array } from "fp-ts";
-import { mathH } from "@/scripts/utils/mathH";
-import randomH from "@/scripts/utils/randomH";
-import { IDinamicUpdatesB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdates/IDinamicUpdatesB";
-import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate/IDinamicUpdateB";
-import {
-	IDinamicObjectB,
-	type IRootGame,
-} from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
-import { IEnableableB } from "@/scripts/GameEngineFunctional/ADTs/IEnableable/IEnableableB";
-import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
-import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdates/IDinamicUpdatesH";
-import { PromisseH } from "@/scripts/utils/PromisseH";
-import { ILoopB } from "@/scripts/GameEngineFunctional/ADTs/ILoop/ILoop";
+import { IDinamicUpdatesB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesB";
+import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
+import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
+import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
+import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
-import { MATHJS } from "@/scripts/FrameworksExport";
-import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
-import type { ID } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/ID";
+import { BroH } from "@/scripts/GameEngineFunctional/FunctionalBroH";
+import { IDinamicObjectH } from "../../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectH";
 /**
  * its goal is to buld scene up.
  */
@@ -91,14 +82,16 @@ export default class SceneConfiguratorH {
 					newTimeBasedRotator("y")(() => 0.0003375),
 					IDinamicObjectB.newFromIDinamicUpdate,
 					IDinamicUpdatesH.newInsertedAndBinded(rootGame.self),
-					IDB.new
+					IDB.new,
+					BroH.logThisOnePLZ
+					// BroH.meanwhile((id) => console.log(id))
 				)
 			)
 		);
 
 		// apply vertex color material on everything ========-====-====-====-============
 		const vertexColored = new TJ.VertexColoredMaterial();
-		await VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(bgScene.scene);
+		await VertexColoredMaterialH.assignWhiteVertexColorsToSceneIfHasNoVC(asi.data.ThreeScene);
 		asi.data.ThreeSceneManagimented.scene.overrideMaterial = vertexColored.shader;
 
 		// asi.mediator.publish(new ThreeSceneWasLoadedAndInited());

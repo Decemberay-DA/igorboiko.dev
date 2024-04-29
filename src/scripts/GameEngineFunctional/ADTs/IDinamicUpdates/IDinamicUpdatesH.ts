@@ -1,4 +1,4 @@
-import type { IParented } from "../../IGameBounded/IGameBounded";
+import type { IParented } from "../IParented/IParented";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
 
@@ -26,12 +26,12 @@ export class IDinamicUpdatesH {
 		<B extends IDinamicUpdate>(updateability: B): B & IParented => {
 			return {
 				...IDinamicUpdatesH.insert(collection)(updateability),
-				parentExecutor: collection,
+				parent: collection,
 			};
 		};
 	static newRemovedAndUnBinded =
 		<A extends IDinamicUpdates>(collection: A) =>
-		<B extends IDinamicUpdate & IParented>(updateability: B): Omit<B, "parentExecutor"> => {
+		<B extends IDinamicUpdate & IParented>(updateability: B): Omit<B, keyof IParented> => {
 			return {
 				...IDinamicUpdatesH.remove(collection)(updateability),
 			};

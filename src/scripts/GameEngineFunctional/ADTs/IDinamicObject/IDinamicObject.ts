@@ -1,4 +1,4 @@
-import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IEnableable } from "../IEnableable/IEnableable";
 
 /**

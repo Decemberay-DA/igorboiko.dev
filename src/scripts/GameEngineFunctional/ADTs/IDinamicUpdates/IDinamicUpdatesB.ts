@@ -11,7 +11,7 @@ export class IDinamicUpdatesB {
 		};
 
 	static new = (dinamicUpdateFields: IDinamicUpdateFields) => {
-		// also getting inserted in to this 
+		// also getting inserted in to this
 		const selfUpdateability = IDinamicUpdateB.new(dinamicUpdateFields);
 		const collector: IDinamicUpdates = {
 			participants: [],

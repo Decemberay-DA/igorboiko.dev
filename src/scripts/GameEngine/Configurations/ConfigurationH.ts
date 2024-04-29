@@ -1,4 +1,3 @@
-import type { IGame } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdates/IGame/IGame";
 import { GE } from "..";
 
 /**

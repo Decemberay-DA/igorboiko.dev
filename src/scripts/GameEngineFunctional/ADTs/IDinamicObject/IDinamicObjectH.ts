@@ -1,14 +1,13 @@
 import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { array } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
-import type { IGame } from "../IDinamicUpdate/IDinamicUpdates/IGame/IGame";
-import type { IDinamicObject } from "./IDinamicObject";
-import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate/IDinamicUpdate";
-import type { IParented } from "../IGameBounded/IGameBounded";
+import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
+import type { IParented } from "../IParented/IParented";
 import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";
 import { BroH } from "../../FunctionalBroH";
-import { SedeffectsH } from "../../SedeffectsH";
+import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
+import type { IDinamicObject } from "./IDinamicObject";
 
 /**
  *
@@ -34,35 +33,5 @@ export class IDinamicObjectH {
 				// SedeffectsH.doIf((obj) => console.log(obj))((obj) => true)
 				// SedeffectsH.doIf((obj)=>obj.)
 			);
-		};
-
-	static readonly destroyItself = <A extends IDinamicUpdate & IEnableable & IParented>(obj: A): A => {
-		const game = obj.parentExecutor;
-
-		const deleted = pipe(
-			obj,
-			IEnableableH.disable,
-			BroH.meanwhile((x) => x.onDelete(game.timeMoment))
-		);
-
-		game.participants = pipe(
-			game.participants,
-			array.filter((objs) => objs !== obj)
-		);
-
-		return deleted;
-	};
-
-	static readonly destroyFrom =
-		<G extends IGame>(game: G) =>
-		<A extends IDinamicUpdate & IEnableable>(obj: A): G => {
-			obj.onDelete(game.timeMoment);
-
-			game.participants = pipe(
-				game.participants,
-				array.filter((objs) => objs !== obj)
-			);
-
-			return game;
 		};
 }
