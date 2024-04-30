@@ -15,48 +15,40 @@ export class ACursorStranding extends GE.ADynamicObject {
 	protected __pagePosition: THREE.Vector2 = new Vector2(window.innerWidth / 2, window.innerHeight / 2);
 	protected __clientPosition: THREE.Vector2 = new Vector2(window.innerWidth / 2, window.innerHeight / 2);
 
-	public readonly pageRelative: CursorPositionDataProvider;
-	public readonly clientRelstive: CursorPositionDataProvider;
-	public readonly window: CursorPositionWindowDataProvider;
+	public readonly pageRelative = CursorPositionProviderB.newRelative(() => this.__pagePosition);
+	public readonly clientRelstive = CursorPositionProviderB.newRelative(() => this.__clientPosition);
+	public readonly window = CursorPositionProviderB.newRelativeWindow(() => this.__clientPosition);
 
 	protected constructor() {
 		super();
-		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.EARLY_FRAME_UPDATE - 1;
-
-		this.pageRelative = new CursorPositionDataProvider(() => this.__pagePosition);
-		this.clientRelstive = new CursorPositionDataProvider(() => this.__clientPosition);
-		this.window = new CursorPositionWindowDataProvider(() => this.__clientPosition);
+		this.onFrameUpdateOrder = GE.OnFrameUpdateOrders.EARLY_FRAME_UPDATE - 1;
 	}
 }
 
-class CursorPositionDataProvider {
-	private readonly getter: () => THREE.Vector2;
-	public constructor(getter: () => THREE.Vector2) {
-		this.getter = getter;
-	}
-	public get position(): THREE.Vector2 {
-		return this.getter();
-	}
-	public get position0to1(): THREE.Vector2 {
-		return new Vector2(this.getter().x / window.innerWidth, this.getter().y / window.innerHeight);
-	}
-	public get positionNegative1toPositive1(): THREE.Vector2 {
-		return new Vector2((this.position0to1.x - 0.5) * 2, (this.position0to1.y - 0.5) * 2);
-	}
-	public distanceTo(point: THREE.Vector2): number {
-		return this.getter().distanceTo(point);
-	}
-}
+class CursorPositionProviderB {
+	static newRelative = (getter: () => THREE.Vector2) => {
+		const position = () => getter();
+		const position0to1 = () =>
+			new Vector2(getter().x / window.innerWidth, getter().y / window.innerHeight);
+		const positionNegative1toPositive1 = () =>
+			new Vector2((position0to1().x - 0.5) * 2, (position0to1().y - 0.5) * 2);
+		const distanceTo = (point: THREE.Vector2) => getter().distanceTo(point);
+		return {
+			position,
+			position0to1,
+			positionNegative1toPositive1,
+			distanceTo,
+		};
+	};
 
-class CursorPositionWindowDataProvider {
-	private readonly getter: () => THREE.Vector2;
-	public constructor(getter: () => THREE.Vector2) {
-		this.getter = getter;
-	}
-	public get isCursorWithinScreen(): boolean {
-		const x = this.getter().x;
-		const y = this.getter().y;
-
-		return x >= 0 && x <= window.innerWidth && y >= 0 && y <= window.innerHeight;
-	}
+	static newRelativeWindow = (getter: () => THREE.Vector2) => {
+		const isCursorWithinScreen = () => {
+			const x = getter().x;
+			const y = getter().y;
+			return x >= 0 && x <= window.innerWidth && y >= 0 && y <= window.innerHeight;
+		};
+		return {
+			isCursorWithinScreen,
+		};
+	};
 }

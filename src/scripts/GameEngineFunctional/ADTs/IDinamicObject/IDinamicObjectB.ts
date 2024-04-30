@@ -8,12 +8,12 @@ import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicObjectH } from "./IDinamicObjectH";
-import { OnFrameUpdatePriorities } from "../../../GameEngine/Game/OnFrameUpdatePriorities";
+import { OnFrameUpdateOrders } from "../../../GameEngine/oopGame/OnFrameUpdateOrders";
 import { pipe } from "fp-ts/lib/function";
 import { IDinamicUpdatesB } from "../IDinamicUpdates/IDinamicUpdatesB";
 import { MixinB } from "../Utils/MixinB";
 import { IDB } from "../ID.ts/IDB";
-import { URIB } from "../_IURI/URIB";
+import { IURIB } from "../_IURI/IURIB";
 import { pointed } from "fp-ts";
 
 export interface IRootGame {

@@ -1,4 +1,4 @@
-export * from "./Game";
+export * from "./oopGame";
 export * from "./Types";
 export * from "./Configurations/SceneConfiguratorH";
 

@@ -8,10 +8,11 @@ export default class SideStackMagician extends GE.ADynamicObject {
 
 	public constructor() {
 		super();
-		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.GUI_EFFECTS;
+		this.onFrameUpdateOrder = GE.OnFrameUpdateOrders.GUI_EFFECTS;
 	}
 
 	public override onStart(): void {
+		super.onStart();
 		this.stack = DOMSearcherH.getElementById("side-stack-89906bb0-5f3d-401d-9d8c-109faf03b099");
 	}
 

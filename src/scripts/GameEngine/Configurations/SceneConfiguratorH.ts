@@ -12,8 +12,9 @@ import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUp
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
-import { GameB } from "@/scripts/GameEngineFunctional/Types/GameB";
-import { URIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/URIB";
+import { ITopLevelGameB } from "@/scripts/GameEngineFunctional/Types/ITopLevelGameB";
+import { IURIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/IURIB";
+import { CurrentSceneFromDOMDetectorB } from "@/scripts/VueTSHelpers/CurrentSceneFromDOMDetectorB";
 
 /**
  * its goal is to buld scene up.
@@ -25,11 +26,10 @@ export default class SceneConfiguratorH {
 	 * like in unity lol.
 	 */
 	public static async asetupMainScenePage() {
-		// Base Game setup ========-====-====-====-============
-		// ConfigurationH.time(); // obsolete
-		// const listenerA = new TAnyInterractionListener();
-		const listenerGame = GameB.listenerGame();
-		const anyListener = TAnyInterractionListenerB.new(listenerGame.self);
+		// listener game setup ========-====-====-====-============
+		// some listeners that are convertinc any type of events to mediated notifications
+		const anyListener = TAnyInterractionListenerB.new(asi.game.root.self);
+		const CurrentSceneFromDOMDetector = CurrentSceneFromDOMDetectorB.new();
 
 		// Three background scene ========-====-====-====-============
 		const bgScene = new TJ.ThreeScene();
@@ -54,8 +54,6 @@ export default class SceneConfiguratorH {
 		// const cameraPilot = FPSPilotB.new(mainCamera);
 		// GE.Game.getInstance().registerDinamicObject(cameraPilot);
 
-		const rootGame = GameB.rootGame();
-
 		const newTimeBasedRotation =
 			(axis: "x" | "y" | "z") =>
 			(speed: LazyArg<number>) =>
@@ -74,8 +72,8 @@ export default class SceneConfiguratorH {
 					cube,
 					newTimeBasedRotation("y")(() => 0.0003375),
 					IDinamicObjectB.new,
-					IDinamicUpdatesH.newInsertedAndParented(rootGame.self),
-					URIB.newImprinted("CubeRotator"),
+					IDinamicUpdatesH.newInsertedAndParentedToasiRootGame,
+					IURIB.newImprinted("CubeRotator"),
 					IDB.new
 				)
 			)

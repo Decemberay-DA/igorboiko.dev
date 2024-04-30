@@ -1,5 +1,6 @@
+import { GE } from "@/scripts/GameEngine";
 import { Vector2 } from "three";
-import { ACursorStranding } from "./ACursorStranding";
+import { ACursorStranding } from ".";
 
 /**
  *
@@ -16,19 +17,18 @@ export class MouseCursorStranding extends ACursorStranding {
 			this.__clientPosition = client;
 		}
 	};
-	
+
 	public constructor() {
 		super();
 	}
 
 	public override onStart(): void {
+		super.onStart();
 		document.addEventListener("mousemove", this._mousemoveListener);
-		// document.addEventListener("scroll", this._mousemoveListener);
 	}
 
 	public override onDelete(): void {
 		super.onDelete();
 		document.removeEventListener("mousemove", this._mousemoveListener);
-		// document.removeEventListener("scroll", this._mousemoveListener);
 	}
 }

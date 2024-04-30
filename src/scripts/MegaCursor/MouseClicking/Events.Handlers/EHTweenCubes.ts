@@ -5,7 +5,7 @@ import asi from "@/scripts/asi/asi";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { array, option } from "fp-ts";
 import { MATHJS, TWEEN } from "@/scripts/FrameworksExport";
-import { CoroutineB, type ICoroutine } from "@/scripts/GameEngineFunctional/Types/CoroutineB";
+import { ICoroutineB, type ICoroutine } from "@/scripts/GameEngineFunctional/Types/ICoroutine";
 import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { THREE } from "@/scripts/ThreeJS";
 import { AngleH } from "@/scripts/utils/AngleH";
@@ -46,7 +46,7 @@ export default class EHTweenCubes implements INotificationHandler<ETAnyInterract
 						EHTweenCubes.cube_tween.set(obj, tw);
 					});
 
-				return CoroutineB.newFromTweenAsGameRoot(tw, (x) => {
+				return ICoroutineB.newFromTweenAsGameRoot(tw, (x) => {
 					EHTweenCubes.cube_tween.delete(obj);
 				});
 			})

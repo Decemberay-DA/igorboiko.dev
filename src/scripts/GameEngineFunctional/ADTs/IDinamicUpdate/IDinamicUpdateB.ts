@@ -13,7 +13,7 @@ export class IDinamicUpdateB {
 	 * creates IDinamicUpdates from optional params
 	 */
 	static readonly new = ({
-		onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
+		onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
 		onStart = (time: ITimeMoment) => {},
 		onFrameUpdate = (time: ITimeMoment) => {},
 		onDelete = (time: ITimeMoment) => {},
@@ -31,7 +31,7 @@ export class IDinamicUpdateB {
 	 */
 	static readonly newMixedIn =
 		({
-			onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE,
+			onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
 			onStart = (time: ITimeMoment) => {},
 			onFrameUpdate = (time: ITimeMoment) => {},
 			onDelete = (time: ITimeMoment) => {},

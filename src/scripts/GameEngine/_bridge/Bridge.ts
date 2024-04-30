@@ -3,14 +3,13 @@ import type { ITimeMoment } from "@/scripts/GameEngineFunctional/ADTs/ITimeMomen
 
 /**
  * converts obsolete stuff of object oriented engine to functional engine
- * @deprecated temporary used for transition to IGame category
  */
 export class BridgeH {
 	static readonly getCurrentITimeMomentFrom_GEGameTime = (): ITimeMoment => {
 		return {
-			sinceStart: GE.GameTime.realTimeSinceStartup,
-			delta: GE.GameTime.deltaTime,
-			frame: GE.GameTime.frame,
+			sinceStart: GE.GameTime___.sinceStart,
+			delta: GE.GameTime___.delta,
+			frame: GE.GameTime___.frame,
 		};
 	};
 	// static readonly ADT_to_ADynamicObject = (adt: IDinamicObject): GE.ADynamicObject => {

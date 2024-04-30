@@ -3,7 +3,6 @@ import { GE } from "..";
 
 /**
  * wrapped TWEEN.Tween thingy
- * @deprecated use somwthing from GameEngineFunctional => CoroutineB
  */
 export class Coroutine<T extends Record<string, any>> extends GE.ADynamicObject {
 	private _tween: Tween<T>;
@@ -31,11 +30,10 @@ export class Coroutine<T extends Record<string, any>> extends GE.ADynamicObject 
 
 	private constructor(tween: Tween<T>) {
 		super();
-
 		this._tween = tween;
 	}
 
-	public start() {
+	public launch() {
 		this._tween.start();
 	}
 

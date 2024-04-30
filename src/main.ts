@@ -2,7 +2,6 @@ import "./assets/styles/styles.min.css";
 import "./styles/global.scss";
 import { createApp } from "vue";
 import App from "./App.vue";
-import * as GE from "./scripts/GameEngine";
 import SceneConfiguratorH from "./scripts/GameEngine/Configurations/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 //
@@ -28,7 +27,10 @@ const newTestMessageAfter =
 // init all code in "parallel"
 PromisseH.runSimultaneously([
 	TailwindMirrorH.injectColorTokensToCSSDocument(),
-	SceneConfiguratorH.asetupMainScenePage().finally(() => GE.Game.getInstance().triggerStart()),
+	SceneConfiguratorH.asetupMainScenePage(),
+	// SceneConfiguratorH.asetupMainScenePage().finally(() =>
+	// 	IDinamicObjectH.start(ITimeMomentB.newPerformanceNow())(asi.game.oopgame)
+	// ),
 	newTestMessageAfter(0)("nut after 0 ms"),
 	newTestMessageAfter(1000)("nut after 1000 ms"),
 	newTestMessageAfter(2000)("nut after 2000 ms"),

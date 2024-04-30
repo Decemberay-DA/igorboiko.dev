@@ -37,7 +37,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	}
 
 	public override onFrameUpdate(): void {
-		this.__shader.uniforms.sceneTime.value = GE.GameTime.realTimeSinceStartup;
+		this.__shader.uniforms.sceneTime.value = GE.GameTime___.sinceStart;
 	}
 
 	public static applyOn(meshes: THREE.Mesh[]): void {

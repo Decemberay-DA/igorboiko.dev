@@ -2,7 +2,12 @@ import type { IParented } from "../IParented/IParented";
 import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IDinamicUpdates } from "./IDinamicUpdates";
 import { option } from "fp-ts";
+import asi from "@/scripts/asi/asi";
+import type { ITopLevelGame } from "../../Types/ITopLevelGameB";
 
+/**
+ *
+ */
 export class IDinamicUpdatesH {
 	/**
 	 * adds in collection new functions to sorted position
@@ -22,6 +27,9 @@ export class IDinamicUpdatesH {
 			return updateability;
 		};
 
+	/**
+	 *
+	 */
 	static newInsertedAndParented =
 		<A extends IDinamicUpdates>(collection: A) =>
 		<B extends IDinamicUpdate>(updateability: B): B & IParented<A> => {
@@ -30,6 +38,14 @@ export class IDinamicUpdatesH {
 				parent: option.some(collection),
 			};
 		};
+	static newInsertedAndParentedToasiRootGame = <B extends IDinamicUpdate>(
+		updateability: B
+	): B & IParented<ITopLevelGame> =>
+		IDinamicUpdatesH.newInsertedAndParented(asi.game.root.self)(updateability);
+
+	/**
+	 *
+	 */
 	static removeAndUnParent =
 		<A extends IDinamicUpdates>(collection: A) =>
 		<B extends IDinamicUpdate & IParented<A>>(updateability: B): B => {
@@ -46,4 +62,7 @@ export class IDinamicUpdatesH {
 			}
 			return updateability;
 		};
+	static removeAndUnParentFromasiRootGame = <B extends IDinamicUpdate & IParented<ITopLevelGame>>(
+		updateability: B
+	): B => IDinamicUpdatesH.removeAndUnParent(asi.game.root.self)(updateability);
 }

@@ -3,20 +3,16 @@ import { type App, getCurrentInstance } from "vue";
 import type CameraManager from "../CameraManagiment/CameraManager";
 import ScenesRegistry from "../CameraManagiment/DefinedScenes/SceneRegistry/ScenesRegistry";
 import type { TJ, THREE } from "../ThreeJS";
-import { CurrentSceneFromDOMDetector } from "../VueTSHelpers";
-import { CursorFollower } from "../MegaCursor/CursorFollower";
+
 import { ACursorStranding, CursorStrandingBuilderH } from "../MegaCursor/CursorStranding";
-
-
-
+import { CurrentSceneFromDOMDetectorB } from "../VueTSHelpers/CurrentSceneFromDOMDetectorB";
 
 /**
  * compile time complete thing
  */
 export default class data {
-	// html ========-====-====-====-============
-	private readonly CurrentSceneFromDOMDetector = new CurrentSceneFromDOMDetector();
 
+	
 	public get vueApp(): App<any> {
 		return getCurrentInstance()!.appContext.app;
 	}

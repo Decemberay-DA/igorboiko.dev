@@ -9,7 +9,7 @@ import { Bro } from "../../FunctionalBroH";
 import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicUpdatesH } from "../IDinamicUpdates/IDinamicUpdatesH";
-import { URIB } from "../_IURI/URIB";
+import { IURIB } from "../_IURI/IURIB";
 import { IParentedH } from "../IParented/IParentedH";
 
 /**
@@ -70,7 +70,7 @@ export class IDinamicObjectH {
 					return x;
 				},
 				IEnableableH.disable,
-				URIB.newErrazed(IParentedH.URI)
+				IURIB.newErrazed(IParentedH.URI)
 			);
 		};
 	static readonly newDeleteParented =
@@ -80,7 +80,7 @@ export class IDinamicObjectH {
 				obj,
 				IDinamicObjectH.newDelete(time),
 				IDinamicUpdatesH.tryRemoveAndUnParent(obj.parent),
-				URIB.newErrazed(IParentedH.URI)
+				IURIB.newErrazed(IParentedH.URI)
 			);
 		};
 }

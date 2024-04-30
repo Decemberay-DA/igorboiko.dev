@@ -1,9 +1,8 @@
-import type { Container } from "inversify";
 import context from "./context.ts";
 import data from "./data.ts";
-import InjectionContainerBuilderH from "./injector.ts";
 import { Mediator } from "./OneFileMediator/OneFileMediator.ts";
 import OMediatoH from "./OneFileMediator/OneFileMediatorNotificationHandlersRegistrationH.ts";
+import { game } from "./game.ts";
 
 /**
  * Description:
@@ -12,11 +11,24 @@ import OMediatoH from "./OneFileMediator/OneFileMediatorNotificationHandlersRegi
  * ispolnitel
  *
  * Explanation:
- * ocheny dlinnaya istoriyz, mne leny pisaty no povery mne - nikto ne slomal sebe kolennuyu chashechku, vklyuchaya teh 3000 pchyol.
+ * ocheny dlinnaya istoriyz, mne leny pisaty no povery mne - nikto ne slomal sebe kolennuyu chashechku,
+ * 		 vklyuchaya tyeh 3000 pchyol.
  */
 export default class asi {
+	/**
+	 * some app-level state
+	 */
 	public static readonly context = new context();
+	/**
+	 * bag with global wariables
+	 */
 	public static readonly data = new data();
+	/**
+	 * app-scope events
+	 */
 	public static readonly mediator: Readonly<Mediator> = OMediatoH.registerHandlers(new Mediator());
-	public static readonly injector: Readonly<Container> = InjectionContainerBuilderH.build();
+	/**
+	 * the root game
+	 */
+	public static readonly game: Readonly<game> = new game();
 }

@@ -10,10 +10,11 @@ export class CursorFollower extends GE.ADynamicObject {
 
 	public constructor() {
 		super();
-		this.onFrameUpdateOrder = GE.OnFrameUpdatePriorities.LATE_FRAME_UPDATE;
+		this.onFrameUpdateOrder = GE.OnFrameUpdateOrders.LATE_FRAME_UPDATE;
 	}
 
 	override onStart(): void {
+		super.onStart();
 		// if (asi.context.pageType === asiSpecificks.PageTypes.ERROR_404_PAGE) {
 		const foregroundStar = DOMSearcherH.getElementById("cursor_betreyal_foregroundStar");
 		this.draggerF = new CursorDragger(foregroundStar, 0.5);

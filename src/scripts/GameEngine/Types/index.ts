@@ -1,4 +1,4 @@
 export * from "./ADynamicObject";
 export * from "./AnemicDynamicObject";
 export * from "./Coroutine";
-export * from "./GameTime";
+export * from "./GameTime___";

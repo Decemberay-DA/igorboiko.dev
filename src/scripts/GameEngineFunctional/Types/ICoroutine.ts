@@ -4,7 +4,7 @@ import { IDinamicUpdateB } from "../ADTs/IDinamicUpdate/IDinamicUpdateB";
 import type { IDinamicUpdates } from "../ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicObjectB } from "../ADTs/IDinamicObject/IDinamicObjectB";
 import { IDinamicUpdatesH } from "../ADTs/IDinamicUpdates/IDinamicUpdatesH";
-import { URIB } from "../ADTs/_IURI/URIB";
+import { IURIB } from "../ADTs/_IURI/IURIB";
 import { IDB } from "../ADTs/ID.ts/IDB";
 import { MixinB } from "../ADTs/Utils/MixinB";
 import { IDinamicObjectH } from "../ADTs/IDinamicObject/IDinamicObjectH";
@@ -24,14 +24,14 @@ export interface ICoroutine<T extends Record<string, any>> {
 /**
  *
  */
-export class CoroutineH {
-	static URI = "Coroutine";
+export class ICoroutineH {
+	static URI = "ICoroutine";
 }
 
 /**
  *
  */
-export class CoroutineB {
+export class ICoroutineB {
 	/**
 	 * creates tween wrapped in executable env and launches it on coroutineGame
 	 */
@@ -70,8 +70,8 @@ export class CoroutineB {
 				MixinB.newWith<ICoroutine<T>>({
 					_tween: tween,
 				}),
-				URIB.newImprinted(CoroutineH.URI),
-				URIB.newImprinted("RootGame"),
+				IURIB.newImprinted(ICoroutineH.URI),
+				IURIB.newImprinted("RootGame"),
 				IDB.new
 			);
 
@@ -117,8 +117,8 @@ export class CoroutineB {
 			MixinB.newWith<ICoroutine<T>>({
 				_tween: tween,
 			}),
-			URIB.newImprinted(CoroutineH.URI),
-			URIB.newImprinted("RootGame"),
+			IURIB.newImprinted(ICoroutineH.URI),
+			IURIB.newImprinted("RootGame"),
 			IDB.new
 		);
 

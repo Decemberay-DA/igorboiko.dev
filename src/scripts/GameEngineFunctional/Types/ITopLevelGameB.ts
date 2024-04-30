@@ -6,40 +6,37 @@ import { type IRootGame, IDinamicObjectB } from "../ADTs/IDinamicObject/IDinamic
 import type { IDinamicUpdates } from "../ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicUpdatesB } from "../ADTs/IDinamicUpdates/IDinamicUpdatesB";
 import type { IDinamicUpdateFields } from "../ADTs/IDinamicUpdate/IDinamicUpdate";
+import { IURIB } from "../ADTs/_IURI/IURIB";
+import type { IURI } from "../ADTs/_IURI/IURI";
 
 /**
  *
  */
-export type Game = IDinamicUpdates & IDinamicObject & IRootGame;
+export type ITopLevelGame = IURI & IDinamicUpdates & IDinamicObject & IRootGame;
 
 /**
  * builds root top entities that unfortunatelly ron on the same thread
  */
-export class GameB {
-	static _createGame = (dinamicUpdateFields: IDinamicUpdateFields): ID<Game> =>
+export class ITopLevelGameB {
+	static _createGame = (dinamicUpdateFields: IDinamicUpdateFields): ID<ITopLevelGame> =>
 		pipe(
 			dinamicUpdateFields, //
 			IDinamicUpdatesB.new,
 			IDinamicObjectB.newRootSelfUpdating,
+			IURIB.newImprinted("ITopLevelGame"),
 			IDB.new
 		);
 
-	static rootGame = (): ID<Game> =>
-		GameB._createGame({
+	static newRootGame = (): ID<ITopLevelGame> =>
+		ITopLevelGameB._createGame({
 			onStart(time) {
 				console.log("rootGame started");
 			},
 		});
-	static coroutineGame = (): ID<Game> =>
-		GameB._createGame({
-			onStart(time) {
-				console.log("coroutineGame started");
-			},
-		});
-	static listenerGame = (): ID<Game> =>
-		GameB._createGame({
-			onStart(time) {
-				console.log("listenerGame started");
-			},
-		});
+	// static listenerGame = (): ID<Game> =>
+	// 	GameB._createGame({
+	// 		onStart(time) {
+	// 			console.log("listenerGame started");
+	// 		},
+	// 	});
 }

@@ -1,9 +1,11 @@
-import { GE, type __oop_localDinamicObject } from "..";
+import asi from "@/scripts/asi/asi";
+import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
+import { OnFrameUpdateOrders } from "../oopGame";
 
 /**
  * it is a class based on functional ADTs
  */
-export abstract class ADynamicObject implements __oop_localDinamicObject {
+export abstract class ADynamicObject implements IDinamicObject {
 	protected _isEnabled: boolean = true; // is this object should be updated
 	public get isEnabled(): boolean {
 		return this._isEnabled;
@@ -19,16 +21,18 @@ export abstract class ADynamicObject implements __oop_localDinamicObject {
 
 	public isRegistersItSelfInOOPGame = true;
 	protected constructor() {
-		if (this.isRegistersItSelfInOOPGame) GE.Game.getInstance().registerDinamicObject(this);
+		if (this.isRegistersItSelfInOOPGame) asi.game.oopgame.registerDinamicObject(this);
 		console.log("DynamicObject '" + this.constructor.name + "' created.");
 	}
 
+	_isStarted = false;
 	public onStart(): void {
+		this._isStarted = true;
 		return;
 	}
 
 	// define the order in which dynamick objects are sorted and updated
-	public onFrameUpdateOrder: number = GE.OnFrameUpdatePriorities.MID_FRAME_UPDATE;
+	public onFrameUpdateOrder: number = OnFrameUpdateOrders.MID_FRAME_UPDATE;
 	public onFrameUpdate(): void {
 		return;
 	}
@@ -39,7 +43,7 @@ export abstract class ADynamicObject implements __oop_localDinamicObject {
 	public _isDeleted = false;
 	public delete(): void {
 		this.onDelete();
-		if (this.isRegistersItSelfInOOPGame) GE.Game.getInstance().unRegisterDinamicObject(this); // Unregister this object from the Game instance
+		if (this.isRegistersItSelfInOOPGame) asi.game.oopgame.unRegisterDinamicObject(this); // Unregister this object from the Game instance
 		this._isDeleted = true;
 	}
 }

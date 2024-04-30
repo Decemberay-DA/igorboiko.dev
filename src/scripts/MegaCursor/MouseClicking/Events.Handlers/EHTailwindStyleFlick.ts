@@ -5,7 +5,7 @@ import TailwindH from "@/scripts/styles/TailwindH";
 import TailwindMirrorH from "@/scripts/styles/TailwindMirrorH";
 import { Tween } from "@tweenjs/tween.js";
 import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
-import { CoroutineB } from "@/scripts/GameEngineFunctional/Types/CoroutineB";
+import { ICoroutineB } from "@/scripts/GameEngineFunctional/Types/ICoroutine";
 
 /**
  *
@@ -27,7 +27,7 @@ export default class EHTailwindStyleFlick implements INotificationHandler<ETAnyI
 			});
 
 		// const coroutine = GE.Coroutine.newFromTween(tween);
-		const coroutine = CoroutineB.newFromTweenAsGameRoot(tween);
+		const coroutine = ICoroutineB.newFromTweenAsGameRoot(tween);
 
 		return Promise.resolve();
 	}

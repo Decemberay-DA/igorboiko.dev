@@ -24,10 +24,6 @@ export class Mediator {
 	public constructor() {}
 
 	public async publish(notification: INotification): Promise<void> {
-		// const flowd = await pipe(
-		// 	(await this._mapping.get(notification.constructor.name)) || [], //
-		// 	await array.map(async (handler) => await handler.handle(notification).then().catch())
-		// );
 		const flowd = pipe(
 			this._mapping.get(notification.constructor.name),
 			option.fromNullable,

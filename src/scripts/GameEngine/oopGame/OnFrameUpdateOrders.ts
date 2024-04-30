@@ -3,7 +3,7 @@
  * Legit for every type of update: onStart, onFrame, etc cz array is sorted
  */
 
-export class OnFrameUpdatePriorities {
+export class OnFrameUpdateOrders {
 	// any shared base
 	public static readonly GAME_TIME = -10000;
 	public static readonly EARLY_FRAME_UPDATE = -9500;
