@@ -50,7 +50,9 @@ export class IDinamicUpdateB {
 		<A extends IDinamicUpdate>(a: A) =>
 		<B extends IDinamicUpdate>(b: B): A & B & IDinamicUpdate =>
 			pipe(
-				{
+				a,
+				MixinB.newWith(b),
+				IDinamicUpdateB.newMixedIn({
 					onStart(time) {
 						a.onStart(time);
 						b.onStart(time);
@@ -64,9 +66,6 @@ export class IDinamicUpdateB {
 						a.onDelete(time);
 						b.onDelete(time);
 					},
-				},
-				IDinamicUpdateB.new,
-				MixinB.newWith(a),
-				MixinB.newWith(b)
+				})
 			);
 }

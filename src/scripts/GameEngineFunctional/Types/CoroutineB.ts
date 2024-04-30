@@ -100,12 +100,12 @@ export class CoroutineB {
 				onStart(time) {
 					currentTimeHack = () => time;
 					tween.start(performance.now());
-					console.error("Coroutine was started");
+					console.warn("Coroutine was started");
 				},
 				onFrameUpdate(time) {
 					currentTimeHack = () => time;
 					tween.update(performance.now());
-					console.error("Coroutine was updated");
+					console.warn("Coroutine was updated");
 				},
 				onDelete(time) {
 					currentTimeHack = () => time;

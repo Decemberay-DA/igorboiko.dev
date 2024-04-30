@@ -12,11 +12,12 @@ import type { Mediator } from "./OneFileMediator";
 import EHOnAnyInterractionGeneral from "@/scripts/MegaCursor/MouseClicking/Events.Handlers/EHOnAnyInterractionGeneral";
 import ETAnyInterractionOccured from "@/scripts/MegaCursor/MouseClicking/Events/ETAnyInterractionOccured";
 import EHTailwindStyleFlick from "@/scripts/MegaCursor/MouseClicking/Events.Handlers/EHTailwindStyleFlick";
+import EHTweenCubes from "@/scripts/MegaCursor/MouseClicking/Events.Handlers/EHTweenCubes";
 
 /**
  *
  */
-export default class OneFileMediatorRegistrationH {
+export default class OneFileMediatorNotificationHandlersRegistrationH {
 	/**
 	 * i am LITERALLY FORCED TO INIT THEM ALL HERE CZ OTHER WHIZE THIERS FILES WILL BE NEVER READ
 	 * force to register handlers from other files
@@ -33,6 +34,7 @@ export default class OneFileMediatorRegistrationH {
 		mediator.register(NCurtainsOpened.name, new EHStuff_on_NCurtainsOpened());
 		mediator.register(ETAnyInterractionOccured.name, new EHOnAnyInterractionGeneral());
 		mediator.register(ETAnyInterractionOccured.name, new EHTailwindStyleFlick());
+		mediator.register(ETAnyInterractionOccured.name, new EHTweenCubes());
 
 		return mediator;
 	}

@@ -61,15 +61,19 @@ export default class ColorEncodeH {
 	/**
 	 * @param rgbaCSSColor "rgba(0, 120, 255, 1)" like
 	 */
-	public static CSSRGBAString_to_IRGBA(rgbaCSSColor: string): option.Option<IRGBA> {
-		const rgba = rgbaCSSColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([01]?(?:\.\d+)?)\)/);
-		return rgba
-			? option.some({
-					r: parseInt(rgba[1]) / 255,
-					g: parseInt(rgba[2]) / 255,
-					b: parseInt(rgba[3]) / 255,
-					a: parseInt(rgba[4]),
-			  })
-			: option.none;
-	}
+	static CSSRGBAString_to_IRGBA = (rgbaCSSColor: string): option.Option<IRGBA> =>
+		pipe(
+			rgbaCSSColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([01]?(?:\.\d+)?)\)/),
+			option.fromNullable,
+			option.match(
+				() => option.none,
+				(ok) =>
+					option.some({
+						r: parseInt(ok[1]) / 255,
+						g: parseInt(ok[2]) / 255,
+						b: parseInt(ok[3]) / 255,
+						a: parseInt(ok[4]),
+					})
+			)
+		);
 }

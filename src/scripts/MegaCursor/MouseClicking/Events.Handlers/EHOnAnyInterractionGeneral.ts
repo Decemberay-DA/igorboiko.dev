@@ -2,7 +2,7 @@ import type { INotificationHandler } from "@/scripts/asi/OneFileMediator/OneFile
 import type ETAnyInterractionOccured from "../Events/ETAnyInterractionOccured";
 
 /**
- * 
+ *
  */
 export default class EHOnAnyInterractionGeneral implements INotificationHandler<ETAnyInterractionOccured> {
 	async handle(notification: ETAnyInterractionOccured): Promise<void> {

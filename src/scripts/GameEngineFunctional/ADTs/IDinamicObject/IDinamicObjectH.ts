@@ -5,7 +5,7 @@ import type { IDinamicUpdate } from "../IDinamicUpdate/IDinamicUpdate";
 import type { IParented } from "../IParented/IParented";
 import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";
-import { BroH } from "../../FunctionalBroH";
+import { Bro } from "../../FunctionalBroH";
 import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicUpdatesH } from "../IDinamicUpdates/IDinamicUpdatesH";
@@ -17,7 +17,7 @@ import { IParentedH } from "../IParented/IParentedH";
  */
 export class IDinamicObjectH {
 	static readonly URI = "DinamicObject";
-	
+
 	static readonly start =
 		<T extends ITimeMoment>(time: T) =>
 		<A extends IDinamicObject>(obj: A): A => {
@@ -27,7 +27,7 @@ export class IDinamicObjectH {
 					obj.onStart(time);
 					obj._isStarted = true;
 				}),
-				BroH.meanwhile((bro) => console.log("started: " + bro))
+				Bro.meanwhile((bro) => console.log("started: " + bro))
 			);
 		};
 	static readonly tryStart =

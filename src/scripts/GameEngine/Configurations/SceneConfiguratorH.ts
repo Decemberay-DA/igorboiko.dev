@@ -11,7 +11,7 @@ import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinami
 import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
 import { ThreeObjectFinderH } from "@/scripts/ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
-import { BroH } from "@/scripts/GameEngineFunctional/FunctionalBroH";
+import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { GameB } from "@/scripts/GameEngineFunctional/Types/GameB";
 import { URIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/URIB";
 

@@ -3,7 +3,7 @@ import context from "./context.ts";
 import data from "./data.ts";
 import InjectionContainerBuilderH from "./injector.ts";
 import { Mediator } from "./OneFileMediator/OneFileMediator.ts";
-import OMediatoH from "./OneFileMediator/OneFileMediatorRegistrationH.ts";
+import OMediatoH from "./OneFileMediator/OneFileMediatorNotificationHandlersRegistrationH.ts";
 
 /**
  * Description:
