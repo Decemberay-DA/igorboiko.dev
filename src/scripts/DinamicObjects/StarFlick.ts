@@ -5,8 +5,9 @@ import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFi
 import { Tween } from "@tweenjs/tween.js";
 import { TWEEN } from "../FrameworksExport";
 import SmoothLerper from "../CameraManagiment/Lerper";
-import { mathH } from "../utils";
 import randomH from "../utils/randomH";
+import asi from "../asi/asi";
+import { mathH } from "../utils/mathH";
 
 export class CoroutineFlick {
 	public static newStarFlick(
@@ -41,14 +42,14 @@ export class StarFlick extends GE.ADynamicObject {
 	private _lastTimeFlicked = -1010101;
 	private _isIttimeToFlick() {
 		const flicEveryxms = 1 / this._flickFrequency;
-		const timePassed = GE.GameTime___.sinceStart - this._lastTimeFlicked;
+		const timePassed = asi.game.oopgame.rootTime.sinceStart - this._lastTimeFlicked;
 		const isNeededToFlick = timePassed > flicEveryxms;
 		return isNeededToFlick;
 	}
 
 	public override onFrameUpdate(): void {
 		if (!this._isIttimeToFlick()) return;
-		this._lastTimeFlicked = GE.GameTime___.sinceStart;
+		this._lastTimeFlicked = asi.game.oopgame.rootTime.sinceStart;
 
 		const nextToBeFlicked = this._stars[this._lastIndexFlicked];
 		this._lastIndexFlicked =

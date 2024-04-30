@@ -67,3 +67,9 @@ export class oopGame implements IURI, IEnableable, IDinamicUpdate, IDinamicUpdat
 		this._isDeleted = true;
 	};
 }
+
+export class oopGameB {
+	static new = () => {
+		return new oopGame();
+	};
+}

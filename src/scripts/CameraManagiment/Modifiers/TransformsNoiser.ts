@@ -4,6 +4,7 @@ import Transforms from "../ParamsControllers/Transforms/Transforms";
 import { GE } from "../../GameEngine";
 import { THREE } from "../../ThreeJS/ThreeEngine/THREE";
 import SmoothLerper from "../Lerper";
+import asi from "@/scripts/asi/asi";
 
 /**
  * applyes perlin to transforms
@@ -24,7 +25,7 @@ export class TransformsNoiser implements IModifier<Transforms> {
 	private s = 0.845132;
 
 	apply(object: Transforms): Transforms {
-		const time = GE.GameTime___.sinceStart;
+		const time = asi.game.oopgame.rootTime.sinceStart;
 		const noisedTransforms = new Transforms(object);
 
 		if (this.influencePosition > 0) {

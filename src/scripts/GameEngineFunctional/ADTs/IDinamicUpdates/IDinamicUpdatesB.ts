@@ -47,4 +47,15 @@ export class IDinamicUpdatesB {
 		);
 		return collector;
 	};
+
+	/**
+	 * not tested
+	 */
+	static readonly concat =
+		<A extends IDinamicUpdates>(a: A) =>
+		<B extends IDinamicUpdates>(b: B): A & B & IDinamicUpdates =>
+			pipe(
+				IDinamicUpdateB.concat(a)(b),
+				MixinB.newWith({ participants: [...a.participants, ...b.participants] })
+			);
 }

@@ -4,15 +4,13 @@ import type CameraManager from "../CameraManagiment/CameraManager";
 import ScenesRegistry from "../CameraManagiment/DefinedScenes/SceneRegistry/ScenesRegistry";
 import type { TJ, THREE } from "../ThreeJS";
 
-import { ACursorStranding, CursorStrandingBuilderH } from "../MegaCursor/CursorStranding";
+import { CursorStrandingBuilderH } from "../MegaCursor/CursorStranding";
 import { CurrentSceneFromDOMDetectorB } from "../VueTSHelpers/CurrentSceneFromDOMDetectorB";
 
 /**
  * compile time complete thing
  */
 export default class data {
-
-	
 	public get vueApp(): App<any> {
 		return getCurrentInstance()!.appContext.app;
 	}
@@ -20,7 +18,7 @@ export default class data {
 	// cursor effects ========-====-====-====-============
 
 	// cursor effects ========-====-====-====-============
-	public Cursor: ACursorStranding = CursorStrandingBuilderH.getPlatformDependend();
+	public Cursor = CursorStrandingBuilderH.getPlatformDependend();
 	// public readonly CursorFollower = new CursorFollower();
 
 	// three ========-====-====-====-============

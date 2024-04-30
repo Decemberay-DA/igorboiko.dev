@@ -7,6 +7,8 @@ import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObj
 import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import type { IDinamicUpdates } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
+import { array } from "fp-ts";
+import { IListenerB } from "@/scripts/GameEngineFunctional/Types/IListenerH";
 
 export class TAnyInterractionListenerB {
 	private static _listener = (e: TAnyInterraction) => asi.mediator.publish(new ETAnyInterractionOccured(e));
@@ -25,6 +27,15 @@ export class TAnyInterractionListenerB {
 				},
 			},
 			IDinamicUpdateB.new,
+			IDinamicObjectB.new,
+			IDinamicUpdatesH.newInsertedAndParented(game),
+			IDB.new
+		);
+	};
+	static new2 = <A extends IDinamicUpdates>(game: A) => {
+		return pipe(
+			["click", "keydown", "touchend"],
+			IListenerB.newSubscribeUnsobscribeActions_toMulti_any(TAnyInterractionListenerB._listener),
 			IDinamicObjectB.new,
 			IDinamicUpdatesH.newInsertedAndParented(game),
 			IDB.new

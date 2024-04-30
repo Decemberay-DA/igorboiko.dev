@@ -4,6 +4,7 @@ import { THREE } from "../ThreeEngine/THREE";
 import a_vertex from "./a_vertex.glsl";
 import a_fragment from "./a_fragment.glsl";
 import { GE } from "@/scripts/GameEngine";
+import asi from "@/scripts/asi/asi";
 
 export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	public static instances: VertexColoredMaterial[] = [];
@@ -37,7 +38,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	}
 
 	public override onFrameUpdate(): void {
-		this.__shader.uniforms.sceneTime.value = GE.GameTime___.sinceStart;
+		this.__shader.uniforms.sceneTime.value = asi.game.oopgame.rootTime.sinceStart;
 	}
 
 	public static applyOn(meshes: THREE.Mesh[]): void {

@@ -25,11 +25,19 @@ export class IDinamicUpdateB {
 		_isDeleted: false,
 		onDelete: onDelete,
 	});
+	static readonly empty = (): IDinamicUpdate => ({
+		onFrameUpdateOrder: GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
+		_isStarted: false,
+		onStart: (time: ITimeMoment) => {},
+		onFrameUpdate: (time: ITimeMoment) => {},
+		_isDeleted: false,
+		onDelete: (time: ITimeMoment) => {},
+	});
 
 	/**
 	 * mixes updates after main type
 	 */
-	static readonly newMixedIn =
+	static readonly mixedIn =
 		({
 			onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
 			onStart = (time: ITimeMoment) => {},
@@ -46,13 +54,13 @@ export class IDinamicUpdateB {
 			onDelete: onDelete,
 		});
 
-	static readonly newConcat =
+	static readonly concat =
 		<A extends IDinamicUpdate>(a: A) =>
 		<B extends IDinamicUpdate>(b: B): A & B & IDinamicUpdate =>
 			pipe(
 				a,
 				MixinB.newWith(b),
-				IDinamicUpdateB.newMixedIn({
+				IDinamicUpdateB.mixedIn({
 					onStart(time) {
 						a.onStart(time);
 						b.onStart(time);

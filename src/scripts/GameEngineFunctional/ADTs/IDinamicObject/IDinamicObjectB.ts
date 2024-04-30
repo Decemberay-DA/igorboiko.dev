@@ -43,7 +43,7 @@ export class IDinamicObjectB {
 
 		const rootObject = pipe(
 			updateability,
-			IDinamicUpdateB.newMixedIn({
+			IDinamicUpdateB.mixedIn({
 				// wrapped to also controll the loop
 				onStart(time) {
 					updateability.onStart(time);

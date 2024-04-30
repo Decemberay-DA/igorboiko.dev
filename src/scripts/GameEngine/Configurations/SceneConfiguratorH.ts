@@ -1,5 +1,4 @@
 import type { GLTF } from "three/examples/jsm/Addons.js";
-import asi from "../../asi/asi";
 import NSceneConfigurationChanged from "../../CameraManagiment/DefinedScenes/Events/SceneConfigurationWasChanged";
 import { TJ, THREE, VertexColoredMaterialH } from "../../ThreeJS";
 import { TAnyInterractionListenerB } from "../../MegaCursor/MouseClicking/TAnyInterractionListenerB";
@@ -15,6 +14,7 @@ import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { ITopLevelGameB } from "@/scripts/GameEngineFunctional/Types/ITopLevelGameB";
 import { IURIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/IURIB";
 import { CurrentSceneFromDOMDetectorB } from "@/scripts/VueTSHelpers/CurrentSceneFromDOMDetectorB";
+import asi from "../../asi/asi";
 
 /**
  * its goal is to buld scene up.
