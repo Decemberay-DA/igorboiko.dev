@@ -1,3 +1,4 @@
+import { MATHJS } from "@/scripts/FrameworksExport";
 import type { IEnableable } from "./IEnableable";
 
 /**

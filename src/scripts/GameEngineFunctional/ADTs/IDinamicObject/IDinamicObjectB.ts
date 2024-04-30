@@ -35,16 +35,16 @@ export class IDinamicObjectB {
 		let _killSignal = () => false;
 
 		const _currentRelativeTime = () => performance.now() - rootObject.startedAt;
-		const _updateRootTime = (currentFrame: number) =>
+		const _updateRootTime = (currentFrame: number): ITimeMoment =>
 			(rootObject.rootTime = {
 				...ITimeMomentB.current(rootObject.rootTime)(_currentRelativeTime()),
 				frame: currentFrame,
 			});
 
 		const rootObject = pipe(
-			{
+			updateability,
+			IDinamicUpdateB.newMixedIn({
 				// wrapped to also controll the loop
-				...updateability, // =>> TypeError: collection.participants is undefined
 				onStart(time) {
 					updateability.onStart(time);
 					_isStarted = true;
@@ -56,15 +56,13 @@ export class IDinamicObjectB {
 					updateability.onDelete(time);
 					_killSignal = () => true;
 				},
-			},
-			IDinamicUpdateB.new,
+			}),
 			IDinamicObjectB.new,
 			MixinB.newWith<IRootGame>({
 				startedAt: performance.now(),
 				rootTime: ITimeMomentB.newPerformanceNow(),
 			})
-		) as A & IDinamicObject & IRootGame; // =>> cz of this czst that is used cz i cant get A type of ...updateability passed throught IDinamicUpdateB.new function
-		// TODO fix
+		);
 
 		const _onLoopUpdate = (loopDataBag: ILoopDataBag) => {
 			if (!_isStarted) {
