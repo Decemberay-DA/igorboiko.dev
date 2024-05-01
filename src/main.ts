@@ -3,7 +3,7 @@ import "./styles/global.scss";
 import { createApp } from "vue";
 import App from "./App.vue";
 //
-import SceneConfiguratorH from "./scripts/GameEngine/Configurations/SceneConfiguratorH";
+import SceneConfiguratorH from "./scripts/GameEngineFunctional/Configurator/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 import { PromisseH } from "./scripts/utils/PromisseH";
 

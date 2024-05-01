@@ -6,7 +6,7 @@ import { option } from "fp-ts";
 /**
  *
  */
-export type UUID = number;
+export type UUID = string;
 
 /**
  *
@@ -21,13 +21,15 @@ export class UUIDB {
 				(x) => x
 			),
 			randomH.float0to1,
-			mathH.lerpc(Number.MIN_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER)
+			mathH.lerpc(Number.MIN_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER),
+			toString
 		);
 	};
 	static readonly random = (): UUID => {
 		return pipe(
 			randomH.float0to1(), //
-			mathH.lerpc(Number.MIN_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER)
+			mathH.lerpc(Number.MIN_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER),
+			toString
 		);
 	};
 }

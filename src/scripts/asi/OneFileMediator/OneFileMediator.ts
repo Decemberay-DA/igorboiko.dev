@@ -1,3 +1,4 @@
+import type { UUID } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/UUID";
 import { PromisseH } from "@/scripts/utils/PromisseH";
 import { array, option } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
@@ -6,6 +7,18 @@ import { pipe } from "fp-ts/lib/function";
  *
  */
 export interface INotification {}
+export interface INotificationTyped extends INotification, ITypeUUIDed {
+	readonly typeUUID: UUID;
+}
+
+export interface ITypeUUIDed {
+	readonly typeUUID: UUID;
+}
+export class TypeUUDIH {
+	static readonly appendInherited = (thisOne: UUID) => (baseOne: ITypeUUIDed) => thisOne + baseOne.typeUUID;
+	static readonly isContains = (thisOne: UUID) => (baseOne: ITypeUUIDed) =>
+		baseOne.typeUUID.includes(thisOne);
+}
 
 /**
  *

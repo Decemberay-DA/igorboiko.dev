@@ -1,11 +1,17 @@
 import { TJ } from "..";
 import { THREE } from "../ThreeEngine/THREE";
-
 import a_vertex from "./a_vertex.glsl";
 import a_fragment from "./a_fragment.glsl";
 import { GE } from "@/scripts/GameEngine";
 import asi from "@/scripts/asi/asi";
+import { IEnableableH } from "@/scripts/GameEngineFunctional/ADTs/IEnableable/IEnableableH";
+import { pipe, tupled } from "fp-ts/lib/function";
+import { ArgumentsH } from "@/scripts/utils/ArgumentsH";
+import { refinement } from "fp-ts";
 
+/**
+ *
+ */
 export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	public static instances: VertexColoredMaterial[] = [];
 
@@ -14,6 +20,13 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 
 		const noiseTexture = new THREE.TextureLoader().load(
 			"src/scripts/ThreeJS/VertexColoredMaterial/noiseT.png"
+		);
+
+		const gjlkf = pipe(
+			IEnableableH.copyFrom, //
+			ArgumentsH.flip,
+			ArgumentsH.loin2,
+			tupled
 		);
 
 		this.__shader = new THREE.ShaderMaterial({
@@ -38,7 +51,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 	}
 
 	public override onFrameUpdate(): void {
-		this.__shader.uniforms.sceneTime.value = asi.game.oopgame.self.rootTime.sinceStart;
+		this.__shader.uniforms.sceneTime.value = asi.game.root.self.rootTime.sinceStart;
 	}
 
 	public static applyOn(meshes: THREE.Mesh[]): void {

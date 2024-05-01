@@ -6,6 +6,7 @@ import { MixinB } from "@/scripts/GameEngineFunctional/ADTs/Utils/MixinB";
 import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { IListenerB } from "@/scripts/GameEngineFunctional/Types/IListenerH";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
+import { functor } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
 
 /**
@@ -63,12 +64,14 @@ export class ACursorStrandingB {
 			IDB.new
 		);
 
+		const jgksd = functor.bindTo;
+
 		return cs;
 	};
 }
 
 /**
- *
+ * 
  */
 type ICursorPositionData = {
 	position: () => THREE.Vector2;

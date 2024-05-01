@@ -25,7 +25,7 @@ export class TransformsNoiser implements IModifier<Transforms> {
 	private s = 0.845132;
 
 	apply(object: Transforms): Transforms {
-		const time = asi.game.oopgame.rootTime.sinceStart;
+		const time = asi.game.root.rootTime.sinceStart;
 		const noisedTransforms = new Transforms(object);
 
 		if (this.influencePosition > 0) {

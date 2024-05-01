@@ -8,7 +8,7 @@ import type { ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import { ITimeMomentB } from "../ITimeMoment/ITimeMomentB";
 import type { IDinamicObject } from "./IDinamicObject";
 import { IDinamicObjectH } from "./IDinamicObjectH";
-import { OnFrameUpdateOrders } from "../../../GameEngine/oopGame/OnFrameUpdateOrders";
+import { OnFrameUpdateOrders } from "../IDinamicUpdate/OnFrameUpdateOrders";
 import { pipe } from "fp-ts/lib/function";
 import { IDinamicUpdatesB } from "../IDinamicUpdates/IDinamicUpdatesB";
 import { MixinB } from "../Utils/MixinB";

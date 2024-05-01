@@ -42,14 +42,14 @@ export class StarFlick extends GE.ADynamicObject {
 	private _lastTimeFlicked = -1010101;
 	private _isIttimeToFlick() {
 		const flicEveryxms = 1 / this._flickFrequency;
-		const timePassed = asi.game.oopgame.rootTime.sinceStart - this._lastTimeFlicked;
+		const timePassed = asi.game.rootTime.sinceStart - this._lastTimeFlicked;
 		const isNeededToFlick = timePassed > flicEveryxms;
 		return isNeededToFlick;
 	}
 
 	public override onFrameUpdate(): void {
 		if (!this._isIttimeToFlick()) return;
-		this._lastTimeFlicked = asi.game.oopgame.rootTime.sinceStart;
+		this._lastTimeFlicked = asi.game.rootTime.sinceStart;
 
 		const nextToBeFlicked = this._stars[this._lastIndexFlicked];
 		this._lastIndexFlicked =
