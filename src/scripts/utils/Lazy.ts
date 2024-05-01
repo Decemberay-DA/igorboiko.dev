@@ -22,6 +22,6 @@ export class Lazy<T> {
 /**
  *
  */
-export class LazyH {
+export class LazyB {
 	static new = <T>(factory: () => T) => new Lazy(factory);
 }
