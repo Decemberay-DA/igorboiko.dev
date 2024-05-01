@@ -1,3 +1,5 @@
+import { THREE } from "../ThreeJS/ThreeEngine/THREE";
+
 export interface IRGB {
 	r: number;
 	g: number;

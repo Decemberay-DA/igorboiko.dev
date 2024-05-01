@@ -1,25 +1,25 @@
 import { pipe } from "fp-ts/lib/function";
 import asi from "../asi/asi";
-import { GE } from "../GameEngine";
 import HTMLElementEX from "./HTMLElementEX";
 import { array } from "fp-ts";
 import SectionWasChangedToID from "../CameraManagiment/DefinedScenes/Events/SectionWasChangedTo";
-import { game } from "../asi/game";
 import { IDB } from "../GameEngineFunctional/ADTs/ID.ts/IDB";
 import { IDinamicObjectB } from "../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
 import { IDinamicUpdateB } from "../GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { IDinamicUpdatesH } from "../GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
-import { TAnyInterractionListenerB } from "../MegaCursor/MouseClicking/TAnyInterractionListenerB";
 import { IURIB } from "../GameEngineFunctional/ADTs/_IURI/IURIB";
 import type { IURI } from "../GameEngineFunctional/ADTs/_IURI/IURI";
 import type { ID } from "../GameEngineFunctional/ADTs/ID.ts/ID";
 import type { IDinamicObject } from "../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
-import type { IDinamicUpdate } from "../GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
 import type { IParented } from "../GameEngineFunctional/ADTs/IParented/IParented";
 import type { ITopLevelGame } from "../GameEngineFunctional/Types/ITopLevelGameB";
+import { IListenerB } from "../GameEngineFunctional/Types/IListenerH";
 
+/**
+ *
+ */
 export class CurrentSceneFromDOMDetectorH {
-	static byHorizontallCursorOverlap(): void {
+	static byHorizontallCursorOverlap = (): void => {
 		const previousActiveScene = asi.data.ScenesRegistry.currentAnyScene;
 		const scenes = asi.data.ScenesRegistry.cahsedIHTMLScene;
 
@@ -32,7 +32,7 @@ export class CurrentSceneFromDOMDetectorH {
 			scenes,
 			array.filter((sc) =>
 				HTMLElementEX.isCursorOverlaps(
-					asi.data.cursor.clientRelstive.position,
+					asi.data.cursor.self.clientRelative.position(),
 					sc.htmlElement,
 					checkParams
 				)
@@ -47,7 +47,7 @@ export class CurrentSceneFromDOMDetectorH {
 		if (isSectionWasChanged && asi.context.isAbleCursorSectionSwitching) {
 			asi.mediator.publish(new SectionWasChangedToID(currentScene.nameID));
 		}
-	}
+	};
 }
 
 export class CurrentSceneFromDOMDetectorB {
@@ -57,28 +57,10 @@ export class CurrentSceneFromDOMDetectorB {
 	 */
 	static new = (): ID<IURI & IDinamicObject & IParented<ITopLevelGame>> => {
 		return pipe(
-			{
-				onStart(time) {
-					document.addEventListener(
-						"mousemove",
-						CurrentSceneFromDOMDetectorH.byHorizontallCursorOverlap
-					);
-					document.addEventListener(
-						"scroll",
-						CurrentSceneFromDOMDetectorH.byHorizontallCursorOverlap
-					);
-				},
-				onDelete(time) {
-					document.removeEventListener(
-						"mousemove",
-						CurrentSceneFromDOMDetectorH.byHorizontallCursorOverlap
-					);
-					document.removeEventListener(
-						"scroll",
-						CurrentSceneFromDOMDetectorH.byHorizontallCursorOverlap
-					);
-				},
-			},
+			["mousemove", "scroll"],
+			IListenerB.newSubscribeUnsobscribeActions_toMulti_any(
+				CurrentSceneFromDOMDetectorH.byHorizontallCursorOverlap
+			),
 			IDinamicUpdateB.new,
 			IDinamicObjectB.new,
 			IDinamicUpdatesH.newInsertedAndParentedToasiRootGame,

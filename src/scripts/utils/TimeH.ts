@@ -1,5 +1,4 @@
 import { pipe } from "fp-ts/lib/function";
-import { GE } from "../GameEngine";
 import { mathH } from "./mathH";
 import asi from "../asi/asi";
 
@@ -52,7 +51,7 @@ export class TimeH {
 
 	public static calculateRemainingFactor(startTime: number, endTime: number): number {
 		const duration = endTime - startTime;
-		const remainsms = endTime - asi.game.root.rootTime.sinceStart;
+		const remainsms = endTime - asi.game.rootTime.sinceStart;
 		const remains0to1 = (duration / 1) * remainsms;
 		const factor = 1 - remains0to1;
 

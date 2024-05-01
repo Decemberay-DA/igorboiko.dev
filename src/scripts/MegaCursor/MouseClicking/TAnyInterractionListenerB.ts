@@ -11,31 +11,26 @@ import { array } from "fp-ts";
 import { IListenerB } from "@/scripts/GameEngineFunctional/Types/IListenerH";
 
 export class TAnyInterractionListenerB {
-	private static _listener = (e: TAnyInterraction) => asi.mediator.publish(new ETAnyInterractionOccured(e));
-	static new = <A extends IDinamicUpdates>(game: A) => {
+	private static readonly _listener = (e: TAnyInterraction) =>
+		asi.mediator.publish(new ETAnyInterractionOccured(e));
+	static readonly new = <A extends IDinamicUpdates>(game: A) => {
 		return pipe(
-			{
-				onStart(time) {
-					document.addEventListener("click", TAnyInterractionListenerB._listener);
-					document.addEventListener("keydown", TAnyInterractionListenerB._listener);
-					window.addEventListener("touchend", TAnyInterractionListenerB._listener);
-				},
-				onDelete(time) {
-					document.removeEventListener("click", TAnyInterractionListenerB._listener);
-					document.removeEventListener("keydown", TAnyInterractionListenerB._listener);
-					window.removeEventListener("touchend", TAnyInterractionListenerB._listener);
-				},
-			},
-			IDinamicUpdateB.new,
-			IDinamicObjectB.new,
-			IDinamicUpdatesH.newInsertedAndParented(game),
-			IDB.new
-		);
-	};
-	static new2 = <A extends IDinamicUpdates>(game: A) => {
-		return pipe(
-			["click", "keydown", "touchend"],
-			IListenerB.newSubscribeUnsobscribeActions_toMulti_any(TAnyInterractionListenerB._listener),
+			[
+				IListenerB.newSubscribeUnsobscribeActionsFor(document)(
+					"click",
+					TAnyInterractionListenerB._listener as any
+				),
+				IListenerB.newSubscribeUnsobscribeActionsFor(document)(
+					"keydown",
+					TAnyInterractionListenerB._listener as any
+				),
+				IListenerB.newSubscribeUnsobscribeActionsFor(window)(
+					"touchend",
+					TAnyInterractionListenerB._listener as any
+				),
+			],
+			array.map((a) => IDinamicUpdateB.new(a)),
+			array.reduce(IDinamicUpdateB.empty(), (a, b) => IDinamicUpdateB.concat(a)(b)),
 			IDinamicObjectB.new,
 			IDinamicUpdatesH.newInsertedAndParented(game),
 			IDB.new

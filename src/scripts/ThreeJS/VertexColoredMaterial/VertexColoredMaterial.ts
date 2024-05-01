@@ -25,7 +25,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 		const gjlkf = pipe(
 			IEnableableH.copyFrom, //
 			ArgumentsH.flip,
-			ArgumentsH.loin2,
+			ArgumentsH.join2,
 			tupled
 		);
 

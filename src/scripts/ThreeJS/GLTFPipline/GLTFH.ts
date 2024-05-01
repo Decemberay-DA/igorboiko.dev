@@ -12,12 +12,6 @@ export class GLTFH {
 	): option.Option<string> {
 		return pipe(
 			object.userData,
-			// (data) => {
-			// 	console.log("extras:");
-			// 	console.log(JSON.stringify(data));
-			// 	console.log(data);
-			// 	return data;
-			// },
 			option.fromNullable,
 			option.match(
 				() => {

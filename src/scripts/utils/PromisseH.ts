@@ -8,9 +8,14 @@ export class PromisseH {
 	/**
 	 * starts all promisses at the same time without waiting for their completition
 	 */
-	static runSimultaneously = (promises: Promise<void>[]) =>
+	static readonly runSimultaneously = (promises: Promise<void>[]) =>
 		pipe(
 			promises, //
 			array.map((p) => p.then().catch())
+		);
+	static readonly chainArray = <T>(...chain: Promise<T>[]): Promise<T> =>
+		pipe(
+			chain, //
+			array.reduce(new Promise<T>(() => {}), (acc, p) => acc.then(() => p))
 		);
 }

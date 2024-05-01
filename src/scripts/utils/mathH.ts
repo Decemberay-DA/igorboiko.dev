@@ -1,5 +1,6 @@
 import { pipe } from "fp-ts/lib/function";
-import SmoothLerper from "../CameraManagiment/Lerper";
+import { LerpH } from "../CameraManagiment/Lerper";
+import { ArgumentsH } from "./ArgumentsH";
 
 /**
  *
@@ -18,14 +19,8 @@ export class mathH {
 		(val: number): number =>
 			mathH.clamp(val, min, max);
 
-	static lerp(start: number, end: number, t: number): number {
-		return SmoothLerper.instance.Number(start, end, t);
-	}
-	static lerpc =
-		(start: number) =>
-		(end: number) =>
-		(t: number): number =>
-			mathH.lerp(start, end, t);
+	static lerp = LerpH.Number;
+	static lerpc = ArgumentsH.curry3(mathH.lerp);
 
 	static remapRange(
 		value: number,
@@ -37,4 +32,8 @@ export class mathH {
 		const ratio = (value - fromMin) / (fromMax - fromMin);
 		return toMin + ratio * (toMax - toMin);
 	}
+	static remapRangec =
+		(fromMin: number = 0, fromMax: number = 1, toMin: number = 0, toMax: number = 1) =>
+		(value: number): number =>
+			mathH.remapRange(value, fromMin, fromMax, toMin, toMax);
 }

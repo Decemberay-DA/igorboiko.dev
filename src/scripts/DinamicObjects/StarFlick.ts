@@ -4,7 +4,7 @@ import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
 import { ThreeObjectFinderH } from "../ThreeJS/ThreeEngine/Helpers/ThreeObjectFinderH";
 import { Tween } from "@tweenjs/tween.js";
 import { TWEEN } from "../FrameworksExport";
-import SmoothLerper from "../CameraManagiment/Lerper";
+import { LerpH } from "../CameraManagiment/Lerper";
 import randomH from "../utils/randomH";
 import asi from "../asi/asi";
 import { mathH } from "../utils/mathH";
@@ -68,7 +68,7 @@ export class StarFlick extends GE.ADynamicObject {
 			.to({ progress: 1 }, 1024)
 			.easing(TWEEN.Easing.Exponential.Out)
 			.onUpdate((params) =>
-				star.scale.copy(SmoothLerper.instance.Vector3(peakScale, initialScale, params.progress))
+				star.scale.copy(LerpH.instance.Vector3(peakScale, initialScale, params.progress))
 			);
 		const coroutine = GE.Coroutine.newFromTween(tween);
 	}

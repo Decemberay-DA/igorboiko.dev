@@ -1,65 +1,51 @@
-import { mathH } from "./mathH";
+import { tupled, untupled } from "fp-ts/lib/function";
 
 /**
  * moves arguments aroud and over
  */
 export class ArgumentsH {
 	/**
-	 *
+	 * tuples
 	 */
-	static readonly loin2 = <A, B, O>(fn: (a: A) => (b: B) => O) => {
+	static readonly tupled = tupled;
+	static readonly untupled = untupled;
+
+	/**
+	 * 2 arguments
+	 */
+	static readonly join2 = <A, B, O>(fn: (a: A) => (b: B) => O) => {
 		return (a: A, b: B) => fn(a)(b);
 	};
 	static readonly curry2 = <A, B, O>(fn: (a: A, b: B) => O) => {
 		return (b: B) => (a: A) => fn(a, b);
 	};
-	/**
-	 * swaps two arguments
-	 */
 	static readonly flip = <A, B, O>(fn: (a: A) => (b: B) => O) => {
 		return (b: B) => (a: A) => fn(a)(b);
 	};
 
 	/**
-	 *
+	 * 3 arguments
 	 */
-	static readonly loin3 = <A, B, C, O>(fn: (a: A) => (b: B) => (c: C) => O) => {
+	static readonly join3 = <A, B, C, O>(fn: (a: A) => (b: B) => (c: C) => O) => {
 		return (a: A, b: B, c: C) => fn(a)(b)(c);
 	};
 	static readonly curry3 = <A, B, C, O>(fn: (a: A, b: B, c: C) => O) => {
 		return (a: A) => (b: B) => (c: C) => fn(a, b, c);
 	};
+	static readonly curryLast3 = <A, B, C, O>(fn: (a: A, b: B, c: C) => O) => {
+		return (c: C, b: B) => (a: A) => fn(a, b, c);
+	};
+
 	/**
-	 * swaps argument A with specified position
+	 * 4 arguments
 	 */
-	static readonly Abc =
-		<A, B, C, O>(swapToPosition: 2 | 3) =>
-		(fn: (a: A) => (b: B) => (c: C) => O) => {
-			return {
-				2: (b: B) => (a: A) => (c: C) => fn(a)(b)(c),
-				3: (c: C) => (b: B) => (a: A) => fn(a)(b)(c),
-			}[swapToPosition];
-		};
-	/**
-	 * swaps argument B with specified position
-	 */
-	static readonly aBc =
-		<A, B, C, O>(swapToPosition: 1 | 3) =>
-		(fn: (a: A) => (b: B) => (c: C) => O) => {
-			return {
-				1: (b: B) => (a: A) => (c: C) => fn(a)(b)(c),
-				3: (a: A) => (c: C) => (b: B) => fn(a)(b)(c),
-			}[swapToPosition];
-		};
-	/**
-	 * swaps argument C with specified position
-	 */
-	static readonly abC =
-		<A, B, C, O>(swapToPosition: 1 | 2) =>
-		(fn: (a: A) => (b: B) => (c: C) => O) => {
-			return {
-				1: (c: C) => (b: B) => (a: A) => fn(a)(b)(c),
-				2: (a: A) => (c: C) => (b: B) => fn(a)(b)(c),
-			}[swapToPosition];
-		};
+	static readonly join4 = <A, B, C, D, O>(fn: (a: A) => (b: B) => (c: C) => (d: D) => O) => {
+		return (a: A, b: B, c: C, d: D) => fn(a)(b)(c)(d);
+	};
+	static readonly curry4 = <A, B, C, D, O>(fn: (a: A, b: B, c: C, d: D) => O) => {
+		return (a: A) => (b: B) => (c: C) => (d: D) => fn(a, b, c, d);
+	};
+	static readonly curruLast4 = <A, B, C, D, O>(fn: (a: A, b: B, c: C, d: D) => O) => {
+		return (d: D, c: C, b: B) => (a: A) => fn(a, b, c, d);
+	};
 }

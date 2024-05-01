@@ -3,7 +3,6 @@ import { IDinamicUpdateB } from "../GameEngineFunctional/ADTs/IDinamicUpdate/IDi
 import { IEnableableB } from "../GameEngineFunctional/ADTs/IEnableable/IEnableableB";
 import type { IDinamicObject } from "../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import type { LazyArg } from "fp-ts/lib/function";
-import type { ID } from "../GameEngineFunctional/ADTs/ID.ts/ID";
 
 export interface IFPSPilot {
 	controlled: THREE.Object3D;

@@ -2,7 +2,7 @@ import asi from "../../asi/asi";
 import * as GE from "../../GameEngine/index";
 import DOMSearcherH from "@/scripts/VueTSHelpers/DOMSearcherH";
 import { THREE } from "@/scripts/ThreeJS/ThreeEngine/THREE";
-import SmoothLerper from "@/scripts/CameraManagiment/Lerper";
+import { LerpH } from "@/scripts/CameraManagiment/Lerper";
 
 export class CursorFollower extends GE.ADynamicObject {
 	private draggerF!: CursorDragger;
@@ -46,8 +46,8 @@ class CursorDragger {
 			asi.data.cursor.pageRelative.position.y
 		);
 
-		const x = SmoothLerper.number(this._lastPosition.x, currentCursorPosition.x, this._dragForce);
-		const y = SmoothLerper.number(this._lastPosition.y, currentCursorPosition.y, this._dragForce);
+		const x = LerpH.number(this._lastPosition.x, currentCursorPosition.x, this._dragForce);
+		const y = LerpH.number(this._lastPosition.y, currentCursorPosition.y, this._dragForce);
 
 		const draggedposition = asi.data.cursor.pageRelative.position;
 		this._lastPosition = draggedposition;

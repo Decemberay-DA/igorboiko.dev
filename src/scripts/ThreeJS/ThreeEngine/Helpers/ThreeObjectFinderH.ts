@@ -1,11 +1,11 @@
 import * as THREE from "three";
-
 import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
-
 import { array, option } from "fp-ts";
 import { includes } from "fp-ts/lib/string";
 
+/**
+ * 
+ */
 export class ThreeObjectFinderH {
 	public static byUserData(
 		scene: THREE.Object3D,
@@ -51,12 +51,13 @@ export class ThreeObjectFinderH {
 			return matchingObjects;
 		};
 
-	public static getAllMeshesFromScene(scene: THREE.Scene): THREE.Mesh[] {
+	public static getAllMeshesFromScene = (scene: THREE.Scene): THREE.Mesh[] => {
 		return pipe(
 			scene.children,
 			array.filterMap(
-				(object): O.Option<THREE.Mesh> => (object instanceof THREE.Mesh ? O.some(object) : O.none)
+				(object): option.Option<THREE.Mesh> =>
+					object instanceof THREE.Mesh ? option.some(object) : option.none
 			)
 		);
-	}
+	};
 }

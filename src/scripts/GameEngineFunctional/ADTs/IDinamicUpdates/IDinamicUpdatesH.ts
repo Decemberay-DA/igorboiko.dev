@@ -45,10 +45,7 @@ export class IDinamicUpdatesH {
 				parent: option.some(collection),
 			};
 		};
-	static newInsertedAndParentedToasiRootGame = <B extends IDinamicUpdate>(
-		updateability: B
-	): B & IParented<ITopLevelGame> =>
-		IDinamicUpdatesH.newInsertedAndParented(asi.game.root.self)(updateability);
+	static newInsertedAndParentedToasiRootGame = IDinamicUpdatesH.newInsertedAndParented(asi.game.root.self);
 
 	/**
 	 *
@@ -69,7 +66,5 @@ export class IDinamicUpdatesH {
 			}
 			return updateability;
 		};
-	static removeAndUnParentFromasiRootGame = <B extends IDinamicUpdate & IParented<ITopLevelGame>>(
-		updateability: B
-	): B => IDinamicUpdatesH.removeAndUnParent(asi.game.root.self)(updateability);
+	static removeAndUnParentFromasiRootGame = IDinamicUpdatesH.removeAndUnParent(asi.game.root.self);
 }
