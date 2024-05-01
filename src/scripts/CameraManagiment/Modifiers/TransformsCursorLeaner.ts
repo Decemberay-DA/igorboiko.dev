@@ -24,7 +24,7 @@ export class TransformsCursorLeaner implements IModifier<Transforms> {
 	}
 
 	public apply(object: Transforms): Transforms {
-		let cursor = asi.data.Cursor.clientRelstive.positionNegative1toPositive1;
+		let cursor = asi.data.cursor.clientRelstive.positionNegative1toPositive1;
 		cursor.multiplyScalar(this.influensedStrength);
 
 		const t = new Transforms(object);

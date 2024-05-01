@@ -32,7 +32,7 @@ export class CurrentSceneFromDOMDetectorH {
 			scenes,
 			array.filter((sc) =>
 				HTMLElementEX.isCursorOverlaps(
-					asi.data.Cursor.clientRelstive.position,
+					asi.data.cursor.clientRelstive.position,
 					sc.htmlElement,
 					checkParams
 				)

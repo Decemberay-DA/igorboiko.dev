@@ -24,7 +24,7 @@ export default class SideStackMagician extends GE.ADynamicObject {
 		const centerY = rect.top + rect.height / 2;
 		const centerOfElement = new THREE.Vector2(centerX, centerY);
 
-		const dustanceToCursor = asi.data.Cursor.clientRelstive.position.distanceTo(centerOfElement);
+		const dustanceToCursor = asi.data.cursor.self.clientRelative.position().distanceTo(centerOfElement);
 
 		const isInRange = dustanceToCursor < this.transitionDistanceTreshold;
 

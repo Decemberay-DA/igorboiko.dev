@@ -2,9 +2,9 @@ import "./assets/styles/styles.min.css";
 import "./styles/global.scss";
 import { createApp } from "vue";
 import App from "./App.vue";
+//
 import SceneConfiguratorH from "./scripts/GameEngine/Configurations/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
-//
 import { PromisseH } from "./scripts/utils/PromisseH";
 
 // load website first

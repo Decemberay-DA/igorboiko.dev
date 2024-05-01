@@ -42,14 +42,14 @@ class CursorDragger {
 
 	public doDrugs() {
 		const currentCursorPosition = new THREE.Vector2(
-			asi.data.Cursor.pageRelative.position.x,
-			asi.data.Cursor.pageRelative.position.y
+			asi.data.cursor.pageRelative.position.x,
+			asi.data.cursor.pageRelative.position.y
 		);
 
 		const x = SmoothLerper.number(this._lastPosition.x, currentCursorPosition.x, this._dragForce);
 		const y = SmoothLerper.number(this._lastPosition.y, currentCursorPosition.y, this._dragForce);
 
-		const draggedposition = asi.data.Cursor.pageRelative.position;
+		const draggedposition = asi.data.cursor.pageRelative.position;
 		this._lastPosition = draggedposition;
 
 		this._element.style.left = draggedposition.x + "px";

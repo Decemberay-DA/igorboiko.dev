@@ -3,7 +3,7 @@
  */
 export class Lazy<T> {
 	private _value!: T;
-	private _computed: boolean = false;
+	private _computed = false;
 	private _factory: () => T;
 
 	constructor(factory: () => T) {
@@ -12,8 +12,8 @@ export class Lazy<T> {
 
 	public get value(): T {
 		if (!this._computed) {
-			this._value = this._factory();
 			this._computed = true;
+			this._value = this._factory();
 		}
 		return this._value;
 	}

@@ -30,6 +30,13 @@ export class IDinamicUpdatesH {
 	/**
 	 *
 	 */
+	static insertAndParent =
+		<A extends IDinamicUpdates>(collection: A) =>
+		<B extends IDinamicUpdate & IParented<A>>(updateability: B): B => {
+			updateability.parent = option.some(collection);
+			IDinamicUpdatesH.insert(collection)(updateability);
+			return updateability;
+		};
 	static newInsertedAndParented =
 		<A extends IDinamicUpdates>(collection: A) =>
 		<B extends IDinamicUpdate>(updateability: B): B & IParented<A> => {

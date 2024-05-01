@@ -18,7 +18,7 @@ export default class data {
 	// cursor effects ========-====-====-====-============
 
 	// cursor effects ========-====-====-====-============
-	public Cursor = CursorStrandingBuilderH.getPlatformDependend();
+	public cursor = CursorStrandingBuilderH.getPlatformDependend();
 	// public readonly CursorFollower = new CursorFollower();
 
 	// three ========-====-====-====-============

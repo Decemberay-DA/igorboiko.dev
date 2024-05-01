@@ -1,9 +1,8 @@
 import { pipe } from "fp-ts/lib/function";
-import { oopGameB } from "../GameEngine/index.ts";
 import { ITopLevelGameB } from "../GameEngineFunctional/Types/ITopLevelGameB.ts";
 import { IDinamicObjectH } from "../GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectH.ts";
 import { ITimeMomentB } from "../GameEngineFunctional/ADTs/ITimeMoment/ITimeMomentB.ts";
-import { LazyB } from "../utils/Lazy.ts";
+import { GE } from "@/scripts/GameEngine";
 
 /**
  *
@@ -12,22 +11,17 @@ export class game {
 	/**
 	 * functional
 	 */
-	public get root() {
-		return this._li_root.value;
-	}
-	private readonly _li_root = LazyB.new(() => ITopLevelGameB.newRootGame());
+	public readonly root = ITopLevelGameB.newRootGame();
 
 	/**
 	 * depricated-like oop that just works and i dont want to rewrite it
 	 * @deprecated use root
 	 */
+	// public readonly oopgame2 = pipe(
+	// 	GE.oopGameB.new(), //yo
+	// 	IDinamicObjectH.start(ITimeMomentB.newPerformanceNow())
+	// );
 	public get oopgame() {
-		return this._li_oopgame.value;
+		return this.root;
 	}
-	private readonly _li_oopgame = LazyB.new(() =>
-		pipe(
-			oopGameB.new(), //yo
-			IDinamicObjectH.start(ITimeMomentB.newPerformanceNow())
-		)
-	);
 }
