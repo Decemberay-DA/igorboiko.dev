@@ -2,7 +2,6 @@ import { TJ } from "..";
 import { THREE } from "../ThreeEngine/THREE";
 import a_vertex from "./a_vertex.glsl";
 import a_fragment from "./a_fragment.glsl";
-import { GE } from "@/scripts/GameEngine";
 import asi from "@/scripts/asi/asi";
 import { IEnableableH } from "@/scripts/GameEngineFunctional/ADTs/IEnableable/IEnableableH";
 import { pipe, tupled } from "fp-ts/lib/function";
@@ -50,7 +49,7 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 		this.__shader.name = "VertexColoredMaterial";
 	}
 
-	public override onFrameUpdate(): void {
+	public onFrameUpdate(): void {
 		this.__shader.uniforms.sceneTime.value = asi.game.root.self.rootTime.sinceStart;
 	}
 
