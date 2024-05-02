@@ -15,6 +15,7 @@
         "@types/mathjs": "^9.4.2",
         "fp-ts": "^2.16.5",
         "immer": "^10.1.1",
+        "immutable": "^5.0.0-beta.5",
         "inversify": "^6.0.2",
         "mathjs": "^12.4.2",
         "process": "^0.11.10",
@@ -25,6 +26,7 @@
     },
     "devDependencies": {
         "@tsconfig/node20": "^20.1.2",
+        "@types/immutable": "^3.8.7",
         "@types/node": "^20.12.7",
         "@types/three": "^0.162.0",
         "@types/tween.js": "^18.6.1",

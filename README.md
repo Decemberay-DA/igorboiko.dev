@@ -23,8 +23,11 @@
   </a>
 </p> -->
 
-# Current demo
-![demo](https://github.com/Decemberay-DA/igorboiko.dev/blob/main/gitView/_%5Bfirefox%5DIgor_Boyko_-_Desigher_%26_Developer_%E2%80%94_Mozilla_Firefo_1692%20(2).png)
+# Previous demo
+![old demo](https://github.com/Decemberay-DA/igorboiko.dev/blob/main/gitView/_%5Bfirefox%5DIgor_Boyko_-_Desigher_%26_Developer_%E2%80%94_Mozilla_Firefo_1692%20(2).png)
+
+
+old videodemo - https://www.youtube.com/watch?v=4l8UnzQ8rFs
 
 
 # work still in progress
@@ -33,7 +36,6 @@ The fetures to have to finally put online
 
 ## what i want to have
 
-- some z-gen description
 - some small three visuals
 - my photo
 - sections
@@ -47,17 +49,14 @@ The fetures to have to finally put online
     - contact me
 - pdf resume link for HRs
 - host on the web under igorboiko.dev url => https://www.netlify.com/
+- fully understand meaning of the joke *"I wil put my foot in your Fuctor"* by creating a fully functionally paradigmenned corrupted geme engine with Algebraik Data Types, Immutability, Functors composition, Hier Kinded Types, Monads, No FPS and Semigroups...
 
 ## what i`ll will djfkakdjjkls
 
 ### base
 
 - [ ] remove all deez nuts jokes from codebase
-- [x] use my silly implementation of mediator
-- [ ] never use anymore defined registryes of scenes id in this badly extend as before oh my god
-
-- [ ] intro cutscene like in SPORE*
-- [ ] like maybe fast loading hahahhaha*
+- [ ] intro cutscene like in SPORE* => https://youtu.be/9Jx1zecOnrw?t=15 by animationing camera along curve
 - [ ] finally finish and add current unfinished works to 3d portfolio*
     - [ ] Shum*
     - [ ] Hover Infinity*
@@ -65,7 +64,7 @@ The fetures to have to finally put online
 #### html
 
 - [ ] header navigation button to scroll to thmlScene
-- [ ] add initial load animation => https://v4.brittanychiang.com/
+- [ ] add initial html load animation => https://v4.brittanychiang.com/
 - [ ] have cursor follower smoothly follewing mouse on 2 layers with come visuals
     - [ ] under center layer circle
     - [ ] above center layer circle
@@ -91,7 +90,7 @@ The fetures to have to finally put online
 
 #### three
 
-- [x] smoothe camera movement between threeScenes
+- [ ] smoothe camera movement between threeScenes
 - [ ] create loading curtains
 - [ ] fix initial camera position smoothing error (maybe by enabeling smoothing on after CurtainsOpened)
 - [ ] make vertex shader more versitile and interesting
@@ -102,17 +101,6 @@ The fetures to have to finally put online
     - [ ] have all shaders react to mouse over them*
 - [ ] compress scene.gltf*
 
-
-
-
-
-
-
-#### etc
-
- - [ ] create new test envs
- - [ ] create new test 3d scene
- - [ ] add some fgame to it 
 
 
 
