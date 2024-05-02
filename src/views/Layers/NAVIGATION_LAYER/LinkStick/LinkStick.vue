@@ -32,7 +32,7 @@ const mediateOut = (message: string) => {
 	asi.mediator.publish(new SectionWasChangedToID(message));
 };
 
-const SM = new SideStackMagician();
+// const SM = new SideStackMagician();
 </script>
 
 <style scoped lang="scss">

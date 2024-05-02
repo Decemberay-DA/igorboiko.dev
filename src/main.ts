@@ -6,6 +6,7 @@ import App from "./App.vue";
 import SceneConfiguratorH from "./scripts/GameEngineFunctional/Configurator/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 import { PromisseH } from "./scripts/utils/PromisseH";
+import { createSillyGame } from "./scripts/asi/i have understood algebraic data types";
 
 // load website first
 createApp(App).mount("#app");
@@ -31,6 +32,7 @@ PromisseH.runSimultaneously([
 	// SceneConfiguratorH.asetupMainScenePage().finally(() =>
 	// 	IDinamicObjectH.start(ITimeMomentB.newPerformanceNow())(asi.game.oopgame)
 	// ),
+	new Promise<void>(() => createSillyGame()),
 	newTestMessageAfter(0)("nut after 0 ms"),
 	newTestMessageAfter(1000)("nut after 1000 ms"),
 	newTestMessageAfter(2000)("nut after 2000 ms"),

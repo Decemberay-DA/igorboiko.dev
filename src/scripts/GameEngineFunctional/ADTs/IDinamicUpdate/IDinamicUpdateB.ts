@@ -1,9 +1,9 @@
-import { GE } from "@/scripts/GameEngine";
 import { type ITimeMoment } from "../ITimeMoment/ITimeMoment";
 import type { IDinamicUpdate, IDinamicUpdateFields } from "./IDinamicUpdate";
 import { pipe } from "fp-ts/lib/function";
 import { MATHJS } from "@/scripts/FrameworksExport";
 import { MixinB } from "../Utils/MixinB";
+import { OnFrameUpdateOrders } from "./OnFrameUpdateOrders";
 
 /**
  *
@@ -13,7 +13,7 @@ export class IDinamicUpdateB {
 	 * creates IDinamicUpdates from optional params
 	 */
 	static readonly new = ({
-		onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
+		onFrameUpdateOrder: onFrameUpdateOrder = OnFrameUpdateOrders.MID_FRAME_UPDATE,
 		onStart = (time: ITimeMoment) => {},
 		onFrameUpdate = (time: ITimeMoment) => {},
 		onDelete = (time: ITimeMoment) => {},
@@ -26,7 +26,7 @@ export class IDinamicUpdateB {
 		onDelete: onDelete,
 	});
 	static readonly empty = (): IDinamicUpdate => ({
-		onFrameUpdateOrder: GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
+		onFrameUpdateOrder: OnFrameUpdateOrders.MID_FRAME_UPDATE,
 		_isStarted: false,
 		onStart: (time: ITimeMoment) => {},
 		onFrameUpdate: (time: ITimeMoment) => {},
@@ -39,7 +39,7 @@ export class IDinamicUpdateB {
 	 */
 	static readonly mixedIn =
 		({
-			onFrameUpdateOrder: onFrameUpdateOrder = GE.OnFrameUpdateOrders.MID_FRAME_UPDATE,
+			onFrameUpdateOrder: onFrameUpdateOrder = OnFrameUpdateOrders.MID_FRAME_UPDATE,
 			onStart = (time: ITimeMoment) => {},
 			onFrameUpdate = (time: ITimeMoment) => {},
 			onDelete = (time: ITimeMoment) => {},

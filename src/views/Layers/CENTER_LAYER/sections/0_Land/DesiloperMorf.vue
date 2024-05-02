@@ -5,18 +5,7 @@ div.Base
 </template>
 
 <script setup lang="ts">
-import { GE } from "@/scripts/GameEngine";
-import { onMounted } from "vue";
 
-class DesiloperMorpher extends GE.ADynamicObject {
-	private designer!: HTMLElement;
-	private developer!: HTMLElement;
-
-	public constructor() {
-		super();
-	}
-}
-const DM = new DesiloperMorpher();
 </script>
 
 <style scoped lang="scss">

@@ -1,6 +1,8 @@
 import { time } from "console";
 import { array, option } from "fp-ts";
 import { pipe } from "fp-ts/lib/function";
+import { readonly } from "vue";
+import randomH from "../utils/randomH";
 
 /**
  * used for pattern matching
@@ -8,10 +10,6 @@ import { pipe } from "fp-ts/lib/function";
 interface URI<U> {
 	readonly _uri: U;
 }
-
-const newURI = (uri: string): URI<string> => ({
-	_uri: uri,
-});
 
 const isURIEquals = (a: URI<string>, b: URI<string>): boolean => a._uri === b._uri;
 
@@ -60,10 +58,23 @@ interface updateable extends URI<updateableURI> {
 
 type updateableURI = "updateable";
 
+interface UpdateableOptions {
+	onStart?: (time: number) => void;
+	onUpdate?: (time: number) => void;
+	onEnd?: (time: number) => void;
+}
+const newEmptyUpdateableOptions = (): UpdateableOptions => ({
+	onStart: (time: number) => {},
+	onUpdate: (time: number) => {},
+	onEnd: (time: number) => {},
+});
+
 const newUpdateable = (
-	onStart: (time: number) => void,
-	onUpdate: (time: number) => void,
-	onEnd: (time: number) => void
+	{
+		onStart = (time: number) => {},
+		onUpdate = (time: number) => {},
+		onEnd = (time: number) => {},
+	}: UpdateableOptions = newEmptyUpdateableOptions()
 ): updateable => ({
 	_uri: "updateable",
 	onStart,
@@ -109,11 +120,11 @@ type dinamicObject = URI<dinamicObjectURI> &
 
 type dinamicObjectURI = "std" | "enb";
 
-const newSimpleObject = (upd: updateable): dinamicObject => ({
+const newSimpleDinamicObject = (upd: updateable): dinamicObject => ({
 	_uri: "std",
 	updateable: upd,
 });
-const newFullObject = (upd: updateable): dinamicObject => ({
+const newFullDinamicObject = (upd: updateable): dinamicObject => ({
 	_uri: "enb",
 	updateable: upd,
 	enableable: newEnableable(),
@@ -132,6 +143,14 @@ const concatdinamicObject = (a: dinamicObject, b: dinamicObject): dinamicObject 
 		_uri: "std",
 		updateable: concatUpdateable(a.updateable, b.updateable),
 	};
+};
+
+const isDinamicObjectEnabled = (obj: dinamicObject): boolean => {
+	const matched = {
+		std: () => false,
+		enb: () => (obj as any).enableable.state,
+	}[obj._uri]();
+	return matched;
 };
 
 type updFuncExecutorType<Target> = (time: number) => (obj: Target) => Target;
@@ -179,10 +198,10 @@ interface parentable<P, CH> extends URI<parentableURI> {
 
 type parentableURI = "parentable";
 
-const newEmptyParentable = <P, CH>(parent: option.Option<P>, children: CH[]): parentable<P, CH> => ({
+const newEmptyParentable = <P, CH>(parent: option.Option<P>, ...children: CH[]): parentable<P, CH> => ({
 	_uri: "parentable",
 	parent,
-	children,
+	children: children.length === 0 ? [] : children,
 });
 
 const concatParentable = <P, CH>(a: parentable<P, CH>, b: parentable<P, CH>): parentable<P, CH> => ({
@@ -208,22 +227,22 @@ const removeChild = <P, CH>(parent: parentable<P, CH>, child: CH): void => {
  * algebraic data type for game object
  */
 interface gameObject extends URI<gameObjectURI> {
-	hierarchy: parentable<gameObject, gameObject[]>;
-	updateable: updateable;
+	hierarchy: parentable<gameObject, gameObject>;
+	dinamic: dinamicObject;
 }
 
 type gameObjectURI = "gameObject";
 
-const newGameObject = (updateable: updateable): gameObject => ({
+const newGameObject = (dinamic: dinamicObject): gameObject => ({
 	_uri: "gameObject",
-	hierarchy: newEmptyParentable(option.none, []),
-	updateable,
+	hierarchy: newEmptyParentable<gameObject, gameObject>(option.none),
+	dinamic: dinamic,
 });
 
 const concatGameObject = (a: gameObject, b: gameObject): gameObject => ({
 	_uri: "gameObject",
 	hierarchy: concatParentable(a.hierarchy, b.hierarchy),
-	updateable: concatUpdateable(a.updateable, b.updateable),
+	dinamic: concatdinamicObject(a.dinamic, b.dinamic),
 });
 
 /**
@@ -259,10 +278,151 @@ const endGame =
 		return obj;
 	};
 
-const newEmptyGameSpecificObject = (): gameObject => ({
+const newGameSpecedGO = (): gameObject => ({
 	_uri: "gameObject",
-	hierarchy: newEmptyParentable(option.none, []),
-	updateable: newUpdateable(startGame, updateGame, endGame),
+	hierarchy: newEmptyParentable<gameObject, gameObject>(option.none),
+	dinamic: pipe(
+		newUpdateable({ onStart: startGame, onUpdate: updateGame, onEnd: endGame }), //
+		newFullDinamicObject
+	),
 });
 
+/**
+ * infinite loop
+ */
+interface LoopDataBag {
+	readonly frameCount: number;
+	readonly currentTime: number;
+	readonly deltaTime: number;
+}
+const newInfiniteLoopBehaviour =
+	(isKeepGoing: () => boolean, isActive: () => boolean) =>
+	(action: (loopData: LoopDataBag) => void): (() => void) => {
+		let frameCount = 0;
+		let previousFrameTime = 0;
+
+		const loop = (): void => {
+			if (isKeepGoing()) {
+				const currentTime = performance.now();
+				const deltaTime = currentTime - previousFrameTime;
+				previousFrameTime = currentTime;
+
+				const bag: LoopDataBag = {
+					frameCount,
+					currentTime,
+					deltaTime,
+				};
+				if (isActive()) {
+					action(bag);
+				}
+
+				requestAnimationFrame(loop);
+			}
+		};
+
+		return loop;
+	};
+
+const gameObjectLifeCycleBahviour =
+	(killSignal: () => boolean) =>
+	(go: gameObject): ((loopData: LoopDataBag) => void) => {
+		let wasStarted = () => false;
+		let wasEnded = () => false;
+
+		const updateLoop = (loopData: LoopDataBag): void => {
+			if (!wasStarted) {
+				wasEnded = () => true;
+				startGame(loopData.currentTime)(go);
+			}
+
+			updateGame(loopData.currentTime)(go);
+
+			if (killSignal()) {
+				wasEnded = () => true;
+				endGame(loopData.currentTime)(go);
+			}
+		};
+
+		const loop = newInfiniteLoopBehaviour(
+			() => wasEnded(),
+			() => isDinamicObjectEnabled(go.dinamic)
+		)(updateLoop);
+
+		return loop;
+	};
+
+const newRootGameObject = (): gameObject => {
+	const isAlive = () => true;
+	const go = newGameSpecedGO();
+	const behavoiur = gameObjectLifeCycleBahviour(isAlive)(go);
+
+	const loop = newInfiniteLoopBehaviour(
+		isAlive, //
+		() => isDinamicObjectEnabled(go.dinamic)
+	)(behavoiur);
+
+	loop();
+
+	return go;
+};
+
 // i have understood algebraic data types.
+
+// usage
+
+export const createSillyGame = () => {
+	const rootGame = newRootGameObject();
+
+	const timeLogger = pipe(
+		{
+			onStart: (time: number) => console.log("start", time),
+			onUpdate: (time: number) => console.log("update", time),
+			onEnd: (time: number) => console.log("end", time),
+		},
+		newUpdateable,
+		newFullDinamicObject,
+		newGameObject
+	);
+	addChild(rootGame.hierarchy, timeLogger);
+
+	const wrapInQuotse = (str: string): string => `"${str}"`;
+	const prependWord =
+		(word: string) =>
+		(str: string): string =>
+			word + " " + str;
+	const loremus = [
+		"lorem",
+		"ipsum",
+		"dolor",
+		"sit",
+		"amet",
+		"consectetur",
+		"adipiscing",
+		"elit",
+		"donec",
+		"nibh",
+	];
+	const loremIpsumesLogger = pipe(
+		{
+			onUpdate: (time: number) => {
+				const sentence = pipe(
+					loremus,
+					array.filter((word) => randomH.floatneg1to1() > 0),
+
+					array.reduce("", (acc, word) => acc + " " + word),
+					option.fromNullable,
+					option.match(
+						() => "no words",
+						(str) => prependWord("Do")(str)
+					),
+					wrapInQuotse
+				);
+				console.log("Lorem sas: " + sentence);
+			},
+		},
+		newUpdateable,
+		newFullDinamicObject,
+		newGameObject
+	);
+	addChild(rootGame.hierarchy, loremIpsumesLogger);
+};
