@@ -12,7 +12,7 @@ import { AngleH } from "@/scripts/utils/AngleH";
 import type { Euler } from "three";
 import type { ID } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/types";
 import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
-import type { IRootGame } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
+import type { IRootGame } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/builders";
 import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
 import type { URI } from "fp-ts/lib/Predicate";
 

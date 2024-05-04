@@ -1,6 +1,6 @@
 import { IURIB } from "@/scripts/GameEngineFunctional/ADTs/_IURI/IURIB";
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
-import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
+import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/builders";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
 import { MixinB } from "@/scripts/GameEngineFunctional/ADTs/Utils/MixinB";
 import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
@@ -71,7 +71,7 @@ export class ACursorStrandingB {
 }
 
 /**
- * 
+ *
  */
 type ICursorPositionData = {
 	position: () => THREE.Vector2;

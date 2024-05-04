@@ -5,7 +5,7 @@ import { TAnyInterractionListenerB } from "../../MegaCursor/MouseClicking/TAnyIn
 import { pipe, type LazyArg } from "fp-ts/lib/function";
 import { array } from "fp-ts";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";
-import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
+import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/builders";
 import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
 import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";

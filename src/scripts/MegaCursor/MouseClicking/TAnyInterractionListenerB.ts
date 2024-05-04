@@ -3,7 +3,7 @@ import asi from "@/scripts/asi/asi";
 import ETAnyInterractionOccured from "./Events/ETAnyInterractionOccured";
 import { pipe } from "fp-ts/lib/function";
 import { IDB } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/IDB";
-import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
+import { IDinamicObjectB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/builders";
 import { IDinamicUpdatesH } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import type { IDinamicUpdates } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicUpdateB } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdateB";

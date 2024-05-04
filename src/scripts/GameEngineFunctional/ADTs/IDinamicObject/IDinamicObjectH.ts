@@ -7,80 +7,75 @@ import { type IEnableable } from "../IEnableable/IEnableable";
 import { IEnableableH } from "../IEnableable/IEnableableH";
 import { Bro } from "../../FunctionalBroH";
 import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
-import type { IDinamicObject } from "./IDinamicObject";
+import type { IDinamicObject } from "./typesBase";
 import { IDinamicUpdatesH } from "../IDinamicUpdates/IDinamicUpdatesH";
-import { IURIB } from "../_IURI/IURIB";
 import { IParentedH } from "../IParented/IParentedH";
+import { iuri } from "../_IURI";
+import { dinamicObject } from ".";
 
 /**
  *
  */
-export class IDinamicObjectH {
-	static readonly URI = "DinamicObject";
+export const start =
+	<T extends ITimeMoment>(time: T) =>
+	<A extends IDinamicObject>(obj: A): A => {
+		return pipe(
+			obj,
+			IEnableableH.executeIfEnabled(() => {
+				obj.onStart(time);
+				obj._isStarted = true;
+			}),
+			Bro.meanwhile((bro) => console.log("started: " + bro))
+		);
+	};
+export const tryStart =
+	<T extends ITimeMoment>(time: T) =>
+	<A extends object>(obj: A): A => {
+		// the worst typescript i have ever wrote
+		// i am expecting bug here
+		if ("onStart" in obj === false) return obj;
+		return pipe(
+			obj as any as IDinamicObject,
+			option.fromNullable,
+			option.match(
+				() => obj,
+				(casted) => dinamicObject.start(time)(casted) as A
+			)
+		);
+	};
 
-	static readonly start =
-		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicObject>(obj: A): A => {
-			return pipe(
-				obj,
-				IEnableableH.executeIfEnabled(() => {
-					obj.onStart(time);
-					obj._isStarted = true;
-				}),
-				Bro.meanwhile((bro) => console.log("started: " + bro))
-			);
-		};
-	static readonly tryStart =
-		<T extends ITimeMoment>(time: T) =>
-		<A extends object>(obj: A): A => {
-			// the worst typescript i have ever wrote
-			// i am expecting bug here
-			if ("onStart" in obj === false) return obj;
-			return pipe(
-				obj as any as IDinamicObject,
-				option.fromNullable,
-				option.match(
-					() => obj,
-					(casted) => IDinamicObjectH.start(time)(casted) as A
-				)
-			);
-		};
+export const frameUpdate =
+	<T extends ITimeMoment>(time: T) =>
+	<A extends IDinamicObject>(obj: A): A => {
+		return pipe(
+			obj,
+			// BroH.logThisOnePLZ,
+			IEnableableH.executeIfEnabled(() => obj.onFrameUpdate(time))
+			// BroH.meanwhile((bro) => console.log("meanwhiled " + bro))
+			// SedeffectsH.doIf((obj) => console.log(obj))((obj) => true)
+			// SedeffectsH.doIf((obj)=>obj.)
+		);
+	};
 
-	static readonly frameUpdate =
-		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicObject>(obj: A): A => {
-			return pipe(
-				obj,
-				// BroH.logThisOnePLZ,
-				IEnableableH.executeIfEnabled(() => obj.onFrameUpdate(time))
-				// BroH.meanwhile((bro) => console.log("meanwhiled " + bro))
-				// SedeffectsH.doIf((obj) => console.log(obj))((obj) => true)
-				// SedeffectsH.doIf((obj)=>obj.)
-			);
-		};
-
-	static readonly newDelete =
-		<T extends ITimeMoment>(time: T) =>
-		<A extends IDinamicObject>(obj: A): A => {
-			return pipe(
-				obj,
-				(x) => {
-					x.onDelete(time);
-					x._isDeleted = true;
-					return x;
-				},
-				IEnableableH.disable,
-				IURIB.newErrazed(IParentedH.URI)
-			);
-		};
-	static readonly newDeleteParented =
-		<T extends ITimeMoment>(time: T) =>
-		<C, A extends IDinamicObject & IParented<C>>(obj: A): A => {
-			return pipe(
-				obj,
-				IDinamicObjectH.newDelete(time),
-				IDinamicUpdatesH.tryRemoveAndUnParent(obj.parent),
-				IURIB.newErrazed(IParentedH.URI)
-			);
-		};
-}
+export const newDelete =
+	<T extends ITimeMoment>(time: T) =>
+	<A extends IDinamicObject>(obj: A): A => {
+		return pipe(
+			obj,
+			(x) => {
+				x.onDelete(time);
+				x._isDeleted = true;
+				return x;
+			},
+			IEnableableH.disable
+		);
+	};
+export const newDeleteParented =
+	<T extends ITimeMoment>(time: T) =>
+	<C, A extends IDinamicObject & IParented<C>>(obj: A): A => {
+		return pipe(
+			obj, //
+			dinamicObject.newDelete(time),
+			IDinamicUpdatesH.tryRemoveAndUnParent(obj.parent)
+		);
+	};

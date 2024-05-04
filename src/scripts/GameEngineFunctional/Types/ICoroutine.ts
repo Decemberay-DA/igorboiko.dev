@@ -2,7 +2,7 @@ import type { Tween } from "@tweenjs/tween.js";
 import { pipe } from "fp-ts/lib/function";
 import { IDinamicUpdateB } from "../ADTs/IDinamicUpdate/IDinamicUpdateB";
 import type { IDinamicUpdates } from "../ADTs/IDinamicUpdates/IDinamicUpdates";
-import { IDinamicObjectB } from "../ADTs/IDinamicObject/IDinamicObjectB";
+import { IDinamicObjectB } from "../ADTs/IDinamicObject/builders";
 import { IDinamicUpdatesH } from "../ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import { IURIB } from "../ADTs/_IURI/IURIB";
 import { IDB } from "../ADTs/ID.ts/builders";
