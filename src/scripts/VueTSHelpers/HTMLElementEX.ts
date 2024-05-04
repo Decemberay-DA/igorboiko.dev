@@ -1,6 +1,6 @@
 import { pipe } from "fp-ts/lib/function";
 import type { THREE } from "../ThreeJS/ThreeEngine/THREE";
-import { ArgumentsH } from "../utils/ArgumentsH";
+import { ArgH } from "../utils/ArgH";
 
 /**
  * duh

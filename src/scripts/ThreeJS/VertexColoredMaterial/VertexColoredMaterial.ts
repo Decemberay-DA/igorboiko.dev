@@ -5,7 +5,7 @@ import a_fragment from "./a_fragment.glsl";
 import asi from "@/scripts/asi/asi";
 import { IEnableableH } from "@/scripts/GameEngineFunctional/ADTs/IEnableable/IEnableableH";
 import { pipe, tupled } from "fp-ts/lib/function";
-import { ArgumentsH } from "@/scripts/utils/ArgumentsH";
+import { ArgH } from "@/scripts/utils/ArgH";
 import { refinement } from "fp-ts";
 
 /**
@@ -23,8 +23,8 @@ export class VertexColoredMaterial extends TJ.AManagimentedShaderMaterial {
 
 		const gjlkf = pipe(
 			IEnableableH.copyFrom, //
-			ArgumentsH.flip,
-			ArgumentsH.join2,
+			ArgH.flip,
+			ArgH.join2,
 			tupled
 		);
 

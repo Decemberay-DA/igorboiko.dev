@@ -1,6 +1,6 @@
 import { pipe } from "fp-ts/lib/function";
 import { LerpH } from "../CameraManagiment/Lerper";
-import { ArgumentsH } from "./ArgumentsH";
+import { ArgH } from "./ArgH";
 
 /**
  *
@@ -20,7 +20,7 @@ export class mathH {
 			mathH.clamp(val, min, max);
 
 	static lerp = LerpH.Number;
-	static lerpc = ArgumentsH.curry3(mathH.lerp);
+	static lerpc = ArgH.curry3(mathH.lerp);
 
 	static remapRange(
 		value: number,

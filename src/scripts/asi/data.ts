@@ -1,6 +1,6 @@
 import type { GLTF } from "three/examples/jsm/Addons.js";
 import { type App, getCurrentInstance } from "vue";
-import type CameraManager from "../CameraManagiment/CameraManager";
+// import type CameraManager from "../CameraManagiment/CameraManager";
 import ScenesRegistry from "../CameraManagiment/DefinedScenes/SceneRegistry/ScenesRegistry";
 import type { TJ, THREE } from "../ThreeJS";
 
