@@ -34,26 +34,6 @@ export class IDinamicUpdateB {
 		onDelete: (time: ITimeMoment) => {},
 	});
 
-	/**
-	 * mixes updates after main type
-	 */
-	static readonly mixedIn =
-		({
-			onFrameUpdateOrder: onFrameUpdateOrder = OnFrameUpdateOrders.MID_FRAME_UPDATE,
-			onStart = (time: ITimeMoment) => {},
-			onFrameUpdate = (time: ITimeMoment) => {},
-			onDelete = (time: ITimeMoment) => {},
-		}: IDinamicUpdateFields) =>
-		<A>(a: A): A & IDinamicUpdate => ({
-			...a,
-			onFrameUpdateOrder: onFrameUpdateOrder,
-			_isStarted: false,
-			onStart: onStart,
-			onFrameUpdate: onFrameUpdate,
-			_isDeleted: false,
-			onDelete: onDelete,
-		});
-
 	static readonly concat =
 		<A extends IDinamicUpdate>(a: A) =>
 		<B extends IDinamicUpdate>(b: B): A & B & IDinamicUpdate =>

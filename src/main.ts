@@ -6,7 +6,7 @@ import App from "./App.vue";
 import SceneConfiguratorH from "./scripts/GameEngineFunctional/Configurator/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 import { PromisseH } from "./scripts/utils/PromisseH";
-import { createSillyGame } from "./scripts/GameEngineFunctional/i have";
+import { createSillyGame } from "./scripts/GameEngineFunctional2/i have";
 import { IMMER } from "./scripts/FrameworksExport";
 
 // load website first
