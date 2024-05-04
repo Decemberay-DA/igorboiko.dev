@@ -5,7 +5,7 @@ import type { IDinamicUpdates } from "../ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicObjectB } from "../ADTs/IDinamicObject/IDinamicObjectB";
 import { IDinamicUpdatesH } from "../ADTs/IDinamicUpdates/IDinamicUpdatesH";
 import { IURIB } from "../ADTs/_IURI/IURIB";
-import { IDB } from "../ADTs/ID.ts/IDB";
+import { IDB } from "../ADTs/ID.ts/builders";
 import { MixinB } from "../ADTs/Utils/MixinB";
 import { IDinamicObjectH } from "../ADTs/IDinamicObject/IDinamicObjectH";
 import { ITimeMomentB } from "../ADTs/ITimeMoment/ITimeMomentB";

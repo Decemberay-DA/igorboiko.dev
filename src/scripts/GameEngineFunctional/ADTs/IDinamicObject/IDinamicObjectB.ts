@@ -12,7 +12,7 @@ import { OnFrameUpdateOrders } from "../IDinamicUpdate/OnFrameUpdateOrders";
 import { pipe } from "fp-ts/lib/function";
 import { IDinamicUpdatesB } from "../IDinamicUpdates/IDinamicUpdatesB";
 import { MixinB } from "../Utils/MixinB";
-import { IDB } from "../ID.ts/IDB";
+import { IDB } from "../ID.ts/builders";
 import { IURIB } from "../_IURI/IURIB";
 import { pointed } from "fp-ts";
 

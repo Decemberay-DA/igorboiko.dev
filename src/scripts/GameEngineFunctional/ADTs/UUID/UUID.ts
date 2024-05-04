@@ -8,7 +8,7 @@ import { option } from "fp-ts";
  */
 export type UUID = string;
 
-export const fromSeed = (seed: any): UUID => {
+export const newFromSeed = (seed: any): UUID => {
 	return pipe(
 		+seed, // here is the error btw i think
 		option.fromNullable,
@@ -22,7 +22,7 @@ export const fromSeed = (seed: any): UUID => {
 	);
 };
 
-export const random = (): UUID => {
+export const newRandom = (): UUID => {
 	return pipe(
 		randomH.float0to1(), //
 		mathH.lerpc(Number.MIN_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER),

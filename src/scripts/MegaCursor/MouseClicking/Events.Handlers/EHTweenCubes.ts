@@ -10,7 +10,7 @@ import { Bro } from "@/scripts/GameEngineFunctional/FunctionalBroH";
 import { THREE } from "@/scripts/ThreeJS";
 import { AngleH } from "@/scripts/utils/AngleH";
 import type { Euler } from "three";
-import type { ID } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/ID";
+import type { ID } from "@/scripts/GameEngineFunctional/ADTs/ID.ts/types";
 import type { IDinamicObject } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObject";
 import type { IRootGame } from "@/scripts/GameEngineFunctional/ADTs/IDinamicObject/IDinamicObjectB";
 import type { IDinamicUpdate } from "@/scripts/GameEngineFunctional/ADTs/IDinamicUpdate/IDinamicUpdate";
