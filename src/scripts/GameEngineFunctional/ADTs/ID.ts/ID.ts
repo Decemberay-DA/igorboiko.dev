@@ -1,4 +1,4 @@
-import { type UUID } from "./UUID";
+import { type UUID } from "../UUID/UUID";
 
 /**
  * only one reliable reference type that never getting rebuilded.

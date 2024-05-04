@@ -6,7 +6,7 @@ import App from "./App.vue";
 import SceneConfiguratorH from "./scripts/GameEngineFunctional/Configurator/SceneConfiguratorH";
 import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 import { PromisseH } from "./scripts/utils/PromisseH";
-import { createSillyGame } from "./scripts/asi/i have understood algebraic data types";
+import { createSillyGame } from "./scripts/GameEngineFunctional/i have";
 import { IMMER } from "./scripts/FrameworksExport";
 
 // load website first

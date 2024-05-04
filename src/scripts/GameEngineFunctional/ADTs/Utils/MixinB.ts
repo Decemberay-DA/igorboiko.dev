@@ -1,5 +1,5 @@
 /**
- *
+ * @deprivated use adt style instead of mixing
  */
 export class MixinB {
 	static newWith =
