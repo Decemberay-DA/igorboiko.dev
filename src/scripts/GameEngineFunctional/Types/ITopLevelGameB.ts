@@ -1,13 +1,13 @@
 import { pipe } from "fp-ts/lib/function";
-import type { ID } from "../ADTs/ID.ts/types";
-import { IDB } from "../ADTs/ID.ts/builders";
+import type { ID } from "../ADTs/ID___/types";
+import { IDB } from "../ADTs/ID___/builders";
 import type { IDinamicObject } from "../ADTs/IDinamicObject/typesBase";
 import { type IRootGame, IDinamicObjectB } from "../ADTs/IDinamicObject/builders";
 import type { IDinamicUpdates } from "../ADTs/IDinamicUpdates/IDinamicUpdates";
 import { IDinamicUpdatesB } from "../ADTs/IDinamicUpdates/IDinamicUpdatesB";
 import type { IDinamicUpdateFields } from "../ADTs/IDinamicUpdate/IDinamicUpdate";
-import { IURIB } from "../ADTs/_IURI/IURIB";
-import type { IURI } from "../ADTs/_IURI/types";
+import { IURIB } from "../ADTs/_IURI___/IURIB";
+import type { IURI } from "../ADTs/_IURI___/types";
 
 /**
  *

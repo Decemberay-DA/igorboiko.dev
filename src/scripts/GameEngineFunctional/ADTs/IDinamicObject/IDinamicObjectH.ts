@@ -10,7 +10,7 @@ import type { IDinamicUpdates } from "../IDinamicUpdates/IDinamicUpdates";
 import type { IDinamicObject } from "./typesBase";
 import { IDinamicUpdatesH } from "../IDinamicUpdates/IDinamicUpdatesH";
 import { IParentedH } from "../IParented/IParentedH";
-import { iuri } from "../_IURI";
+import { iuri } from "../_IURI___";
 import { dinamicObject } from ".";
 
 /**

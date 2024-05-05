@@ -8,9 +8,12 @@ import TailwindMirrorH from "./scripts/styles/TailwindMirrorH";
 import { PromisseH } from "./scripts/utils/PromisseH";
 import { createSillyGame } from "./scripts/GameEngineFunctional2/i have";
 import { IMMER } from "./scripts/FrameworksExport";
+import { testEnableableEvents } from "./scripts/GameEngineFunctional2/IEnableable/IEnableable";
 
 // load website first
 createApp(App).mount("#app");
+
+testEnableableEvents();
 
 /**
  * @deprecated
@@ -34,7 +37,7 @@ PromisseH.runSimultaneously([
 	// 	IDinamicObjectH.start(ITimeMomentB.newPerformanceNow())(asi.game.oopgame)
 	// ),
 	new Promise<void>(() => createSillyGame()),
-	new Promise<void>(() => IMMER.enableMapSet()),
+	// new Promise<void>(() => IMMER.enableMapSet()),
 	newTestMessageAfter(0)("nut after 0 ms"),
 	newTestMessageAfter(1000)("nut after 1000 ms"),
 	newTestMessageAfter(2000)("nut after 2000 ms"),

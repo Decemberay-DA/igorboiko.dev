@@ -76,6 +76,8 @@ export default class SceneConfiguratorH {
 				)
 			)
 		);
+		
+//end
 
 		// apply vertex color material on everything ========-====-====-====-============
 		const vertexColored = new TJ.VertexColoredMaterial();
