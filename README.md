@@ -30,4 +30,5 @@
 old videodemo - https://www.youtube.com/watch?v=4l8UnzQ8rFs
 
 
-state: work still in progress v 1.0;
+State: Terminated;
+Termination notice: "I've decided to do a fresh start from scratch with the project. It's time to stop tinkering with the wheel and focus on creating something new and improved."
