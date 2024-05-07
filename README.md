@@ -27,8 +27,12 @@
 ![old demo](https://github.com/Decemberay-DA/igorboiko.dev/blob/main/gitView/_%5Bfirefox%5DIgor_Boyko_-_Desigher_%26_Developer_%E2%80%94_Mozilla_Firefo_1692%20(2).png)
 
 
-old videodemo - https://www.youtube.com/watch?v=4l8UnzQ8rFs
+see videodemo - https://www.youtube.com/watch?v=4l8UnzQ8rFs
 
+---
 
-State: Terminated;
-Termination notice: "I've decided to do a fresh start from scratch with the project. It's time to stop tinkering with the wheel and focus on creating something new and improved."
+State: Closesd.
+
+Closing notice: Originally this project was for my diploma. I have passed diploma with this project successfully and had desided to rewrite OOP like game engine to FP like. I have done it. Then I red some clevr -> clever articles and figured out that FP that I got is not the actuall -> actuall FP. I was just about to start to rewriting this FP like game engine to FP like game engine but 100000+ red errors tells me to stop -> quit. 
+
+Feeling a profound sense of disillusionment with both myself and humanity I thought "I shall stop rewriting things if I want to deliver a stuff". With that in mind, I stopped working on this project and started a new one.
